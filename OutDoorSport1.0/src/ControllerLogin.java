@@ -52,7 +52,6 @@ public class ControllerLogin{
 			txtUsername.setText("");
 			txtPassword.setText("");
 		}
-		
 	}
 
 	@FXML protected void login_button(MouseEvent event) {	
@@ -62,17 +61,4 @@ public class ControllerLogin{
 	private void onProva(){
 		System.out.println("ciao");
 	}
-	
-	
-	
-	
-
-
-
-
-
-
-
-
-
 }
