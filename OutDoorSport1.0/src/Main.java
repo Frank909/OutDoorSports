@@ -14,7 +14,7 @@ public class Main extends Application {
 
 	@Override
 	public void start(Stage primaryStage) {
-		Forms.showForm("login");
+		Forms.showForm("dashboardPartecipante");
 	}
 	
 	public static void main(String[] args) {

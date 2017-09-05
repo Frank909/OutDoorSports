@@ -38,7 +38,6 @@
               </rowConstraints>
                <children>
                   <Button id="signin_button" fx:id="signin_button" mnemonicParsing="false" prefHeight="40.0" prefWidth="150.0" text="Registrati" />
-                  <Button id="login_button" fx:id="login_button" mnemonicParsing="false" onMouseClicked="#login_button" prefHeight="40.0" prefWidth="150.0" text="Login" GridPane.columnIndex="1" GridPane.halignment="RIGHT" />
                </children>
             </GridPane>
             <GridPane prefHeight="121.0" prefWidth="465.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
