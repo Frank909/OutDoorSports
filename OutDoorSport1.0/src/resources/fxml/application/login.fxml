@@ -5,7 +5,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="650.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ControllerLogin">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="650.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="outdoorapp.ControllerLogin">
    <children>
       <GridPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <columnConstraints>
@@ -38,6 +38,7 @@
               </rowConstraints>
                <children>
                   <Button id="signin_button" fx:id="signin_button" mnemonicParsing="false" prefHeight="40.0" prefWidth="150.0" text="Registrati" />
+                  <Button id="login_button" alignment="CENTER" contentDisplay="RIGHT" mnemonicParsing="false" onMouseClicked="#executeLogin" prefHeight="40.0" prefWidth="150.0" text="Entra" GridPane.columnIndex="1" GridPane.halignment="RIGHT" />
                </children>
             </GridPane>
             <GridPane prefHeight="121.0" prefWidth="465.0" GridPane.columnIndex="1" GridPane.rowIndex="1">

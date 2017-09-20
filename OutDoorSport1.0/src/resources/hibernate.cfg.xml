@@ -8,21 +8,21 @@
   <property name="hibernate.connection.username">root</property>
   <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
   <property name="hibernate.current_session_context_class">thread</property>
-  <mapping class="java.to.Escursione"/>
-  <mapping class="java.to.Iscrizione"/>
-  <mapping class="java.to.ManagerDiEscursione"/>
-  <mapping class="java.to.ManagerDiSistema"/>
-  <mapping class="java.to.Optional"/>
-  <mapping class="java.to.OptionalEscursione"/>
-  <mapping class="java.to.OptionalIscrizione"/>
-  <mapping class="java.to.Partecipante"/>
-  <mapping class="java.to.Ruoli"/>
-  <mapping class="java.to.StatoEscursione"/>
-  <mapping class="java.to.StatoIscrizione"/>
-  <mapping class="java.to.StatoOptional"/>
-  <mapping class="java.to.StatoUtente"/>
-  <mapping class="java.to.TipoEscursione"/>
-  <mapping class="java.to.TipoOptional"/>
-  <mapping class="java.to.Utente"/>
+  <mapping class="outdoorapp.to.Escursione"/>
+  <mapping class="outdoorapp.to.Iscrizione"/>
+  <mapping class="outdoorapp.to.ManagerDiEscursione"/>
+  <mapping class="outdoorapp.to.ManagerDiSistema"/>
+  <mapping class="outdoorapp.to.Optional"/>
+  <mapping class="outdoorapp.to.OptionalEscursione"/>
+  <mapping class="outdoorapp.to.OptionalIscrizione"/>
+  <mapping class="outdoorapp.to.Partecipante"/>
+  <mapping class="outdoorapp.to.Ruoli"/>
+  <mapping class="outdoorapp.to.StatoEscursione"/>
+  <mapping class="outdoorapp.to.StatoIscrizione"/>
+  <mapping class="outdoorapp.to.StatoOptional"/>
+  <mapping class="outdoorapp.to.StatoUtente"/>
+  <mapping class="outdoorapp.to.TipoEscursione"/>
+  <mapping class="outdoorapp.to.TipoOptional"/>
+  <mapping class="outdoorapp.to.Utente"/>
  </session-factory>
 </hibernate-configuration>
