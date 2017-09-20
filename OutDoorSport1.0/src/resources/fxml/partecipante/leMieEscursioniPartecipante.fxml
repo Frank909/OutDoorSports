@@ -35,12 +35,12 @@
             </GridPane>
             <TableView fx:id="mTableEscursioni" prefHeight="461.0" prefWidth="800.0" GridPane.rowIndex="1">
               <columns>
-                <TableColumn fx:id="mColNameEscursioni" prefWidth="75.0" text="Nome" />
-                <TableColumn fx:id="mColDataEscursioni" prefWidth="75.0" text="Data" />
-                  <TableColumn fx:id="mColNMinEscursioni" prefWidth="123.0" text="N° Min Partecipanti" />
-                  <TableColumn fx:id="mColNMaxEscursioni" prefWidth="123.0" text="N° Max Partecipanti" />
-                  <TableColumn fx:id="mColCostoEscursioni" prefWidth="52.0" text="Costo" />
-                  <TableColumn fx:id="mColDescrizioneEscursioni" prefWidth="151.0" text="Descrizione" />
+                  <TableColumn prefWidth="184.0" text="Nome" />
+                <TableColumn fx:id="mColNameEscursioni" prefWidth="104.0" text="Tipo Escursione" />
+                <TableColumn fx:id="mColDataEscursioni" minWidth="0.0" prefWidth="76.0" text="Data" />
+                  <TableColumn fx:id="mColNMinEscursioni" minWidth="0.0" prefWidth="60.0" text="Min/Max" />
+                  <TableColumn fx:id="mColCostoEscursioni" minWidth="0.0" prefWidth="63.0" text="Costo" />
+                  <TableColumn prefWidth="64.0" text="Stato" />
               </columns>
             </TableView>
          </children>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-reverse-engineering PUBLIC "-//Hibernate/Hibernate Reverse Engineering DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-reverse-engineering-3.0.dtd" >
+
+<hibernate-reverse-engineering>
+  <table-filter match-catalog="outdoorsports" match-name="tbl_escursione"/>
+  <table-filter match-catalog="outdoorsports" match-name="tbl_iscrizione"/>
+  <table-filter match-catalog="outdoorsports" match-name="tbl_mde"/>
+  <table-filter match-catalog="outdoorsports" match-name="tbl_mds"/>
+  <table-filter match-catalog="outdoorsports" match-name="tbl_optional"/>
+  <table-filter match-catalog="outdoorsports" match-name="tbl_optional_escursione"/>
+  <table-filter match-catalog="outdoorsports" match-name="tbl_optional_iscrizione"/>
+  <table-filter match-catalog="outdoorsports" match-name="tbl_partecipante"/>
+  <table-filter match-catalog="outdoorsports" match-name="tbl_ruoli"/>
+  <table-filter match-catalog="outdoorsports" match-name="tbl_stato_escursione"/>
+  <table-filter match-catalog="outdoorsports" match-name="tbl_stato_iscrizione"/>
+  <table-filter match-catalog="outdoorsports" match-name="tbl_stato_optional"/>
+  <table-filter match-catalog="outdoorsports" match-name="tbl_stato_utente"/>
+  <table-filter match-catalog="outdoorsports" match-name="tbl_tipo_escursione"/>
+  <table-filter match-catalog="outdoorsports" match-name="tbl_tipo_optional"/>
+  <table-filter match-catalog="outdoorsports" match-name="tbl_utente"/>
+</hibernate-reverse-engineering>
