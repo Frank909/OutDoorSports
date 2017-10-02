@@ -1,6 +1,7 @@
 package outdoorapp.integration.dao;
 
 import outdoorapp.exceptions.DatabaseException;
+import outdoorapp.to.StatoUtente;
 import outdoorapp.to.Utente;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,6 +16,15 @@ import java.util.List;
  */
 
 public class UtenteDAO<T extends Utente> extends GenericDAO<T>{
+	
+	
+	/**
+	 * Il costruttore inizializza l'entità Utente da utilizzare 
+	 * in tutte le operazioni del DAO.
+	 */
+	public UtenteDAO() {
+		this.setCurrentClass(new Utente());
+	}
 	
 	/**
 	 * @param utente
@@ -62,7 +72,10 @@ public class UtenteDAO<T extends Utente> extends GenericDAO<T>{
 	public T getByUsername(String username) throws DatabaseException {
 		List<String> param = new ArrayList<String>();
 		param.add(username);
-		return this.getUtenteByQuery("boooooooooooooooooh", param);
+		return this.getUtenteByQuery("getByUsername", param);
+		/*List<T> prova = new ArrayList<T>();
+		prova = super.executeQuery("from outdoorapp.to.Utente");
+		return prova.get(0);*/
 	}
 	
 	/**

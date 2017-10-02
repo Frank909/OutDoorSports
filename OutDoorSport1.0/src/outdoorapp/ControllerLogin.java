@@ -34,11 +34,13 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import outdoorapp.exceptions.DatabaseException;
+import outdoorapp.integration.dao.UtenteDAO;
+import outdoorapp.to.Utente;
 
 
 public class ControllerLogin
 {
-
 	/*@FXML private Button btnLogin;
 	@FXML private Button btnRegistrati;
 	@FXML private TextField txtUsername;
@@ -59,6 +61,8 @@ public class ControllerLogin
 	@FXML private TextField txtSearchEscursione;
 	@FXML private Button btnSearchEscursione;
 	@FXML private TableView mTableEscursioni;
+	@FXML private TextField username_textview;
+	@FXML private PasswordField password_textview;
 
 	private String user;
 	private String pass;
@@ -86,8 +90,16 @@ public class ControllerLogin
 		loadPanel(ilMioProfiloPartecipante, "ilMioProfiloPartecipante");
 	}
 	
-	@FXML protected void executeLogin(){
+	@FXML protected void executeLogin() throws DatabaseException{
 		System.out.println("Psciaccaun d mamt");
+
+		UtenteDAO<Utente> udao = new UtenteDAO<Utente>();
+		String utente = "";
+		utente = this.username_textview.getText();
+		
+		Utente newUtente = udao.getByUsername(utente);
+		
+		System.out.println(newUtente.getUsername() + newUtente.getEmail());
 	}
 	
 	private void loadPanel(StackPane panel, String panelName) throws IOException{

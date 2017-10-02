@@ -27,6 +27,8 @@ public abstract class GenericDAO<T extends OutDoorSports>{
 	
 	/**
 	 * @return la sessione creata nella classe SessionUtil
+	 * @throws DatabaseException 
+	 * @throws HibernateException 
 	 */
 	private Session getSession(){
 		return SessionUtil.getSessionFactory().openSession();
@@ -207,6 +209,7 @@ public abstract class GenericDAO<T extends OutDoorSports>{
 			transaction = session.beginTransaction();
 
 			Query query = session.getNamedQuery(queryName);
+			//Query query = session.createQuery(queryName);
 			int index = 0;
 
 			for(Object param : parameters){
@@ -247,6 +250,8 @@ public abstract class GenericDAO<T extends OutDoorSports>{
 			transaction = session.beginTransaction();
 
 			Query query = session.getNamedQuery(queryName);
+			//Query query = session.createQuery(queryName);
+			//Query query = session.createNativeQuery(queryName);
 			response = query.list();
 
 			transaction.commit();

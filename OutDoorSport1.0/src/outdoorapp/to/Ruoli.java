@@ -21,8 +21,6 @@ import javax.persistence.Table;
  *
  */
 
-@Entity
-@Table(name = "tbl_ruoli", catalog = "outdoorsports")
 public class Ruoli implements OutDoorSports{
 
 	private static final long serialVersionUID = -5565024038693813756L;
@@ -45,10 +43,6 @@ public class Ruoli implements OutDoorSports{
 	/**
 	 * @return l'id del ruolo dell'utente
 	 */
-	@Id
-	@GeneratedValue(strategy = IDENTITY)
-
-	@Column(name = "id_ruolo", unique = true, nullable = false)
 	public Integer getIdRuolo() {
 		return this.idRuolo;
 	}
@@ -65,7 +59,6 @@ public class Ruoli implements OutDoorSports{
 	/**
 	 * @return il nome del ruolo 
 	 */
-	@Column(name = "nome", nullable = false, length = 45)
 	public String getNome() {
 		return this.nome;
 	}
@@ -82,16 +75,10 @@ public class Ruoli implements OutDoorSports{
 	/**
 	 * @return l'utente relativo a quel ruolo
 	 */
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "tblRuoli")
 	public Set<Utente> getUtente() {
 		return this.tblUtentes;
 	}
 
-	/**
-	 * Metodo che setta l'utente relativo a quel ruolo
-	 * 
-	 * @param tblUtentes
-	 */
 	public void setUtente(Set<Utente> tblUtentes) {
 		this.tblUtentes = tblUtentes;
 	}

@@ -67,7 +67,7 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <TextField id="password_textview" fx:id="password_textview" />
+                  <PasswordField fx:id="password_textview" />
                   <Button id="forgot_password_button" fx:id="forgot_password_button" mnemonicParsing="false" text="Password Dimenticata" GridPane.halignment="RIGHT" GridPane.rowIndex="1" />
                </children>
             </GridPane>

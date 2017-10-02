@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="outdoorapp.to.Ruoli" table="tbl_ruoli"
+		catalog="outdoorsports">
+		<id name="id" type="java.lang.Integer">
+			<column name="id_ruolo" />
+			<generator class="increment" />
+		</id>
+		<property name="nome" type="string">
+			<column name="nome" not-null="true" />
+		</property>
+	</class>
+	
+	<query name="getAllRuoloUtente">
+        <![CDATA[ from outdoorapp.to.Ruoli o ]]></query>
+	<query name="getRuoloUtenteManagerDiSistema">
+		<![CDATA[ from outdoorapp.to.Ruoli m where m.idRuolo = 0 ]]></query>
+	<query name="getRuoloUtenteManagerDiEscursione">
+		<![CDATA[ from outdoorapp.to.Ruoli m where m.idRuolo = 1 ]]></query>
+	<query name="getRuoloUtentePartecipante">
+		<![CDATA[ from outdoorapp.to.Ruoli m where m.idRuolo = 2 ]]></query>
+</hibernate-mapping>

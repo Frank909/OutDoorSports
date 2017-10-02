@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="outdoorapp.to.Utente" table="tbl_utente" catalog="outdoorsports">
+		<id name="idUtente" type="java.lang.Integer">
+			<column name="id_utente" />
+			<generator class="increment" />
+		</id>
+		<property name="username" type="string">
+			<column name="username" not-null="true" />
+		</property>
+		<property name="password" type="string">
+			<column name="password" not-null="true" />
+		</property>
+		<property name="nome" type="string">
+			<column name="nome" not-null="true" />
+		</property>
+		<property name="cognome" type="string">
+			<column name="cognome" not-null="true" />
+		</property>
+		<property name="email" type="string">
+			<column name="email" not-null="true" />
+		</property>
+		<property name="codiceFiscale" type="string">
+			<column name="codice_fiscale" not-null="true" />
+		</property>
+		<property name="dataNascita" type="date">
+			<column name="data_nascita" not-null="true" />
+		</property>
+		<property name="sesso" type="string">
+			<column name="sesso" not-null="true" />
+		</property>
+		<property name="indirizzo" type="string">
+			<column name="indirizzo" not-null="true" />
+		</property>
+		<property name="citta" type="string">
+			<column name="citta" not-null="true" />
+		</property>
+		<!--<many-to-one name="ruoloUtente" class="outdoorapp.to.Ruoli"
+			cascade="persist,merge,refresh" lazy="false">
+			<column name="id_ruolo" not-null="true" />
+		</many-to-one>
+		<many-to-one name="statoUtente" class="outdoorapp.to.StatoUtente"
+			 cascade="persist,merge,refresh" lazy="false">
+			<column name="id_stato_utente" not-null="true" />
+		</many-to-one>
+		<joined-subclass name="outdoorapp.to.ManagerDiSistema"
+			table="tbl_mds" extends="outdoorapp.to.Utente">
+			<key column="id_mds" />
+			<property name="telefono" type="string">
+				<column name="telefono" />
+			</property>
+		</joined-subclass>
+		<joined-subclass name="outdoorapp.to.ManagerDiEscursione"
+			table="tbl_mde" extends="outdoorapp.to.Utente">
+			<key column="id_mde" />
+			<property name="stipendio" type="double">
+				<column name="stipendio" />
+			</property>
+		</joined-subclass>
+		<joined-subclass name="outdoorapp.to.Partecipante"
+			table="tbl_partecipante" extends="outdoorapp.to.Utente">
+			<key column="id_partecipante" />
+			<property name="numTesseraSanitaria" type="string">
+				<column name="n_tessera_sanitaria" not-null="true" />
+			</property>
+			<property name="certificatoSRC" type="string">
+				<column name="certificato_src" not-null="true" />
+			</property>
+			<property name="dataCertificatoSRC" type="date">
+				<column name="data_certificato_src" not-null="true" />
+			</property>
+		</joined-subclass>-->
+
+	</class>
+	
+	<query name="getByUsername">
+		<![CDATA[ from outdoorapp.to.Utente m where m.username = ? ]]></query>
+	
+	<!--<query name="checkMds">
+		<![CDATA[ from agroludos.to.Utente m where m.statoUtente.id = 1 and m.tipoUtente.id = 0 ]]></query>
+	<query name="getUtente">
+        <![CDATA[ from agroludos.to.Utente u where u.statoUtente.id = 1 and u.username = ? and u.password = ?]]></query>
+	<query name="getByID">
+        <![CDATA[ from agroludos.to.Utente u where u.statoUtente.id = 1 and u.id = ?]]></query>
+	<query name="getPartecipante">
+        <![CDATA[ from agroludos.to.Partecipante p where p.statoUtente.id = 1 and p.id = ? ]]></query>
+	<query name="getPartecipanteByCF">
+        <![CDATA[ from agroludos.to.Partecipante p where p.statoUtente.id = 1 and p.cf = ? ]]></query>
+	<query name="getAllManagerDiCompetizione">
+		<![CDATA[ from agroludos.to.ManagerDiCompetizione m where m.statoUtente.id = 1]]></query>
+	<query name="getAllPartecipante">
+		<![CDATA[ from agroludos.to.Partecipante m where m.statoUtente.id = 1 ]]></query>
+	<query name="getByEmail">
+		<![CDATA[ from agroludos.to.Utente m where m.statoUtente.id = 1 and m.email = ? ]]></query>-->
+</hibernate-mapping>

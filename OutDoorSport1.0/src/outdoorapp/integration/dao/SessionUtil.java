@@ -17,7 +17,7 @@ import org.hibernate.service.ServiceRegistry;
  */
 public class SessionUtil {
 	
-	private static SessionFactory sessionFactory;
+	private static SessionFactory sessionFactory = buildSessionFactory();
 
 	/**
 	 * Metodo che prepara la session factory
@@ -25,19 +25,23 @@ public class SessionUtil {
 	 * @return la session Factory
 	 * @throws DatabaseException
 	 */
-	public static SessionFactory buildSessionFactory() throws DatabaseException{
+	public static SessionFactory buildSessionFactory(){
 		SessionFactory res = null;
 
 		if(sessionFactory == null){
 			Configuration configuration = new Configuration();
-			configuration.configure();
-			ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder().applySettings(
-					configuration.getProperties()).build();
+			configuration.configure("/resources/hibernate.cfg.xml");
+			/*ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder().applySettings(
+					configuration.getProperties()).build();*/
 			try{
-				sessionFactory = configuration.buildSessionFactory(serviceRegistry);
+				sessionFactory = configuration.buildSessionFactory();
 				res = sessionFactory;
 			}catch(Exception e){
-				throw new DatabaseException(e.getMessage());
+				try {
+					throw new DatabaseException(e.getMessage());
+				} catch (DatabaseException e1) {
+					e1.getMessage();
+				}
 			}
 		} else {
 			res = sessionFactory;
@@ -46,8 +50,8 @@ public class SessionUtil {
 		return res;
 	}
 	
-	/**
-	 * @return la sessionFactory
+	/*
+	 * Metodo che restituisce la session factory
 	 */
 	public static SessionFactory getSessionFactory(){
 		return sessionFactory;		

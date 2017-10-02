@@ -19,6 +19,9 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.UniqueConstraint;
 
+import org.hibernate.annotations.NamedQueries;
+import org.hibernate.annotations.NamedQuery;
+
 /**
  * Classe che rappresenta Utente. Sono fornite tutte le 
  * dichiarazioni dei metodi per la lettura e la scrittura dei dati
@@ -28,9 +31,6 @@ import javax.persistence.UniqueConstraint;
  *
  */
 
-@Entity
-@Table(name = "tbl_utente", catalog = "outdoorsports", uniqueConstraints = { @UniqueConstraint(columnNames = "email"),
-		@UniqueConstraint(columnNames = "username"), @UniqueConstraint(columnNames = "codice_fiscale")})
 public class Utente implements OutDoorSports{
 
 	private static final long serialVersionUID = 625888613100910416L;
@@ -99,10 +99,6 @@ public class Utente implements OutDoorSports{
 	/**
 	 * @return l'id dell'utente
 	 */
-	@Id
-	@GeneratedValue(strategy = IDENTITY)
-
-	@Column(name = "id_utente", unique = true, nullable = false)
 	public Integer getIdUtente() {
 		return this.idUtente;
 	}
@@ -119,8 +115,6 @@ public class Utente implements OutDoorSports{
 	/**
 	 * @return il ruolo relativo a un determinato utente
 	 */
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "id_ruolo", nullable = false)
 	public Ruoli getRuolo() {
 		return this.tblRuoli;
 	}
@@ -137,8 +131,6 @@ public class Utente implements OutDoorSports{
 	/**
 	 * @return lo stato utente relativo a un determinato utente
 	 */
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "id_stato_utente", nullable = false)
 	public StatoUtente getStatoUtente() {
 		return this.tblStatoUtente;
 	}
@@ -155,7 +147,6 @@ public class Utente implements OutDoorSports{
 	/**
 	 * @return l'username dell'utente
 	 */
-	@Column(name = "username", nullable = false, length = 45)
 	public String getUsername() {
 		return this.username;
 	}
@@ -172,7 +163,6 @@ public class Utente implements OutDoorSports{
 	/**
 	 * @return la password dell'utente
 	 */
-	@Column(name = "password", nullable = false, length = 45)
 	public String getPassword() {
 		return this.password;
 	}
@@ -189,7 +179,6 @@ public class Utente implements OutDoorSports{
 	/**
 	 * @return il nome dell'utente
 	 */
-	@Column(name = "nome", nullable = false, length = 45)
 	public String getNome() {
 		return this.nome;
 	}
@@ -206,7 +195,6 @@ public class Utente implements OutDoorSports{
 	/**
 	 * @return il cognome dell'utente
 	 */
-	@Column(name = "cognome", nullable = false, length = 45)
 	public String getCognome() {
 		return this.cognome;
 	}
@@ -223,7 +211,6 @@ public class Utente implements OutDoorSports{
 	/**
 	 * @return l'email dell'utente
 	 */
-	@Column(name = "email", nullable = false, length = 45)
 	public String getEmail() {
 		return this.email;
 	}
@@ -240,7 +227,6 @@ public class Utente implements OutDoorSports{
 	/**
 	 * @return il codice fiscale dell'utente
 	 */ 
-	@Column(name = "codice_fiscale", nullable = false, length = 16)
 	public String getCodiceFiscale() {
 		return this.codiceFiscale;
 	}
@@ -257,8 +243,6 @@ public class Utente implements OutDoorSports{
 	/**
 	 * @return la data di nascia dell'utente
 	 */
-	@Temporal(TemporalType.DATE)
-	@Column(name = "data_nascita", nullable = false, length = 10)
 	public Date getDataNascita() {
 		return this.dataNascita;
 	}
@@ -275,7 +259,6 @@ public class Utente implements OutDoorSports{
 	/**
 	 * @return il sesso dell'utente
 	 */
-	@Column(name = "sesso", nullable = false, length = 1)
 	public String getSesso() {
 		return this.sesso;
 	}
@@ -292,7 +275,6 @@ public class Utente implements OutDoorSports{
 	/**
 	 * @return l'indirizzo dell'utente
 	 */
-	@Column(name = "indirizzo", nullable = false, length = 45)
 	public String getIndirizzo() {
 		return this.indirizzo;
 	}
@@ -309,7 +291,6 @@ public class Utente implements OutDoorSports{
 	/**
 	 * @return la città dell'utente
 	 */
-	@Column(name = "citta", nullable = false, length = 45)
 	public String getCitta() {
 		return this.citta;
 	}
@@ -326,7 +307,6 @@ public class Utente implements OutDoorSports{
 	/**
 	 * @return le iscrizioni dell'utente
 	 */
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "tblUtente")
 	public Set<Iscrizione> getIscrizioni() {
 		return this.tblIscriziones;
 	}
@@ -343,7 +323,6 @@ public class Utente implements OutDoorSports{
 	/**
 	 * @return il partecipante relativo all'utente
 	 */
-	@OneToOne(fetch = FetchType.LAZY, mappedBy = "tblUtente")
 	public Partecipante getPartecipante() {
 		return this.tblPartecipante;
 	}
@@ -360,7 +339,6 @@ public class Utente implements OutDoorSports{
 	/**
 	 * @return manager di sistema relativo all'utente
 	 */
-	@OneToOne(fetch = FetchType.LAZY, mappedBy = "tblUtente")
 	public ManagerDiSistema getManagerDiSistema() {
 		return this.tblMds;
 	}
@@ -377,7 +355,6 @@ public class Utente implements OutDoorSports{
 	/**
 	 * @return le escursioni relative all'utente
 	 */
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "tblUtente")
 	public Set<Escursione> getEscursioni() {
 		return this.tblEscursiones;
 	}
@@ -394,7 +371,6 @@ public class Utente implements OutDoorSports{
 	/**
 	 * @return manager di escursione relativo all'utente
 	 */
-	@OneToOne(fetch = FetchType.LAZY, mappedBy = "tblUtente")
 	public ManagerDiEscursione getManagerDiEscursione() {
 		return this.tblMde;
 	}
