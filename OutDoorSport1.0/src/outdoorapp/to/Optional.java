@@ -23,8 +23,6 @@ import javax.persistence.Table;
  *
  */
 
-@Entity
-@Table(name = "tbl_optional", catalog = "outdoorsports")
 public class Optional implements OutDoorSports{
 
 	private static final long serialVersionUID = -7068153413865370972L;
@@ -58,10 +56,6 @@ public class Optional implements OutDoorSports{
 	/**
 	 * @return l'id dell'optional
 	 */
-	@Id
-	@GeneratedValue(strategy = IDENTITY)
-
-	@Column(name = "id_optional", unique = true, nullable = false)
 	public Integer getIdOptional() {
 		return this.idOptional;
 	}
@@ -78,8 +72,6 @@ public class Optional implements OutDoorSports{
 	/**
 	 * @return lo stato dell'optional
 	 */
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "id_stato_optional", nullable = false)
 	public StatoOptional getStatoOptional() {
 		return this.tblStatoOptional;
 	}
@@ -96,8 +88,6 @@ public class Optional implements OutDoorSports{
 	/**
 	 * @return il tipo dell'optional
 	 */
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "id_tipo_optional", nullable = false)
 	public TipoOptional getTipoOptional() {
 		return this.tblTipoOptional;
 	}
@@ -114,7 +104,6 @@ public class Optional implements OutDoorSports{
 	/**
 	 * @return il nome dell'optional
 	 */
-	@Column(name = "nome", nullable = false, length = 45)
 	public String getNome() {
 		return this.nome;
 	}
@@ -131,7 +120,6 @@ public class Optional implements OutDoorSports{
 	/**
 	 * @return la descrizione dell'optional
 	 */
-	@Column(name = "descrizione", nullable = false, length = 65535)
 	public String getDescrizione() {
 		return this.descrizione;
 	}
@@ -148,7 +136,6 @@ public class Optional implements OutDoorSports{
 	/**
 	 * @return gli optional relativi a una determinata escursione
 	 */
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "tblOptional")
 	public Set<OptionalEscursione> getOptionalEscursione() {
 		return this.tblOptionalEscursiones;
 	}

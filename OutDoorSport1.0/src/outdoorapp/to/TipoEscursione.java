@@ -21,8 +21,6 @@ import javax.persistence.Table;
  *
  */
 
-@Entity
-@Table(name = "tbl_tipo_escursione", catalog = "outdoorsports")
 public class TipoEscursione implements OutDoorSports{
 
 	private static final long serialVersionUID = -8638030899448668159L;
@@ -48,10 +46,6 @@ public class TipoEscursione implements OutDoorSports{
 	/**
 	 * @return l'id del tipo escursione
 	 */
-	@Id
-	@GeneratedValue(strategy = IDENTITY)
-
-	@Column(name = "id_tipo_escursione", unique = true, nullable = false)
 	public Integer getIdTipoEscursione() {
 		return this.idTipoEscursione;
 	}
@@ -68,7 +62,6 @@ public class TipoEscursione implements OutDoorSports{
 	/**
 	 * @return il nome del tipo escursione
 	 */
-	@Column(name = "nome", nullable = false, length = 45)
 	public String getNome() {
 		return this.nome;
 	}
@@ -85,7 +78,6 @@ public class TipoEscursione implements OutDoorSports{
 	/** 
 	 * @return la descrizione del tipoEscursione
 	 */
-	@Column(name = "decrizione", nullable = false, length = 65535)
 	public String getDecrizione() {
 		return this.decrizione;
 	}
@@ -102,7 +94,6 @@ public class TipoEscursione implements OutDoorSports{
 	/**
 	 * @return le escursioni collegate a un determinato tipo di escursione
 	 */
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "tblTipoEscursione")
 	public Set<Escursione> getEscursioni() {
 		return this.tblEscursiones;
 	}

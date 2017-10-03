@@ -21,8 +21,6 @@ import javax.persistence.Table;
  *
  */
 
-@Entity
-@Table(name = "tbl_stato_optional", catalog = "outdoorsports")
 public class StatoOptional implements OutDoorSports{
 
 	private static final long serialVersionUID = 4816235332067876389L;
@@ -45,10 +43,6 @@ public class StatoOptional implements OutDoorSports{
 	/**
 	 * @return l'id dello stato dell'optional
 	 */
-	@Id
-	@GeneratedValue(strategy = IDENTITY)
-
-	@Column(name = "id_stato_optional", unique = true, nullable = false)
 	public Integer getIdStatoOptional() {
 		return this.idStatoOptional;
 	}
@@ -65,7 +59,6 @@ public class StatoOptional implements OutDoorSports{
 	/**
 	 * @return il nome dello stato dell'optional
 	 */
-	@Column(name = "nome", nullable = false, length = 45)
 	public String getNome() {
 		return this.nome;
 	}
@@ -82,7 +75,6 @@ public class StatoOptional implements OutDoorSports{
 	/**
 	 * @return gli optional relativi al determinato stato
 	 */
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "tblStatoOptional")
 	public Set<Optional> getOptional() {
 		return this.tblOptionals;
 	}

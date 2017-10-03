@@ -20,9 +20,6 @@ import javax.persistence.Table;
  * @author Francesco Ventura
  *
  */
-
-@Entity
-@Table(name = "tbl_stato_escursione", catalog = "outdoorsports")
 public class StatoEscursione implements OutDoorSports{
 
 	private static final long serialVersionUID = -3317221757629047387L;
@@ -45,10 +42,6 @@ public class StatoEscursione implements OutDoorSports{
 	/**
 	 * @return l'id dello stato escursione
 	 */
-	@Id
-	@GeneratedValue(strategy = IDENTITY)
-
-	@Column(name = "id_stato_escursione", unique = true, nullable = false)
 	public Integer getIdStatoEscursione() {
 		return this.idStatoEscursione;
 	}
@@ -65,7 +58,6 @@ public class StatoEscursione implements OutDoorSports{
 	/**
 	 * @return il nome dello stato escursione
 	 */
-	@Column(name = "nome", nullable = false, length = 45)
 	public String getNome() {
 		return this.nome;
 	}
@@ -82,7 +74,6 @@ public class StatoEscursione implements OutDoorSports{
 	/**
 	 * @return le escursioni associate allo stato escursione
 	 */
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "tblStatoEscursione")
 	public Set<Escursione> getEscursione() {
 		return this.tblEscursiones;
 	}

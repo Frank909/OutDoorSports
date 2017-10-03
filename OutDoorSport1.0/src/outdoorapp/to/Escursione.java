@@ -26,8 +26,6 @@ import javax.persistence.TemporalType;
  *
  */
 
-@Entity
-@Table(name = "tbl_escursione", catalog = "outdoorsports")
 public class Escursione implements OutDoorSports{
 
 	private static final long serialVersionUID = -8060673121786005549L;
@@ -80,10 +78,6 @@ public class Escursione implements OutDoorSports{
 	/**
 	 * @return l'id dell'Escursione
 	 */
-	@Id
-	@GeneratedValue(strategy = IDENTITY)
-
-	@Column(name = "id_escursione", unique = true, nullable = false)
 	public Integer getIdEscursione() {
 		return this.idEscursione;
 	}
@@ -100,8 +94,6 @@ public class Escursione implements OutDoorSports{
 	/**
 	 * @return lo stato dell'Escursione
 	 */
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "id_stato_escursione", nullable = false)
 	public StatoEscursione getStatoEscursione() {
 		return this.tblStatoEscursione;
 	}
@@ -118,8 +110,6 @@ public class Escursione implements OutDoorSports{
 	/**
 	 * @return il tipo dell'escursione
 	 */
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "id_tipo_escursione", nullable = false)
 	public TipoEscursione getTipoEscursione() {
 		return this.tblTipoEscursione;
 	}
@@ -136,8 +126,6 @@ public class Escursione implements OutDoorSports{
 	/**
 	 * @return l'utente associato a una determinata Escursione
 	 */
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "id_mde", nullable = false)
 	public Utente getUtente() {
 		return this.tblUtente;
 	}
@@ -154,7 +142,6 @@ public class Escursione implements OutDoorSports{
 	/**
 	 * @return il nome dell'escursione
 	 */
-	@Column(name = "nome", nullable = false, length = 45)
 	public String getNome() {
 		return this.nome;
 	}
@@ -171,8 +158,6 @@ public class Escursione implements OutDoorSports{
 	/**
 	 * @return la data dell'escursione
 	 */
-	@Temporal(TemporalType.DATE)
-	@Column(name = "data", nullable = false, length = 10)
 	public Date getData() {
 		return this.data;
 	}
@@ -189,7 +174,6 @@ public class Escursione implements OutDoorSports{
 	/**
 	 * @return numero minimo di partecipanti della escursione
 	 */
-	@Column(name = "number_min", nullable = false)
 	public int getNumberMin() {
 		return this.numberMin;
 	}
@@ -206,7 +190,6 @@ public class Escursione implements OutDoorSports{
 	/**
 	 * @return numero massimo di partecipanti della escursione
 	 */
-	@Column(name = "number_max", nullable = false)
 	public int getNumberMax() {
 		return this.numberMax;
 	}
@@ -223,7 +206,6 @@ public class Escursione implements OutDoorSports{
 	/**
 	 * @return il costo della escursione
 	 */
-	@Column(name = "costo", nullable = false, precision = 22, scale = 0)
 	public double getCosto() {
 		return this.costo;
 	}
@@ -240,7 +222,6 @@ public class Escursione implements OutDoorSports{
 	/**
 	 * @return la descrizione della escursione
 	 */
-	@Column(name = "descrizione", nullable = false, length = 65535)
 	public String getDescrizione() {
 		return this.descrizione;
 	}
@@ -257,7 +238,6 @@ public class Escursione implements OutDoorSports{
 	/**
 	 * @return le iscrizioni per una determinata escursione
 	 */
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "tblEscursione")
 	public Set<Iscrizione> getIscrizioni() {
 		return this.tblIscriziones;
 	}
@@ -274,7 +254,6 @@ public class Escursione implements OutDoorSports{
 	/**
 	 * @return gli optional di una determinata escursione
 	 */
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "tblEscursione")
 	public Set<OptionalEscursione> getOptionalEscursione() {
 		return this.tblOptionalEscursiones;
 	}

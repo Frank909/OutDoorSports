@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="outdoorapp.to.TipoOptional" table="tbl_tipo_optional" catalog="outdoorsports">
+		<id name="idTipoOptional" type="java.lang.Integer">
+			<column name="id_tipo_optional" />
+			<generator class="increment" />
+		</id>
+		<property name="nome" type="string">
+			<column name="nome" not-null="true" />
+		</property>
+		<property name="costo" type="double">
+			<column name="costo" not-null="true" />
+		</property>
+	</class>
+	
+	<!-- <query name="getAllTipoOptional">
+        <![CDATA[ from agroludos.to.TipoOptional o ]]></query>  -->
+        
+</hibernate-mapping>

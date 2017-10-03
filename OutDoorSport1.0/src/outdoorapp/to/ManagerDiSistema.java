@@ -20,9 +20,6 @@ import org.hibernate.annotations.Parameter;
  * @author Francesco Ventura
  *
  */
-
-@Entity
-@Table(name = "tbl_mds", catalog = "outdoorsports")
 public class ManagerDiSistema extends Utente{
 
 	private static final long serialVersionUID = 3017572647898485317L;
@@ -41,11 +38,6 @@ public class ManagerDiSistema extends Utente{
 	/**
 	 * @return l'id del manager di sistema
 	 */
-	@GenericGenerator(name = "generator", strategy = "foreign", parameters = @Parameter(name = "property", value = "tblUtente"))
-	@Id
-	@GeneratedValue(generator = "generator")
-
-	@Column(name = "id_mds", unique = true, nullable = false)
 	public int getIdManagerDiSistema() {
 		return this.idMds;
 	}
@@ -62,8 +54,6 @@ public class ManagerDiSistema extends Utente{
 	/**
 	 * @return altre informazioni del manager di sistema dalla classe Utente
 	 */
-	@OneToOne(fetch = FetchType.LAZY)
-	@PrimaryKeyJoinColumn
 	public Utente getUtente() {
 		return this.tblUtente;
 	}
@@ -80,7 +70,6 @@ public class ManagerDiSistema extends Utente{
 	/**
 	 * @return il numero di telefono del manager di sistema
 	 */
-	@Column(name = "telefono", nullable = false, length = 45)
 	public String getTelefono() {
 		return this.telefono;
 	}

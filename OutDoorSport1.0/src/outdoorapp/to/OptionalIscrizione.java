@@ -19,8 +19,6 @@ import javax.persistence.Table;
  * @author Francesco Ventura
  *
  */
-@Entity
-@Table(name = "tbl_optional_iscrizione", catalog = "outdoorsports")
 public class OptionalIscrizione implements OutDoorSports{
 
 	private static final long serialVersionUID = -5812339531551921552L;
@@ -39,10 +37,6 @@ public class OptionalIscrizione implements OutDoorSports{
 	/**
 	 * @return l'id di optional iscrizione
 	 */
-	@Id
-	@GeneratedValue(strategy = IDENTITY)
-
-	@Column(name = "id", unique = true, nullable = false)
 	public Integer getId() {
 		return this.id;
 	}
@@ -59,8 +53,6 @@ public class OptionalIscrizione implements OutDoorSports{
 	/**
 	 * @return l'iscrizione relativa all'optional
 	 */
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "id_iscrizione", nullable = false)
 	public Iscrizione getIscrizione() {
 		return this.tblIscrizione;
 	}
@@ -77,8 +69,6 @@ public class OptionalIscrizione implements OutDoorSports{
 	/**
 	 * @return l'optional escursione relativo all'iscrizione
 	 */
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "id_optional", nullable = false)
 	public OptionalEscursione getOptionalEscursione() {
 		return this.tblOptionalEscursione;
 	}

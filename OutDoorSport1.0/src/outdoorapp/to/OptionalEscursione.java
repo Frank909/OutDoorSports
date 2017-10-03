@@ -22,8 +22,6 @@ import javax.persistence.Table;
  * @author Francesco Ventura
  *
  */
-@Entity
-@Table(name = "tbl_optional_escursione", catalog = "outdoorsports")
 public class OptionalEscursione implements OutDoorSports{
 
 	private static final long serialVersionUID = -2717683768500440335L;
@@ -50,10 +48,6 @@ public class OptionalEscursione implements OutDoorSports{
 	/**
 	 * @return l'id di OptionalEscursione
 	 */
-	@Id
-	@GeneratedValue(strategy = IDENTITY)
-
-	@Column(name = "id", unique = true, nullable = false)
 	public Integer getId() {
 		return this.id;
 	}
@@ -70,8 +64,6 @@ public class OptionalEscursione implements OutDoorSports{
 	/**
 	 * @return l'escursione collegata all'optional
 	 */
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "id_escursione", nullable = false)
 	public Escursione getEscursione() {
 		return this.tblEscursione;
 	}
@@ -88,8 +80,6 @@ public class OptionalEscursione implements OutDoorSports{
 	/**
 	 * @return l'optional collegato all'escursione
 	 */
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "id_optional", nullable = false)
 	public Optional getOptional() {
 		return this.tblOptional;
 	}
@@ -106,7 +96,6 @@ public class OptionalEscursione implements OutDoorSports{
 	/**
 	 * @return gli optional dell'iscrizione
 	 */
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "tblOptionalEscursione")
 	public Set<OptionalIscrizione> getOptionalIscrizione() {
 		return this.tblOptionalIscriziones;
 	}

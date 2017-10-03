@@ -38,7 +38,7 @@
 		<property name="citta" type="string">
 			<column name="citta" not-null="true" />
 		</property>
-		<!--<many-to-one name="ruoloUtente" class="outdoorapp.to.Ruoli"
+		<many-to-one name="ruoloUtente" class="outdoorapp.to.Ruoli"
 			cascade="persist,merge,refresh" lazy="false">
 			<column name="id_ruolo" not-null="true" />
 		</many-to-one>
@@ -72,7 +72,7 @@
 			<property name="dataCertificatoSRC" type="date">
 				<column name="data_certificato_src" not-null="true" />
 			</property>
-		</joined-subclass>-->
+		</joined-subclass>
 
 	</class>
 	

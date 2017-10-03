@@ -3,9 +3,8 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping>
-	<class name="outdoorapp.to.StatoUtente" table="tbl_stato_utente"
-		catalog="outdoorsports">
-		<id name="id" type="java.lang.Integer">
+	<class name="outdoorapp.to.StatoUtente" table="tbl_stato_utente" catalog="outdoorsports">
+		<id name="idStatoUtente" type="java.lang.Integer">
 			<column name="id_stato_utente" />
 			<generator class="increment" />
 		</id>
@@ -14,8 +13,8 @@
 		</property>
 	</class>
 	
-	<query name="getAllStatoUtente">
+	<!-- <query name="getAllStatoUtente">
         <![CDATA[ from outdoorapp.to.StatoUtente o ]]></query>
 	<query name="getStatoAttivo">
-        <![CDATA[ from outdoorapp.to.StatoUtente o where o.idStatoUtente = 1]]></query>
+        <![CDATA[ from outdoorapp.to.StatoUtente o where o.idStatoUtente = 1]]></query>-->
 </hibernate-mapping>

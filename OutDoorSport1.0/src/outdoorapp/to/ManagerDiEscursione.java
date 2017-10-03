@@ -21,8 +21,6 @@ import org.hibernate.annotations.Parameter;
  *
  */
 
-@Entity
-@Table(name = "tbl_mde", catalog = "outdoorsports")
 public class ManagerDiEscursione extends Utente{
 
 	private static final long serialVersionUID = -4507785182150099517L;
@@ -41,11 +39,6 @@ public class ManagerDiEscursione extends Utente{
 	/**
 	 * @return l'id del manager di escursione
 	 */ 
-	@GenericGenerator(name = "generator", strategy = "foreign", parameters = @Parameter(name = "property", value = "tblUtente"))
-	@Id
-	@GeneratedValue(generator = "generator")
-
-	@Column(name = "id_mde", unique = true, nullable = false)
 	public int getIdManagerDiEscursione() {
 		return this.idMde;
 	}
@@ -62,8 +55,6 @@ public class ManagerDiEscursione extends Utente{
 	/**
 	 * @return altre informazioni del manager di escursione dalla classe Utente
 	 */
-	@OneToOne(fetch = FetchType.LAZY)
-	@PrimaryKeyJoinColumn
 	public Utente getUtente() {
 		return this.tblUtente;
 	}
@@ -80,7 +71,6 @@ public class ManagerDiEscursione extends Utente{
 	/**
 	 * @return lo stipendio del manager di escursione
 	 */
-	@Column(name = "stipendio", nullable = false, precision = 22, scale = 0)
 	public double getStipendio() {
 		return this.stipendio;
 	}

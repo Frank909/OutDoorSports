@@ -21,8 +21,6 @@ import javax.persistence.Table;
  *
  */
 
-@Entity
-@Table(name = "tbl_stato_iscrizione", catalog = "outdoorsports")
 public class StatoIscrizione implements OutDoorSports{
 
 	private static final long serialVersionUID = -8626250321580095948L;
@@ -45,10 +43,6 @@ public class StatoIscrizione implements OutDoorSports{
 	/**
 	 * @return l'id dello statoIscrizione
 	 */
-	@Id
-	@GeneratedValue(strategy = IDENTITY)
-
-	@Column(name = "id_stato_iscrizione", unique = true, nullable = false)
 	public Integer getIdStatoIscrizione() {
 		return this.idStatoIscrizione;
 	}
@@ -65,7 +59,6 @@ public class StatoIscrizione implements OutDoorSports{
 	/**
 	 * @return il nome dello stato iscrizione
 	 */
-	@Column(name = "nome", nullable = false, length = 45)
 	public String getNome() {
 		return this.nome;
 	}
@@ -82,7 +75,6 @@ public class StatoIscrizione implements OutDoorSports{
 	/**
 	 * @return le iscrizioni associate a un determinato stato
 	 */
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "tblStatoIscrizione")
 	public Set<Iscrizione> getIscrizione() {
 		return this.tblIscriziones;
 	}

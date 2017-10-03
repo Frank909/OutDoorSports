@@ -26,8 +26,6 @@ import javax.persistence.TemporalType;
  *
  */
 
-@Entity
-@Table(name = "tbl_iscrizione", catalog = "outdoorsports")
 public class Iscrizione implements OutDoorSports{
 
 	private static final long serialVersionUID = 5440407744318413216L;
@@ -61,10 +59,6 @@ public class Iscrizione implements OutDoorSports{
 	/**
 	 * @return id dell'iscrizione
 	 */
-	@Id
-	@GeneratedValue(strategy = IDENTITY)
-
-	@Column(name = "id_iscrizione", unique = true, nullable = false)
 	public Integer getIdIscrizione() {
 		return this.idIscrizione;
 	}
@@ -81,8 +75,6 @@ public class Iscrizione implements OutDoorSports{
 	/**
 	 * @return l'escursione associata a quell'escursione
 	 */
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "id_escursione", nullable = false)
 	public Escursione getEscursione() {
 		return this.tblEscursione;
 	}
@@ -99,8 +91,6 @@ public class Iscrizione implements OutDoorSports{
 	/**
 	 * @return lo stato dell'iscrizione
 	 */
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "id_stato_iscrizione", nullable = false)
 	public StatoIscrizione getStatoIscrizione() {
 		return this.tblStatoIscrizione;
 	}
@@ -117,8 +107,6 @@ public class Iscrizione implements OutDoorSports{
 	/**
 	 * @return l'utente relativo a quella iscrizione
 	 */
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "id_partecipante", nullable = false)
 	public Utente getUtente() {
 		return this.tblUtente;
 	}
@@ -135,8 +123,6 @@ public class Iscrizione implements OutDoorSports{
 	/**
 	 * @return la data di una iscrizione
 	 */
-	@Temporal(TemporalType.DATE)
-	@Column(name = "data", nullable = false, length = 10)
 	public Date getData() {
 		return this.data;
 	}
@@ -153,7 +139,6 @@ public class Iscrizione implements OutDoorSports{
 	/**
 	 * @return gli optional relativi a una iscrizione ad una escursione
 	 */
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "tblIscrizione")
 	public Set<OptionalIscrizione> getOptionalIscrizione() {
 		return this.tblOptionalIscriziones;
 	}

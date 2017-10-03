@@ -21,8 +21,6 @@ import javax.persistence.Table;
  *
  */
 
-@Entity
-@Table(name = "tbl_tipo_optional", catalog = "outdoorsports")
 public class TipoOptional implements OutDoorSports{
 
 	private static final long serialVersionUID = -7551037113422783655L;
@@ -48,10 +46,6 @@ public class TipoOptional implements OutDoorSports{
 	/**
 	 * @return l'id del tipo optional
 	 */
-	@Id
-	@GeneratedValue(strategy = IDENTITY)
-
-	@Column(name = "id_tipo_optional", unique = true, nullable = false)
 	public Integer getIdTipoOptional() {
 		return this.idTipoOptional;
 	}
@@ -68,7 +62,6 @@ public class TipoOptional implements OutDoorSports{
 	/**
 	 * @return il nome del tipo optional
 	 */
-	@Column(name = "nome", nullable = false, length = 45)
 	public String getNome() {
 		return this.nome;
 	}
@@ -85,7 +78,6 @@ public class TipoOptional implements OutDoorSports{
 	/**
 	 * @return il costo di un optional
 	 */
-	@Column(name = "costo", nullable = false, precision = 22, scale = 0)
 	public double getCosto() {
 		return this.costo;
 	}
@@ -102,7 +94,6 @@ public class TipoOptional implements OutDoorSports{
 	/**
 	 * @return gli optional collegati al tipo optional
 	 */
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "tblTipoOptional")
 	public Set<Optional> getOptional() {
 		return this.tblOptionals;
 	}

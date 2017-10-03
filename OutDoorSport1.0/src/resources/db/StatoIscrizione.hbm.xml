@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="outdoorapp.to.StatoIscrizione" table="tbl_stato_iscrizione" catalog="outdoorsports">
+		<id name="idStatoIscrizione" type="java.lang.Integer">
+			<column name="id_stato_iscrizione" />
+			<generator class="increment" />
+		</id>
+		<property name="nome" type="string">
+			<column name="nome" not-null="true" />
+		</property>
+	</class>
+	
+	<!-- <query name="getAllStatoIscrizione">
+        <![CDATA[ from agroludos.to.StatoIscrizione o ]]></query>
+	<query name="getStatoIscrizioneDisattivato">
+        <![CDATA[ from agroludos.to.StatoIscrizione o where id = 0 ]]></query>
+	<query name="getStatoIscrizioneTerminato">
+        <![CDATA[ from agroludos.to.StatoIscrizione o where id = 2 ]]></query> -->
+        
+</hibernate-mapping>

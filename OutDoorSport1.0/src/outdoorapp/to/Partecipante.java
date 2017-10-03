@@ -24,8 +24,6 @@ import org.hibernate.annotations.Parameter;
  *
  */
 
-@Entity
-@Table(name = "tbl_partecipante", catalog = "outdoorsports")
 public class Partecipante extends Utente{
 
 
@@ -50,11 +48,6 @@ public class Partecipante extends Utente{
 	/**
 	 * @return l'id del partecipante
 	 */
-	@GenericGenerator(name = "generator", strategy = "foreign", parameters = @Parameter(name = "property", value = "tblUtente"))
-	@Id
-	@GeneratedValue(generator = "generator")
-
-	@Column(name = "id_partecipante", unique = true, nullable = false)
 	public int getIdPartecipante() {
 		return this.idPartecipante;
 	}
@@ -71,8 +64,6 @@ public class Partecipante extends Utente{
 	/**
 	 * @return l'utente collegato al partecipante
 	 */
-	@OneToOne(fetch = FetchType.LAZY)
-	@PrimaryKeyJoinColumn
 	public Utente getUtente() {
 		return this.tblUtente;
 	}
@@ -89,7 +80,6 @@ public class Partecipante extends Utente{
 	/**
 	 * @return il numero di tessera sanitaria del partecipante
 	 */
-	@Column(name = "n_tessera_sanitaria", nullable = false, length = 20)
 	public String getNTesseraSanitaria() {
 		return this.NTesseraSanitaria;
 	}
@@ -106,7 +96,6 @@ public class Partecipante extends Utente{
 	/**
 	 * @return il certificato src del partecipante
 	 */
-	@Column(name = "certificato_src", nullable = false, length = 200)
 	public String getCertificatoSrc() {
 		return this.certificatoSrc;
 	}
@@ -123,8 +112,6 @@ public class Partecipante extends Utente{
 	/**
 	 * @return la data di rilascio del certificato src del partecipante
 	 */
-	@Temporal(TemporalType.DATE)
-	@Column(name = "data_certificato_src", nullable = false, length = 10)
 	public Date getDataCertificatoSrc() {
 		return this.dataCertificatoSrc;
 	}

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="outdoorapp.to.Escursione" table="tbl_escursione" catalog="outdoorsports">
+		<id name="idEscursione" type="java.lang.Integer">
+			<column name="id_escursione" />
+			<generator class="increment" />
+		</id>
+		<property name="nome" type="string">
+			<column name="nome" not-null="true" />
+		</property>
+		<property name="data" type="date">
+			<column name="data" not-null="true" />
+		</property>
+		<property name="numberMin" type="integer">
+			<column name="number_min" not-null="true" default="1" />
+		</property>
+		<property name="numberMax" type="integer">
+			<column name="number_max" not-null="true" default="1" />
+		</property>
+		<property name="costo" type="double">
+			<column name="costo" not-null="true" />
+		</property>
+		<property name="descrizione" type="string">
+			<column name="descrizione" not-null="true" />
+		</property>
+		<set name="optionals" cascade="persist,merge,refresh" table="tbl_optional_escursione" lazy="false">
+			<key column="id_escursione" />
+			<many-to-many column="id_optional" class="outdoorapp.to.Optional" />
+		</set>
+		<many-to-one name="tblStatoEscursione" cascade="persist,merge,refresh"
+			class="outdoorapp.to.StatoEscursione" lazy="false">
+			<column name="id_stato_escursione" not-null="true" />
+		</many-to-one>
+		<many-to-one name="tblTipoEscursione" cascade="persist,merge,refresh"
+			class="outdoorapp.to.TipoEscursione" lazy="false">
+			<column name="id_tipo_escursione" not-null="true" />
+		</many-to-one>
+		<many-to-one name="tblUtente" cascade="persist,merge,refresh"
+			class="outdoorapp.to.ManagerDiEscursione" lazy="false">
+			<column name="id_mde" not-null="true" />
+		</many-to-one>
+	</class>
+
+<!--  
+	<query name="getAllCompetizione">
+        <![CDATA[ from agroludos.to.Competizione c ]]></query>
+	<query name="getCompetizioniByTipo">
+        <![CDATA[ from agroludos.to.Competizione c where c.tipoCompetizione.nome = ?]]></query>
+	<query name="getCompetizioneById">
+        <![CDATA[ from agroludos.to.Competizione c where c.id = ?]]></query>
+	<query name="getCompetizioneByMdc">
+        <![CDATA[ from agroludos.to.Competizione c where c.managerDiCompetizione = ?]]></query>
+	<query name="getCompetizioneAttiveByMdc">
+        <![CDATA[ from agroludos.to.Competizione c where c.managerDiCompetizione = ? and (statocomp = 1 or statocomp = 2 or statocomp = 3)]]></query>
+	<query name="annullaCompetizione">
+        <![CDATA[ update agroludos.to.Competizione set statocomp = 0]]></query>
+	<query name="getCompetizioniAperte">
+        <![CDATA[ from agroludos.to.Competizione c where statocomp = 1]]></query>
+	<query name="getCompetizioniAttive">
+        <![CDATA[ from agroludos.to.Competizione c where statocomp = 1 or statocomp = 2 or statocomp = 3]]></query> -->
+
+</hibernate-mapping>

@@ -3,9 +3,8 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping>
-	<class name="outdoorapp.to.Ruoli" table="tbl_ruoli"
-		catalog="outdoorsports">
-		<id name="id" type="java.lang.Integer">
+	<class name="outdoorapp.to.Ruoli" table="tbl_ruoli" catalog="outdoorsports">
+		<id name="idRuolo" type="java.lang.Integer">
 			<column name="id_ruolo" />
 			<generator class="increment" />
 		</id>
@@ -14,12 +13,12 @@
 		</property>
 	</class>
 	
-	<query name="getAllRuoloUtente">
+	<!-- <query name="getAllRuoloUtente">
         <![CDATA[ from outdoorapp.to.Ruoli o ]]></query>
 	<query name="getRuoloUtenteManagerDiSistema">
 		<![CDATA[ from outdoorapp.to.Ruoli m where m.idRuolo = 0 ]]></query>
 	<query name="getRuoloUtenteManagerDiEscursione">
 		<![CDATA[ from outdoorapp.to.Ruoli m where m.idRuolo = 1 ]]></query>
 	<query name="getRuoloUtentePartecipante">
-		<![CDATA[ from outdoorapp.to.Ruoli m where m.idRuolo = 2 ]]></query>
+		<![CDATA[ from outdoorapp.to.Ruoli m where m.idRuolo = 2 ]]></query> -->
 </hibernate-mapping>

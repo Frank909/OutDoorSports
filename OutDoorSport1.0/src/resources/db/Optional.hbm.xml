@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="outdoorapp.to.Optional" table="tbl_optional" catalog="outdoorsports">
+		<id name="idOptional" type="java.lang.Integer">
+			<column name="id_optional" />
+			<generator class="increment" />
+		</id>
+		<property name="nome" type="string">
+			<column name="nome" not-null="true" />
+		</property>
+		<property name="descrizione" type="string">
+			<column name="descrizione" not-null="true" />
+		</property>
+		<many-to-one name="tblTipoOptional" class="outdoorsports.to.TipoOptional" cascade="persist,merge,refresh" lazy="false">
+			<column name="id_tipo_optional" not-null="true" />
+		</many-to-one>
+		<many-to-one name="tblStatoOptional" class="outdoorsport.to.StatoOptional" cascade="persist,merge,refresh" lazy="false">
+			<column name="id_stato_optional" not-null="true" />
+		</many-to-one>
+	</class>
+	
+	<!-- <query name="getAllOptional">
+        <![CDATA[ from agroludos.to.Optional o ]]></query>
+	<query name="getOptionalByTipo">
+        <![CDATA[ from agroludos.to.Optional o where o.tipoOptional.nome = ?]]></query>
+	<query name="getOptionalAttiviByTipo">
+        <![CDATA[ from agroludos.to.Optional o where o.tipoOptional.nome = ? and stato = 1]]></query>-->
+        
+</hibernate-mapping>
