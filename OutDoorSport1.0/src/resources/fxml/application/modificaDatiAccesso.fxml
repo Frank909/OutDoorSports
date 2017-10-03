@@ -32,7 +32,7 @@
                                   <children>
                                     <PasswordField fx:id="txtPassword" prefWidth="-1.0" promptText="Inserisci la nuova password" GridPane.columnIndex="0" GridPane.rowIndex="0">
                                       <GridPane.margin>
-                                        <Insets right="30.0" fx:id="x5" />
+                                        <Insets right="30.0" top="10.0" fx:id="x5" />
                                       </GridPane.margin>
                                     </PasswordField>
                                     <Label fx:id="lblPasswordError" styleClass="lblError" text="Label" visible="false" GridPane.columnIndex="0" GridPane.rowIndex="1" GridPane.valignment="TOP">
@@ -87,8 +87,8 @@
                             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                           </columnConstraints>
                           <rowConstraints>
-                            <RowConstraints maxHeight="25.0" minHeight="10.0" prefHeight="25.0" vgrow="SOMETIMES" />
-                            <RowConstraints maxHeight="35.0" minHeight="10.0" prefHeight="35.0" vgrow="SOMETIMES" />
+                            <RowConstraints maxHeight="36.0" minHeight="10.0" prefHeight="29.0" vgrow="SOMETIMES" />
+                            <RowConstraints maxHeight="35.0" minHeight="10.0" prefHeight="31.0" vgrow="SOMETIMES" />
                           </rowConstraints>
                         </GridPane>
                         <GridPane GridPane.columnIndex="1" GridPane.rowIndex="1">
@@ -100,14 +100,9 @@
                             </Label>
                             <TextField fx:id="txtUsername" promptText="Inserisci la nuova username" GridPane.columnIndex="0" GridPane.rowIndex="0">
                               <GridPane.margin>
-                                <Insets right="30.0" fx:id="x5" />
+                                <Insets right="30.0" top="8.0" fx:id="x5" />
                               </GridPane.margin>
                             </TextField>
-                            <Label fx:id="lblUsernameError" styleClass="lblError" text="Label" visible="true" GridPane.columnIndex="0" GridPane.rowIndex="1" GridPane.valignment="TOP">
-                              <GridPane.margin>
-                                <Insets />
-                              </GridPane.margin>
-                            </Label>
                           </children>
                           <columnConstraints>
                             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -147,7 +142,7 @@
             </GridPane>
             <GridPane>
               <children>
-                <Label text="Modifica i tuoi dati di accesso.">
+                <Label text="MODIFICA DATI ACCESSO">
                   <font>
                     <Font name="System Bold" size="24.0" />
                   </font>
@@ -168,6 +163,11 @@
                 <Insets bottom="20.0" />
               </GridPane.margin>
             </Button>
+    <Label fx:id="lblUserPswError" contentDisplay="CENTER" styleClass="lblError" text="Label" visible="true" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="BASELINE">
+      <GridPane.margin>
+        <Insets />
+      </GridPane.margin>
+    </Label>
           </children>
           <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
