@@ -73,9 +73,6 @@ public class UtenteDAO<T extends Utente> extends GenericDAO<T>{
 		List<String> param = new ArrayList<String>();
 		param.add(username);
 		return this.getUtenteByQuery("getByUsername", param);
-		/*List<T> prova = new ArrayList<T>();
-		prova = super.executeQuery("from outdoorapp.to.Utente");
-		return prova.get(0);*/
 	}
 	
 	/**

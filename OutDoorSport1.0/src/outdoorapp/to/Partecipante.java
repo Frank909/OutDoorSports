@@ -26,46 +26,45 @@ import org.hibernate.annotations.Parameter;
 
 public class Partecipante extends Utente{
 
-
 	private static final long serialVersionUID = -1029684532506699639L;
-	private int idPartecipante;
-	private Utente tblUtente;
-	private String NTesseraSanitaria;
+	//private int idPartecipante;
+	private Utente utente;
+	private String tesseraSanitaria;
 	private String certificatoSrc;
 	private Date dataCertificatoSrc;
 
 	public Partecipante() {
 	}
 
-	public Partecipante(Utente tblUtente, String NTesseraSanitaria, String certificatoSrc,
+	/*public Partecipante(Utente utente, String nTesseraSanitaria, String certificatoSrc,
 			Date dataCertificatoSrc) {
-		this.tblUtente = tblUtente;
-		this.NTesseraSanitaria = NTesseraSanitaria;
+		this.utente = utente;
+		this.nTesseraSanitaria = nTesseraSanitaria;
 		this.certificatoSrc = certificatoSrc;
 		this.dataCertificatoSrc = dataCertificatoSrc;
-	}
+	}*/
 
 	/**
 	 * @return l'id del partecipante
 	 */
-	public int getIdPartecipante() {
+	/*public int getIdPartecipante() {
 		return this.idPartecipante;
-	}
+	}*/
 
 	/**
 	 * Metodo che setta l'id del partecipante
 	 * 
 	 * @param idPartecipante
 	 */
-	public void setIdPartecipante(int idPartecipante) {
+	/*public void setIdPartecipante(int idPartecipante) {
 		this.idPartecipante = idPartecipante;
-	}
+	}*/
 
 	/**
 	 * @return l'utente collegato al partecipante
 	 */
 	public Utente getUtente() {
-		return this.tblUtente;
+		return this.utente;
 	}
 
 	/**
@@ -73,15 +72,15 @@ public class Partecipante extends Utente{
 	 * 
 	 * @param tblUtente
 	 */
-	public void setUtente(Utente tblUtente) {
-		this.tblUtente = tblUtente;
+	public void setUtente(Utente utente) {
+		this.utente = utente;
 	}
 
 	/**
 	 * @return il numero di tessera sanitaria del partecipante
 	 */
-	public String getNTesseraSanitaria() {
-		return this.NTesseraSanitaria;
+	public String getTesseraSanitaria() {
+		return this.tesseraSanitaria;
 	}
 
 	/**
@@ -89,8 +88,8 @@ public class Partecipante extends Utente{
 	 * 
 	 * @param NTesseraSanitaria
 	 */
-	public void setNTesseraSanitaria(String NTesseraSanitaria) {
-		this.NTesseraSanitaria = NTesseraSanitaria;
+	public void setTesseraSanitaria(String tesseraSanitaria) {
+		this.tesseraSanitaria = tesseraSanitaria;
 	}
 
 	/**
@@ -124,5 +123,4 @@ public class Partecipante extends Utente{
 	public void setDataCertificatoSrc(Date dataCertificatoSrc) {
 		this.dataCertificatoSrc = dataCertificatoSrc;
 	}
-
 }

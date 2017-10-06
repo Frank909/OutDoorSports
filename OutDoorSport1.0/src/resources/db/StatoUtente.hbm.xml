@@ -13,8 +13,6 @@
 		</property>
 	</class>
 	
-	<!-- <query name="getAllStatoUtente">
-        <![CDATA[ from outdoorapp.to.StatoUtente o ]]></query>
-	<query name="getStatoAttivo">
-        <![CDATA[ from outdoorapp.to.StatoUtente o where o.idStatoUtente = 1]]></query>-->
+	<query name="getAllStatoUtente">
+        <![CDATA[ from outdoorapp.to.StatoUtente]]></query>
 </hibernate-mapping>

@@ -24,39 +24,39 @@ import org.hibernate.annotations.Parameter;
 public class ManagerDiEscursione extends Utente{
 
 	private static final long serialVersionUID = -4507785182150099517L;
-	private int idMde;
-	private Utente tblUtente;
+	// private int idMde;
+	private Utente utente;
 	private double stipendio;
 
 	public ManagerDiEscursione() {
 	}
 
-	public ManagerDiEscursione(Utente tblUtente, double stipendio) {
-		this.tblUtente = tblUtente;
+	/*public ManagerDiEscursione(Utente utente, double stipendio) {
+		this.utente = utente;
 		this.stipendio = stipendio;
-	}
+	}*/
 
 	/**
 	 * @return l'id del manager di escursione
 	 */ 
-	public int getIdManagerDiEscursione() {
+	/*public int getIdManagerDiEscursione() {
 		return this.idMde;
-	}
+	}*/
 
 	/**
 	 * Metodo che setta l'id del manager di escursione
 	 * 
 	 * @param idMde
 	 */
-	public void setIdManagerDiEscursione(int idMde) {
+	/*public void setIdManagerDiEscursione(int idMde) {
 		this.idMde = idMde;
-	}
+	}*/
 
 	/**
 	 * @return altre informazioni del manager di escursione dalla classe Utente
 	 */
 	public Utente getUtente() {
-		return this.tblUtente;
+		return this.utente;
 	}
 
 	/**
@@ -64,8 +64,8 @@ public class ManagerDiEscursione extends Utente{
 	 * 
 	 * @param tblUtente
 	 */
-	public void setUtente(Utente tblUtente) {
-		this.tblUtente = tblUtente;
+	public void setUtente(Utente utente) {
+		this.utente = utente;
 	}
 
 	/**

@@ -23,39 +23,39 @@ import org.hibernate.annotations.Parameter;
 public class ManagerDiSistema extends Utente{
 
 	private static final long serialVersionUID = 3017572647898485317L;
-	private int idMds;
-	private Utente tblUtente;
+	//private int idMds;
+	private Utente utente;
 	private String telefono;
 
 	public ManagerDiSistema() {
 	}
 
-	public ManagerDiSistema(Utente tblUtente, String telefono) {
-		this.tblUtente = tblUtente;
+	/*public ManagerDiSistema(Utente utente, String telefono) {
+		this.utente = utente;
 		this.telefono = telefono;
-	}
+	}*/
 
 	/**
 	 * @return l'id del manager di sistema
 	 */
-	public int getIdManagerDiSistema() {
+	/*public int getIdManagerDiSistema() {
 		return this.idMds;
-	}
+	}*/
 
 	/**
 	 * Metodo che setta il manager di sistema
 	 * 
 	 * @param idMds
 	 */
-	public void setIdManagerDiSistema(int idMds) {
+	/*public void setIdManagerDiSistema(int idMds) {
 		this.idMds = idMds;
-	}
+	}*/
 
 	/**
 	 * @return altre informazioni del manager di sistema dalla classe Utente
 	 */
 	public Utente getUtente() {
-		return this.tblUtente;
+		return this.utente;
 	}
 
 	/**
@@ -63,8 +63,8 @@ public class ManagerDiSistema extends Utente{
 	 * 
 	 * @param tblUtente
 	 */
-	public void setUtente(Utente tblUtente) {
-		this.tblUtente = tblUtente;
+	public void setUtente(Utente utente) {
+		this.utente = utente;
 	}
 
 	/**

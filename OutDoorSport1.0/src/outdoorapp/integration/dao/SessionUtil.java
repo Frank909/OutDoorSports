@@ -37,6 +37,7 @@ public class SessionUtil {
 				sessionFactory = configuration.buildSessionFactory();
 				res = sessionFactory;
 			}catch(Exception e){
+				System.out.println(e.getMessage());
 				try {
 					throw new DatabaseException(e.getMessage());
 				} catch (DatabaseException e1) {

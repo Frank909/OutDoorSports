@@ -38,46 +38,56 @@
 		<property name="citta" type="string">
 			<column name="citta" not-null="true" />
 		</property>
-		<many-to-one name="ruoloUtente" class="outdoorapp.to.Ruoli"
+		
+		<many-to-one name="ruolo" class="outdoorapp.to.Ruoli"
 			cascade="persist,merge,refresh" lazy="false">
-			<column name="id_ruolo" not-null="true" />
+			<column name="id_ruolo" not-null="true"/> 
 		</many-to-one>
+		
 		<many-to-one name="statoUtente" class="outdoorapp.to.StatoUtente"
 			 cascade="persist,merge,refresh" lazy="false">
-			<column name="id_stato_utente" not-null="true" />
+			<column name="id_stato_utente" not-null="true"/>
 		</many-to-one>
+		
 		<joined-subclass name="outdoorapp.to.ManagerDiSistema"
 			table="tbl_mds" extends="outdoorapp.to.Utente">
 			<key column="id_mds" />
+			
 			<property name="telefono" type="string">
 				<column name="telefono" />
 			</property>
 		</joined-subclass>
+		
 		<joined-subclass name="outdoorapp.to.ManagerDiEscursione"
 			table="tbl_mde" extends="outdoorapp.to.Utente">
 			<key column="id_mde" />
+			
 			<property name="stipendio" type="double">
 				<column name="stipendio" />
 			</property>
 		</joined-subclass>
+		
 		<joined-subclass name="outdoorapp.to.Partecipante"
 			table="tbl_partecipante" extends="outdoorapp.to.Utente">
-			<key column="id_partecipante" />
-			<property name="numTesseraSanitaria" type="string">
+			<key column="id_partecipante"/>
+			
+			<property name="tesseraSanitaria" type="string">
 				<column name="n_tessera_sanitaria" not-null="true" />
 			</property>
-			<property name="certificatoSRC" type="string">
+			
+			<property name="certificatoSrc" type="string">
 				<column name="certificato_src" not-null="true" />
 			</property>
-			<property name="dataCertificatoSRC" type="date">
+			
+			<property name="dataCertificatoSrc" type="date">
 				<column name="data_certificato_src" not-null="true" />
-			</property>
+			</property> 
 		</joined-subclass>
-
+		
 	</class>
 	
 	<query name="getByUsername">
-		<![CDATA[ from outdoorapp.to.Utente m where m.username = ? ]]></query>
+		<![CDATA[ from outdoorapp.to.Utente m where m.statoUtente.idStatoUtente = 1 and m.username = ? ]]></query>
 	
 	<!--<query name="checkMds">
 		<![CDATA[ from agroludos.to.Utente m where m.statoUtente.id = 1 and m.tipoUtente.id = 0 ]]></query>

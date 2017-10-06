@@ -26,18 +26,12 @@ public class StatoUtente implements OutDoorSports{
 	private static final long serialVersionUID = -2947070361442588483L;
 	private Integer idStatoUtente;
 	private String nome;
-	private Set<Utente> tblUtentes = new HashSet<Utente>(0);
 
 	public StatoUtente() {
 	}
 
 	public StatoUtente(String nome) {
 		this.nome = nome;
-	}
-
-	public StatoUtente(String nome, Set<Utente> tblUtentes) {
-		this.nome = nome;
-		this.tblUtentes = tblUtentes;
 	}
 
 	/**
@@ -71,21 +65,4 @@ public class StatoUtente implements OutDoorSports{
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-
-	/**
-	 * @return gli utenti associati a un determinato stato
-	 */
-	public Set<Utente> getUtente() {
-		return this.tblUtentes;
-	}
-
-	/**
-	 * Metodo che setta gli utenti associati a un determinato stato
-	 * 
-	 * @param tblUtentes
-	 */
-	public void setUtente(Set<Utente> tblUtentes) {
-		this.tblUtentes = tblUtentes;
-	}
-
 }

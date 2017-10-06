@@ -15,17 +15,13 @@
   <mapping resource="resources/db/Ruoli.hbm.xml"/>
   <mapping resource="resources/db/StatoUtente.hbm.xml"/>
   <mapping resource="resources/db/Utente.hbm.xml"/>
-  <!--<mapping class="outdoorapp.to.Escursione"/>
-  <mapping class="outdoorapp.to.Iscrizione"/>
-  <mapping class="outdoorapp.to.Optional"/>
-  <mapping class="outdoorapp.to.OptionalEscursione"/>
-  <mapping class="outdoorapp.to.OptionalIscrizione"/>
-  
-  <mapping class="outdoorapp.to.StatoEscursione"/>
-  <mapping class="outdoorapp.to.StatoIscrizione"/>
-  <mapping class="outdoorapp.to.StatoOptional"/>
-  
-  <mapping class="outdoorapp.to.TipoEscursione"/>
-  <mapping class="outdoorapp.to.TipoOptional"/>-->
+  <!-- <mapping resource="resources/db/Escursione.hbm.xml"/>
+  <mapping resource="resources/db/Iscrizione.hbm.xml"/>
+  <mapping resource="resources/db/Optional.hbm.xml"/>
+  <mapping resource="resources/db/StatoEscursione.hbm.xml"/>
+  <mapping resource="resources/db/StatoIscrizione.hbm.xml"/>
+  <mapping resource="resources/db/StatoOptional.hbm.xml"/>
+  <mapping resource="resources/db/TipoEscursione.hbm.xml"/>
+  <mapping resource="resources/db/TipoOptional.hbm.xml"/> -->
  </session-factory>
 </hibernate-configuration>

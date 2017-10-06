@@ -8,6 +8,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Date;
 import java.util.ResourceBundle;
 
 import javafx.event.ActionEvent;
@@ -35,8 +36,16 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import outdoorapp.exceptions.DatabaseException;
+import outdoorapp.integration.dao.ManagerDiEscursioneDAO;
+import outdoorapp.integration.dao.ManagerDiSistemaDAO;
+import outdoorapp.integration.dao.PartecipanteDAO;
+import outdoorapp.integration.dao.RuoliDAO;
+import outdoorapp.integration.dao.StatoUtenteDAO;
 import outdoorapp.integration.dao.UtenteDAO;
 import outdoorapp.to.Utente;
+import outdoorapp.to.Partecipante;
+import outdoorapp.to.Ruoli;
+import outdoorapp.to.StatoUtente;
 
 
 public class ControllerLogin
@@ -91,15 +100,50 @@ public class ControllerLogin
 	}
 	
 	@FXML protected void executeLogin() throws DatabaseException{
-		System.out.println("Psciaccaun d mamt");
-
-		UtenteDAO<Utente> udao = new UtenteDAO<Utente>();
+		
+		UtenteDAO<Utente> utente_dao = new UtenteDAO<Utente>();
+		Partecipante newPartecipante = new Partecipante();
+		
+		newPartecipante.setNome("cacca");
+		newPartecipante.setCognome("cacca");
+		newPartecipante.setNome("cacca");
+		newPartecipante.setUsername("cacca");
+		newPartecipante.setPassword("cacca");
+		newPartecipante.setEmail("cacca");
+		newPartecipante.setCodiceFiscale("cacca");
+		Date newDate = new Date();
+		newPartecipante.setDataNascita(newDate);
+		newPartecipante.setSesso("m");
+		newPartecipante.setIndirizzo("thvthv");
+		newPartecipante.setCitta("thvthv");
+		newPartecipante.setCertificatoSrc("gvtht");
+		newPartecipante.setDataCertificatoSrc(newDate);
+		newPartecipante.setTesseraSanitaria("vthtv");
+		
+		Ruoli ruolo = new Ruoli();
+		ruolo.setIdRuolo(1);
+		newPartecipante.setRuolo(ruolo);
+		StatoUtente stato = new StatoUtente();
+		stato.setIdStatoUtente(1);
+		newPartecipante.setStatoUtente(stato);
+		
 		String utente = "";
 		utente = this.username_textview.getText();
 		
-		Utente newUtente = udao.getByUsername(utente);
+		Partecipante newUtente = (Partecipante) utente_dao.getByUsername(utente);
 		
-		System.out.println(newUtente.getUsername() + newUtente.getEmail());
+		try{
+			utente_dao.create(newPartecipante);
+		}catch (DatabaseException e) {
+			// TODO: handle exception
+		}
+		
+		newPartecipante.setCognome("zio");
+		newPartecipante.setNome("zio");
+		
+		utente_dao.update(newPartecipante);
+		
+		System.out.println(newUtente.getUsername() + newUtente.getRuolo().getNome() + newUtente.getCertificatoSrc());
 	}
 	
 	private void loadPanel(StackPane panel, String panelName) throws IOException{

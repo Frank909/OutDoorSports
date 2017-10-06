@@ -13,12 +13,12 @@
 		</property>
 	</class>
 	
-	<!-- <query name="getAllRuoloUtente">
+	<query name="getAllRuoli">
         <![CDATA[ from outdoorapp.to.Ruoli o ]]></query>
 	<query name="getRuoloUtenteManagerDiSistema">
 		<![CDATA[ from outdoorapp.to.Ruoli m where m.idRuolo = 0 ]]></query>
 	<query name="getRuoloUtenteManagerDiEscursione">
 		<![CDATA[ from outdoorapp.to.Ruoli m where m.idRuolo = 1 ]]></query>
 	<query name="getRuoloUtentePartecipante">
-		<![CDATA[ from outdoorapp.to.Ruoli m where m.idRuolo = 2 ]]></query> -->
+		<![CDATA[ from outdoorapp.to.Ruoli m where m.idRuolo = 2 ]]></query>
 </hibernate-mapping>

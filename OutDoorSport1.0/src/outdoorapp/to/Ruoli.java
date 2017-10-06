@@ -26,18 +26,12 @@ public class Ruoli implements OutDoorSports{
 	private static final long serialVersionUID = -5565024038693813756L;
 	private Integer idRuolo;
 	private String nome;
-	private Set<Utente> tblUtentes = new HashSet<Utente>(0);
 
 	public Ruoli() {
 	}
 
 	public Ruoli(String nome) {
 		this.nome = nome;
-	}
-
-	public Ruoli(String nome, Set<Utente> tblUtentes) {
-		this.nome = nome;
-		this.tblUtentes = tblUtentes;
 	}
 
 	/**
@@ -71,16 +65,4 @@ public class Ruoli implements OutDoorSports{
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-
-	/**
-	 * @return l'utente relativo a quel ruolo
-	 */
-	public Set<Utente> getUtente() {
-		return this.tblUtentes;
-	}
-
-	public void setUtente(Set<Utente> tblUtentes) {
-		this.tblUtentes = tblUtentes;
-	}
-
 }

@@ -35,8 +35,8 @@ public class Utente implements OutDoorSports{
 
 	private static final long serialVersionUID = 625888613100910416L;
 	private Integer idUtente;
-	private Ruoli tblRuoli;
-	private StatoUtente tblStatoUtente;
+	private Ruoli ruolo;
+	private StatoUtente statoUtente;
 	private String username;
 	private String password;
 	private String nome;
@@ -47,20 +47,15 @@ public class Utente implements OutDoorSports{
 	private String sesso;
 	private String indirizzo;
 	private String citta;
-	private Set<Iscrizione> tblIscriziones = new HashSet<Iscrizione>(0);
-	private Partecipante tblPartecipante;
-	private ManagerDiSistema tblMds;
-	private Set<Escursione> tblEscursiones = new HashSet<Escursione>(0);
-	private ManagerDiEscursione tblMde;
 
 	public Utente() {
 	}
 
-	public Utente(Ruoli tblRuoli, StatoUtente tblStatoUtente, String username, String password, String nome,
+	public Utente(Ruoli ruolo, StatoUtente statoUtente, String username, String password, String nome,
 			String cognome, String email, String codiceFiscale, Date dataNascita, String sesso, String indirizzo,
 			String citta) {
-		this.tblRuoli = tblRuoli;
-		this.tblStatoUtente = tblStatoUtente;
+		this.ruolo = ruolo;
+		this.statoUtente = statoUtente;
 		this.username = username;
 		this.password = password;
 		this.nome = nome;
@@ -71,29 +66,6 @@ public class Utente implements OutDoorSports{
 		this.sesso = sesso;
 		this.indirizzo = indirizzo;
 		this.citta = citta;
-	}
-
-	public Utente(Ruoli tblRuoli, StatoUtente tblStatoUtente, String username, String password, String nome,
-			String cognome, String email, String codiceFiscale, Date dataNascita, String sesso, String indirizzo,
-			String citta, Set<Iscrizione> tblIscriziones, Partecipante tblPartecipante, ManagerDiSistema tblMds,
-			Set<Escursione> tblEscursiones, ManagerDiEscursione tblMde) {
-		this.tblRuoli = tblRuoli;
-		this.tblStatoUtente = tblStatoUtente;
-		this.username = username;
-		this.password = password;
-		this.nome = nome;
-		this.cognome = cognome;
-		this.email = email;
-		this.codiceFiscale = codiceFiscale;
-		this.dataNascita = dataNascita;
-		this.sesso = sesso;
-		this.indirizzo = indirizzo;
-		this.citta = citta;
-		this.tblIscriziones = tblIscriziones;
-		this.tblPartecipante = tblPartecipante;
-		this.tblMds = tblMds;
-		this.tblEscursiones = tblEscursiones;
-		this.tblMde = tblMde;
 	}
 
 	/**
@@ -116,7 +88,7 @@ public class Utente implements OutDoorSports{
 	 * @return il ruolo relativo a un determinato utente
 	 */
 	public Ruoli getRuolo() {
-		return this.tblRuoli;
+		return this.ruolo;
 	}
 
 	/**
@@ -124,15 +96,15 @@ public class Utente implements OutDoorSports{
 	 * 
 	 * @param tblRuoli
 	 */
-	public void setRuolo(Ruoli tblRuoli) {
-		this.tblRuoli = tblRuoli;
+	public void setRuolo(Ruoli ruolo) {
+		this.ruolo = ruolo;
 	}
 
 	/**
 	 * @return lo stato utente relativo a un determinato utente
 	 */
 	public StatoUtente getStatoUtente() {
-		return this.tblStatoUtente;
+		return this.statoUtente;
 	}
 
 	/**
@@ -141,7 +113,7 @@ public class Utente implements OutDoorSports{
 	 * @param tblStatoUtente
 	 */
 	public void setStatoUtente(StatoUtente tblStatoUtente) {
-		this.tblStatoUtente = tblStatoUtente;
+		this.statoUtente = tblStatoUtente;
 	}
 
 	/**
@@ -303,85 +275,4 @@ public class Utente implements OutDoorSports{
 	public void setCitta(String citta) {
 		this.citta = citta;
 	}
-
-	/**
-	 * @return le iscrizioni dell'utente
-	 */
-	public Set<Iscrizione> getIscrizioni() {
-		return this.tblIscriziones;
-	}
-
-	/**
-	 * Metodo che setta le iscrizioni di un utente
-	 * 
-	 * @param tblIscriziones
-	 */
-	public void setIscrizioni(Set<Iscrizione> tblIscriziones) {
-		this.tblIscriziones = tblIscriziones;
-	}
-
-	/**
-	 * @return il partecipante relativo all'utente
-	 */
-	public Partecipante getPartecipante() {
-		return this.tblPartecipante;
-	}
-
-	/**
-	 * Metodo che setta il partecipante relatico all'utente
-	 * 
-	 * @param tblPartecipante
-	 */
-	public void setPartecipante(Partecipante tblPartecipante) {
-		this.tblPartecipante = tblPartecipante;
-	}
-
-	/**
-	 * @return manager di sistema relativo all'utente
-	 */
-	public ManagerDiSistema getManagerDiSistema() {
-		return this.tblMds;
-	}
-
-	/**
-	 * Metodo che setta il manager di sistema relativo all'utente
-	 * 
-	 * @param tblMds
-	 */
-	public void setManagerDiSistema(ManagerDiSistema tblMds) {
-		this.tblMds = tblMds;
-	}
-
-	/**
-	 * @return le escursioni relative all'utente
-	 */
-	public Set<Escursione> getEscursioni() {
-		return this.tblEscursiones;
-	}
-
-	/**
-	 * Metodo che setta le escursioni relative all'utente
-	 * 
-	 * @param tblEscursiones
-	 */
-	public void setEscursioni(Set<Escursione> tblEscursiones) {
-		this.tblEscursiones = tblEscursiones;
-	}
-
-	/**
-	 * @return manager di escursione relativo all'utente
-	 */
-	public ManagerDiEscursione getManagerDiEscursione() {
-		return this.tblMde;
-	}
-
-	/**
-	 * Metodo che setta il manager di escursione relativo all'utente
-	 * 
-	 * @param tblMde
-	 */
-	public void setManagerDiEscursione(ManagerDiEscursione tblMde) {
-		this.tblMde = tblMde;
-	}
-
 }
