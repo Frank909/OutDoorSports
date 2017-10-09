@@ -1,4 +1,4 @@
-package outdoorapp.integration.dao;
+package outdoorapp.integration;
 
 import outdoorapp.exceptions.DatabaseException;
 

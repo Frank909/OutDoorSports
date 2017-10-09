@@ -1,6 +1,7 @@
 package outdoorapp.integration.dao;
 
 import outdoorapp.exceptions.DatabaseException;
+import outdoorapp.integration.SessionUtil;
 import outdoorapp.to.OutDoorSports;
 import java.util.List;
 
