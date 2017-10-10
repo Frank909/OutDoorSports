@@ -57,7 +57,7 @@
                             <RowConstraints maxHeight="25.0" minHeight="10.0" prefHeight="25.0" vgrow="SOMETIMES" />
                           </rowConstraints>
                         </GridPane>
-                        <GridPane GridPane.columnIndex="1" GridPane.rowIndex="0">
+                        <GridPane fx:id="txtIndirizzo" GridPane.columnIndex="1" GridPane.rowIndex="0">
                           <children>
                             <TextField fx:id="txtIndirizzo" GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.valignment="TOP">
                               <GridPane.margin>
@@ -173,7 +173,7 @@
                                        <GridPane.margin>
                                           <Insets left="10.0" top="10.0" />
                                        </GridPane.margin></Label>
-                        <GridPane prefHeight="92.0" prefWidth="333.0" GridPane.columnIndex="1" GridPane.rowIndex="5">
+                        <GridPane prefHeight="92.0" prefWidth="333.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
                           <children>
                             <TextField id="txtShowPassword" prefWidth="-1.0" visible="false" GridPane.columnIndex="0" GridPane.rowIndex="0">
                               <GridPane.margin>
@@ -220,7 +220,7 @@
                             <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                           </rowConstraints>
                         </GridPane>
-                        <Label font="$x1" text="Password" GridPane.columnIndex="0" GridPane.rowIndex="5" GridPane.valignment="TOP">
+                        <Label font="$x1" text="Password" GridPane.columnIndex="0" GridPane.rowIndex="4" GridPane.valignment="TOP">
                                        <GridPane.margin>
                                           <Insets left="10.0" top="10.0" />
                                        </GridPane.margin></Label>
@@ -266,7 +266,7 @@
                             <RowConstraints maxHeight="33.0" minHeight="10.0" prefHeight="31.0" vgrow="SOMETIMES" />
                           </rowConstraints>
                         </GridPane>
-                        <GridPane GridPane.columnIndex="1" GridPane.rowIndex="4">
+                        <GridPane GridPane.columnIndex="1" GridPane.rowIndex="3">
                           <children>
                             <TextField fx:id="txtUsername" prefWidth="200.0" GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.valignment="TOP">
                               <GridPane.margin>
@@ -287,7 +287,7 @@
                             <RowConstraints maxHeight="36.0" minHeight="10.0" prefHeight="35.0" vgrow="SOMETIMES" />
                           </rowConstraints>
                         </GridPane>
-                        <Label font="$x1" text="Username" wrapText="true" GridPane.columnIndex="0" GridPane.rowIndex="4" GridPane.valignment="TOP">
+                        <Label font="$x1" text="Username" wrapText="true" GridPane.columnIndex="0" GridPane.rowIndex="3" GridPane.valignment="TOP">
                                        <GridPane.margin>
                                           <Insets left="10.0" top="10.0" />
                                        </GridPane.margin></Label>
@@ -317,38 +317,12 @@
                             <RowConstraints maxHeight="35.0" minHeight="10.0" prefHeight="35.0" vgrow="SOMETIMES" />
                           </rowConstraints>
                         </GridPane>
-                        <GridPane GridPane.columnIndex="1" GridPane.rowIndex="3">
-                          <children>
-                            <TextField fx:id="txtNTSanitaria" prefWidth="333.0" GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.valignment="TOP">
-                              <GridPane.margin>
-                                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" fx:id="x5" />
-                              </GridPane.margin>
-                            </TextField>
-                            <Label fx:id="lblTesSanError" styleClass="lblError" text="Label" visible="false" GridPane.columnIndex="0" GridPane.rowIndex="1" GridPane.valignment="TOP">
-                                             <GridPane.margin>
-                                                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                             </GridPane.margin></Label>
-                          </children>
-                          <columnConstraints>
-                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                          </columnConstraints>
-                          <rowConstraints>
-                            <RowConstraints maxHeight="25.0" minHeight="10.0" prefHeight="25.0" vgrow="SOMETIMES" />
-                            <RowConstraints maxHeight="34.0" minHeight="10.0" prefHeight="34.0" vgrow="SOMETIMES" />
-                          </rowConstraints>
-                        </GridPane>
-                        <Label font="$x1" text="Num. Tess. Sanitaria" wrapText="true" GridPane.columnIndex="0" GridPane.rowIndex="3" GridPane.valignment="TOP">
-                          <GridPane.margin>
-                            <Insets left="10.0" top="10.0" fx:id="x3" />
-                          </GridPane.margin>
-                        </Label>
                       </children>
                       <columnConstraints>
                         <ColumnConstraints hgrow="SOMETIMES" maxWidth="239.0" minWidth="10.0" prefWidth="140.0" />
                         <ColumnConstraints hgrow="SOMETIMES" maxWidth="381.0" minWidth="10.0" prefWidth="312.0" />
                       </columnConstraints>
                       <rowConstraints>
-                        <RowConstraints maxHeight="60.0" minHeight="10.0" prefHeight="60.0" vgrow="SOMETIMES" />
                         <RowConstraints maxHeight="60.0" minHeight="10.0" prefHeight="60.0" vgrow="SOMETIMES" />
                         <RowConstraints maxHeight="60.0" minHeight="10.0" prefHeight="60.0" vgrow="SOMETIMES" />
                         <RowConstraints maxHeight="60.0" minHeight="10.0" prefHeight="60.0" vgrow="SOMETIMES" />
