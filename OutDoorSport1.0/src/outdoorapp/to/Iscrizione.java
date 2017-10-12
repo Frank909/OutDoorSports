@@ -30,30 +30,13 @@ public class Iscrizione implements OutDoorSports{
 
 	private static final long serialVersionUID = 5440407744318413216L;
 	private Integer idIscrizione;
-	private Escursione tblEscursione;
-	private StatoIscrizione tblStatoIscrizione;
-	private Utente tblUtente;
+	private Escursione escursione;
+	private StatoIscrizione statoIscrizione;
+	private Utente utente;
 	private Date data;
-	private Set<OptionalIscrizione> tblOptionalIscriziones = new HashSet<OptionalIscrizione>(0);
+	private Set<Optional> optionals;
 
 	public Iscrizione() {
-	}
-
-	public Iscrizione(Escursione tblEscursione, StatoIscrizione tblStatoIscrizione, Utente tblUtente,
-			Date data) {
-		this.tblEscursione = tblEscursione;
-		this.tblStatoIscrizione = tblStatoIscrizione;
-		this.tblUtente = tblUtente;
-		this.data = data;
-	}
-
-	public Iscrizione(Escursione tblEscursione, StatoIscrizione tblStatoIscrizione, Utente tblUtente,
-			Date data, Set<OptionalIscrizione> tblOptionalIscriziones) {
-		this.tblEscursione = tblEscursione;
-		this.tblStatoIscrizione = tblStatoIscrizione;
-		this.tblUtente = tblUtente;
-		this.data = data;
-		this.tblOptionalIscriziones = tblOptionalIscriziones;
 	}
 
 	/**
@@ -76,7 +59,7 @@ public class Iscrizione implements OutDoorSports{
 	 * @return l'escursione associata a quell'escursione
 	 */
 	public Escursione getEscursione() {
-		return this.tblEscursione;
+		return this.escursione;
 	}
 
 	/**
@@ -84,15 +67,15 @@ public class Iscrizione implements OutDoorSports{
 	 * 
 	 * @param tblEscursione
 	 */
-	public void setEscursione(Escursione tblEscursione) {
-		this.tblEscursione = tblEscursione;
+	public void setEscursione(Escursione escursione) {
+		this.escursione = escursione;
 	}
 
 	/**
 	 * @return lo stato dell'iscrizione
 	 */
 	public StatoIscrizione getStatoIscrizione() {
-		return this.tblStatoIscrizione;
+		return this.statoIscrizione;
 	}
 
 	/**
@@ -100,15 +83,15 @@ public class Iscrizione implements OutDoorSports{
 	 * 
 	 * @param tblStatoIscrizione
 	 */
-	public void setStatoIscrizione(StatoIscrizione tblStatoIscrizione) {
-		this.tblStatoIscrizione = tblStatoIscrizione;
+	public void setStatoIscrizione(StatoIscrizione statoIscrizione) {
+		this.statoIscrizione = statoIscrizione;
 	}
 
 	/**
 	 * @return l'utente relativo a quella iscrizione
 	 */
 	public Utente getUtente() {
-		return this.tblUtente;
+		return this.utente;
 	}
 
 	/**
@@ -116,8 +99,8 @@ public class Iscrizione implements OutDoorSports{
 	 * 
 	 * @param tblUtente
 	 */
-	public void setUtente(Utente tblUtente) {
-		this.tblUtente = tblUtente;
+	public void setUtente(Utente utente) {
+		this.utente = utente;
 	}
 
 	/**
@@ -135,21 +118,20 @@ public class Iscrizione implements OutDoorSports{
 	public void setData(Date data) {
 		this.data = data;
 	}
-
+	
 	/**
-	 * @return gli optional relativi a una iscrizione ad una escursione
+	 * @return un set di optional
 	 */
-	public Set<OptionalIscrizione> getOptionalIscrizione() {
-		return this.tblOptionalIscriziones;
+	public Set<Optional> getOptionals() {
+		return optionals;
 	}
 
 	/**
-	 * Metodo che setta gli optional relativi a una iscrizione ad una escursione
+	 * Metodo che setta gli optional per una determinata iscrizione
 	 * 
-	 * @param tblOptionalIscriziones
+	 * @param optionals
 	 */
-	public void setOptionalIscrizione(Set<OptionalIscrizione> tblOptionalIscriziones) {
-		this.tblOptionalIscriziones = tblOptionalIscriziones;
+	public void setOptionals(Set<Optional> optionals) {
+		this.optionals = optionals;
 	}
-
 }

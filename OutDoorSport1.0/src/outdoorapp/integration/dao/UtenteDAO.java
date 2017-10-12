@@ -102,7 +102,7 @@ public class UtenteDAO<T extends Utente> extends GenericDAO<T>{
 	 * @return vero se è un utente nullo, falso altrimenti
 	 */
 	private boolean isNullUtente(Utente utente){
-		return utente.getIdUtente() == -1;
+		return utente.getIdUtente() == null;
 	}
 	
 	/**
@@ -114,7 +114,7 @@ public class UtenteDAO<T extends Utente> extends GenericDAO<T>{
 		boolean response = false;
 		List<String> param = new ArrayList<String>();
 		param.add(utente.getUsername());
-		Utente newUtente = this.getUtenteByQuery("boooooooooooooooooh", param);
+		Utente newUtente = this.getUtenteByQuery("getByUsername", param);
 		response = !this.isNullUtente(newUtente);
 		return response;
 	}
@@ -128,7 +128,7 @@ public class UtenteDAO<T extends Utente> extends GenericDAO<T>{
 		boolean response = false;
 		List<String> param = new ArrayList<String>();
 		param.add(utente.getEmail());
-		Utente newUtente = this.getUtenteByQuery("booooooooooooooooooh", param);
+		Utente newUtente = this.getUtenteByQuery("getByEmail", param);
 		response = !this.isNullUtente(newUtente);
 		return response;
 	}

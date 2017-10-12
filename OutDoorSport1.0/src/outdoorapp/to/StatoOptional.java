@@ -26,18 +26,8 @@ public class StatoOptional implements OutDoorSports{
 	private static final long serialVersionUID = 4816235332067876389L;
 	private Integer idStatoOptional;
 	private String nome;
-	private Set<Optional> tblOptionals = new HashSet<Optional>(0);
 
 	public StatoOptional() {
-	}
-
-	public StatoOptional(String nome) {
-		this.nome = nome;
-	}
-
-	public StatoOptional(String nome, Set<Optional> tblOptionals) {
-		this.nome = nome;
-		this.tblOptionals = tblOptionals;
 	}
 
 	/**
@@ -71,21 +61,4 @@ public class StatoOptional implements OutDoorSports{
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-
-	/**
-	 * @return gli optional relativi al determinato stato
-	 */
-	public Set<Optional> getOptional() {
-		return this.tblOptionals;
-	}
-
-	/**
-	 * Metodo che setta gli optional relativi al determinato stato
-	 * 
-	 * @param tblOptionals
-	 */
-	public void setOptional(Set<Optional> tblOptionals) {
-		this.tblOptionals = tblOptionals;
-	}
-
 }

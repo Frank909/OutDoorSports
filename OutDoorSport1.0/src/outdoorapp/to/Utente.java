@@ -1,6 +1,7 @@
 package outdoorapp.to;
 // Generated 14-set-2017 13.06.34 by Hibernate Tools 5.2.3.Final
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -43,7 +44,7 @@ public class Utente implements OutDoorSports{
 	private String cognome;
 	private String email;
 	private String codiceFiscale;
-	private Date dataNascita;
+	private String dataNascita;
 	private String sesso;
 	private String indirizzo;
 	private String citta;
@@ -52,7 +53,7 @@ public class Utente implements OutDoorSports{
 	}
 
 	public Utente(Ruoli ruolo, StatoUtente statoUtente, String username, String password, String nome,
-			String cognome, String email, String codiceFiscale, Date dataNascita, String sesso, String indirizzo,
+			String cognome, String email, String codiceFiscale, String dataNascita, String sesso, String indirizzo,
 			String citta) {
 		this.ruolo = ruolo;
 		this.statoUtente = statoUtente;
@@ -215,17 +216,17 @@ public class Utente implements OutDoorSports{
 	/**
 	 * @return la data di nascia dell'utente
 	 */
-	public Date getDataNascita() {
+	public String getDataNascita() {
 		return this.dataNascita;
 	}
 
 	/**
 	 * Metodo che setta la data di nascita dell'utente
 	 * 
-	 * @param dataNascita
+	 * @param localDate
 	 */
-	public void setDataNascita(Date dataNascita) {
-		this.dataNascita = dataNascita;
+	public void setDataNascita(String localDate) {
+		this.dataNascita = localDate;
 	}
 
 	/**

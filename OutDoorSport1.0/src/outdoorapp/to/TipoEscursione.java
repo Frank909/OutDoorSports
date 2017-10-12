@@ -26,21 +26,9 @@ public class TipoEscursione implements OutDoorSports{
 	private static final long serialVersionUID = -8638030899448668159L;
 	private Integer idTipoEscursione;
 	private String nome;
-	private String decrizione;
-	private Set<Escursione> tblEscursiones = new HashSet<Escursione>(0);
+	private String descrizione;
 
 	public TipoEscursione() {
-	}
-
-	public TipoEscursione(String nome, String decrizione) {
-		this.nome = nome;
-		this.decrizione = decrizione;
-	}
-
-	public TipoEscursione(String nome, String decrizione, Set<Escursione> tblEscursiones) {
-		this.nome = nome;
-		this.decrizione = decrizione;
-		this.tblEscursiones = tblEscursiones;
 	}
 
 	/**
@@ -78,8 +66,8 @@ public class TipoEscursione implements OutDoorSports{
 	/** 
 	 * @return la descrizione del tipoEscursione
 	 */
-	public String getDecrizione() {
-		return this.decrizione;
+	public String getDescrizione() {
+		return this.descrizione;
 	}
 
 	/**
@@ -87,23 +75,7 @@ public class TipoEscursione implements OutDoorSports{
 	 * 
 	 * @param decrizione
 	 */
-	public void setDecrizione(String decrizione) {
-		this.decrizione = decrizione;
-	}
-
-	/**
-	 * @return le escursioni collegate a un determinato tipo di escursione
-	 */
-	public Set<Escursione> getEscursioni() {
-		return this.tblEscursiones;
-	}
-
-	/**
-	 * Metodo che setta le escursioni collegate a un determinato tipo di escursione
-	 * 
-	 * @param tblEscursiones
-	 */
-	public void setEscursioni(Set<Escursione> tblEscursiones) {
-		this.tblEscursiones = tblEscursiones;
+	public void setDescrizione(String decrizione) {
+		this.descrizione = decrizione;
 	}
 }

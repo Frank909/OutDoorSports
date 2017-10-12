@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
-"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping>
 	<class name="outdoorapp.to.Iscrizione" table="tbl_iscrizione" catalog="outdoorsports">
@@ -11,18 +11,22 @@
 		<property name="data" type="date">
 			<column name="data" not-null="true" />
 		</property>
-		<many-to-one name="tblStatoIscrizione" class="outdoorapp.to.StatoIscrizione"
+		
+		<many-to-one name="statoIscrizione" class="outdoorapp.to.StatoIscrizione"
 			cascade="persist,merge,refresh" lazy="false">
 			<column name="id_stato_iscrizione" not-null="true" />
 		</many-to-one>
-		<many-to-one name="tblEscursione" class="outdoorapp.to.Escursione"
+		
+		<many-to-one name="escursione" class="outdoorapp.to.Escursione"
 			cascade="persist,merge,refresh" lazy="false">
 			<column name="id_escursione" not-null="true" />
 		</many-to-one>
-		<many-to-one name="tblUtente" class="outdoorapp.to.Partecipante"
+		
+		<many-to-one name="utente" class="outdoorapp.to.Partecipante"
 			cascade="persist,merge,refresh" lazy="false">
 			<column name="id_partecipante" not-null="true" />
 		</many-to-one>
+		
 		<set name="optionals" cascade="persist,merge,refresh" table="tbl_optional_iscrizione"
 			lazy="false">
 			<key column="id_iscrizione" />

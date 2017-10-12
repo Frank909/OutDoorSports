@@ -1,4 +1,4 @@
-package outdoorapp;
+package outdoorapp.utils;
 
 
 import java.io.IOException;

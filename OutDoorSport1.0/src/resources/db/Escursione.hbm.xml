@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
-"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping>
 	<class name="outdoorapp.to.Escursione" table="tbl_escursione" catalog="outdoorsports">
@@ -26,19 +26,23 @@
 		<property name="descrizione" type="string">
 			<column name="descrizione" not-null="true" />
 		</property>
+		
 		<set name="optionals" cascade="persist,merge,refresh" table="tbl_optional_escursione" lazy="false">
 			<key column="id_escursione" />
 			<many-to-many column="id_optional" class="outdoorapp.to.Optional" />
 		</set>
-		<many-to-one name="tblStatoEscursione" cascade="persist,merge,refresh"
+		
+		<many-to-one name="statoEscursione" cascade="persist,merge,refresh"
 			class="outdoorapp.to.StatoEscursione" lazy="false">
 			<column name="id_stato_escursione" not-null="true" />
 		</many-to-one>
-		<many-to-one name="tblTipoEscursione" cascade="persist,merge,refresh"
+		
+		<many-to-one name="tipoEscursione" cascade="persist,merge,refresh"
 			class="outdoorapp.to.TipoEscursione" lazy="false">
 			<column name="id_tipo_escursione" not-null="true" />
 		</many-to-one>
-		<many-to-one name="tblUtente" cascade="persist,merge,refresh"
+		
+		<many-to-one name="utente" cascade="persist,merge,refresh"
 			class="outdoorapp.to.ManagerDiEscursione" lazy="false">
 			<column name="id_mde" not-null="true" />
 		</many-to-one>

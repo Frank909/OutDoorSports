@@ -30,49 +30,18 @@ public class Escursione implements OutDoorSports{
 
 	private static final long serialVersionUID = -8060673121786005549L;
 	private Integer idEscursione;
-	private StatoEscursione tblStatoEscursione;
-	private TipoEscursione tblTipoEscursione;
-	private Utente tblUtente;
+	private StatoEscursione statoEscursione;
+	private TipoEscursione tipoEscursione;
+	private Utente utente;
 	private String nome;
 	private Date data;
 	private int numberMin;
 	private int numberMax;
 	private double costo;
 	private String descrizione;
-	private Set<Iscrizione> tblIscriziones = new HashSet<Iscrizione>(0);
-	private Set<OptionalEscursione> tblOptionalEscursiones = new HashSet<OptionalEscursione>(0);
+	private Set<Optional> optionals;
 
 	public Escursione() {
-	}
-
-	public Escursione(StatoEscursione tblStatoEscursione, TipoEscursione tblTipoEscursione,
-			Utente tblUtente, String nome, Date data, int numberMin, int numberMax, double costo,
-			String descrizione) {
-		this.tblStatoEscursione = tblStatoEscursione;
-		this.tblTipoEscursione = tblTipoEscursione;
-		this.tblUtente = tblUtente;
-		this.nome = nome;
-		this.data = data;
-		this.numberMin = numberMin;
-		this.numberMax = numberMax;
-		this.costo = costo;
-		this.descrizione = descrizione;
-	}
-
-	public Escursione(StatoEscursione tblStatoEscursione, TipoEscursione tblTipoEscursione,
-			Utente tblUtente, String nome, Date data, int numberMin, int numberMax, double costo, String descrizione,
-			Set<Iscrizione> tblIscriziones, Set<OptionalEscursione> tblOptionalEscursiones) {
-		this.tblStatoEscursione = tblStatoEscursione;
-		this.tblTipoEscursione = tblTipoEscursione;
-		this.tblUtente = tblUtente;
-		this.nome = nome;
-		this.data = data;
-		this.numberMin = numberMin;
-		this.numberMax = numberMax;
-		this.costo = costo;
-		this.descrizione = descrizione;
-		this.tblIscriziones = tblIscriziones;
-		this.tblOptionalEscursiones = tblOptionalEscursiones;
 	}
 
 	/**
@@ -95,7 +64,7 @@ public class Escursione implements OutDoorSports{
 	 * @return lo stato dell'Escursione
 	 */
 	public StatoEscursione getStatoEscursione() {
-		return this.tblStatoEscursione;
+		return this.statoEscursione;
 	}
 
 	/**
@@ -103,15 +72,15 @@ public class Escursione implements OutDoorSports{
 	 * 
 	 * @param tblStatoEscursione
 	 */
-	public void setStatoEscursione(StatoEscursione tblStatoEscursione) {
-		this.tblStatoEscursione = tblStatoEscursione;
+	public void setStatoEscursione(StatoEscursione statoEscursione) {
+		this.statoEscursione = statoEscursione;
 	}
 
 	/**
 	 * @return il tipo dell'escursione
 	 */
 	public TipoEscursione getTipoEscursione() {
-		return this.tblTipoEscursione;
+		return this.tipoEscursione;
 	}
 
 	/**
@@ -119,15 +88,15 @@ public class Escursione implements OutDoorSports{
 	 * 
 	 * @param tblTipoEscursione
 	 */
-	public void setTipoEscursione(TipoEscursione tblTipoEscursione) {
-		this.tblTipoEscursione = tblTipoEscursione;
+	public void setTipoEscursione(TipoEscursione tipoEscursione) {
+		this.tipoEscursione = tipoEscursione;
 	}
 
 	/**
 	 * @return l'utente associato a una determinata Escursione
 	 */
 	public Utente getUtente() {
-		return this.tblUtente;
+		return this.utente;
 	}
 
 	/**
@@ -135,8 +104,8 @@ public class Escursione implements OutDoorSports{
 	 * 
 	 * @param tblUtente
 	 */
-	public void setUtente(Utente tblUtente) {
-		this.tblUtente = tblUtente;
+	public void setUtente(Utente utente) {
+		this.utente = utente;
 	}
 
 	/**
@@ -234,37 +203,21 @@ public class Escursione implements OutDoorSports{
 	public void setDescrizione(String descrizione) {
 		this.descrizione = descrizione;
 	}
-
+	
 	/**
-	 * @return le iscrizioni per una determinata escursione
+	 * @return un set di optional
 	 */
-	public Set<Iscrizione> getIscrizioni() {
-		return this.tblIscriziones;
+	public Set<Optional> getOptionals() {
+		return optionals;
 	}
 
 	/**
-	 * Metodo che setta le iscrizioni per una determinata escursione
+	 * Metodo che setta gli optional per una determinata escursione
 	 * 
-	 * @param tblIscriziones
+	 * @param optionals
 	 */
-	public void setIscrizioni(Set<Iscrizione> tblIscriziones) {
-		this.tblIscriziones = tblIscriziones;
-	}
-
-	/**
-	 * @return gli optional di una determinata escursione
-	 */
-	public Set<OptionalEscursione> getOptionalEscursione() {
-		return this.tblOptionalEscursiones;
-	}
-
-	/**
-	 * Metodo che setta gli optional di una escursione
-	 * 
-	 * @param tblOptionalEscursiones
-	 */
-	public void setOptionalEscursione(Set<OptionalEscursione> tblOptionalEscursiones) {
-		this.tblOptionalEscursiones = tblOptionalEscursiones;
+	public void setOptionals(Set<Optional> optionals) {
+		this.optionals = optionals;
 	}
 
 }

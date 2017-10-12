@@ -27,20 +27,8 @@ public class TipoOptional implements OutDoorSports{
 	private Integer idTipoOptional;
 	private String nome;
 	private double costo;
-	private Set<Optional> tblOptionals = new HashSet<Optional>(0);
 
 	public TipoOptional() {
-	}
-
-	public TipoOptional(String nome, double costo) {
-		this.nome = nome;
-		this.costo = costo;
-	}
-
-	public TipoOptional(String nome, double costo, Set<Optional> tblOptionals) {
-		this.nome = nome;
-		this.costo = costo;
-		this.tblOptionals = tblOptionals;
 	}
 
 	/**
@@ -90,21 +78,4 @@ public class TipoOptional implements OutDoorSports{
 	public void setCosto(double costo) {
 		this.costo = costo;
 	}
-
-	/**
-	 * @return gli optional collegati al tipo optional
-	 */
-	public Set<Optional> getOptional() {
-		return this.tblOptionals;
-	}
-
-	/**
-	 * Metodo che setta gli optional collegati al tipo optional
-	 * 
-	 * @param tblOptionals
-	 */
-	public void setOptional(Set<Optional> tblOptionals) {
-		this.tblOptionals = tblOptionals;
-	}
-
 }

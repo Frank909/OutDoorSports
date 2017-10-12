@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
-                                         "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+"http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+
 <hibernate-configuration>
- <session-factory name="">
+ <session-factory>
   <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
   <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/outdoorsports</property>
   <property name="hibernate.connection.username">root</property>
@@ -15,13 +16,13 @@
   <mapping resource="resources/db/Ruoli.hbm.xml"/>
   <mapping resource="resources/db/StatoUtente.hbm.xml"/>
   <mapping resource="resources/db/Utente.hbm.xml"/>
-  <!-- <mapping resource="resources/db/Escursione.hbm.xml"/>
+  <mapping resource="resources/db/Escursione.hbm.xml"/>
+  <mapping resource="resources/db/StatoEscursione.hbm.xml"/>
+  <mapping resource="resources/db/TipoEscursione.hbm.xml"/>
+  <mapping resource="resources/db/StatoIscrizione.hbm.xml"/>
   <mapping resource="resources/db/Iscrizione.hbm.xml"/>
   <mapping resource="resources/db/Optional.hbm.xml"/>
-  <mapping resource="resources/db/StatoEscursione.hbm.xml"/>
-  <mapping resource="resources/db/StatoIscrizione.hbm.xml"/>
   <mapping resource="resources/db/StatoOptional.hbm.xml"/>
-  <mapping resource="resources/db/TipoEscursione.hbm.xml"/>
-  <mapping resource="resources/db/TipoOptional.hbm.xml"/> -->
+  <mapping resource="resources/db/TipoOptional.hbm.xml"/>
  </session-factory>
 </hibernate-configuration>

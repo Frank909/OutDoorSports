@@ -25,18 +25,8 @@ public class StatoEscursione implements OutDoorSports{
 	private static final long serialVersionUID = -3317221757629047387L;
 	private Integer idStatoEscursione;
 	private String nome;
-	private Set<Escursione> tblEscursiones = new HashSet<Escursione>(0);
 
 	public StatoEscursione() {
-	}
-
-	public StatoEscursione(String nome) {
-		this.nome = nome;
-	}
-
-	public StatoEscursione(String nome, Set<Escursione> tblEscursiones) {
-		this.nome = nome;
-		this.tblEscursiones = tblEscursiones;
 	}
 
 	/**
@@ -70,21 +60,4 @@ public class StatoEscursione implements OutDoorSports{
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-
-	/**
-	 * @return le escursioni associate allo stato escursione
-	 */
-	public Set<Escursione> getEscursione() {
-		return this.tblEscursiones;
-	}
-
-	/**
-	 * Metodo che setta le escursioni associate allo stato escursione
-	 * 
-	 * @param tblEscursiones
-	 */
-	public void setTblEscursiones(Set<Escursione> tblEscursiones) {
-		this.tblEscursiones = tblEscursiones;
-	}
-
 }

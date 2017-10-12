@@ -2,7 +2,11 @@ package outdoorapp.integration.dao;
 
 import outdoorapp.exceptions.DatabaseException;
 import outdoorapp.integration.SessionUtil;
+import outdoorapp.to.ManagerDiSistema;
 import outdoorapp.to.OutDoorSports;
+import outdoorapp.to.Utente;
+
+import java.time.LocalDate;
 import java.util.List;
 
 import org.hibernate.HibernateException;
@@ -58,11 +62,9 @@ public abstract class GenericDAO<T extends OutDoorSports>{
 		try {
 			session = this.getSession();
 			transaction = session.beginTransaction();
-
 			session.saveOrUpdate(entity);
-
 			transaction.commit();
-		} catch (HibernateException e){
+		} catch (Exception e){
 			if (transaction != null){
 				transaction.rollback();
 			}
@@ -251,8 +253,6 @@ public abstract class GenericDAO<T extends OutDoorSports>{
 			transaction = session.beginTransaction();
 
 			Query query = session.getNamedQuery(queryName);
-			//Query query = session.createQuery(queryName);
-			//Query query = session.createNativeQuery(queryName);
 			response = query.list();
 
 			transaction.commit();

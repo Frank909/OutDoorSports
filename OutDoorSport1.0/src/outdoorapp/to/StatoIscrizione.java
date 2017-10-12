@@ -26,18 +26,12 @@ public class StatoIscrizione implements OutDoorSports{
 	private static final long serialVersionUID = -8626250321580095948L;
 	private Integer idStatoIscrizione;
 	private String nome;
-	private Set<Iscrizione> tblIscriziones = new HashSet<Iscrizione>(0);
 
 	public StatoIscrizione() {
 	}
 
 	public StatoIscrizione(String nome) {
 		this.nome = nome;
-	}
-
-	public StatoIscrizione(String nome, Set<Iscrizione> tblIscriziones) {
-		this.nome = nome;
-		this.tblIscriziones = tblIscriziones;
 	}
 
 	/**
@@ -71,21 +65,4 @@ public class StatoIscrizione implements OutDoorSports{
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-
-	/**
-	 * @return le iscrizioni associate a un determinato stato
-	 */
-	public Set<Iscrizione> getIscrizione() {
-		return this.tblIscriziones;
-	}
-	
-	/**
-	 * Metodo che setta le iscrizioni associate a un determinato stato
-	 * 
-	 * @param tblIscriziones
-	 */
-	public void setIscrizione(Set<Iscrizione> tblIscriziones) {
-		this.tblIscriziones = tblIscriziones;
-	}
-
 }

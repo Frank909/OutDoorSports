@@ -33,7 +33,6 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import outdoorapp.Forms;
 import outdoorapp.exceptions.DatabaseException;
 import outdoorapp.integration.dao.ManagerDiEscursioneDAO;
 import outdoorapp.integration.dao.ManagerDiSistemaDAO;
@@ -45,6 +44,8 @@ import outdoorapp.presentation.frontcontroller.FrontController;
 import outdoorapp.presentation.reqresp.Request;
 import outdoorapp.presentation.reqresp.Response;
 import outdoorapp.to.Utente;
+import outdoorapp.utils.Forms;
+import outdoorapp.utils.KeyMap;
 import outdoorapp.to.Partecipante;
 import outdoorapp.to.Ruoli;
 import outdoorapp.to.StatoUtente;
@@ -103,9 +104,6 @@ public class ControllerLogin implements KeyMap
 	}
 	
 	@FXML protected void executeLogin() throws DatabaseException{
-		
-		UtenteDAO<Utente> utente_dao = new UtenteDAO<Utente>();
-		
 		Utente utente = new Utente();
 		utente.setUsername(this.username_textview.getText());
 		utente.setPassword(this.password_textview.getText());

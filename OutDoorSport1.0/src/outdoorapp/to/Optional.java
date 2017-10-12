@@ -27,30 +27,12 @@ public class Optional implements OutDoorSports{
 
 	private static final long serialVersionUID = -7068153413865370972L;
 	private Integer idOptional;
-	private StatoOptional tblStatoOptional;
-	private TipoOptional tblTipoOptional;
+	private StatoOptional statoOptional;
+	private TipoOptional tipoOptional;
 	private String nome;
 	private String descrizione;
-	private Set<OptionalEscursione> tblOptionalEscursiones = new HashSet<OptionalEscursione>(0);
 
 	public Optional() {
-	}
-
-	public Optional(StatoOptional tblStatoOptional, TipoOptional tblTipoOptional, String nome,
-			String descrizione) {
-		this.tblStatoOptional = tblStatoOptional;
-		this.tblTipoOptional = tblTipoOptional;
-		this.nome = nome;
-		this.descrizione = descrizione;
-	}
-
-	public Optional(StatoOptional tblStatoOptional, TipoOptional tblTipoOptional, String nome,
-			String descrizione, Set<OptionalEscursione> tblOptionalEscursiones) {
-		this.tblStatoOptional = tblStatoOptional;
-		this.tblTipoOptional = tblTipoOptional;
-		this.nome = nome;
-		this.descrizione = descrizione;
-		this.tblOptionalEscursiones = tblOptionalEscursiones;
 	}
 
 	/**
@@ -73,7 +55,7 @@ public class Optional implements OutDoorSports{
 	 * @return lo stato dell'optional
 	 */
 	public StatoOptional getStatoOptional() {
-		return this.tblStatoOptional;
+		return this.statoOptional;
 	}
 
 	/**
@@ -81,15 +63,15 @@ public class Optional implements OutDoorSports{
 	 * 
 	 * @param tblStatoOptional
 	 */
-	public void setStatoOptional(StatoOptional tblStatoOptional) {
-		this.tblStatoOptional = tblStatoOptional;
+	public void setStatoOptional(StatoOptional statoOptional) {
+		this.statoOptional = statoOptional;
 	}
 
 	/**
 	 * @return il tipo dell'optional
 	 */
 	public TipoOptional getTipoOptional() {
-		return this.tblTipoOptional;
+		return this.tipoOptional;
 	}
 
 	/**
@@ -97,8 +79,8 @@ public class Optional implements OutDoorSports{
 	 * 
 	 * @param tblTipoOptional
 	 */
-	public void setTipoOptional(TipoOptional tblTipoOptional) {
-		this.tblTipoOptional = tblTipoOptional;
+	public void setTipoOptional(TipoOptional tipoOptional) {
+		this.tipoOptional = tipoOptional;
 	}
 
 	/**
@@ -132,21 +114,4 @@ public class Optional implements OutDoorSports{
 	public void setDescrizione(String descrizione) {
 		this.descrizione = descrizione;
 	}
-
-	/**
-	 * @return gli optional relativi a una determinata escursione
-	 */
-	public Set<OptionalEscursione> getOptionalEscursione() {
-		return this.tblOptionalEscursiones;
-	}
-
-	/**
-	 * Metodo che setta gli optional per una relativa escursione
-	 * 
-	 * @param tblOptionalEscursiones
-	 */
-	public void setOptionalEscursione(Set<OptionalEscursione> tblOptionalEscursiones) {
-		this.tblOptionalEscursiones = tblOptionalEscursiones;
-	}
-
 }
