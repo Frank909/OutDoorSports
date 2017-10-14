@@ -33,7 +33,11 @@ public class ApplicationServiceManagerDiSistema implements KeyMap{
 		mds_dao = new ManagerDiSistemaDAO();
 	}
 	
-
+	/**
+	 * Metodo che resistitusce la risposta rispetto alla richiesta di verificare il manager di sistema.
+	 * @param request: Richiesta in ingresso
+	 * @return response: Risposta rispetto alla richiesta
+	 */
 	public Response verificaManagerDiSistema(Request request){
 		Response response = new Response();
 		
@@ -57,13 +61,18 @@ public class ApplicationServiceManagerDiSistema implements KeyMap{
 		return response;
 	}
 	
+	/**
+	 * Metodo che restituisce la risposta rispetto alla richiesta di inserire un nuovo manager di sistema
+	 * @param request: Richiesta in ingresso
+	 * @return response: Risposta rispetto alla richiesta
+	 */
 	public Response nuovoManagerDiSistema(Request request){
 		Response response = new Response();
 		
 		ManagerDiSistemaDAO mds_dao = new ManagerDiSistemaDAO();
 		
 		try {
-			if(!mds_dao.esisteEmail((Utente)request.getData()) && !mds_dao.esisteUsername((Utente)request.getData())){
+			if(!mds_dao.esisteEmail((Utente)request.getData())){
 				
 				RuoliDAO ruoliDao = new RuoliDAO();
 				StatoUtenteDAO statoUtenteDao = new StatoUtenteDAO();
@@ -73,7 +82,6 @@ public class ApplicationServiceManagerDiSistema implements KeyMap{
 				mds_dao.create(mds);
 			}
 		} catch (DatabaseException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		

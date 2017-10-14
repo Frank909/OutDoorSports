@@ -19,6 +19,12 @@ import outdoorapp.presentation.reqresp.Response;
 import outdoorapp.to.ManagerDiSistema;
 import outdoorapp.utils.KeyMap;
 
+/**
+ * 
+ * @author Andrea Zito
+ * @author Francesco Ventura
+ *
+ */
 public class ControllerConfig implements KeyMap{
 
 	@FXML private TextField txtNome;
@@ -36,15 +42,24 @@ public class ControllerConfig implements KeyMap{
 	@FXML private DatePicker dateDataNasc;
 	@FXML private Label lblErrore;
 	
-	
+	/**
+	 * Costruttore della classe ControllerConfig che inizializza la label di errore come stringa vuota
+	 */
 	public ControllerConfig() {
-		// TODO Auto-generated constructor stub
+		lblErrore.setText("");
 	}
 	
+	/**
+	 * Evento associato all'invio dei dati della configurazione iniziale del manager di sistema
+	 */
 	@FXML protected void registraManagerDiSistema(){
 		execRegistraManagerDiSistema();
 	}
 	
+	/**
+	 * Metodo che esegue la registrazione del manager di sistema controllando che tutte le informazioni siano state inserite
+	 * correttamente
+	 */
 	private void execRegistraManagerDiSistema(){
 
 		ManagerDiSistema mds = new ManagerDiSistema();
@@ -62,6 +77,23 @@ public class ControllerConfig implements KeyMap{
 			mds.setSesso(FEMALE);
 		mds.setTelefono(txtTelefono.getText());
 
+		
+		String result = checkErrors(mds);
+		if(result.equals("")){
+			FrontController fc = new FrontController();
+			Response res = fc.sendRequest(new Request(mds, OUTDOORSPORT_SAVE_MDS));
+		}else
+			lblErrore.setText(result);
+	}
+	
+
+	/**
+	 * Funzione che restituisce la stringa degli errori rispetto alle informazioni inserite in maniera non corretta 
+	 * per registrare il manager di sistema nella configurazione iniziale
+	 * @param mds: manager di sistema
+	 * @return result: stringa errori
+	 */
+	private String checkErrors(ManagerDiSistema mds){
 		String result = "";
 
 		if(dateDataNasc.getValue() == null)
@@ -88,10 +120,10 @@ public class ControllerConfig implements KeyMap{
 					}
 				}
 			} catch (IllegalArgumentException | IllegalAccessException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
+		
 		i = 0;
 		for (Field f : mds.getClass().getDeclaredFields()) {
 			f.setAccessible(true);
@@ -105,7 +137,6 @@ public class ControllerConfig implements KeyMap{
 					}
 				}
 			} catch (IllegalArgumentException | IllegalAccessException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
@@ -120,10 +151,9 @@ public class ControllerConfig implements KeyMap{
 		if(!result.equals(""))
 			result += " non corretti!";
 
-		lblErrore.setText(result);
-
-		/*FrontController fc = new FrontController();
-		Response res = fc.sendRequest(new Request(mds, OUTDOORSPORT_SAVE_MDS));*/
+		return result;
 	}
 
 }
+
+

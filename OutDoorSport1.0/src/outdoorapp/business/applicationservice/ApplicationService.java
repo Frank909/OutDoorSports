@@ -4,7 +4,8 @@ package outdoorapp.business.applicationservice;
  * Classe utilizzata dal Business Delegate per identificare il giusto Application Service 
  * in base alla richiesta inviata
  * 
- * @author andreese
+ * @author Andrea Zito
+ * @author Francesco Ventura
  *
  */
 

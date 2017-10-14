@@ -51,8 +51,9 @@ public class SessionUtil {
 		return res;
 	}
 	
-	/*
+	/**
 	 * Metodo che restituisce la session factory
+	 * @return sessionFactory: Sessione restituita
 	 */
 	public static SessionFactory getSessionFactory(){
 		return sessionFactory;		
