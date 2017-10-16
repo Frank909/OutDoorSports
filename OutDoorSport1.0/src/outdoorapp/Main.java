@@ -15,15 +15,17 @@ import outdoorapp.presentation.reqresp.Request;
 import outdoorapp.presentation.reqresp.Response;
 import outdoorapp.to.ManagerDiSistema;
 import outdoorapp.utils.Forms;
-import outdoorapp.utils.KeyMap;
+import outdoorapp.utils.Actions;
 
-public class Main extends Application implements KeyMap{
+public class Main extends Application implements Actions{
 	
 	@Override
 	public void start(Stage primaryStage) {
 		ManagerDiSistema mds = new ManagerDiSistema();
 		FrontController fc = new FrontController();
-		Forms.showForm(fc.sendRequest(new Request(mds, OUTDOORSPORT_MDS_EXISTS_AT_LEAST_ONE)).getView());
+		Request request = new Request(mds, OUTDOORSPORT_MDS_EXISTS_AT_LEAST_ONE);
+		Response response = fc.sendRequest(request);
+		Forms.showForm(response.getView());
 	}
 	
 	public static void main(String[] args) {

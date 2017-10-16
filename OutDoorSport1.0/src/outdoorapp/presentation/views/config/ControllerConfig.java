@@ -17,15 +17,19 @@ import outdoorapp.presentation.frontcontroller.FrontController;
 import outdoorapp.presentation.reqresp.Request;
 import outdoorapp.presentation.reqresp.Response;
 import outdoorapp.to.ManagerDiSistema;
-import outdoorapp.utils.KeyMap;
+import outdoorapp.to.OutDoorSports;
+import outdoorapp.to.Utente;
+import outdoorapp.utils.Actions;
 
 /**
+ * Gestisce la view per la configurazione iniziale alla prima
+ * apertura dell'applicazione.
  * 
  * @author Andrea Zito
  * @author Francesco Ventura
  *
  */
-public class ControllerConfig implements KeyMap{
+public class ControllerConfig implements Actions{
 
 	@FXML private TextField txtNome;
 	@FXML private TextField txtCognome;
@@ -42,12 +46,20 @@ public class ControllerConfig implements KeyMap{
 	@FXML private DatePicker dateDataNasc;
 	@FXML private Label lblErrore;
 	
+	
 	/**
-	 * Costruttore della classe ControllerConfig che inizializza la label di errore come stringa vuota
+	 * Costruttore della classe ControllerConfig 
 	 */
-	public ControllerConfig() {
-		lblErrore.setText("");
-	}
+	public ControllerConfig() {}
+	
+	/**
+	 * Metodo che inizializza tutti i campi della finestra
+	 */
+	
+	@FXML public void initialize() {
+        lblErrore.setText("");
+        ///DA COMPLETARE CON TUTTI I CAMPI///
+    }
 	
 	/**
 	 * Evento associato all'invio dei dati della configurazione iniziale del manager di sistema
@@ -82,6 +94,10 @@ public class ControllerConfig implements KeyMap{
 		if(result.equals("")){
 			FrontController fc = new FrontController();
 			Response res = fc.sendRequest(new Request(mds, OUTDOORSPORT_SAVE_MDS));
+			if(res.getResponse().equals(RESP_OK))
+				System.out.println("Manager di sistema inserito correttamente");
+			else
+				lblErrore.setText("Errore! Email o Username già presenti!");
 		}else
 			lblErrore.setText(result);
 	}
@@ -90,24 +106,25 @@ public class ControllerConfig implements KeyMap{
 	/**
 	 * Funzione che restituisce la stringa degli errori rispetto alle informazioni inserite in maniera non corretta 
 	 * per registrare il manager di sistema nella configurazione iniziale
-	 * @param mds: manager di sistema
+	 * 
+	 * @param utente: manager di sistema
 	 * @return result: stringa errori
 	 */
-	private String checkErrors(ManagerDiSistema mds){
+	private String checkErrors(Utente utente){
 		String result = "";
 
 		if(dateDataNasc.getValue() == null)
-			mds.setDataNascita("");
+			utente.setDataNascita("");
 		else{
 			if(!(dateDataNasc.getValue().getYear() >= LocalDate.now().getYear() - 15))
-				mds.setDataNascita(dateDataNasc.getValue().toString());
+				utente.setDataNascita(dateDataNasc.getValue().toString());
 		}
 
 		int i = 0;
-		for (Field f : mds.getClass().getSuperclass().getDeclaredFields()) {
+		for (Field f : utente.getClass().getSuperclass().getDeclaredFields()) {
 			f.setAccessible(true);
 			try {
-				if ((f.get(mds) == null || f.get(mds).equals(""))) {
+				if ((f.get(utente) == null || f.get(utente).equals(""))) {
 					if(!(f.getName().equals("ruolo") || f.getName().equals("statoUtente"))){
 						if(!f.getName().equals("email")){
 							result += f.getName() + ", ";
@@ -125,10 +142,10 @@ public class ControllerConfig implements KeyMap{
 		}
 		
 		i = 0;
-		for (Field f : mds.getClass().getDeclaredFields()) {
+		for (Field f : utente.getClass().getDeclaredFields()) {
 			f.setAccessible(true);
 			try {
-				if (f.get(mds) == null || f.get(mds).equals("")) {
+				if (f.get(utente) == null || f.get(utente).equals("")) {
 					result += f.getName() + ", ";
 					i++;
 					if(i == 2){
@@ -142,7 +159,7 @@ public class ControllerConfig implements KeyMap{
 		}
 		
 		Pattern pattern = Pattern.compile(REGEX);
-		Matcher matcher = pattern.matcher(mds.getEmail());
+		Matcher matcher = pattern.matcher(utente.getEmail());
 
 		if(!matcher.matches()){
 			result += "email";
@@ -153,7 +170,6 @@ public class ControllerConfig implements KeyMap{
 
 		return result;
 	}
-
 }
 
 

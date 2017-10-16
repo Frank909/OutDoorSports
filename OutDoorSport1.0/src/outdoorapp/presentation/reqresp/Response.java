@@ -13,6 +13,7 @@ import outdoorapp.to.Utente;
 public class Response {
 
 	private OutDoorSports data;
+	private String request;
 	private String response;
 	private String view;
 	
@@ -79,5 +80,21 @@ public class Response {
 	 */
 	public void setResponse(String response) {
 		this.response = response;
+	}
+	
+	/**
+	 * @return la richiesta inviata inizialmente
+	 */
+	public String getRequest() {
+		return request;
+	}
+
+	/**
+	 * Metodo che setta la richiesta inviata inizialmente
+	 * 
+	 * @param request
+	 */
+	public void setRequest(String request) {
+		this.request = request;
 	}
 }

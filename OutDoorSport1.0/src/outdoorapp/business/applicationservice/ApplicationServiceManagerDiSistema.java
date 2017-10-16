@@ -8,7 +8,8 @@ import outdoorapp.presentation.reqresp.Request;
 import outdoorapp.presentation.reqresp.Response;
 import outdoorapp.to.ManagerDiSistema;
 import outdoorapp.to.Utente;
-import outdoorapp.utils.KeyMap;
+import outdoorapp.utils.Actions;
+import outdoorapp.utils.Views;
 
 /**
  * Classe che modella e implementa l'Application Service per la gestione di un Manager di Sistema.
@@ -22,7 +23,7 @@ import outdoorapp.utils.KeyMap;
  *
  */
 
-public class ApplicationServiceManagerDiSistema implements KeyMap{
+public class ApplicationServiceManagerDiSistema implements Actions, Views{
 
 	ManagerDiSistemaDAO mds_dao;
 	
@@ -51,10 +52,10 @@ public class ApplicationServiceManagerDiSistema implements KeyMap{
 		response.setData(null);
 		if(result){
 			response.setResponse(RESP_OK);
-			response.setView("../../resources/fxml/application/login");
+			response.setView(VIEW_LOGIN);
 		}
 		else{
-			response.setView("../../resources/fxml/manager_sistema/managerDiSistemaConfig");
+			response.setView(VIEW_MANAGER_DI_SISTEMA_CONFIG);
 			response.setResponse(RESP_KO);
 		}
 		
@@ -69,10 +70,8 @@ public class ApplicationServiceManagerDiSistema implements KeyMap{
 	public Response nuovoManagerDiSistema(Request request){
 		Response response = new Response();
 		
-		ManagerDiSistemaDAO mds_dao = new ManagerDiSistemaDAO();
-		
 		try {
-			if(!mds_dao.esisteEmail((Utente)request.getData())){
+			if(!mds_dao.esisteEmail((Utente)request.getData()) && !mds_dao.esisteUsername((Utente)request.getData())){
 				
 				RuoliDAO ruoliDao = new RuoliDAO();
 				StatoUtenteDAO statoUtenteDao = new StatoUtenteDAO();
@@ -80,7 +79,11 @@ public class ApplicationServiceManagerDiSistema implements KeyMap{
 				mds.setRuolo(ruoliDao.getRuoloManagerDiSistema());
 				mds.setStatoUtente(statoUtenteDao.getStatoAttivo());
 				mds_dao.create(mds);
+				response.setResponse(RESP_OK);
+			}else{
+				response.setResponse(RESP_KO);
 			}
+			response.setData(null);
 		} catch (DatabaseException e) {
 			e.printStackTrace();
 		}

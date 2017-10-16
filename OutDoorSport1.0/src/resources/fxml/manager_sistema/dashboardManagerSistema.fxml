@@ -8,7 +8,7 @@
 <?import javafx.scene.paint.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane fx:id="dashboardPartecipante" stylesheets="@dashboardManagerSistema.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ControllerLogin">
+<AnchorPane stylesheets="@dashboardManagerSistema.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="outdoorapp.presentation.views.managersistema.ControllerManagerDiSistema">
    <children>
       <MenuBar prefHeight="25.0" prefWidth="929.0">
          <menus>
@@ -53,7 +53,7 @@
          <children>
             <GridPane id="right_menu">
                <children>
-                  <Label fx:id="lblVisulizzaEscursioniSistema" onMouseClicked="#lblVisulizzaEscursioniAperteOnClick" prefHeight="101.0" prefWidth="235.0" styleClass="text_menu" text="Visualizza Escursioni Sistema" textFill="WHITE" GridPane.rowIndex="1">
+                  <Label fx:id="lblVisulizzaEscursioniSistema" prefHeight="101.0" prefWidth="235.0" styleClass="text_menu" text="Visualizza Escursioni Sistema" textFill="WHITE" GridPane.rowIndex="1">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -64,7 +64,7 @@
                         <Insets left="10.0" />
                      </padding>
                   </Label>
-                  <Label fx:id="lblGestioneEscursione" onMouseClicked="#lblLeMieEscursioniOnClick" prefHeight="200.0" prefWidth="341.0" styleClass="text_menu" text="Gestione Manager Escursione" textFill="WHITE">
+                  <Label fx:id="lblGestioneManagerEscursione" prefHeight="200.0" prefWidth="341.0" styleClass="text_menu" text="Gestione Manager Escursione" textFill="WHITE">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -75,7 +75,7 @@
                         <Insets left="10.0" />
                      </padding>
                   </Label>
-                  <Label fx:id="lblVisulizzaEscursioniSistema1" onMouseClicked="#lblVisulizzaEscursioniAperteOnClick" prefHeight="101.0" prefWidth="235.0" styleClass="text_menu" text="Inserisci Manager Escursione" textFill="WHITE" GridPane.rowIndex="2">
+                  <Label fx:id="lblInserisciManagerEscursione" prefHeight="101.0" prefWidth="235.0" styleClass="text_menu" text="Inserisci Manager Escursione" textFill="WHITE" GridPane.rowIndex="2">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -102,7 +102,7 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <AnchorPane fx:id="idContent" />
+                  <AnchorPane fx:id="AnchorContent" />
                </children>
             </GridPane>
          </children>

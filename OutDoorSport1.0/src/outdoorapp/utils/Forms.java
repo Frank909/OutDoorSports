@@ -15,7 +15,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 
-public class Forms {
+abstract public class Forms{
 	
 	static class Form{//rimuovere
 		private Scene scene;
@@ -60,5 +60,9 @@ public class Forms {
 	public static void closeForm(String resource) {
 		((Stage)Forms.get(resource).getWindow()).close();
 		Forms.remove(resource);
+	}
+	
+	public static Stage getForm(String resource){
+		return (Stage) Forms.get(resource).getWindow();
 	}
 }

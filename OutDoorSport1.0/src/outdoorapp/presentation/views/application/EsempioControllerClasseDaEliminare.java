@@ -1,4 +1,4 @@
-package outdoorapp.presentation.views.login;
+package outdoorapp.presentation.views.application;
 
 import java.io.IOException;
 import java.net.URL;
@@ -45,13 +45,13 @@ import outdoorapp.presentation.reqresp.Request;
 import outdoorapp.presentation.reqresp.Response;
 import outdoorapp.to.Utente;
 import outdoorapp.utils.Forms;
-import outdoorapp.utils.KeyMap;
+import outdoorapp.utils.Actions;
 import outdoorapp.to.Partecipante;
 import outdoorapp.to.Ruoli;
 import outdoorapp.to.StatoUtente;
 
 
-public class ControllerLogin implements KeyMap
+public class EsempioControllerClasseDaEliminare implements Actions
 {
 	/*@FXML private Button btnLogin;
 	@FXML private Button btnRegistrati;

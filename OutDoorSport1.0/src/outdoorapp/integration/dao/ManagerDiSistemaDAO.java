@@ -2,7 +2,7 @@ package outdoorapp.integration.dao;
 
 import outdoorapp.exceptions.DatabaseException;
 import outdoorapp.to.ManagerDiSistema;
-import outdoorapp.utils.KeyMap;
+import outdoorapp.utils.Actions;
 
 import java.util.List;
 
@@ -15,7 +15,7 @@ import java.util.List;
  *
  */
 
-public class ManagerDiSistemaDAO extends UtenteDAO<ManagerDiSistema> implements KeyMap{
+public class ManagerDiSistemaDAO extends UtenteDAO<ManagerDiSistema> implements Actions{
 
 	/**
 	 * Il costruttore inizializza l'entità Manager di Sistema da utilizzare 

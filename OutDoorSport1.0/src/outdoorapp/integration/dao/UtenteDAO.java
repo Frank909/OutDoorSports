@@ -37,7 +37,7 @@ public class UtenteDAO<T extends Utente> extends GenericDAO<T>{
 		List<String> param = new ArrayList<String>();
 		param.add(utente.getUsername());
 		param.add(utente.getPassword());
-		List<T> list = this.executeParamQuery("boooooooooooooooh", param);
+		List<T> list = this.executeParamQuery("getUtente", param);
 		if(list.size() == 1){
 			response = list.get(0);
 		} else {
@@ -83,7 +83,7 @@ public class UtenteDAO<T extends Utente> extends GenericDAO<T>{
 	public T getByEmail(String email) throws DatabaseException {
 		List<String> param = new ArrayList<String>();
 		param.add(email);
-		return this.getUtenteByQuery("boooooooooooooh", param);
+		return this.getUtenteByQuery("getByEmail", param);
 	}
 	
 	/**
