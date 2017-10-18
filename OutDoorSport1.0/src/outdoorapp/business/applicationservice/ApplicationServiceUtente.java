@@ -177,7 +177,7 @@ public class ApplicationServiceUtente implements Views, Actions{
 	
 	
 	/**
-	 * Di supporto a checkUserTipe, inserisce i dati raccolti in precedenza
+	 * Metodo di supporto a checkUserTipe, inserisce i dati raccolti in precedenza
 	 * nella nuova istanza dopo aver identificato il tipo 
 	 * 
 	 * @param newData

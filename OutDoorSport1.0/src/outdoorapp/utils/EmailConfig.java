@@ -21,10 +21,16 @@ public class EmailConfig {
 
 	Email email;
 	
+	/**
+	 * Costruttore della classe EmailConfig che inizializza il controllo Email
+	 */
 	public EmailConfig() {
 		email = new Email();
 	}
 	
+	/** 
+	 * @return props: Restituisce le proprietà dell'email.
+	 */
 	private Properties createMailProperties(){
 		Properties props = new Properties();
 		
@@ -38,6 +44,10 @@ public class EmailConfig {
 		return props;
 	}
 	
+	/**
+	 * Metodo che viene utilizzato per mandare l'email.
+	 * @param email: Email in ingresso da mandare
+	 */
 	public void sendEmail(Email email) {
 		final String username = "outdoorsportszitoventura@gmail.com";
 		final String password = "20172018";

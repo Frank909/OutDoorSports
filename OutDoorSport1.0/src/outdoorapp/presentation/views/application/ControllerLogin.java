@@ -79,6 +79,9 @@ public class ControllerLogin implements Actions, Views{
 		Forms.showForm(VIEW_PASSWORD_DIMENTICATA);
 	}
 	
+	/**
+	 * Metodo che visualizza a video la finestra della registrazione del partecipante
+	 */
 	@FXML protected void eseguiSignIn(){
 		Forms.showForm(VIEW_REGISTRAZIONE_PARTECIPANTE);
 	}
