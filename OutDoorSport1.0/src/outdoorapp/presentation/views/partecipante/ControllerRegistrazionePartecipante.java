@@ -101,7 +101,7 @@ public class ControllerRegistrazionePartecipante extends ControllerRegistrazione
 	 * registrazione dei partecipanti e viene mandata ai livelli successivi
 	 */
 	private void execRegistraPartecipante() {
-		///////////////////////////////////////////
+		
 		Partecipante partecipante = new Partecipante();
 		partecipante.setNome(txtNome.getText());
 		partecipante.setCognome(txtCognome.getText());
@@ -115,7 +115,6 @@ public class ControllerRegistrazionePartecipante extends ControllerRegistrazione
 			partecipante.setSesso(MALE);
 		else if(radioF.isSelected())
 			partecipante.setSesso(FEMALE);
-		////////////////////////////////////////////
 		partecipante.setCertificatoSrc(lblSrcCertificatoSRC.getText());
 		partecipante.setTesseraSanitaria(txtNTSanitaria.getText());
 		

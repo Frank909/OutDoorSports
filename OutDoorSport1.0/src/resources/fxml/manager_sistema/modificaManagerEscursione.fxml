@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<StackPane prefHeight="502.0" prefWidth="813.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<StackPane prefHeight="519.0" prefWidth="786.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <BorderPane prefHeight="700.0" prefWidth="800.0">
          <center>
@@ -17,54 +17,142 @@
                      <children>
                         <GridPane>
                            <children>
-                              <GridPane prefHeight="264.0" prefWidth="378.0" GridPane.columnIndex="1" GridPane.rowIndex="0">
+                              <GridPane prefHeight="398.0" prefWidth="451.0" GridPane.columnIndex="1" GridPane.rowIndex="0">
                                  <children>
-                                    <Label prefHeight="22.0" prefWidth="101.0" text="Selez. Optional" GridPane.columnIndex="0" GridPane.valignment="TOP">
+                                    <Label text="Indirizzo" GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.valignment="TOP">
                                        <font>
                                           <Font name="System Bold" size="13.0" fx:id="x1" />
                                        </font>
                                        <GridPane.margin>
-                                          <Insets bottom="10.0" left="10.0" top="10.0" />
+                                          <Insets left="10.0" top="10.0" />
                                        </GridPane.margin>
                                     </Label>
-                                    <GridPane GridPane.columnIndex="1">
+                                    <Label font="$x1" text="Sesso" GridPane.columnIndex="0" GridPane.rowIndex="2" GridPane.valignment="TOP">
+                                       <GridPane.margin>
+                                          <Insets left="10.0" top="6.0" fx:id="x3" />
+                                       </GridPane.margin>
+                                    </Label>
+                                    <Label font="$x1" text="Email" GridPane.columnIndex="0" GridPane.rowIndex="3" GridPane.valignment="TOP">
+                                       <GridPane.margin>
+                                          <Insets left="10.0" top="10.0" />
+                                       </GridPane.margin>
+                                    </Label>
+                                    <Label font="$x1" text="Data di Nascita" GridPane.columnIndex="0" GridPane.margin="$x3" GridPane.rowIndex="4" GridPane.valignment="TOP" />
+                                    <GridPane fx:id="paneDataNasc" GridPane.columnIndex="1" GridPane.rowIndex="4">
                                        <children>
-                                          <Label fx:id="lblIndirizzoError" styleClass="lblError" text="Label" visible="false" GridPane.columnIndex="0" GridPane.valignment="TOP">
+                                          <DatePicker fx:id="datepDataNasc" prefHeight="25.0" prefWidth="308.0">
+                                             <GridPane.margin>
+                                                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                             </GridPane.margin>
+                                          </DatePicker>
+                                       </children>
+                                       <columnConstraints>
+                                          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                       </columnConstraints>
+                                       <rowConstraints>
+                                          <RowConstraints maxHeight="25.0" minHeight="10.0" prefHeight="25.0" vgrow="SOMETIMES" />
+                                       </rowConstraints>
+                                    </GridPane>
+                                    <GridPane GridPane.columnIndex="1" GridPane.rowIndex="0">
+                                       <children>
+                                          <TextField fx:id="txtIndirizzo" GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.valignment="TOP">
+                                             <GridPane.margin>
+                                                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" fx:id="x5" />
+                                             </GridPane.margin>
+                                          </TextField>
+                                          <Label fx:id="lblIndirizzoError" styleClass="lblError" text="Label" visible="false" GridPane.columnIndex="0" GridPane.rowIndex="1" GridPane.valignment="TOP">
                                              <GridPane.margin>
                                                 <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                                              </GridPane.margin>
                                           </Label>
-                                          <ChoiceBox prefHeight="25.0" prefWidth="264.0" GridPane.valignment="TOP">
+                                       </children>
+                                       <columnConstraints>
+                                          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                       </columnConstraints>
+                                       <rowConstraints>
+                                          <RowConstraints maxHeight="25.0" minHeight="10.0" prefHeight="25.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                       </rowConstraints>
+                                    </GridPane>
+                                    <GridPane GridPane.columnIndex="1" GridPane.rowIndex="3">
+                                       <children>
+                                          <TextField fx:id="txtEmail" GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.valignment="TOP">
+                                             <GridPane.margin>
+                                                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" fx:id="x5" />
+                                             </GridPane.margin>
+                                          </TextField>
+                                          <Label fx:id="lblEmailError" styleClass="lblError" text="Label" visible="false" GridPane.columnIndex="0" GridPane.rowIndex="1" GridPane.valignment="TOP">
                                              <GridPane.margin>
                                                 <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                                              </GridPane.margin>
-                                          </ChoiceBox>
+                                          </Label>
+                                       </children>
+                                       <columnConstraints>
+                                          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                       </columnConstraints>
+                                       <rowConstraints>
+                                          <RowConstraints maxHeight="25.0" minHeight="10.0" prefHeight="25.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                       </rowConstraints>
+                                    </GridPane>
+                                    <GridPane GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                       <children>
+                                          <Label fx:id="lblSessoError" styleClass=", lblError" text="Label" visible="false" GridPane.columnIndex="0" GridPane.rowIndex="1" GridPane.valignment="TOP" />
+                                          <RadioButton fx:id="radioM" mnemonicParsing="false" text="M" GridPane.valignment="TOP">
+                                             <GridPane.margin>
+                                                <Insets bottom="10.0" left="10.0" right="10.0" top="5.0" fx:id="x4" />
+                                             </GridPane.margin>
+                                          </RadioButton>
+                                          <RadioButton fx:id="radioF" mnemonicParsing="false" text="F" GridPane.margin="$x4" GridPane.rowIndex="1" GridPane.valignment="TOP" />
                                        </children>
                                        <columnConstraints>
                                           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                                        </columnConstraints>
                                        <rowConstraints>
                                           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                        </rowConstraints>
                                     </GridPane>
-                                    <ListView prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                    <Label text="Città" GridPane.rowIndex="1" GridPane.valignment="TOP">
+                                       <font>
+                                          <Font name="System Bold" size="13.0" fx:id="x11" />
+                                       </font>
                                        <GridPane.margin>
-                                          <Insets bottom="50.0" left="10.0" right="10.0" top="10.0" />
+                                          <Insets left="10.0" top="10.0" />
                                        </GridPane.margin>
-                                    </ListView>
-                                    <Button mnemonicParsing="false" prefHeight="24.0" prefWidth="114.0" text="Elimina selezione" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
-                                       <GridPane.margin>
-                                          <Insets bottom="20.0" right="10.0" />
-                                       </GridPane.margin>
-                                    </Button>
+                                    </Label>
+                                    <GridPane GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                       <children>
+                                          <TextField fx:id="txtCitta" GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.valignment="TOP">
+                                             <GridPane.margin>
+                                                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" fx:id="x51" />
+                                             </GridPane.margin>
+                                          </TextField>
+                                          <Label fx:id="lblCittaError" styleClass="lblError" text="Label" visible="false" GridPane.columnIndex="0" GridPane.rowIndex="1" GridPane.valignment="TOP">
+                                             <GridPane.margin>
+                                                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                             </GridPane.margin>
+                                          </Label>
+                                       </children>
+                                       <columnConstraints>
+                                          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                       </columnConstraints>
+                                       <rowConstraints>
+                                          <RowConstraints maxHeight="25.0" minHeight="10.0" prefHeight="25.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                       </rowConstraints>
+                                    </GridPane>
                                  </children>
                                  <columnConstraints>
                                     <ColumnConstraints hgrow="SOMETIMES" maxWidth="239.0" minWidth="10.0" prefWidth="140.0" />
                                     <ColumnConstraints hgrow="SOMETIMES" maxWidth="311.0" minWidth="10.0" prefWidth="299.0" />
                                  </columnConstraints>
                                  <rowConstraints>
-                                    <RowConstraints maxHeight="316.0" minHeight="10.0" prefHeight="42.0" vgrow="SOMETIMES" />
-                                    <RowConstraints maxHeight="340.0" minHeight="0.0" prefHeight="340.0" vgrow="SOMETIMES" />
+                                    <RowConstraints maxHeight="79.0" minHeight="10.0" prefHeight="61.0" vgrow="SOMETIMES" />
+                                    <RowConstraints maxHeight="83.0" minHeight="10.0" prefHeight="59.0" vgrow="SOMETIMES" />
+                                    <RowConstraints maxHeight="87.0" minHeight="10.0" prefHeight="56.0" vgrow="SOMETIMES" />
+                                    <RowConstraints maxHeight="96.0" minHeight="10.0" prefHeight="66.0" vgrow="SOMETIMES" />
+                                    <RowConstraints maxHeight="116.0" minHeight="10.0" prefHeight="66.0" vgrow="SOMETIMES" />
                                  </rowConstraints>
                               </GridPane>
                               <GridPane GridPane.columnIndex="0" GridPane.rowIndex="0">
@@ -74,7 +162,7 @@
                                           <Insets left="10.0" top="10.0" />
                                        </GridPane.margin>
                                     </Label>
-                                    <Label font="$x1" text="N° Min Iscrizioni" wrapText="true" GridPane.columnIndex="0" GridPane.rowIndex="1" GridPane.valignment="TOP">
+                                    <Label font="$x1" text="Cognome" wrapText="true" GridPane.columnIndex="0" GridPane.rowIndex="1" GridPane.valignment="TOP">
                                        <GridPane.margin>
                                           <Insets left="10.0" top="10.0" />
                                        </GridPane.margin>
@@ -90,6 +178,11 @@
                                              <children>
                                                 <GridPane prefHeight="74.0" prefWidth="312.0" GridPane.columnIndex="0" GridPane.rowIndex="0">
                                                    <children>
+                                                      <PasswordField fx:id="txtPassword" prefWidth="-1.0" GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.valignment="TOP">
+                                                         <GridPane.margin>
+                                                            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" fx:id="x5" />
+                                                         </GridPane.margin>
+                                                      </PasswordField>
                                                       <Label fx:id="lblPasswordError" styleClass="lblError" text="Label" visible="false" GridPane.columnIndex="0" GridPane.rowIndex="1" GridPane.valignment="TOP">
                                                          <GridPane.margin>
                                                             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" fx:id="x5" />
@@ -104,11 +197,6 @@
                                                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                                    </rowConstraints>
                                                 </GridPane>
-                                                <TextArea fx:id="txtDescrizione" prefHeight="77.0" prefWidth="276.0">
-                                                   <GridPane.margin>
-                                                      <Insets left="10.0" right="10.0" top="10.0" />
-                                                   </GridPane.margin>
-                                                </TextArea>
                                              </children>
                                              <columnConstraints>
                                                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -126,9 +214,14 @@
                                           <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                        </rowConstraints>
                                     </GridPane>
+                                    <Label font="$x1" text="Password" GridPane.columnIndex="0" GridPane.rowIndex="5" GridPane.valignment="TOP">
+                                       <GridPane.margin>
+                                          <Insets left="10.0" top="10.0" />
+                                       </GridPane.margin>
+                                    </Label>
                                     <GridPane GridPane.columnIndex="1" GridPane.rowIndex="0">
                                        <children>
-                                          <TextField fx:id="txtNomeEscursione" prefWidth="200.0" GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.valignment="TOP">
+                                          <TextField fx:id="txtNome" prefWidth="200.0" GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.valignment="TOP">
                                              <GridPane.margin>
                                                 <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" fx:id="x5" />
                                              </GridPane.margin>
@@ -149,7 +242,7 @@
                                     </GridPane>
                                     <GridPane GridPane.columnIndex="1" GridPane.rowIndex="1">
                                        <children>
-                                          <TextField fx:id="txtMin" prefWidth="200.0" GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.valignment="TOP">
+                                          <TextField fx:id="txtCognome" prefWidth="200.0" GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.valignment="TOP">
                                              <GridPane.margin>
                                                 <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" fx:id="x5" />
                                              </GridPane.margin>
@@ -168,19 +261,40 @@
                                           <RowConstraints maxHeight="33.0" minHeight="10.0" prefHeight="31.0" vgrow="SOMETIMES" />
                                        </rowConstraints>
                                     </GridPane>
-                                    <Label font="$x1" text="Descrizione" wrapText="true" GridPane.rowIndex="5" GridPane.valignment="TOP">
+                                    <GridPane GridPane.columnIndex="1" GridPane.rowIndex="4">
+                                       <children>
+                                          <TextField fx:id="txtUsername" prefWidth="200.0" GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.valignment="TOP">
+                                             <GridPane.margin>
+                                                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" fx:id="x5" />
+                                             </GridPane.margin>
+                                          </TextField>
+                                          <Label fx:id="lblUsernameError" styleClass="lblError" text="Label" visible="false" GridPane.columnIndex="0" GridPane.rowIndex="1" GridPane.valignment="TOP">
+                                             <GridPane.margin>
+                                                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" fx:id="x5" />
+                                             </GridPane.margin>
+                                          </Label>
+                                       </children>
+                                       <columnConstraints>
+                                          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                       </columnConstraints>
+                                       <rowConstraints>
+                                          <RowConstraints maxHeight="25.0" minHeight="10.0" prefHeight="25.0" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="36.0" minHeight="10.0" prefHeight="35.0" vgrow="SOMETIMES" />
+                                       </rowConstraints>
+                                    </GridPane>
+                                    <Label font="$x1" text="Username" wrapText="true" GridPane.columnIndex="0" GridPane.rowIndex="4" GridPane.valignment="TOP">
                                        <GridPane.margin>
                                           <Insets left="10.0" top="10.0" />
                                        </GridPane.margin>
                                     </Label>
-                                    <Label id="lblCfError" font="$x1" text="N° Max Iscrizioni" wrapText="true" GridPane.columnIndex="0" GridPane.rowIndex="2" GridPane.valignment="TOP">
+                                    <Label id="lblCfError" font="$x1" text="Codice Fiscale" wrapText="true" GridPane.columnIndex="0" GridPane.rowIndex="2" GridPane.valignment="TOP">
                                        <GridPane.margin>
                                           <Insets left="10.0" top="10.0" fx:id="x3" />
                                        </GridPane.margin>
                                     </Label>
                                     <GridPane GridPane.columnIndex="1" GridPane.rowIndex="2">
                                        <children>
-                                          <TextField fx:id="txtMax" prefWidth="200.0" GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.valignment="TOP">
+                                          <TextField fx:id="txtCF" prefWidth="200.0" GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.valignment="TOP">
                                              <GridPane.margin>
                                                 <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" fx:id="x5" />
                                              </GridPane.margin>
@@ -201,7 +315,7 @@
                                     </GridPane>
                                     <GridPane GridPane.columnIndex="1" GridPane.rowIndex="3">
                                        <children>
-                                          <TextField fx:id="txtCostoBase" prefWidth="333.0" GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.valignment="TOP">
+                                          <TextField fx:id="txtStipendio" prefWidth="333.0" GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.valignment="TOP">
                                              <GridPane.margin>
                                                 <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" fx:id="x5" />
                                              </GridPane.margin>
@@ -220,29 +334,9 @@
                                           <RowConstraints maxHeight="34.0" minHeight="10.0" prefHeight="34.0" vgrow="SOMETIMES" />
                                        </rowConstraints>
                                     </GridPane>
-                                    <Label font="$x1" text="Costo Base" wrapText="true" GridPane.columnIndex="0" GridPane.rowIndex="3" GridPane.valignment="TOP">
+                                    <Label font="$x1" text="Stipendio" wrapText="true" GridPane.columnIndex="0" GridPane.rowIndex="3" GridPane.valignment="TOP">
                                        <GridPane.margin>
                                           <Insets left="10.0" top="10.0" fx:id="x3" />
-                                       </GridPane.margin>
-                                    </Label>
-                                    <GridPane GridPane.columnIndex="1" GridPane.rowIndex="4">
-                                       <columnConstraints>
-                                          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                       </columnConstraints>
-                                       <rowConstraints>
-                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                       </rowConstraints>
-                                       <children>
-                                          <DatePicker editable="false" prefHeight="25.0" prefWidth="269.0">
-                                             <GridPane.margin>
-                                                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                             </GridPane.margin>
-                                          </DatePicker>
-                                       </children>
-                                    </GridPane>
-                                    <Label font="$x1" text="Data" wrapText="true" GridPane.rowIndex="4">
-                                       <GridPane.margin>
-                                          <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                                        </GridPane.margin>
                                     </Label>
                                  </children>
@@ -278,7 +372,7 @@
                   </GridPane>
                   <GridPane>
                      <children>
-                        <Label text="Inserimento Escursione">
+                        <Label text="Modifica dati Manager Escursione">
                            <font>
                               <Font name="System Bold" size="24.0" />
                            </font>
@@ -294,7 +388,7 @@
                         <RowConstraints maxHeight="69.0" minHeight="10.0" prefHeight="69.0" vgrow="SOMETIMES" />
                      </rowConstraints>
                   </GridPane>
-                  <Button fx:id="btnRegistrati" mnemonicParsing="false" onMouseClicked="#btnRegistrati" prefHeight="41.0" prefWidth="222.0" text="Invia Dati" GridPane.halignment="CENTER" GridPane.rowIndex="2">
+                  <Button fx:id="btnRegistrati" mnemonicParsing="false" onMouseClicked="#btnRegistrati" prefHeight="41.0" prefWidth="222.0" text="Invia le Modifiche" GridPane.halignment="CENTER" GridPane.rowIndex="2">
                      <GridPane.margin>
                         <Insets bottom="20.0" />
                      </GridPane.margin>
@@ -318,7 +412,7 @@
             <Pane prefHeight="550.0" prefWidth="28.0" />
          </right>
          <top>
-            <MenuBar prefHeight="0.0" prefWidth="885.0" BorderPane.alignment="CENTER">
+            <MenuBar BorderPane.alignment="CENTER">
                <menus>
                   <Menu mnemonicParsing="false" text="OutDoorSports">
                      <items>

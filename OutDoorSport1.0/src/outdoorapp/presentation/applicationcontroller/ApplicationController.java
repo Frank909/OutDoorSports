@@ -1,8 +1,11 @@
 package outdoorapp.presentation.applicationcontroller;
 
+import java.lang.reflect.Method;
+
 import outdoorapp.business.BusinessDelegate;
 import outdoorapp.presentation.reqresp.Request;
 import outdoorapp.presentation.reqresp.Response;
+import outdoorapp.utils.Views;
 
 /**
  * Classe che rappresenta un'implementazione dell'Application Controller
@@ -43,5 +46,4 @@ public class ApplicationController{
 	public Response getAction(Request request){
 		return businessDelegate.lookup(request);
 	}
-
 }

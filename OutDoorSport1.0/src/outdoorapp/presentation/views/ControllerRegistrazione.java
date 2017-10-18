@@ -5,6 +5,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import javafx.fxml.FXML;
+import outdoorapp.to.Partecipante;
 import outdoorapp.to.Utente;
 import outdoorapp.utils.Actions;
 
@@ -91,7 +92,6 @@ public abstract class ControllerRegistrazione implements Actions, DateFieldCheck
 
 		return result;
 	}
-
 }
 
 /**

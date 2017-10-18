@@ -1,0 +1,10 @@
+REGOLAMENTO:
+1: Nominare un amministratore
+2: Le convocazioni si aprono alle 12:00 del sabato precendete al martedì. Eventuali prenotazioni antecedenti a quanto scritto prima verrannò automaticamente annullate.
+3: Una candidatura è valida solo e solamente se il candidato scrive "Ci sono". Altre frasi del tipo "Ci sarò", "Forse Forse Vengo", "Contatemi", ecc. ecc. non verranno prese in considerazione.
+4: Un candidato può prenotare al più per una persona, e in queso caso dovrà scrivere "Ci sono con Nome Cognome". Altre frasi del tipo "Ci sarò con Mimmo", "Forse Forse Vengo con Sempronio", "Contatemi con Costabile", ecc. ecc. non verranno prese in considerazione. 
+Eventuali candidati successivi al secondo non verranno presi in considerazione.
+5: In caso di defezione di uno o più candidati, entreranno automaticamente i successivi al 14esimo. Il posto perso non può più essere recuperato. In caso volesse ricandidarsi, il candidato ripartirà immediatamente dopo all'ultimo che ha scritto "Ci sono".
+6: In caso di defezione in extremis, ossia nelle 5 ore antecedenti all'inizio della partita, e nel caso in cui non dovessero esserci sostituti, possono essere chiamati cani e porci e come desiderate, basta che si gioca.
+7: In caso non si dovesse raggiungere il numero minimo di candidati, la partita salta.
+8: In caso di defezione giunta a 90 minuti dalla partita è considerata bidone. Dopo due bidoni si è fuori dal gruppo e si perde il diritto di prenotarsi per le partite.

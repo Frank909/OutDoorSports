@@ -58,12 +58,7 @@ public class ApplicationServicePartecipante implements Views, Actions {
 		FileChooser fileChooser = new FileChooser();
 		fileChooser.setTitle("Carica Certificato SRC");
 		fileChooser.getExtensionFilters().addAll(
-				new FileChooser.ExtensionFilter("PDF", "*.pdf"),
-				new FileChooser.ExtensionFilter("JPG", "*.jpg"),
-				new FileChooser.ExtensionFilter("PNG", "*.png"),
-				new FileChooser.ExtensionFilter("JPEG", "*.JPEG"),
-				new FileChooser.ExtensionFilter("BMP", "*.bmp")
-				);
+				new FileChooser.ExtensionFilter("TXT", "*.txt"));
 		File fileCertificatoSRC = fileChooser.showOpenDialog(Forms.getForm(VIEW_REGISTRAZIONE_PARTECIPANTE));
 		if(fileCertificatoSRC != null){
 			partecipante.setCertificatoSrc(fileCertificatoSRC.getPath());
@@ -92,7 +87,7 @@ public class ApplicationServicePartecipante implements Views, Actions {
 				Partecipante partecipante = (Partecipante)request.getData();
 				uploadCertificatoSRC(partecipante);
 				partecipante.setRuolo(ruoliDao.getRuoloPartecipante());
-				partecipante.setStatoUtente(statoUtenteDao.getStatoDisattivo());
+				partecipante.setStatoUtente(statoUtenteDao.getStatoAttivo());
 				partecipante_dao.create(partecipante);
 				response.setResponse(RESP_OK);
 			}else{

@@ -99,7 +99,6 @@ public class ControllerConfig extends ControllerRegistrazione implements Actions
 			Response res = fc.sendRequest(new Request(mds, OUTDOORSPORT_SAVE_MDS));
 			if(res.getResponse().equals(RESP_OK)){
 				Forms.closeForm(VIEW_MANAGER_DI_SISTEMA_CONFIG);
-				Forms.showForm(VIEW_LOGIN); //da rivedere
 			}
 			else
 				lblErrore.setText("Errore! Email o Username già presenti!");
