@@ -62,7 +62,7 @@ public class ControllerPasswordDimenticata implements Actions, Views{
 	private void execRequestNewPassword() {
 		Utente utente = new Utente();
 		utente.setEmail(txtEmail.getText());
-		FrontController fc = new FrontController();
+		FrontController fc = FrontController.getInstance();
 		Request request = new Request(utente, OUTDOORSPORT_REQUEST_NEW_PASSWORD);
 		Response response = fc.sendRequest(request);
 		if(response.getResponse().equals(RESP_OK)){

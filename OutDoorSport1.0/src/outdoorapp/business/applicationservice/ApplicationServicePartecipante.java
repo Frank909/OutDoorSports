@@ -4,7 +4,9 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.io.OutputStream;
+import java.nio.file.Files;
 
 import javafx.stage.FileChooser;
 import outdoorapp.exceptions.DatabaseException;
@@ -34,21 +36,21 @@ import outdoorapp.utils.Views;
 
 public class ApplicationServicePartecipante implements Views, Actions {
 
-	PartecipanteDAO partecipante_dao;
-	
+	private PartecipanteDAO partecipante_dao;
+
 	/**
 	 * Costruttore che inizializza il DAO del Partecipante
 	 */
 	public ApplicationServicePartecipante() {
 		partecipante_dao = new PartecipanteDAO();
 	}
-	
+
 	/**
 	 * Metodo che permette la ricerca del file da caricare e ne salva
 	 * il path.
 	 * 
-	 * @param request
-	 * @return una response in base alla request
+	 * @param request: richiesta in ingresso
+	 * @return response: una response in base alla request
 	 */
 	public Response caricaCertificatoSRC(Request request){
 		Partecipante partecipante = (Partecipante) request.getData();
@@ -56,12 +58,12 @@ public class ApplicationServicePartecipante implements Views, Actions {
 		FileChooser fileChooser = new FileChooser();
 		fileChooser.setTitle("Carica Certificato SRC");
 		fileChooser.getExtensionFilters().addAll(
-                new FileChooser.ExtensionFilter("PDF", "*.pdf"),
-                new FileChooser.ExtensionFilter("JPG", "*.jpg"),
-                new FileChooser.ExtensionFilter("PNG", "*.png"),
-                new FileChooser.ExtensionFilter("JPEG", "*.JPEG"),
-                new FileChooser.ExtensionFilter("BMP", "*.bmp")
-            );
+				new FileChooser.ExtensionFilter("PDF", "*.pdf"),
+				new FileChooser.ExtensionFilter("JPG", "*.jpg"),
+				new FileChooser.ExtensionFilter("PNG", "*.png"),
+				new FileChooser.ExtensionFilter("JPEG", "*.JPEG"),
+				new FileChooser.ExtensionFilter("BMP", "*.bmp")
+				);
 		File fileCertificatoSRC = fileChooser.showOpenDialog(Forms.getForm(VIEW_REGISTRAZIONE_PARTECIPANTE));
 		if(fileCertificatoSRC != null){
 			partecipante.setCertificatoSrc(fileCertificatoSRC.getPath());
@@ -72,11 +74,17 @@ public class ApplicationServicePartecipante implements Views, Actions {
 
 		return response;
 	}
-	
 
+
+	/**
+	 * Metodo che permette la creazione e l'inserimento di un nuovo partecipante all'interno del sistema,
+	 * controllando se il partecipante stesso non è già stato inserito nel sistema
+	 * @param request: richiesta in ingresso
+	 * @return response: responso dell'operazione
+	 */
 	public Response nuovoPartecipante(Request request){
 		Response response = new Response();
-		
+
 		try {
 			if(!partecipante_dao.esisteEmail((Utente)request.getData()) && !partecipante_dao.esisteUsername((Utente)request.getData())){
 				RuoliDAO ruoliDao = new RuoliDAO();
@@ -94,10 +102,10 @@ public class ApplicationServicePartecipante implements Views, Actions {
 		} catch (DatabaseException e) {
 			e.printStackTrace();
 		}
-		
+
 		return response;
 	}
-	
+
 	/**
 	 * Metodo che crea, se non è stata già creata, la directory principale, e crea la directory
 	 * avente il nome dell'username, che conterrà il certificato SRC. Quindi salva il 
@@ -108,32 +116,32 @@ public class ApplicationServicePartecipante implements Views, Actions {
 	private void uploadCertificatoSRC(Partecipante partecipante){
 		File rootDir = new File(ROOT_CERTIFICATE);
 		if (!rootDir.exists()) {
-		    try{
-		        rootDir.mkdir();
-		    } 
-		    catch(SecurityException se){
-		    }        
+			try{
+				rootDir.mkdir();
+			}catch(SecurityException se){
+				se.printStackTrace();
+			}        
 		}
-		
+
 		String path = ROOT_CERTIFICATE + "\\" + partecipante.getUsername();
 		File userCertificateDir = new File(path);
 		if (!userCertificateDir.exists()) {
-		    try{
-		    	userCertificateDir.mkdir();
-		    } 
-		    catch(SecurityException se){
-		    }        
+			try{
+				userCertificateDir.mkdir();
+			}catch(SecurityException se){
+				se.printStackTrace();
+			}        
 		}
-		
-		File newFile = new File(partecipante.getCertificatoSrc());
-		OutputStream out;
-		try {
-			out = new FileOutputStream(newFile);
-			out.close();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
+
+		try{
+			File source = new File(partecipante.getCertificatoSrc());
+			File dest = new File(userCertificateDir.getPath() + "\\" + source.getName());
+			Files.copy(source.toPath(), dest.toPath());
+			
+			partecipante.setCertificatoSrc(dest.getPath());
+		}catch(Exception e){
 			e.printStackTrace();
 		}
-		
+
 	}
 }

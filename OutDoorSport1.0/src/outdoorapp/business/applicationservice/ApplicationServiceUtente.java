@@ -38,13 +38,13 @@ import outdoorapp.utils.Views;
 
 public class ApplicationServiceUtente implements Views, Actions{
 
-	UtenteDAO<Utente> utente_dao;
+	private UtenteDAO<Utente> utente_dao;
 	
 	/**
 	 * Costruttore che inizializza il DAO dell'Utente
 	 */
 	public ApplicationServiceUtente() {
-		utente_dao = new UtenteDAO<Utente>();
+		utente_dao = new UtenteDAO<>();
 	}
 	
 	/**

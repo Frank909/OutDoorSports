@@ -22,7 +22,7 @@ public class Main extends Application implements Actions{
 	@Override
 	public void start(Stage primaryStage) {
 		ManagerDiSistema mds = new ManagerDiSistema();
-		FrontController fc = new FrontController();
+		FrontController fc = FrontController.getInstance();
 		Request request = new Request(mds, OUTDOORSPORT_MDS_EXISTS_AT_LEAST_ONE);
 		Response response = fc.sendRequest(request);
 		Forms.showForm(response.getView());

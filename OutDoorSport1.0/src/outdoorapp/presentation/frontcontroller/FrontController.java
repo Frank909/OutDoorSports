@@ -23,14 +23,24 @@ public class FrontController{
 	 * Riferimento all'application controller.Permette di gestire
 	 * le richieste e le risposte.
 	 */
-	private ApplicationController applicationController;
+	private static ApplicationController applicationController = new ApplicationController();
 	
 	/**
-	 * Costruttore della classe FrontController che inizializza
-	 * l'application controller.
+	 * Riferimento all'istanza di FrontController
 	 */
-	public FrontController(){
-		applicationController = new ApplicationController();
+	private static FrontController fc = new FrontController();
+	
+	/**
+	 * Costruttore della classe FrontController privato
+	 */
+	private FrontController(){}
+	
+	/**
+	 * Metodo che restituisce l'istanza del FrontController (Singleton)
+	 * @return fc: istanza del FrontController
+	 */
+	public static FrontController getInstance(){
+		return fc;
 	}
 	/*private Dispatcher dispatcher;
 	private boolean isAuthenticUser = false;
@@ -58,6 +68,6 @@ public class FrontController{
 	 * @return la risposta in base alla richiesta
 	 */
 	public Response sendRequest(Request request) {
-		return this.applicationController.getAction(request);
+		return applicationController.getAction(request);
 	}
 }

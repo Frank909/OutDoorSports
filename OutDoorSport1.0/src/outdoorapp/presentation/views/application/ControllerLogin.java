@@ -62,7 +62,7 @@ public class ControllerLogin implements Actions, Views{
 		utente.setUsername(txtUsername.getText());
 		utente.setPassword(txtPassword.getText());
 		Request request = new Request(utente, OUTDOORSPORT_EXECUTE_LOGIN);
-		FrontController fc = new FrontController();
+		FrontController fc = FrontController.getInstance();
 		Response response = fc.sendRequest(request);
 		if(response.getResponse().equals(RESP_OK)){
 			Forms.showForm(response.getView());

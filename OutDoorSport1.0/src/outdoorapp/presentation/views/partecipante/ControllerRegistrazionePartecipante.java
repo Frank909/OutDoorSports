@@ -17,6 +17,7 @@ import javafx.stage.FileChooser;
 import outdoorapp.presentation.frontcontroller.FrontController;
 import outdoorapp.presentation.reqresp.Request;
 import outdoorapp.presentation.reqresp.Response;
+import outdoorapp.presentation.views.ControllerRegistrazione;
 import outdoorapp.to.Partecipante;
 import outdoorapp.to.Utente;
 import outdoorapp.utils.Actions;
@@ -31,7 +32,7 @@ import outdoorapp.utils.Views;
  *
  */
 
-public class ControllerRegistrazionePartecipante implements Actions, Views{
+public class ControllerRegistrazionePartecipante extends ControllerRegistrazione implements Actions, Views{
 
 	@FXML private TextField txtNome;
 	@FXML private TextField txtCognome;
@@ -59,10 +60,18 @@ public class ControllerRegistrazionePartecipante implements Actions, Views{
 	/**
 	 * Metodo che inizializza tutti i campi della finestra
 	 */
-	@FXML public void initialize() {
-        lblErrore.setText("");
-        ///DA COMPLETARE CON TUTTI I CAMPI///
-    }
+	@Override
+	protected void initialize() {
+		lblErrore.setText("");
+	}
+	
+	/**
+	 * Evento associato all'invio dei dati della registrazione di un Partecipante
+	 */
+	@Override
+	protected void registra() {
+		execRegistraPartecipante();
+	}
 	
 	/**
 	 * Evento associato al caricamento del certificato src nel sistema. Viene caricato
@@ -79,22 +88,16 @@ public class ControllerRegistrazionePartecipante implements Actions, Views{
 	private void execCaricaCertificatoSRC() {
 		Partecipante partecipante = new Partecipante();
 		Request request = new Request(partecipante, OUTDOORSPORT_SAVE_SRC_CERTIFICATE);
-		FrontController fc = new FrontController();
+		FrontController fc = FrontController.getInstance();
 		Response response = fc.sendRequest(request);
 		
 		if(response.getResponse().equals(RESP_OK))
 			lblSrcCertificatoSRC.setText(((Partecipante)response.getData()).getCertificatoSrc());
 	}
 	
-	/**
-	 * Evento associato all'invio dei dati della resistrazione di un Partecipante
-	 */
-	@FXML protected void registraPartecipante(){
-		execRegistraPartecipante();
-	}
 
 	/**
-	 * Metodo di supporto a registraPartecipante(). Viene recuperata la richiesta di
+	 * Metodo di supporto a registra(). Viene recuperata la richiesta di
 	 * registrazione dei partecipanti e viene mandata ai livelli successivi
 	 */
 	private void execRegistraPartecipante() {
@@ -119,26 +122,26 @@ public class ControllerRegistrazionePartecipante implements Actions, Views{
 		
 		String result = checkErrors(partecipante);
 		if(result.equals("")){
-			FrontController fc = new FrontController();
+			FrontController fc = FrontController.getInstance();
 			Response response = fc.sendRequest(new Request(partecipante, OUTDOORSPORT_SAVE_PARTECIPANTE));
-			if(response.getResponse().equals(RESP_OK))
-				System.out.println("Partecipante inserito correttamente");
+			if(response.getResponse().equals(RESP_OK)){
+				Forms.closeForm(VIEW_REGISTRAZIONE_PARTECIPANTE);
+				Forms.showForm(VIEW_LOGIN); //da rivedere
+			}
 			else
 				lblErrore.setText("Errore! Email o Username già presenti!");
 		}else
 			lblErrore.setText(result);
 	}
 	
-	/**
-	 * Funzione che restituisce la stringa degli errori rispetto alle informazioni inserite in maniera non corretta 
-	 * per registrare il manager di sistema nella configurazione iniziale
-	 * 
-	 * @param utente: manager di sistema
-	 * @return result: stringa errori
-	 */
-	private String checkErrors(Partecipante utente){
-		String result = "";
 
+	/**
+	 * Riscrittura del metodo checkDatePicker dell'interfaccia DateFieldCheck che permette di controllare i datepicker delle schermate
+	 * di inserimento dati.
+	 * @param utente
+	 */
+	@Override
+	public void checkDatePicker(Utente utente) {
 		if(dateDataNasc.getValue() == null)
 			utente.setDataNascita("");
 		else{
@@ -147,60 +150,10 @@ public class ControllerRegistrazionePartecipante implements Actions, Views{
 		}
 		
 		if(dataCertificatoSRC.getValue() == null)
-			utente.setDataCertificatoSrc("");
+			((Partecipante)utente).setDataCertificatoSrc("");
 		else{
-			if(!(dataCertificatoSRC.getValue().getYear() > LocalDate.now().getYear() - 0))
-				utente.setDataCertificatoSrc(dataCertificatoSRC.getValue().toString());
+			if(!(dataCertificatoSRC.getValue().getYear() >= LocalDate.now().getYear()))
+				((Partecipante)utente).setDataCertificatoSrc(dataCertificatoSRC.getValue().toString());
 		}
-
-		int i = 0;
-		for (Field f : utente.getClass().getSuperclass().getDeclaredFields()) {
-			f.setAccessible(true);
-			try {
-				if ((f.get(utente) == null || f.get(utente).equals(""))) {
-					if(!(f.getName().equals("ruolo") || f.getName().equals("statoUtente"))){
-						if(!f.getName().equals("email")){
-							result += f.getName() + ", ";
-							i++;
-							if(i == 2){
-								result += "\n";
-								i = 0;
-							}
-						}
-					}
-				}
-			} catch (IllegalArgumentException | IllegalAccessException e) {
-				e.printStackTrace();
-			}
-		}
-		
-		i = 0;
-		for (Field f : utente.getClass().getDeclaredFields()) {
-			f.setAccessible(true);
-			try {
-				if (f.get(utente) == null || f.get(utente).equals("")) {
-					result += f.getName() + ", ";
-					i++;
-					if(i == 2){
-						result += "\n";
-						i = 0;
-					}
-				}
-			} catch (IllegalArgumentException | IllegalAccessException e) {
-				e.printStackTrace();
-			}
-		}
-		
-		Pattern pattern = Pattern.compile(REGEX);
-		Matcher matcher = pattern.matcher(utente.getEmail());
-
-		if(!matcher.matches()){
-			result += "email";
-		}
-		
-		if(!result.equals(""))
-			result += " non corretti!";
-
-		return result;
 	}
 }

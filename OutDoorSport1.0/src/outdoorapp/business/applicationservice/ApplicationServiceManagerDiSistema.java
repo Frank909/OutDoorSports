@@ -25,7 +25,7 @@ import outdoorapp.utils.Views;
 
 public class ApplicationServiceManagerDiSistema implements Actions, Views{
 
-	ManagerDiSistemaDAO mds_dao;
+	private ManagerDiSistemaDAO mds_dao;
 	
 	/**
 	 * Costruttore che inizializza il DAO del Manager di Sistema

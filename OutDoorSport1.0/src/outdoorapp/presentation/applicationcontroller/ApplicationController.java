@@ -18,13 +18,13 @@ import outdoorapp.presentation.reqresp.Response;
  *
  */
 
-public class ApplicationController {
+public class ApplicationController{
 
 	/**
 	 * Riferimento al Business Delegate.Permette di gestire, in 
 	 * base alla richiesta, l'application service da utilizzare.
 	 */
-	BusinessDelegate businessDelegate;
+	private BusinessDelegate businessDelegate;
 	
 	/**
 	 * Costruttore della classe che inizializza l'istanza di BusinessDelegate

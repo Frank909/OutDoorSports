@@ -39,5 +39,4 @@ public class ManagerDiSistemaDAO extends UtenteDAO<ManagerDiSistema> implements 
 		return response;
 	}
 
-
 }

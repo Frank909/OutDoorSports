@@ -109,7 +109,7 @@ public class EsempioControllerClasseDaEliminare implements Actions
 		utente.setPassword(this.password_textview.getText());
 		
 		request = new Request(utente, OUTDOORSPORT_AUTENTICATION);
-		FrontController fc = new FrontController();
+		FrontController fc = FrontController.getInstance();
 		Response response = fc.sendRequest(request);
 		
 		Object newUtente = response.getData();

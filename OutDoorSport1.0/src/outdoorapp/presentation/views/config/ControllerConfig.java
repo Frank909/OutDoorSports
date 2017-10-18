@@ -16,10 +16,14 @@ import javafx.scene.control.TextField;
 import outdoorapp.presentation.frontcontroller.FrontController;
 import outdoorapp.presentation.reqresp.Request;
 import outdoorapp.presentation.reqresp.Response;
+import outdoorapp.presentation.views.ControllerRegistrazione;
 import outdoorapp.to.ManagerDiSistema;
 import outdoorapp.to.OutDoorSports;
 import outdoorapp.to.Utente;
 import outdoorapp.utils.Actions;
+import outdoorapp.utils.Forms;
+import outdoorapp.utils.Views;
+
 
 /**
  * Gestisce la view per la configurazione iniziale alla prima
@@ -29,7 +33,7 @@ import outdoorapp.utils.Actions;
  * @author Francesco Ventura
  *
  */
-public class ControllerConfig implements Actions{
+public class ControllerConfig extends ControllerRegistrazione implements Actions, Views{
 
 	@FXML private TextField txtNome;
 	@FXML private TextField txtCognome;
@@ -46,7 +50,6 @@ public class ControllerConfig implements Actions{
 	@FXML private DatePicker dateDataNasc;
 	@FXML private Label lblErrore;
 	
-	
 	/**
 	 * Costruttore della classe ControllerConfig 
 	 */
@@ -55,16 +58,16 @@ public class ControllerConfig implements Actions{
 	/**
 	 * Metodo che inizializza tutti i campi della finestra
 	 */
-	
-	@FXML public void initialize() {
-        lblErrore.setText("");
-        ///DA COMPLETARE CON TUTTI I CAMPI///
-    }
+	@Override
+	protected void initialize() {
+		lblErrore.setText("");
+	}
 	
 	/**
 	 * Evento associato all'invio dei dati della configurazione iniziale del manager di sistema
 	 */
-	@FXML protected void registraManagerDiSistema(){
+	@Override
+	protected void registra() {
 		execRegistraManagerDiSistema();
 	}
 	
@@ -92,84 +95,33 @@ public class ControllerConfig implements Actions{
 		
 		String result = checkErrors(mds);
 		if(result.equals("")){
-			FrontController fc = new FrontController();
+			FrontController fc = FrontController.getInstance();
 			Response res = fc.sendRequest(new Request(mds, OUTDOORSPORT_SAVE_MDS));
-			if(res.getResponse().equals(RESP_OK))
-				System.out.println("Manager di sistema inserito correttamente");
+			if(res.getResponse().equals(RESP_OK)){
+				Forms.closeForm(VIEW_MANAGER_DI_SISTEMA_CONFIG);
+				Forms.showForm(VIEW_LOGIN); //da rivedere
+			}
 			else
 				lblErrore.setText("Errore! Email o Username già presenti!");
 		}else
 			lblErrore.setText(result);
 	}
-	
 
 	/**
-	 * Funzione che restituisce la stringa degli errori rispetto alle informazioni inserite in maniera non corretta 
-	 * per registrare il manager di sistema nella configurazione iniziale
-	 * 
-	 * @param utente: manager di sistema
-	 * @return result: stringa errori
+	 * Riscrittura del metodo checkDatePicker dell'interfaccia DateFieldCheck che permette di controllare i datepicker delle schermate
+	 * di inserimento dati.
+	 * @param utente
 	 */
-	private String checkErrors(Utente utente){
-		String result = "";
-
+	@Override
+	public void checkDatePicker(Utente utente) {
 		if(dateDataNasc.getValue() == null)
 			utente.setDataNascita("");
 		else{
 			if(!(dateDataNasc.getValue().getYear() >= LocalDate.now().getYear() - 15))
 				utente.setDataNascita(dateDataNasc.getValue().toString());
 		}
-
-		int i = 0;
-		for (Field f : utente.getClass().getSuperclass().getDeclaredFields()) {
-			f.setAccessible(true);
-			try {
-				if ((f.get(utente) == null || f.get(utente).equals(""))) {
-					if(!(f.getName().equals("ruolo") || f.getName().equals("statoUtente"))){
-						if(!f.getName().equals("email")){
-							result += f.getName() + ", ";
-							i++;
-							if(i == 2){
-								result += "\n";
-								i = 0;
-							}
-						}
-					}
-				}
-			} catch (IllegalArgumentException | IllegalAccessException e) {
-				e.printStackTrace();
-			}
-		}
-		
-		i = 0;
-		for (Field f : utente.getClass().getDeclaredFields()) {
-			f.setAccessible(true);
-			try {
-				if (f.get(utente) == null || f.get(utente).equals("")) {
-					result += f.getName() + ", ";
-					i++;
-					if(i == 2){
-						result += "\n";
-						i = 0;
-					}
-				}
-			} catch (IllegalArgumentException | IllegalAccessException e) {
-				e.printStackTrace();
-			}
-		}
-		
-		Pattern pattern = Pattern.compile(REGEX);
-		Matcher matcher = pattern.matcher(utente.getEmail());
-
-		if(!matcher.matches()){
-			result += "email";
-		}
-		
-		if(!result.equals(""))
-			result += " non corretti!";
-
-		return result;
 	}
+	
 }
 
 

@@ -21,7 +21,7 @@ public interface Actions {
 	public static final String OUTDOORSPORT_REQUEST_NEW_PASSWORD = "richiediNuovaPassword";
 	public static final String OUTDOORSPORT_SAVE_SRC_CERTIFICATE = "caricaCertificatoSRC";
 	public static final String OUTDOORSPORT_SAVE_PARTECIPANTE = "nuovoPartecipante";
-	
+	public static final String OUTDOORSPORT_SAVE_MDE = "nuovoManagerDiEscursione";
 	
 	
 	public static final String ROOT_CERTIFICATE = "certificatiSRC";
