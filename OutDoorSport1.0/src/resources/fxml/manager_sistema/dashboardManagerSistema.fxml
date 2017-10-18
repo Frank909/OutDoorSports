@@ -10,50 +10,11 @@
 
 <AnchorPane stylesheets="@dashboardManagerSistema.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="outdoorapp.presentation.views.managersistema.ControllerManagerDiSistema">
    <children>
-      <MenuBar prefHeight="25.0" prefWidth="929.0">
-         <menus>
-            <Menu mnemonicParsing="false" text="File">
-               <items>
-                  <MenuItem mnemonicParsing="false" text="New" />
-                  <MenuItem mnemonicParsing="false" text="Open…" />
-                  <Menu mnemonicParsing="false" text="Open Recent" />
-                  <SeparatorMenuItem mnemonicParsing="false" />
-                  <MenuItem mnemonicParsing="false" text="Close" />
-                  <MenuItem mnemonicParsing="false" text="Save" />
-                  <MenuItem mnemonicParsing="false" text="Save As…" />
-                  <MenuItem mnemonicParsing="false" text="Revert" />
-                  <SeparatorMenuItem mnemonicParsing="false" />
-                  <MenuItem mnemonicParsing="false" text="Preferences…" />
-                  <SeparatorMenuItem mnemonicParsing="false" />
-                  <MenuItem mnemonicParsing="false" text="Quit" />
-               </items>
-            </Menu>
-            <Menu mnemonicParsing="false" text="Edit">
-               <items>
-                  <MenuItem mnemonicParsing="false" text="Undo" />
-                  <MenuItem mnemonicParsing="false" text="Redo" />
-                  <SeparatorMenuItem mnemonicParsing="false" />
-                  <MenuItem mnemonicParsing="false" text="Cut" />
-                  <MenuItem mnemonicParsing="false" text="Copy" />
-                  <MenuItem mnemonicParsing="false" text="Paste" />
-                  <MenuItem mnemonicParsing="false" text="Delete" />
-                  <SeparatorMenuItem mnemonicParsing="false" />
-                  <MenuItem mnemonicParsing="false" text="Select All" />
-                  <MenuItem mnemonicParsing="false" text="Unselect All" />
-               </items>
-            </Menu>
-            <Menu mnemonicParsing="false" text="Help">
-               <items>
-                  <MenuItem mnemonicParsing="false" text="About OutDoorSports" />
-               </items>
-            </Menu>
-         </menus>
-      </MenuBar>
-      <GridPane layoutY="25.0" prefHeight="558.0" prefWidth="929.0">
+      <GridPane prefHeight="583.0" prefWidth="929.0">
          <children>
             <GridPane id="right_menu">
                <children>
-                  <Label fx:id="lblVisulizzaEscursioniSistema" prefHeight="101.0" prefWidth="235.0" styleClass="text_menu" text="Visualizza Escursioni Sistema" textFill="WHITE" GridPane.rowIndex="1">
+                  <Label fx:id="lblVisulizzaEscursioniSistema" onMouseClicked="#viewVisualizzaEscursioniSistema" prefHeight="101.0" prefWidth="235.0" styleClass="text_menu" text="Visualizza Escursioni Sistema" textFill="WHITE" GridPane.rowIndex="1">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -64,7 +25,7 @@
                         <Insets left="10.0" />
                      </padding>
                   </Label>
-                  <Label fx:id="lblGestioneManagerEscursione" prefHeight="200.0" prefWidth="341.0" styleClass="text_menu" text="Gestione Manager Escursione" textFill="WHITE">
+                  <Label fx:id="lblGestioneManagerEscursione" onMouseClicked="#viewGestioneManagerEscursione" prefHeight="200.0" prefWidth="341.0" styleClass="text_menu" text="Gestione Manager Escursione" textFill="WHITE">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -75,7 +36,7 @@
                         <Insets left="10.0" />
                      </padding>
                   </Label>
-                  <Label fx:id="lblInserisciManagerEscursione" prefHeight="101.0" prefWidth="235.0" styleClass="text_menu" text="Inserisci Manager Escursione" textFill="WHITE" GridPane.rowIndex="2">
+                  <Label fx:id="lblInserisciManagerEscursione" onMouseClicked="#viewInserisciManagerEscursione" prefHeight="101.0" prefWidth="235.0" styleClass="text_menu" text="Inserisci Manager Escursione" textFill="WHITE" GridPane.rowIndex="2">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -102,7 +63,7 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <AnchorPane fx:id="AnchorContent" />
+                  <AnchorPane fx:id="anchorContent" />
                </children>
             </GridPane>
          </children>
