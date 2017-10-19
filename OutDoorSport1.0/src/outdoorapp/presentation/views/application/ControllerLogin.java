@@ -54,7 +54,7 @@ public class ControllerLogin implements Actions, Views{
 	}
 	
 	/**
-	 * Metodo di supporto a eseguiLogin(). Vengono catturati username e passord e viene
+	 * Metodo di supporto a eseguiLogin(). Vengono catturati username e password e viene
 	 * effettuata la richiesta di login nei livelli sottostanti
 	 */
 	private void execLogin(){
