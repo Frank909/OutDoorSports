@@ -1,5 +1,8 @@
 package outdoorapp.business.applicationservice;
 
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.Alert.AlertType;
 import outdoorapp.exceptions.DatabaseException;
 import outdoorapp.integration.dao.ManagerDiEscursioneDAO;
 import outdoorapp.integration.dao.ManagerDiSistemaDAO;
@@ -53,6 +56,9 @@ public class ApplicationServiceManagerDiEscursione implements Actions, Views{
 				mde.setRuolo(ruoliDao.getRuoloManagerDiEscursione());
 				mde.setStatoUtente(statoUtenteDao.getStatoAttivo());
 				mde_dao.create(mde);
+				Alert alert = new Alert(AlertType.INFORMATION, "Il Manager di Escursione è stato inserito correttamente!", ButtonType.OK);
+				alert.setTitle("OutDoorSport1.0");
+				alert.showAndWait();
 				response.setResponse(RESP_OK);
 			}else{
 				response.setResponse(RESP_KO);

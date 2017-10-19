@@ -17,12 +17,11 @@ import outdoorapp.presentation.frontcontroller.FrontController;
 import outdoorapp.presentation.reqresp.Request;
 import outdoorapp.presentation.reqresp.Response;
 import outdoorapp.presentation.views.ControllerRegistrazione;
-import outdoorapp.presentation.views.ViewCache;
 import outdoorapp.to.ManagerDiSistema;
 import outdoorapp.to.OutDoorSports;
 import outdoorapp.to.Utente;
 import outdoorapp.utils.Actions;
-
+import outdoorapp.utils.ViewCache;
 import outdoorapp.utils.Views;
 
 
@@ -50,14 +49,15 @@ public class ControllerConfig extends ControllerRegistrazione implements Actions
 	@FXML private Button btnRegistrati;
 	@FXML private DatePicker dateDataNasc;
 	@FXML private Label lblErrore;
-	
-	private ViewCache viewCache;
+	private FrontController fc;
+	private ViewCache vc;
 	
 	/**
 	 * Costruttore della classe ControllerConfig 
 	 */
 	public ControllerConfig() {
-		viewCache = ViewCache.getInstance();
+		fc = FrontController.getInstance();
+		vc = ViewCache.getInstance();
 	}
 	
 	/**
@@ -100,10 +100,9 @@ public class ControllerConfig extends ControllerRegistrazione implements Actions
 		
 		String result = checkErrors(mds);
 		if(result.equals("")){
-			FrontController fc = FrontController.getInstance();
 			Response res = fc.sendRequest(new Request(mds, OUTDOORSPORT_SAVE_MDS));
 			if(res.getResponse().equals(RESP_OK))
-				viewCache.setView(VIEW_MANAGER_DI_SISTEMA_CONFIG);
+				vc.setView(VIEW_MANAGER_DI_SISTEMA_CONFIG);
 			else
 				lblErrore.setText("Errore! Email o Username già presenti!");
 		}else

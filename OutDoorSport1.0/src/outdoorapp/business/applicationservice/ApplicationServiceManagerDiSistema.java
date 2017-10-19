@@ -1,5 +1,8 @@
 package outdoorapp.business.applicationservice;
 
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.Alert.AlertType;
 import outdoorapp.exceptions.DatabaseException;
 import outdoorapp.integration.dao.ManagerDiSistemaDAO;
 import outdoorapp.integration.dao.RuoliDAO;
@@ -78,6 +81,9 @@ public class ApplicationServiceManagerDiSistema implements Actions, Views{
 				mds.setRuolo(ruoliDao.getRuoloManagerDiSistema());
 				mds.setStatoUtente(statoUtenteDao.getStatoAttivo());
 				mds_dao.create(mds);
+				Alert alert = new Alert(AlertType.INFORMATION, "Il Manager di Sistema è stato inserito correttamente!", ButtonType.OK);
+				alert.setTitle("OutDoorSport1.0");
+				alert.showAndWait();
 				response.setResponse(RESP_OK);
 			}else{
 				response.setResponse(RESP_KO);

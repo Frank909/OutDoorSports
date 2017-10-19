@@ -294,7 +294,7 @@
                         <RowConstraints maxHeight="69.0" minHeight="10.0" prefHeight="69.0" vgrow="SOMETIMES" />
                      </rowConstraints>
                   </GridPane>
-                  <Button fx:id="btnRegistrati" mnemonicParsing="false" onMouseClicked="#btnRegistrati" prefHeight="41.0" prefWidth="222.0" text="Invia Dati" GridPane.halignment="CENTER" GridPane.rowIndex="2">
+                  <Button fx:id="btnRegistrati" mnemonicParsing="false" prefHeight="41.0" prefWidth="222.0" text="Invia Dati" GridPane.halignment="CENTER" GridPane.rowIndex="2">
                      <GridPane.margin>
                         <Insets bottom="20.0" />
                      </GridPane.margin>
@@ -317,17 +317,6 @@
          <right>
             <Pane prefHeight="550.0" prefWidth="28.0" />
          </right>
-         <top>
-            <MenuBar prefHeight="0.0" prefWidth="885.0" BorderPane.alignment="CENTER">
-               <menus>
-                  <Menu mnemonicParsing="false" text="OutDoorSports">
-                     <items>
-                        <MenuItem mnemonicParsing="false" text="%key15" />
-                     </items>
-                  </Menu>
-               </menus>
-            </MenuBar>
-         </top>
       </BorderPane>
    </children>
 </StackPane>

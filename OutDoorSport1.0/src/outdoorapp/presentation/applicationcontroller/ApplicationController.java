@@ -2,9 +2,11 @@ package outdoorapp.presentation.applicationcontroller;
 
 import java.lang.reflect.Method;
 
+import javafx.scene.layout.AnchorPane;
 import outdoorapp.business.BusinessDelegate;
 import outdoorapp.presentation.reqresp.Request;
 import outdoorapp.presentation.reqresp.Response;
+import outdoorapp.utils.ViewCache;
 import outdoorapp.utils.Views;
 
 /**
@@ -28,6 +30,7 @@ public class ApplicationController{
 	 * base alla richiesta, l'application service da utilizzare.
 	 */
 	private BusinessDelegate businessDelegate;
+	private ViewCache viewCache = ViewCache.getInstance(); 
 	
 	/**
 	 * Costruttore della classe che inizializza l'istanza di BusinessDelegate

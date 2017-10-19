@@ -12,7 +12,6 @@ import outdoorapp.presentation.frontcontroller.FrontController;
 import outdoorapp.presentation.reqresp.Request;
 import outdoorapp.presentation.reqresp.Response;
 import outdoorapp.presentation.views.ControllerRegistrazione;
-import outdoorapp.presentation.views.ViewCache;
 import outdoorapp.to.ManagerDiEscursione;
 import outdoorapp.to.ManagerDiSistema;
 import outdoorapp.to.Utente;
@@ -44,12 +43,11 @@ public class ControllerRegistrazioneManagerDiEscursione extends ControllerRegist
 	@FXML private Button btnRegistrati;
 	@FXML private DatePicker dateDataNasc;
 	@FXML private Label lblErrore;
-	
-	private ViewCache viewCache;
+	private FrontController fc;
 	
 	
 	public ControllerRegistrazioneManagerDiEscursione(){
-		viewCache = ViewCache.getInstance();
+		fc = FrontController.getInstance();
 	}
 	
 	
@@ -91,7 +89,6 @@ public class ControllerRegistrazioneManagerDiEscursione extends ControllerRegist
 		
 		String result = checkErrors(mde);
 		if(result.equals("")){
-			FrontController fc = FrontController.getInstance();
 			Response res = fc.sendRequest(new Request(mde, OUTDOORSPORT_SAVE_MDE));
 			if(res.getResponse().equals(RESP_OK)){
 				System.out.println("Manager di escursione inserito correttamente"); //da rivedere

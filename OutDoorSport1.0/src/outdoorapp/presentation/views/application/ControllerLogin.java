@@ -8,9 +8,9 @@ import javafx.scene.control.TextField;
 import outdoorapp.presentation.frontcontroller.FrontController;
 import outdoorapp.presentation.reqresp.Request;
 import outdoorapp.presentation.reqresp.Response;
-import outdoorapp.presentation.views.ViewCache;
 import outdoorapp.to.Utente;
 import outdoorapp.utils.Actions;
+import outdoorapp.utils.ViewCache;
 import outdoorapp.utils.Views;
 
 /**
@@ -29,12 +29,14 @@ public class ControllerLogin implements Actions, Views{
 	@FXML private TextField txtUsername;
 	@FXML private PasswordField txtPassword;
 	@FXML private Label lblErrore;
-	private ViewCache viewCache;
+	private FrontController fc;
+	private ViewCache vc;
 	/**
 	 * Costruttore della classe ControllerLogin
 	 */
 	public ControllerLogin() {
-		ViewCache viewCache = ViewCache.getInstance();
+		fc = FrontController.getInstance();
+		vc = ViewCache.getInstance();
 	}
 	
 	/**
@@ -62,10 +64,9 @@ public class ControllerLogin implements Actions, Views{
 		utente.setUsername(txtUsername.getText());
 		utente.setPassword(txtPassword.getText());
 		Request request = new Request(utente, OUTDOORSPORT_EXECUTE_LOGIN);
-		FrontController fc = FrontController.getInstance();
 		Response response = fc.sendRequest(request);
 		if(response.getResponse().equals(RESP_OK))
-			viewCache.setView(response.getView());
+			vc.setView(response.getView());
 		else
 			lblErrore.setText(response.getView());
 	}
@@ -75,7 +76,7 @@ public class ControllerLogin implements Actions, Views{
 	 */
 	@FXML protected void richiediNuovaPassword(){
 		//da fare con il frontcontroller
-		viewCache.setView(VIEW_PASSWORD_DIMENTICATA);
+		vc.setView(VIEW_PASSWORD_DIMENTICATA);
 	}
 	
 	/**
@@ -83,7 +84,7 @@ public class ControllerLogin implements Actions, Views{
 	 */
 	@FXML protected void eseguiSignIn(){
 		//da fare con il frontcontroller
-		viewCache.setView(VIEW_REGISTRAZIONE_PARTECIPANTE);
+		vc.setView(VIEW_REGISTRAZIONE_PARTECIPANTE);
 	}
 
 }

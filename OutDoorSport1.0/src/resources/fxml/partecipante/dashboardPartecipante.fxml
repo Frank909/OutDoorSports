@@ -53,7 +53,7 @@
          <children>
             <GridPane id="right_menu">
                <children>
-                  <Label fx:id="lblVisulizzaEscursioniAperte" prefHeight="101.0" prefWidth="235.0" styleClass="text_menu" text="Visualizza Escursioni Aperte" textFill="WHITE" GridPane.rowIndex="1">
+                  <Label fx:id="lblVisulizzaEscursioniAperte" onMouseClicked="#viewVisualizzaEscursioniAperte" prefHeight="101.0" prefWidth="235.0" styleClass="text_menu" text="Visualizza Escursioni Aperte" textFill="WHITE" GridPane.rowIndex="1">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -64,7 +64,7 @@
                         <Insets left="10.0" />
                      </padding>
                   </Label>
-                  <Label fx:id="lblLeMieEscursioni" prefHeight="200.0" prefWidth="341.0" styleClass="text_menu" text="Le mie Escursioni" textFill="WHITE">
+                  <Label fx:id="lblLeMieEscursioni" onMouseClicked="#viewLeMieEscursioni" prefHeight="200.0" prefWidth="341.0" styleClass="text_menu" text="Le mie Escursioni" textFill="WHITE">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -75,7 +75,7 @@
                         <Insets left="10.0" />
                      </padding>
                   </Label>
-                  <Label fx:id="lblIlMioProfilo" prefHeight="66.0" prefWidth="284.0" styleClass="text_menu" text="Il mio Profilo" textFill="WHITE" GridPane.rowIndex="2">
+                  <Label fx:id="lblIlMioProfilo" onMouseClicked="#viewIlMioProfilo" prefHeight="66.0" prefWidth="284.0" styleClass="text_menu" text="Il mio Profilo" textFill="WHITE" GridPane.rowIndex="2">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -105,7 +105,7 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <AnchorPane fx:id="AnchorContent" />
+                  <AnchorPane fx:id="anchorContent" />
                </children>
             </GridPane>
          </children>

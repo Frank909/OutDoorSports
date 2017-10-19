@@ -3,6 +3,9 @@ package outdoorapp.business.applicationservice;
 import java.io.File;
 import java.nio.file.Files;
 
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.Alert.AlertType;
 import javafx.stage.FileChooser;
 import outdoorapp.exceptions.DatabaseException;
 import outdoorapp.integration.dao.PartecipanteDAO;
@@ -10,10 +13,10 @@ import outdoorapp.integration.dao.RuoliDAO;
 import outdoorapp.integration.dao.StatoUtenteDAO;
 import outdoorapp.presentation.reqresp.Request;
 import outdoorapp.presentation.reqresp.Response;
-import outdoorapp.presentation.views.ViewCache;
 import outdoorapp.to.Partecipante;
 import outdoorapp.to.Utente;
 import outdoorapp.utils.Actions;
+import outdoorapp.utils.ViewCache;
 import outdoorapp.utils.Views;
 
 /**
@@ -47,15 +50,13 @@ public class ApplicationServicePartecipante implements Views, Actions {
 	 * @return response: una response in base alla request
 	 */
 	public Response caricaCertificatoSRC(Request request){
-		ViewCache viewCache = ViewCache.getInstance();
-		
 		Partecipante partecipante = (Partecipante) request.getData();
 		Response response = new Response();
 		FileChooser fileChooser = new FileChooser();
 		fileChooser.setTitle("Carica Certificato SRC");
 		fileChooser.getExtensionFilters().addAll(
 				new FileChooser.ExtensionFilter("TXT", "*.txt"));
-		File fileCertificatoSRC = fileChooser.showOpenDialog(viewCache.getCurrentView());
+		File fileCertificatoSRC = fileChooser.showOpenDialog(ViewCache.getCurrentView());
 		if(fileCertificatoSRC != null){
 			partecipante.setCertificatoSrc(fileCertificatoSRC.getPath());
 			response.setResponse(RESP_OK);
@@ -85,6 +86,9 @@ public class ApplicationServicePartecipante implements Views, Actions {
 				partecipante.setRuolo(ruoliDao.getRuoloPartecipante());
 				partecipante.setStatoUtente(statoUtenteDao.getStatoAttivo());
 				partecipante_dao.create(partecipante);
+				Alert alert = new Alert(AlertType.INFORMATION, "Il Partecipante è stato inserito correttamente!", ButtonType.OK);
+				alert.setTitle("OutDoorSport1.0");
+				alert.showAndWait();
 				response.setResponse(RESP_OK);
 			}else{
 				response.setResponse(RESP_KO);

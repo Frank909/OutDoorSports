@@ -53,7 +53,7 @@
          <children>
             <GridPane id="right_menu">
                <children>
-                  <Label fx:id="lblInserisciEscursione" prefHeight="101.0" prefWidth="235.0" styleClass="text_menu" text="Inserisci Escursione" textFill="WHITE" GridPane.rowIndex="1">
+                  <Label fx:id="lblInserisciEscursione" onMouseClicked="#viewInserisciEscursione" prefHeight="101.0" prefWidth="235.0" styleClass="text_menu" text="Inserisci Escursione" textFill="WHITE" GridPane.rowIndex="1">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -64,7 +64,7 @@
                         <Insets left="10.0" />
                      </padding>
                   </Label>
-                  <Label fx:id="lblGestisciEscursioni" prefHeight="200.0" prefWidth="341.0" styleClass="text_menu" text="Gestisci Escursioni" textFill="WHITE">
+                  <Label fx:id="lblGestisciEscursioni" onMouseClicked="#viewGestioneEscursioni" prefHeight="200.0" prefWidth="341.0" styleClass="text_menu" text="Gestisci Escursioni" textFill="WHITE">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -93,7 +93,7 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <AnchorPane fx:id="AnchorContent" />
+                  <AnchorPane fx:id="anchorContent" />
                </children>
             </GridPane>
          </children>

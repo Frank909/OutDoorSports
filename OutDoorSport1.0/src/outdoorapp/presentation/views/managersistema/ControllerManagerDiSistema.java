@@ -4,7 +4,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
-import outdoorapp.presentation.views.ViewCache;
+import outdoorapp.presentation.frontcontroller.FrontController;
+import outdoorapp.utils.ViewCache;
 import outdoorapp.utils.Views;
 
 /**
@@ -20,37 +21,36 @@ public class ControllerManagerDiSistema implements Views{
 	@FXML private Label lblGestioneManagerEscursione;
 	@FXML private Label lblVisulizzaEscursioniSistema;
 	@FXML private Label lblInserisciManagerEscursione;
-	@FXML private StackPane stpGestioneManagerEscursione;
-	@FXML private StackPane stpVisualizzaEscursioniSistema;
-	@FXML private StackPane stpRegistrazioneManagerEscursione;
 	@FXML private AnchorPane anchorContent;
-	private ViewCache viewCache; 
+	private FrontController fc;
+	private ViewCache vc;
 	
 	/**
 	 * Costruttore della classe ControllerManagerDiSistema
 	 */
 	public ControllerManagerDiSistema() {
 		// TODO Auto-generated constructor stub
-		viewCache = ViewCache.getInstance();
+		fc = FrontController.getInstance();
+		vc = ViewCache.getInstance();
 	}
 	
 	/**
 	 * Metodo che inizializza tutti i campi della finestra
 	 */
 	@FXML public void initialize() {
-		viewCache.setNestedView(VIEW_GESTIONE_MANAGER_ESCURSIONE, anchorContent);
+		//viewCache.setNestedView(VIEW_GESTIONE_MANAGER_ESCURSIONE, anchorContent);
     }
 
 	@FXML protected void viewGestioneManagerEscursione(){
-		viewCache.setNestedView(VIEW_GESTIONE_MANAGER_ESCURSIONE, anchorContent);
+		vc.setNestedView(VIEW_GESTIONE_MANAGER_ESCURSIONE, anchorContent);
 	}
 	
 	@FXML protected void viewVisualizzaEscursioniSistema(){
-		viewCache.setNestedView(VIEW_VISUALIZZA_ESCURSIONI_SISTEMA, anchorContent);
+		vc.setNestedView(VIEW_VISUALIZZA_ESCURSIONI_SISTEMA, anchorContent);
 	}
 	
-	@FXML protected void viewInserisciManagerEscursione(){		
-		viewCache.setNestedView(VIEW_REGISTRAZIONE_MANAGER_ESCURSIONE, anchorContent);
+	@FXML protected void viewInserisciManagerEscursione(){
+		vc.setNestedView(VIEW_REGISTRAZIONE_MANAGER_ESCURSIONE, anchorContent);
 	}
 
 }

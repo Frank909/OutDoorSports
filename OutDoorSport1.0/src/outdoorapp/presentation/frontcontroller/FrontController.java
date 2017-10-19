@@ -1,5 +1,6 @@
 package outdoorapp.presentation.frontcontroller;
 
+import javafx.scene.layout.AnchorPane;
 import outdoorapp.business.BusinessDelegate;
 import outdoorapp.presentation.applicationcontroller.ApplicationController;
 import outdoorapp.presentation.reqresp.Request;
@@ -23,7 +24,7 @@ public class FrontController{
 	 * Riferimento all'application controller.Permette di gestire
 	 * le richieste e le risposte.
 	 */
-	private static ApplicationController applicationController = new ApplicationController();
+	private ApplicationController applicationController = new ApplicationController();
 	
 	/**
 	 * Riferimento all'istanza di FrontController
@@ -42,23 +43,6 @@ public class FrontController{
 	public static FrontController getInstance(){
 		return fc;
 	}
-	/*private Dispatcher dispatcher;
-	private boolean isAuthenticUser = false;
-
-	public FrontController() {
-		dispatcher = new Dispatcher();
-	}
-
-	private boolean isAuthenticUser() {
-		// here you have to write Authentication logic
-		System.out.println("User is authenticated successfully.");
-		return isAuthenticUser;
-	}
-
-	private void trackRequest(ReqResp request) {
-		System.out.println("Page requested: " + request.getRequest());
-		BusinessDelegate.getReqResp(request);
-	}*/
 
 	/**
 	 * Metodo che gestisce la richiesta specificata. Il compito di inviare i dati per ottenere

@@ -18,10 +18,10 @@ import outdoorapp.presentation.frontcontroller.FrontController;
 import outdoorapp.presentation.reqresp.Request;
 import outdoorapp.presentation.reqresp.Response;
 import outdoorapp.presentation.views.ControllerRegistrazione;
-import outdoorapp.presentation.views.ViewCache;
 import outdoorapp.to.Partecipante;
 import outdoorapp.to.Utente;
 import outdoorapp.utils.Actions;
+import outdoorapp.utils.ViewCache;
 import outdoorapp.utils.Views;
 
 /**
@@ -51,13 +51,15 @@ public class ControllerRegistrazionePartecipante extends ControllerRegistrazione
 	@FXML private DatePicker dataCertificatoSRC;
 	@FXML private Button btnRegistrati;
 	@FXML private Label lblErrore;
-	private ViewCache viewCache;
+	private FrontController fc;
+	private ViewCache vc;
 	
 	/**
 	 * Costruttore della classe ControllerLogin
 	 */
 	public ControllerRegistrazionePartecipante() {
-		viewCache = ViewCache.getInstance();
+		fc = FrontController.getInstance();
+		vc = ViewCache.getInstance();
 	}
 	
 	/**
@@ -91,7 +93,6 @@ public class ControllerRegistrazionePartecipante extends ControllerRegistrazione
 	private void execCaricaCertificatoSRC() {
 		Partecipante partecipante = new Partecipante();
 		Request request = new Request(partecipante, OUTDOORSPORT_SAVE_SRC_CERTIFICATE);
-		FrontController fc = FrontController.getInstance();
 		Response response = fc.sendRequest(request);
 		
 		if(response.getResponse().equals(RESP_OK))
@@ -124,10 +125,9 @@ public class ControllerRegistrazionePartecipante extends ControllerRegistrazione
 		
 		String result = checkErrors(partecipante);
 		if(result.equals("")){
-			FrontController fc = FrontController.getInstance();
 			Response response = fc.sendRequest(new Request(partecipante, OUTDOORSPORT_SAVE_PARTECIPANTE));
 			if(response.getResponse().equals(RESP_OK))
-				viewCache.setView(VIEW_LOGIN);
+				vc.setView(VIEW_LOGIN);
 			else
 				lblErrore.setText("Errore! Email o Username già presenti!");
 		}else

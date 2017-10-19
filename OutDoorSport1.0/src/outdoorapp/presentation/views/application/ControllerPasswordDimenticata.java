@@ -27,13 +27,14 @@ public class ControllerPasswordDimenticata implements Actions, Views{
 	@FXML private Button btnRichiediNuovaPassword;
 	@FXML private TextField txtEmail;
 	@FXML private Label lblErrore;
+	private FrontController fc;
 	
 	
 	/**
 	 * Costruttore della classe ControllerPasswordDimenticata
 	 */
 	public ControllerPasswordDimenticata() {
-		// TODO Auto-generated constructor stub
+		fc = FrontController.getInstance();
 	}
 	
 	/**
@@ -59,7 +60,6 @@ public class ControllerPasswordDimenticata implements Actions, Views{
 	private void execRequestNewPassword() {
 		Utente utente = new Utente();
 		utente.setEmail(txtEmail.getText());
-		FrontController fc = FrontController.getInstance();
 		Request request = new Request(utente, OUTDOORSPORT_REQUEST_NEW_PASSWORD);
 		Response response = fc.sendRequest(request);
 		if(response.getResponse().equals(RESP_OK)){

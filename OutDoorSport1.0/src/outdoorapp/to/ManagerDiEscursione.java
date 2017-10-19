@@ -28,6 +28,7 @@ public class ManagerDiEscursione extends Utente{
 	private double stipendio;
 
 	public ManagerDiEscursione() {
+		super.setIdUtente(this.getIdManagerDiEscursione());
 	}
 
 	/**
