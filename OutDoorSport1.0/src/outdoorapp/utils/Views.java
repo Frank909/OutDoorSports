@@ -9,14 +9,14 @@ package outdoorapp.utils;
  */
 
 public interface Views {
-	public static final String VIEW_LOGIN = "../../resources/fxml/application/login";
-	public static final String VIEW_MANAGER_DI_SISTEMA_CONFIG = "../../resources/fxml/manager_sistema/managerDiSistemaConfig";
-	public static final String VIEW_DASHBOARD_MANAGER_DI_SISTEMA = "../../resources/fxml/manager_sistema/dashboardManagerSistema";
-	public static final String VIEW_DASHBOARD_MANAGER_DI_ESCURSIONE = "../../resources/fxml/manager_escursione/dashboardManagerEscursione";
-	public static final String VIEW_DASHBOARD_PARTECIPANTE = "../../resources/fxml/partecipante/dashboardPartecipante";
-	public static final String VIEW_PASSWORD_DIMENTICATA = "../../resources/fxml/application/passwordDimenticata";
-	public static final String VIEW_REGISTRAZIONE_PARTECIPANTE = "../../resources/fxml/partecipante/registrazionePartecipante";
-	public static final String VIEW_GESTIONE_MANAGER_ESCURSIONE = "../../resources/fxml/manager_sistema/gestioneManagerEscursione";
-	public static final String VIEW_VISUALIZZA_ESCURSIONI_SISTEMA = "../../resources/fxml/manager_sistema/visualizzaEscursioniSistema";
-	public static final String VIEW_REGISTRAZIONE_MANAGER_ESCURSIONE = "../../resources/fxml/manager_sistema/registrazioneManagerEscursione";
+	public static final String VIEW_LOGIN = "VIEW_LOGIN";
+	public static final String VIEW_MANAGER_DI_SISTEMA_CONFIG = "VIEW_MANAGER_DI_SISTEMA_CONFIG";
+	public static final String VIEW_DASHBOARD_MANAGER_DI_SISTEMA = "VIEW_DASHBOARD_MANAGER_DI_SISTEMA";
+	public static final String VIEW_DASHBOARD_MANAGER_DI_ESCURSIONE = "VIEW_DASHBOARD_MANAGER_DI_ESCURSIONE";
+	public static final String VIEW_DASHBOARD_PARTECIPANTE = "VIEW_DASHBOARD_PARTECIPANTE";
+	public static final String VIEW_PASSWORD_DIMENTICATA = "VIEW_PASSWORD_DIMENTICATA";
+	public static final String VIEW_REGISTRAZIONE_PARTECIPANTE = "VIEW_REGISTRAZIONE_PARTECIPANTE";
+	public static final String VIEW_GESTIONE_MANAGER_ESCURSIONE = "VIEW_GESTIONE_MANAGER_ESCURSIONE";
+	public static final String VIEW_VISUALIZZA_ESCURSIONI_SISTEMA = "VIEW_VISUALIZZA_ESCURSIONI_SISTEMA";
+	public static final String VIEW_REGISTRAZIONE_MANAGER_ESCURSIONE = "VIEW_REGISTRAZIONE_MANAGER_ESCURSIONE";
 }

@@ -12,11 +12,11 @@ import outdoorapp.presentation.frontcontroller.FrontController;
 import outdoorapp.presentation.reqresp.Request;
 import outdoorapp.presentation.reqresp.Response;
 import outdoorapp.presentation.views.ControllerRegistrazione;
+import outdoorapp.presentation.views.ViewCache;
 import outdoorapp.to.ManagerDiEscursione;
 import outdoorapp.to.ManagerDiSistema;
 import outdoorapp.to.Utente;
 import outdoorapp.utils.Actions;
-import outdoorapp.utils.Forms;
 import outdoorapp.utils.Views;
 
 /**
@@ -44,6 +44,14 @@ public class ControllerRegistrazioneManagerDiEscursione extends ControllerRegist
 	@FXML private Button btnRegistrati;
 	@FXML private DatePicker dateDataNasc;
 	@FXML private Label lblErrore;
+	
+	private ViewCache viewCache;
+	
+	
+	public ControllerRegistrazioneManagerDiEscursione(){
+		viewCache = ViewCache.getInstance();
+	}
+	
 	
 	/**
 	 * Metodo che inizializza tutti i campi della finestra

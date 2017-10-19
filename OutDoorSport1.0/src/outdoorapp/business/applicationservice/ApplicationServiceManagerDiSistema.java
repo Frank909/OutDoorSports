@@ -53,8 +53,7 @@ public class ApplicationServiceManagerDiSistema implements Actions, Views{
 		if(result){
 			response.setResponse(RESP_OK);
 			response.setView(VIEW_LOGIN);
-		}
-		else{
+		}else{
 			response.setView(VIEW_MANAGER_DI_SISTEMA_CONFIG);
 			response.setResponse(RESP_KO);
 		}

@@ -1,11 +1,6 @@
 package outdoorapp.business.applicationservice;
 
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectOutputStream;
-import java.io.OutputStream;
 import java.nio.file.Files;
 
 import javafx.stage.FileChooser;
@@ -15,11 +10,10 @@ import outdoorapp.integration.dao.RuoliDAO;
 import outdoorapp.integration.dao.StatoUtenteDAO;
 import outdoorapp.presentation.reqresp.Request;
 import outdoorapp.presentation.reqresp.Response;
-import outdoorapp.to.ManagerDiSistema;
+import outdoorapp.presentation.views.ViewCache;
 import outdoorapp.to.Partecipante;
 import outdoorapp.to.Utente;
 import outdoorapp.utils.Actions;
-import outdoorapp.utils.Forms;
 import outdoorapp.utils.Views;
 
 /**
@@ -53,13 +47,15 @@ public class ApplicationServicePartecipante implements Views, Actions {
 	 * @return response: una response in base alla request
 	 */
 	public Response caricaCertificatoSRC(Request request){
+		ViewCache viewCache = ViewCache.getInstance();
+		
 		Partecipante partecipante = (Partecipante) request.getData();
 		Response response = new Response();
 		FileChooser fileChooser = new FileChooser();
 		fileChooser.setTitle("Carica Certificato SRC");
 		fileChooser.getExtensionFilters().addAll(
 				new FileChooser.ExtensionFilter("TXT", "*.txt"));
-		File fileCertificatoSRC = fileChooser.showOpenDialog(Forms.getForm(VIEW_REGISTRAZIONE_PARTECIPANTE));
+		File fileCertificatoSRC = fileChooser.showOpenDialog(viewCache.getCurrentView());
 		if(fileCertificatoSRC != null){
 			partecipante.setCertificatoSrc(fileCertificatoSRC.getPath());
 			response.setResponse(RESP_OK);

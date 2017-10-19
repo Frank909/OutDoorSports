@@ -75,10 +75,8 @@ public class ApplicationServiceUtente implements Views, Actions{
 				response.setView("Errore! Utente o Password non riconosciuti!");
 			}
 		} catch (DatabaseException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		System.out.println("Ciao sono nel application service utente");
 		return response;
 	}
 	
@@ -128,7 +126,6 @@ public class ApplicationServiceUtente implements Views, Actions{
 				response.setResponse(RESP_KO);
 			}
 		} catch (DatabaseException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		

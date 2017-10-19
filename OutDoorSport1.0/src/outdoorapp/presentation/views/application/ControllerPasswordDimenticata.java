@@ -1,7 +1,5 @@
 package outdoorapp.presentation.views.application;
 
-import java.text.Normalizer.Form;
-
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
@@ -14,7 +12,6 @@ import outdoorapp.presentation.reqresp.Request;
 import outdoorapp.presentation.reqresp.Response;
 import outdoorapp.to.Utente;
 import outdoorapp.utils.Actions;
-import outdoorapp.utils.Forms;
 import outdoorapp.utils.Views;
 
 /**
@@ -71,7 +68,7 @@ public class ControllerPasswordDimenticata implements Actions, Views{
 			alert.showAndWait();
 			
 			if(alert.getResult() == ButtonType.OK){
-				Forms.closeForm(VIEW_PASSWORD_DIMENTICATA);
+				//Forms.closeForm(VIEW_PASSWORD_DIMENTICATA); modificare
 			}
 				
 		}else{

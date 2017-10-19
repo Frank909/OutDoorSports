@@ -1,13 +1,10 @@
 package outdoorapp.presentation.views.managersistema;
 
-import java.io.IOException;
-
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
-import outdoorapp.utils.Forms;
+import outdoorapp.presentation.views.ViewCache;
 import outdoorapp.utils.Views;
 
 /**
@@ -27,55 +24,33 @@ public class ControllerManagerDiSistema implements Views{
 	@FXML private StackPane stpVisualizzaEscursioniSistema;
 	@FXML private StackPane stpRegistrazioneManagerEscursione;
 	@FXML private AnchorPane anchorContent;
+	private ViewCache viewCache; 
 	
 	/**
 	 * Costruttore della classe ControllerManagerDiSistema
 	 */
 	public ControllerManagerDiSistema() {
 		// TODO Auto-generated constructor stub
+		viewCache = ViewCache.getInstance();
 	}
 	
 	/**
 	 * Metodo che inizializza tutti i campi della finestra
 	 */
 	@FXML public void initialize() {
-        ///DA COMPLETARE CON TUTTI I CAMPI///
+		viewCache.setNestedView(VIEW_GESTIONE_MANAGER_ESCURSIONE, anchorContent);
     }
 
 	@FXML protected void viewGestioneManagerEscursione(){
-		try {
-			loadPanel(anchorContent, stpGestioneManagerEscursione, VIEW_GESTIONE_MANAGER_ESCURSIONE);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		viewCache.setNestedView(VIEW_GESTIONE_MANAGER_ESCURSIONE, anchorContent);
 	}
 	
 	@FXML protected void viewVisualizzaEscursioniSistema(){
-		try {
-			loadPanel(anchorContent, stpVisualizzaEscursioniSistema, VIEW_VISUALIZZA_ESCURSIONI_SISTEMA);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		viewCache.setNestedView(VIEW_VISUALIZZA_ESCURSIONI_SISTEMA, anchorContent);
 	}
 	
-	@FXML protected void viewInserisciManagerEscursione(){
-		try {
-			loadPanel(anchorContent, stpRegistrazioneManagerEscursione, VIEW_REGISTRAZIONE_MANAGER_ESCURSIONE);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+	@FXML protected void viewInserisciManagerEscursione(){		
+		viewCache.setNestedView(VIEW_REGISTRAZIONE_MANAGER_ESCURSIONE, anchorContent);
 	}
-	
-	private void loadPanel(AnchorPane anchorpane, StackPane panel, String panelName) throws IOException{
-		panel = (StackPane)FXMLLoader.load(Forms.class.getResource(panelName + ".fxml"));
-		AnchorPane.setLeftAnchor(panel, 0.0);
-		AnchorPane.setRightAnchor(panel, 0.0);
-		AnchorPane.setTopAnchor(panel, 0.0);
-		AnchorPane.setBottomAnchor(panel, 0.0);
-		anchorpane.getChildren().clear();
-		anchorpane.getChildren().add(panel);
-	}
+
 }

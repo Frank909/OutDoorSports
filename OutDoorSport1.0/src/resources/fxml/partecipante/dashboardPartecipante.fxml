@@ -8,7 +8,7 @@
 <?import javafx.scene.paint.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane fx:id="dashboardPartecipante" stylesheets="@dashboardPartecipante.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ControllerLogin">
+<AnchorPane fx:id="dashboardPartecipante" stylesheets="@dashboardPartecipante.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="outdoorapp.presentation.views.partecipante.ControllerPartecipante">
    <children>
       <MenuBar prefHeight="25.0" prefWidth="929.0">
          <menus>

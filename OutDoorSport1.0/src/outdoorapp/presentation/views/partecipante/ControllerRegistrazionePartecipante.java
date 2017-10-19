@@ -18,10 +18,10 @@ import outdoorapp.presentation.frontcontroller.FrontController;
 import outdoorapp.presentation.reqresp.Request;
 import outdoorapp.presentation.reqresp.Response;
 import outdoorapp.presentation.views.ControllerRegistrazione;
+import outdoorapp.presentation.views.ViewCache;
 import outdoorapp.to.Partecipante;
 import outdoorapp.to.Utente;
 import outdoorapp.utils.Actions;
-import outdoorapp.utils.Forms;
 import outdoorapp.utils.Views;
 
 /**
@@ -51,11 +51,14 @@ public class ControllerRegistrazionePartecipante extends ControllerRegistrazione
 	@FXML private DatePicker dataCertificatoSRC;
 	@FXML private Button btnRegistrati;
 	@FXML private Label lblErrore;
+	private ViewCache viewCache;
 	
 	/**
 	 * Costruttore della classe ControllerLogin
 	 */
-	public ControllerRegistrazionePartecipante() {}
+	public ControllerRegistrazionePartecipante() {
+		viewCache = ViewCache.getInstance();
+	}
 	
 	/**
 	 * Metodo che inizializza tutti i campi della finestra
@@ -123,10 +126,8 @@ public class ControllerRegistrazionePartecipante extends ControllerRegistrazione
 		if(result.equals("")){
 			FrontController fc = FrontController.getInstance();
 			Response response = fc.sendRequest(new Request(partecipante, OUTDOORSPORT_SAVE_PARTECIPANTE));
-			if(response.getResponse().equals(RESP_OK)){
-				Forms.closeForm(VIEW_REGISTRAZIONE_PARTECIPANTE);
-				Forms.showForm(VIEW_LOGIN); //da rivedere
-			}
+			if(response.getResponse().equals(RESP_OK))
+				viewCache.setView(VIEW_LOGIN);
 			else
 				lblErrore.setText("Errore! Email o Username già presenti!");
 		}else

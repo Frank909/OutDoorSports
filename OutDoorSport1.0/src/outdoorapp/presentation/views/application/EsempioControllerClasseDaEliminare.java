@@ -44,7 +44,7 @@ import outdoorapp.presentation.frontcontroller.FrontController;
 import outdoorapp.presentation.reqresp.Request;
 import outdoorapp.presentation.reqresp.Response;
 import outdoorapp.to.Utente;
-import outdoorapp.utils.Forms;
+
 import outdoorapp.utils.Actions;
 import outdoorapp.to.Partecipante;
 import outdoorapp.to.Ruoli;
@@ -128,7 +128,7 @@ public class EsempioControllerClasseDaEliminare implements Actions
 	}
 	
 	private void loadPanel(StackPane panel, String panelName) throws IOException{
-		panel = (StackPane)FXMLLoader.load(Forms.class.getResource(panelName + ".fxml"));
+		//panel = (StackPane)FXMLLoader.load(Forms.class.getResource(panelName + ".fxml"));
 		idContent.setLeftAnchor(panel, 0.0);
 		idContent.setRightAnchor(panel, 0.0);
 		idContent.setTopAnchor(panel, 0.0);
