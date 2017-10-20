@@ -11,7 +11,8 @@ import javafx.scene.control.TextField;
 import outdoorapp.presentation.frontcontroller.FrontController;
 import outdoorapp.presentation.reqresp.Request;
 import outdoorapp.presentation.reqresp.Response;
-import outdoorapp.presentation.views.ControllerRegistrazione;
+import outdoorapp.presentation.views.generic.ControllerRegistrazione;
+import outdoorapp.presentation.views.generic.GenericController;
 import outdoorapp.to.ManagerDiEscursione;
 import outdoorapp.to.ManagerDiSistema;
 import outdoorapp.to.Utente;
@@ -27,7 +28,7 @@ import outdoorapp.utils.Views;
  * @author Francesco Ventura
  *
  */
-public class ControllerRegistrazioneManagerDiEscursione extends ControllerRegistrazione implements Actions, Views{
+public class ControllerRegistrazioneManagerDiEscursione extends ControllerRegistrazione{
 
 	@FXML private TextField txtNome;
 	@FXML private TextField txtCognome;
@@ -43,12 +44,9 @@ public class ControllerRegistrazioneManagerDiEscursione extends ControllerRegist
 	@FXML private Button btnRegistrati;
 	@FXML private DatePicker dateDataNasc;
 	@FXML private Label lblErrore;
-	private FrontController fc;
 	
 	
-	public ControllerRegistrazioneManagerDiEscursione(){
-		fc = FrontController.getInstance();
-	}
+	public ControllerRegistrazioneManagerDiEscursione(){}
 	
 	
 	/**
@@ -89,8 +87,8 @@ public class ControllerRegistrazioneManagerDiEscursione extends ControllerRegist
 		
 		String result = checkErrors(mde);
 		if(result.equals("")){
-			Response res = fc.sendRequest(new Request(mde, OUTDOORSPORT_SAVE_MDE));
-			if(res.getResponse().equals(RESP_OK)){
+			Response res = this.sendRequest(new Request(mde, OUTDOORSPORT_SAVE_MDE));
+			if(res.equals(RESP_OK)){
 				System.out.println("Manager di escursione inserito correttamente"); //da rivedere
 			}
 			else

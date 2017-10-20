@@ -16,7 +16,8 @@ import javafx.scene.control.TextField;
 import outdoorapp.presentation.frontcontroller.FrontController;
 import outdoorapp.presentation.reqresp.Request;
 import outdoorapp.presentation.reqresp.Response;
-import outdoorapp.presentation.views.ControllerRegistrazione;
+import outdoorapp.presentation.views.generic.ControllerRegistrazione;
+import outdoorapp.presentation.views.generic.GenericController;
 import outdoorapp.to.ManagerDiSistema;
 import outdoorapp.to.OutDoorSports;
 import outdoorapp.to.Utente;
@@ -33,7 +34,7 @@ import outdoorapp.utils.Views;
  * @author Francesco Ventura
  *
  */
-public class ControllerConfig extends ControllerRegistrazione implements Actions, Views{
+public class ControllerConfig extends ControllerRegistrazione{
 
 	@FXML private TextField txtNome;
 	@FXML private TextField txtCognome;
@@ -49,15 +50,11 @@ public class ControllerConfig extends ControllerRegistrazione implements Actions
 	@FXML private Button btnRegistrati;
 	@FXML private DatePicker dateDataNasc;
 	@FXML private Label lblErrore;
-	private FrontController fc;
-	private ViewCache vc;
 	
 	/**
 	 * Costruttore della classe ControllerConfig 
 	 */
 	public ControllerConfig() {
-		fc = FrontController.getInstance();
-		vc = ViewCache.getInstance();
 	}
 	
 	/**
@@ -100,9 +97,9 @@ public class ControllerConfig extends ControllerRegistrazione implements Actions
 		
 		String result = checkErrors(mds);
 		if(result.equals("")){
-			Response res = fc.sendRequest(new Request(mds, OUTDOORSPORT_SAVE_MDS));
-			if(res.getResponse().equals(RESP_OK))
-				vc.setView(VIEW_MANAGER_DI_SISTEMA_CONFIG);
+			Response res = this.sendRequest(new Request(mds, OUTDOORSPORT_SAVE_MDS));
+			if(res.equals(RESP_OK))
+				this.sendRequest(new Request(VIEW_MANAGER_DI_SISTEMA_CONFIG));
 			else
 				lblErrore.setText("Errore! Email o Username già presenti!");
 		}else

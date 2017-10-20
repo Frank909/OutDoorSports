@@ -12,7 +12,8 @@ import javafx.scene.layout.AnchorPane;
 import outdoorapp.presentation.frontcontroller.FrontController;
 import outdoorapp.presentation.reqresp.Request;
 import outdoorapp.presentation.reqresp.Response;
-import outdoorapp.presentation.views.ControllerRegistrazione;
+import outdoorapp.presentation.views.generic.ControllerRegistrazione;
+import outdoorapp.presentation.views.generic.GenericController;
 import outdoorapp.to.ManagerDiEscursione;
 import outdoorapp.to.Partecipante;
 import outdoorapp.to.Utente;
@@ -30,7 +31,7 @@ import outdoorapp.utils.Views;
  *
  */
 
-public class ControllerRegistrazioneManagerEscursione extends ControllerRegistrazione implements Actions, Views{
+public class ControllerRegistrazioneManagerEscursione extends ControllerRegistrazione{
 
 	@FXML private TextField txtNome;
 	@FXML private TextField txtCognome;
@@ -46,21 +47,16 @@ public class ControllerRegistrazioneManagerEscursione extends ControllerRegistra
 	@FXML private DatePicker dateDataNasc;
 	@FXML private Button btnRegistraManagerDiEscursione;
 	@FXML private Label lblErrore;
-	private FrontController fc;
-	private ViewCache vc;
 	
 	/**
 	 * Costruttore della classe ControllerRegistrazioneManagerEscursione
 	 */
-	public ControllerRegistrazioneManagerEscursione() {
-		fc = FrontController.getInstance();
-		vc = ViewCache.getInstance();
-	}
+	public ControllerRegistrazioneManagerEscursione() {}
 	
 	/**
 	 * Metodo che inizializza tutti i campi della finestra
 	 */
-	@FXML public void initialize() {
+	@FXML protected void initialize() {
 		lblErrore.setText("");
     }
 	
@@ -91,9 +87,9 @@ public class ControllerRegistrazioneManagerEscursione extends ControllerRegistra
 		
 		String result = checkErrors(mde);
 		if(result.equals("")){
-			Response response = fc.sendRequest(new Request(mde, OUTDOORSPORT_SAVE_MDE));
-			if(response.getResponse().equals(RESP_OK))
-				vc.setNestedView(VIEW_GESTIONE_MANAGER_ESCURSIONE, ViewCache.getNestedAnchorPane());
+			Response response = this.sendRequest(new Request(mde, OUTDOORSPORT_SAVE_MDE));
+			if(response.equals(RESP_OK))
+				this.sendRequest(new Request(ViewCache.getNestedAnchorPane(), VIEW_GESTIONE_MANAGER_ESCURSIONE));
 			else
 				lblErrore.setText("Errore! Email o Username già presenti!");
 		}else

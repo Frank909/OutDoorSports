@@ -1,5 +1,6 @@
 package outdoorapp.presentation.reqresp;
 
+import javafx.scene.layout.Pane;
 import outdoorapp.to.OutDoorSports;
 
 /**
@@ -9,9 +10,10 @@ import outdoorapp.to.OutDoorSports;
  * @author Francesco Ventura
  */
 
-public class Request {
+public class Request{
 
 	private OutDoorSports data;
+	private Pane view;
 	private String request;
 	
 	/**
@@ -29,19 +31,33 @@ public class Request {
 		this.data = data;
 		this.request = request;
 	}
+	
+	/**
+	 * Costruttore che inizializza data e request
+	 * 
+	 * @param data
+	 * @param request
+	 */
+	public Request(Pane view, String request) {
+		this.view = view;
+		this.request = request;
+	}
+	
+	/**
+	 * Costruttore che inizializza data e request
+	 * 
+	 * @param data
+	 * @param request
+	 */
+	public Request(String request) {
+		this.request = request;
+	}
 
 	/**
 	 * @return i dati da inviare
 	 */
 	public OutDoorSports getData() {
 		return data;
-	}
-
-	/**
-	 * @return la richiesta da inviare
-	 */
-	public String getRequest() {
-		return request;
 	}
 	
 	/**
@@ -52,13 +68,25 @@ public class Request {
 	public void setData(OutDoorSports data) {
 		this.data = data;
 	}
-
+	
 	/**
-	 * Metodo che setta la richiesta da inviare
-	 * 
-	 * @param request
+	 * @return i dati da inviare
 	 */
-	public void setRequest(String request) {
-		this.request = request;
+	public Pane getView() {
+		return view;
+	}
+	
+	/**
+	 * Metodo che setta i dati da inviare
+	 * 
+	 * @param data
+	 */
+	public void setData(Pane view) {
+		this.view = view;
+	}
+	
+	@Override
+	public String toString() {
+		return this.request;
 	}
 }

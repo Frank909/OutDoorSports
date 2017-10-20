@@ -6,6 +6,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import outdoorapp.presentation.frontcontroller.FrontController;
+import outdoorapp.presentation.views.generic.GenericController;
 import outdoorapp.to.ManagerDiEscursione;
 
 /**
@@ -18,7 +19,7 @@ import outdoorapp.to.ManagerDiEscursione;
  *
  */
 
-public class ControllerGestioneManagerEscursione {
+public class ControllerGestioneManagerEscursione extends GenericController{
 
 	@FXML private TextField txtSearchManagerEscursione;
 	@FXML private Button btnSearchManagerEscursione;
@@ -29,19 +30,17 @@ public class ControllerGestioneManagerEscursione {
 	@FXML private TableColumn<ManagerDiEscursione, String> columnCFManagerDiEscursione;
 	@FXML private Button btnModificaManagerDiEscursione;
 	@FXML private Button btnDettagliManagerDiEscursione;
-	private FrontController fc;
 	
 	/**
 	 * Costruttore della classe ControllerGestioneManagerEscursione
 	 */
-	public ControllerGestioneManagerEscursione() {
-		fc = FrontController.getInstance();
-	}
+	public ControllerGestioneManagerEscursione() {}
 	
 	/**
 	 * Metodo che inizializza tutti i campi della finestra
 	 */
 	@FXML public void initialize() {
+		
     }
 
 }

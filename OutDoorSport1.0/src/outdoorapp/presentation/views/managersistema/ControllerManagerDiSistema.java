@@ -5,6 +5,8 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import outdoorapp.presentation.frontcontroller.FrontController;
+import outdoorapp.presentation.reqresp.Request;
+import outdoorapp.presentation.views.generic.GenericController;
 import outdoorapp.utils.ViewCache;
 import outdoorapp.utils.Views;
 
@@ -16,22 +18,17 @@ import outdoorapp.utils.Views;
  *
  */
 
-public class ControllerManagerDiSistema implements Views{
+public class ControllerManagerDiSistema extends GenericController{
 
 	@FXML private Label lblGestioneManagerEscursione;
 	@FXML private Label lblVisulizzaEscursioniSistema;
 	@FXML private Label lblInserisciManagerEscursione;
 	@FXML private AnchorPane anchorContent;
-	private FrontController fc;
-	private ViewCache vc;
 	
 	/**
 	 * Costruttore della classe ControllerManagerDiSistema
 	 */
 	public ControllerManagerDiSistema() {
-		// TODO Auto-generated constructor stub
-		fc = FrontController.getInstance();
-		vc = ViewCache.getInstance();
 	}
 	
 	/**
@@ -42,15 +39,15 @@ public class ControllerManagerDiSistema implements Views{
     }
 
 	@FXML protected void viewGestioneManagerEscursione(){
-		vc.setNestedView(VIEW_GESTIONE_MANAGER_ESCURSIONE, anchorContent);
+		this.sendRequest(new Request(anchorContent, VIEW_GESTIONE_MANAGER_ESCURSIONE));
 	}
 	
 	@FXML protected void viewVisualizzaEscursioniSistema(){
-		vc.setNestedView(VIEW_VISUALIZZA_ESCURSIONI_SISTEMA, anchorContent);
+		this.sendRequest(new Request(anchorContent, VIEW_VISUALIZZA_ESCURSIONI_SISTEMA));
 	}
 	
 	@FXML protected void viewInserisciManagerEscursione(){
-		vc.setNestedView(VIEW_REGISTRAZIONE_MANAGER_ESCURSIONE, anchorContent);
+		this.sendRequest(new Request(anchorContent, VIEW_REGISTRAZIONE_MANAGER_ESCURSIONE));
 	}
 
 }

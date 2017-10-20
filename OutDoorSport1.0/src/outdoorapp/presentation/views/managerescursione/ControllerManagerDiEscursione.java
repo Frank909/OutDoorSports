@@ -4,6 +4,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import outdoorapp.presentation.frontcontroller.FrontController;
+import outdoorapp.presentation.reqresp.Request;
+import outdoorapp.presentation.views.generic.GenericController;
 import outdoorapp.utils.ViewCache;
 import outdoorapp.utils.Views;
 
@@ -15,20 +17,16 @@ import outdoorapp.utils.Views;
  *
  */
 
-public class ControllerManagerDiEscursione implements Views{
+public class ControllerManagerDiEscursione extends GenericController{
 
 	@FXML private AnchorPane anchorContent;
 	@FXML private Label lblGestisciEscursione;
 	@FXML private Label lblInserisciEscursione;
-	private FrontController fc;
-	private ViewCache vc;
 	
 	/**
 	 * Costruttore della classe ControllerManagerDiEscursione
 	 */
 	public ControllerManagerDiEscursione() {
-		fc = FrontController.getInstance();
-		vc = ViewCache.getInstance();
 	}
 	
 	/**
@@ -39,11 +37,11 @@ public class ControllerManagerDiEscursione implements Views{
     }
 	
 	@FXML protected void viewGestioneEscursioni(){
-		vc.setNestedView(VIEW_GESTIONE_ESCURSIONI, anchorContent);
+		this.sendRequest(new Request(anchorContent, VIEW_GESTIONE_ESCURSIONI));
 	}
 	
 	@FXML protected void viewInserisciEscursione(){
-		vc.setNestedView(VIEW_INSERISCI_ESCURSIONE, anchorContent);
+		this.sendRequest(new Request(anchorContent, VIEW_INSERISCI_ESCURSIONE));
 	}
 
 }

@@ -10,6 +10,7 @@ import javafx.scene.control.TextField;
 import outdoorapp.presentation.frontcontroller.FrontController;
 import outdoorapp.presentation.reqresp.Request;
 import outdoorapp.presentation.reqresp.Response;
+import outdoorapp.presentation.views.generic.GenericController;
 import outdoorapp.to.Utente;
 import outdoorapp.utils.Actions;
 import outdoorapp.utils.Views;
@@ -22,20 +23,17 @@ import outdoorapp.utils.Views;
  *
  */
 
-public class ControllerPasswordDimenticata implements Actions, Views{
+public class ControllerPasswordDimenticata extends GenericController{
 
 	@FXML private Button btnRichiediNuovaPassword;
 	@FXML private TextField txtEmail;
 	@FXML private Label lblErrore;
-	private FrontController fc;
 	
 	
 	/**
 	 * Costruttore della classe ControllerPasswordDimenticata
 	 */
-	public ControllerPasswordDimenticata() {
-		fc = FrontController.getInstance();
-	}
+	public ControllerPasswordDimenticata() {}
 	
 	/**
 	 * Metodo che inizializza tutti i campi della finestra
@@ -60,9 +58,9 @@ public class ControllerPasswordDimenticata implements Actions, Views{
 	private void execRequestNewPassword() {
 		Utente utente = new Utente();
 		utente.setEmail(txtEmail.getText());
-		Request request = new Request(utente, OUTDOORSPORT_REQUEST_NEW_PASSWORD);
-		Response response = fc.sendRequest(request);
-		if(response.getResponse().equals(RESP_OK)){
+		
+		Response response = this.sendRequest(new Request(utente, OUTDOORSPORT_REQUEST_NEW_PASSWORD));
+		if(response.equals(RESP_OK)){
 			Alert alert = new Alert(AlertType.INFORMATION, "La nuova password è stata inviata correttamente!", ButtonType.OK);
 			alert.setTitle("OutDoorSport1.0");
 			alert.showAndWait();

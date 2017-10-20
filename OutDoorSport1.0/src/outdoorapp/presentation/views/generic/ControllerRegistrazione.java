@@ -1,33 +1,18 @@
-package outdoorapp.presentation.views;
+package outdoorapp.presentation.views.generic;
 
 import java.lang.reflect.Field;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import javafx.fxml.FXML;
-import outdoorapp.to.Partecipante;
 import outdoorapp.to.Utente;
-import outdoorapp.utils.Actions;
 
-/**
- * Classe astratta ControllerRegistrazione che conterrà i metodi in comune per gli eventi di registrazione 
- * di un generico utente.
- * @author Andrea Zito
- * @author Francesco Ventura
- *
- */
+public abstract class ControllerRegistrazione extends GenericController{
 
-public abstract class ControllerRegistrazione implements Actions, DateFieldCheck{
-
-	/**
-	 * Metodo che inizializza tutti i campi della finestra
-	 */
-	@FXML protected abstract void initialize();
+	public ControllerRegistrazione() {
+		// TODO Auto-generated constructor stub
+	}
 	
-	/**
-	 * Evento associato all'invio dei dati della registrazione
-	 */
-	@FXML protected abstract void registra();
+	protected abstract void registra();
 
 	/**
 	 * Funzione che restituisce la stringa degli errori rispetto alle informazioni inserite in maniera non corretta 
@@ -92,20 +77,12 @@ public abstract class ControllerRegistrazione implements Actions, DateFieldCheck
 
 		return result;
 	}
-}
-
-/**
- * Interfaccia che permette di far comunicare le classi per applicare controlli sui datepicker in fase di registrazione
- * @author Andrea Zito
- * @author Francesco Ventura
- *
- */
-interface DateFieldCheck{
 	
 	/**
 	 * Metodo dell'interfaccia DateFieldCheck che permette di controllare i datepicker delle schermate
-	 * di inserimento dati.
+	 * di inserimento dati. Il metodo verrà riscritto in base alle esigenze.
 	 * @param utente: Utente in fase di registrazione su cui applicare i controlli
 	 */
-	void checkDatePicker(Utente utente);
+	public void checkDatePicker(Utente utente){};
+	
 }

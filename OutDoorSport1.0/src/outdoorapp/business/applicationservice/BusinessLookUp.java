@@ -34,7 +34,7 @@ class BusinessLookUp{
 			try {
 				Class<?> valueObject = Class.forName(ApplicationService.getApplicationService(request.getData().getClass().getSimpleName()));
 				Object object = valueObject.newInstance();
-				Method m = valueObject.getMethod(request.getRequest(), request.getClass());
+				Method m = valueObject.getMethod(request.toString(), request.getClass());
 				m.setAccessible(true);
 				response = (Response) m.invoke(object, request);
 			} catch (IllegalAccessException e) {

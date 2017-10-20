@@ -2,6 +2,7 @@ package outdoorapp.presentation.frontcontroller;
 
 import outdoorapp.presentation.applicationcontroller.ServiceApplicationController;
 import outdoorapp.presentation.reqresp.Request;
+import outdoorapp.presentation.reqresp.RequestView;
 import outdoorapp.presentation.reqresp.Response;
 import outdoorapp.services.Service;
 

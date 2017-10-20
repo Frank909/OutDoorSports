@@ -12,6 +12,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import outdoorapp.to.OutDoorSports;
 
 /**
  * ViewCache è una classe realizzata allo scopo di pre-caricare le schermate di visualizzazione richieste
@@ -20,7 +21,7 @@ import javafx.stage.Stage;
  * @author Francesco Ventura
  *
  */
-public class ViewCache {
+public class ViewCache{
 
 	private final String VIEW_LOGIN = "../../resources/fxml/application/login";
 	private final String VIEW_MANAGER_DI_SISTEMA_CONFIG = "../../resources/fxml/manager_sistema/managerDiSistemaConfig";
@@ -46,8 +47,7 @@ public class ViewCache {
 	/**
 	 * Costruttore privato - Singleton Class
 	 */
-	private ViewCache(){
-	}
+	private ViewCache(){}
 
 	/**
 	 * 

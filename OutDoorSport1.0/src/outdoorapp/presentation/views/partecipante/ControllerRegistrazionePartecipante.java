@@ -17,7 +17,8 @@ import javafx.stage.FileChooser;
 import outdoorapp.presentation.frontcontroller.FrontController;
 import outdoorapp.presentation.reqresp.Request;
 import outdoorapp.presentation.reqresp.Response;
-import outdoorapp.presentation.views.ControllerRegistrazione;
+import outdoorapp.presentation.views.generic.ControllerRegistrazione;
+import outdoorapp.presentation.views.generic.GenericController;
 import outdoorapp.to.Partecipante;
 import outdoorapp.to.Utente;
 import outdoorapp.utils.Actions;
@@ -32,7 +33,7 @@ import outdoorapp.utils.Views;
  *
  */
 
-public class ControllerRegistrazionePartecipante extends ControllerRegistrazione implements Actions, Views{
+public class ControllerRegistrazionePartecipante extends ControllerRegistrazione{
 
 	@FXML private TextField txtNome;
 	@FXML private TextField txtCognome;
@@ -51,16 +52,11 @@ public class ControllerRegistrazionePartecipante extends ControllerRegistrazione
 	@FXML private DatePicker dataCertificatoSRC;
 	@FXML private Button btnRegistrati;
 	@FXML private Label lblErrore;
-	private FrontController fc;
-	private ViewCache vc;
 	
 	/**
 	 * Costruttore della classe ControllerLogin
 	 */
-	public ControllerRegistrazionePartecipante() {
-		fc = FrontController.getInstance();
-		vc = ViewCache.getInstance();
-	}
+	public ControllerRegistrazionePartecipante() {}
 	
 	/**
 	 * Metodo che inizializza tutti i campi della finestra
@@ -92,10 +88,9 @@ public class ControllerRegistrazionePartecipante extends ControllerRegistrazione
 	 */
 	private void execCaricaCertificatoSRC() {
 		Partecipante partecipante = new Partecipante();
-		Request request = new Request(partecipante, OUTDOORSPORT_SAVE_SRC_CERTIFICATE);
-		Response response = fc.sendRequest(request);
+		Response response = this.sendRequest(new Request(partecipante, OUTDOORSPORT_SAVE_SRC_CERTIFICATE));
 		
-		if(response.getResponse().equals(RESP_OK))
+		if(response.equals(RESP_OK))
 			lblSrcCertificatoSRC.setText(((Partecipante)response.getData()).getCertificatoSrc());
 	}
 	
@@ -125,9 +120,9 @@ public class ControllerRegistrazionePartecipante extends ControllerRegistrazione
 		
 		String result = checkErrors(partecipante);
 		if(result.equals("")){
-			Response response = fc.sendRequest(new Request(partecipante, OUTDOORSPORT_SAVE_PARTECIPANTE));
-			if(response.getResponse().equals(RESP_OK))
-				vc.setView(VIEW_LOGIN);
+			Response response = this.sendRequest(new Request(partecipante, OUTDOORSPORT_SAVE_PARTECIPANTE));
+			if(response.equals(RESP_OK))
+				this.sendRequest(new Request(VIEW_LOGIN));
 			else
 				lblErrore.setText("Errore! Email o Username già presenti!");
 		}else

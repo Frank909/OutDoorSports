@@ -5,6 +5,7 @@ import java.lang.reflect.Method;
 import javafx.scene.layout.AnchorPane;
 import outdoorapp.business.ServiceBusinessDelegate;
 import outdoorapp.presentation.reqresp.Request;
+import outdoorapp.presentation.reqresp.RequestView;
 import outdoorapp.presentation.reqresp.Response;
 import outdoorapp.services.Service;
 import outdoorapp.services.ServiceFactory;
@@ -26,11 +27,9 @@ import outdoorapp.utils.Views;
  */
 
 class ApplicationController{
-	
-	
 	private static ServiceBusinessDelegate serviceBusinessDelegate = ServiceBusinessDelegate.getInstance();
 	private static ApplicationController applicationController = new ApplicationController();
-	
+	private Dispatcher dispatcher = new Dispatcher();
 	private ApplicationController() {}
 	
 	/**
@@ -41,7 +40,10 @@ class ApplicationController{
 	 * @return la risposta in base alla richiesta
 	 */
 	Response getAction(Request request, Service service){
-		return serviceBusinessDelegate.sendRequest(request, service);
+		if(request.toString().contains("VIEW_")){
+			return dispatcher.dispatch(request);
+		}else
+			return serviceBusinessDelegate.sendRequest(request, service);
 	}
 	
 	static ApplicationController getInstance(){

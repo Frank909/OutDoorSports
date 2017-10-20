@@ -9,7 +9,9 @@ import outdoorapp.business.ServiceBusinessDelegate;
 import outdoorapp.business.applicationservice.ServiceBusinessLookUp;
 import outdoorapp.presentation.frontcontroller.FrontController;
 import outdoorapp.presentation.reqresp.Request;
+import outdoorapp.presentation.reqresp.RequestView;
 import outdoorapp.presentation.reqresp.Response;
+import outdoorapp.presentation.views.generic.GenericController;
 import outdoorapp.to.Utente;
 import outdoorapp.utils.Actions;
 import outdoorapp.utils.ViewCache;
@@ -23,7 +25,7 @@ import outdoorapp.utils.Views;
  *
  */
 
-public class ControllerLogin implements Actions, Views{
+public class ControllerLogin extends GenericController{
 
 	@FXML private Button btnLogin;
 	@FXML private Button btnSignIn;
@@ -31,15 +33,10 @@ public class ControllerLogin implements Actions, Views{
 	@FXML private TextField txtUsername;
 	@FXML private PasswordField txtPassword;
 	@FXML private Label lblErrore;
-	private FrontController fc;
-	private ViewCache vc;
 	/**
 	 * Costruttore della classe ControllerLogin
 	 */
-	public ControllerLogin() {
-		fc = FrontController.getInstance();
-		vc = ViewCache.getInstance();
-	}
+	public ControllerLogin() {}
 	
 	/**
 	 * Metodo che inizializza tutti i campi della finestra
@@ -65,18 +62,12 @@ public class ControllerLogin implements Actions, Views{
 		Utente utente = new Utente();
 		utente.setUsername(txtUsername.getText());
 		utente.setPassword(txtPassword.getText());
-		Request request = new Request(utente, OUTDOORSPORT_EXECUTE_LOGIN);
-		ServiceBusinessLookUp s = ServiceBusinessLookUp.getInstance();
+		Response response = this.sendRequest(new Request(utente, OUTDOORSPORT_EXECUTE_LOGIN));
 		
-		Response r = s.sendRequest(request, ServiceBusinessDelegate.getInstance());
-		
-		Response response = fc.sendRequest(request);
-		if(response.getResponse().equals(RESP_OK))
-			vc.setView(response.getView());
+		if(response.equals(RESP_OK))
+			this.sendRequest(new Request(response.getView()));
 		else
-			lblErrore.setText(response.getView());
-		
-		
+			lblErrore.setText("Dati non riconosciuti");
 	}
 	
 	/**
@@ -84,7 +75,7 @@ public class ControllerLogin implements Actions, Views{
 	 */
 	@FXML protected void richiediNuovaPassword(){
 		//da fare con il frontcontroller
-		vc.setView(VIEW_PASSWORD_DIMENTICATA);
+		this.sendRequest(new Request(VIEW_PASSWORD_DIMENTICATA));
 	}
 	
 	/**
@@ -92,7 +83,6 @@ public class ControllerLogin implements Actions, Views{
 	 */
 	@FXML protected void eseguiSignIn(){
 		//da fare con il frontcontroller
-		vc.setView(VIEW_REGISTRAZIONE_PARTECIPANTE);
+		this.sendRequest(new Request(VIEW_REGISTRAZIONE_PARTECIPANTE));
 	}
-
 }
