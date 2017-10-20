@@ -25,8 +25,6 @@ import outdoorapp.utils.Views;
  */
 
 public abstract class GenericController implements Actions, Views{
-
-	private FrontController fc = FrontController.getInstance();
 	
 	/**
 	 * Metodo che inizializza tutti i campi della finestra
@@ -34,6 +32,6 @@ public abstract class GenericController implements Actions, Views{
 	@FXML protected abstract void initialize();
 	
 	protected Response sendRequest(Request request){
-		return fc.sendRequest(request);
+		return FrontController.getInstance().sendRequest(request);
 	}
 }

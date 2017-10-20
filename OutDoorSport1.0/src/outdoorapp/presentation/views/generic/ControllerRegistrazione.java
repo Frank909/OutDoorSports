@@ -4,6 +4,7 @@ import java.lang.reflect.Field;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import javafx.fxml.FXML;
 import outdoorapp.to.Utente;
 
 public abstract class ControllerRegistrazione extends GenericController{
@@ -12,6 +13,7 @@ public abstract class ControllerRegistrazione extends GenericController{
 		// TODO Auto-generated constructor stub
 	}
 	
+	@FXML 
 	protected abstract void registra();
 
 	/**

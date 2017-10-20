@@ -62,7 +62,8 @@ public class ControllerLogin extends GenericController{
 		Utente utente = new Utente();
 		utente.setUsername(txtUsername.getText());
 		utente.setPassword(txtPassword.getText());
-		Response response = this.sendRequest(new Request(utente, OUTDOORSPORT_EXECUTE_LOGIN));
+		Request req = new Request(utente, OUTDOORSPORT_EXECUTE_LOGIN);
+		Response response = this.sendRequest(req);
 		
 		if(response.equals(RESP_OK))
 			this.sendRequest(new Request(response.getView()));
