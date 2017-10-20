@@ -1,16 +1,9 @@
 package outdoorapp.business;
 
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-
-import outdoorapp.business.applicationservice.ApplicationService;
-import outdoorapp.business.applicationservice.ApplicationServiceUtente;
-import outdoorapp.exceptions.DatabaseException;
-import outdoorapp.integration.dao.UtenteDAO;
+import outdoorapp.business.applicationservice.ServiceBusinessLookUp;
 import outdoorapp.presentation.reqresp.Request;
 import outdoorapp.presentation.reqresp.Response;
-import outdoorapp.to.Partecipante;
-import outdoorapp.to.Utente;
+import outdoorapp.services.Service;
 
 /**
  * Classe che rappresenta il Business Delegate, ovvero un'astrazione client-side 
@@ -26,10 +19,21 @@ import outdoorapp.to.Utente;
  *
  */
 
-public class BusinessDelegate {
+class BusinessDelegate{
 	
-	public BusinessDelegate() {
-		// TODO Auto-generated constructor stub
+
+	private static BusinessDelegate businessDelegate = new BusinessDelegate();
+	private static ServiceBusinessLookUp serviceBusinessLookUp = ServiceBusinessLookUp.getInstance();
+	
+	private BusinessDelegate(){
+	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	static BusinessDelegate getInstance(){
+		return businessDelegate;
 	}
 	
 	/**
@@ -40,39 +44,7 @@ public class BusinessDelegate {
 	 * @param richiesta dal quale verrà identificato l'application service opportuno
 	 * @return la risposta in base alla richiesta
 	 */
-	public Response lookup(Request request){
-		
-		Response response = new Response();
-		
-		try {
-			Class<?> valueObject = Class.forName(ApplicationService.getApplicationService(request.getData().getClass().getSimpleName()));
-			Object object = valueObject.newInstance();
-			Method m = valueObject.getMethod(request.getRequest(), request.getClass());
-			m.setAccessible(true);
-			response = (Response) m.invoke(object, request);
-		} catch (IllegalAccessException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IllegalArgumentException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (InvocationTargetException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (NoSuchMethodException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (SecurityException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (InstantiationException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		return response;
+	Response lookup(Request request, Service service){
+		return serviceBusinessLookUp.sendRequest(request, service);
 	}
 }

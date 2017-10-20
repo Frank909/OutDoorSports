@@ -1,10 +1,9 @@
 package outdoorapp.presentation.frontcontroller;
 
-import javafx.scene.layout.AnchorPane;
-import outdoorapp.business.BusinessDelegate;
-import outdoorapp.presentation.applicationcontroller.ApplicationController;
+import outdoorapp.presentation.applicationcontroller.ServiceApplicationController;
 import outdoorapp.presentation.reqresp.Request;
 import outdoorapp.presentation.reqresp.Response;
+import outdoorapp.services.Service;
 
 /**
  * Classe che implementa il Front Controller. Grazie a questa classe è possibile centralizzare
@@ -18,13 +17,14 @@ import outdoorapp.presentation.reqresp.Response;
  * @author Francesco Ventura
  */
 
-public class FrontController{
+public class FrontController implements Service{
 
 	/**
 	 * Riferimento all'application controller.Permette di gestire
 	 * le richieste e le risposte.
 	 */
-	private ApplicationController applicationController = new ApplicationController();
+	//private ApplicationController applicationController = new ApplicationController();
+	private static ServiceApplicationController serviceApplicationController = ServiceApplicationController.getInstance();
 	
 	/**
 	 * Riferimento all'istanza di FrontController
@@ -52,6 +52,6 @@ public class FrontController{
 	 * @return la risposta in base alla richiesta
 	 */
 	public Response sendRequest(Request request) {
-		return applicationController.getAction(request);
+		return serviceApplicationController.sendRequest(request, this);
 	}
 }

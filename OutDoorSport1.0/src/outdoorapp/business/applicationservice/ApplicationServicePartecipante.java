@@ -13,6 +13,7 @@ import outdoorapp.integration.dao.RuoliDAO;
 import outdoorapp.integration.dao.StatoUtenteDAO;
 import outdoorapp.presentation.reqresp.Request;
 import outdoorapp.presentation.reqresp.Response;
+import outdoorapp.services.ServiceFactory;
 import outdoorapp.to.Partecipante;
 import outdoorapp.to.Utente;
 import outdoorapp.utils.Actions;
@@ -31,7 +32,7 @@ import outdoorapp.utils.Views;
  *
  */
 
-public class ApplicationServicePartecipante implements Views, Actions {
+class ApplicationServicePartecipante implements Views, Actions{
 
 	private PartecipanteDAO partecipante_dao;
 

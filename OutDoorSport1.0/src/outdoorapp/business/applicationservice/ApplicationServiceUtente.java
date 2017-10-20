@@ -13,6 +13,7 @@ import outdoorapp.integration.dao.PartecipanteDAO;
 import outdoorapp.integration.dao.UtenteDAO;
 import outdoorapp.presentation.reqresp.Request;
 import outdoorapp.presentation.reqresp.Response;
+import outdoorapp.services.ServiceFactory;
 import outdoorapp.to.Email;
 import outdoorapp.to.ManagerDiEscursione;
 import outdoorapp.to.ManagerDiSistema;
@@ -36,7 +37,7 @@ import outdoorapp.utils.Views;
  *
  */
 
-public class ApplicationServiceUtente implements Views, Actions{
+class ApplicationServiceUtente implements Views, Actions{
 
 	private UtenteDAO<Utente> utente_dao;
 	

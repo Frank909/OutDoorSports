@@ -5,6 +5,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import outdoorapp.business.ServiceBusinessDelegate;
+import outdoorapp.business.applicationservice.ServiceBusinessLookUp;
 import outdoorapp.presentation.frontcontroller.FrontController;
 import outdoorapp.presentation.reqresp.Request;
 import outdoorapp.presentation.reqresp.Response;
@@ -64,11 +66,17 @@ public class ControllerLogin implements Actions, Views{
 		utente.setUsername(txtUsername.getText());
 		utente.setPassword(txtPassword.getText());
 		Request request = new Request(utente, OUTDOORSPORT_EXECUTE_LOGIN);
+		ServiceBusinessLookUp s = ServiceBusinessLookUp.getInstance();
+		
+		Response r = s.sendRequest(request, ServiceBusinessDelegate.getInstance());
+		
 		Response response = fc.sendRequest(request);
 		if(response.getResponse().equals(RESP_OK))
 			vc.setView(response.getView());
 		else
 			lblErrore.setText(response.getView());
+		
+		
 	}
 	
 	/**

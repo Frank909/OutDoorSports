@@ -3,9 +3,11 @@ package outdoorapp.presentation.applicationcontroller;
 import java.lang.reflect.Method;
 
 import javafx.scene.layout.AnchorPane;
-import outdoorapp.business.BusinessDelegate;
+import outdoorapp.business.ServiceBusinessDelegate;
 import outdoorapp.presentation.reqresp.Request;
 import outdoorapp.presentation.reqresp.Response;
+import outdoorapp.services.Service;
+import outdoorapp.services.ServiceFactory;
 import outdoorapp.utils.ViewCache;
 import outdoorapp.utils.Views;
 
@@ -23,21 +25,13 @@ import outdoorapp.utils.Views;
  *
  */
 
-public class ApplicationController{
-
-	/**
-	 * Riferimento al Business Delegate.Permette di gestire, in 
-	 * base alla richiesta, l'application service da utilizzare.
-	 */
-	private BusinessDelegate businessDelegate;
-	private ViewCache viewCache = ViewCache.getInstance(); 
+class ApplicationController{
 	
-	/**
-	 * Costruttore della classe che inizializza l'istanza di BusinessDelegate
-	 */
-	public ApplicationController() {
-		businessDelegate = new BusinessDelegate();
-	}
+	
+	private static ServiceBusinessDelegate serviceBusinessDelegate = ServiceBusinessDelegate.getInstance();
+	private static ApplicationController applicationController = new ApplicationController();
+	
+	private ApplicationController() {}
 	
 	/**
 	 * Metodo che invia la richiesta al business delegate e ottiene come risposta
@@ -46,7 +40,11 @@ public class ApplicationController{
 	 * @param richiesta che viene passata all'Application Controller
 	 * @return la risposta in base alla richiesta
 	 */
-	public Response getAction(Request request){
-		return businessDelegate.lookup(request);
+	Response getAction(Request request, Service service){
+		return serviceBusinessDelegate.sendRequest(request, service);
+	}
+	
+	static ApplicationController getInstance(){
+		return applicationController;
 	}
 }

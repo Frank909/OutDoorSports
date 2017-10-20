@@ -10,6 +10,7 @@ import outdoorapp.integration.dao.RuoliDAO;
 import outdoorapp.integration.dao.StatoUtenteDAO;
 import outdoorapp.presentation.reqresp.Request;
 import outdoorapp.presentation.reqresp.Response;
+import outdoorapp.services.ServiceFactory;
 import outdoorapp.to.ManagerDiEscursione;
 import outdoorapp.to.ManagerDiSistema;
 import outdoorapp.to.Utente;
@@ -28,7 +29,7 @@ import outdoorapp.utils.Views;
  * @author Francesco Ventura
  *
  */
-public class ApplicationServiceManagerDiEscursione implements Actions, Views{
+class ApplicationServiceManagerDiEscursione implements Actions, Views{
 	
 	private ManagerDiEscursioneDAO mde_dao;
 	

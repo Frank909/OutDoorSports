@@ -1,5 +1,8 @@
 package outdoorapp.business.applicationservice;
 
+
+import outdoorapp.services.ServiceFactory;
+
 /**
  * Classe utilizzata dal Business Delegate per identificare il giusto Application Service 
  * in base alla richiesta inviata
@@ -9,8 +12,8 @@ package outdoorapp.business.applicationservice;
  *
  */
 
-public class ApplicationService {
-
+class ApplicationService{
+	
 	/**
 	 * Costante per recuperare il percorso del package
 	 */
@@ -28,7 +31,7 @@ public class ApplicationService {
 	 * @param suffisso per l'application service
 	 * @return il nome completo di package dell'application service
 	 */
-	public static String getApplicationService(String suffix){
-		return PACKAGE_PATH + "." + APPLICATION_SERVICE_PREFIX + suffix;
+	public static String getApplicationService(String suffix) {
+		return PACKAGE_PATH + "." + APPLICATION_SERVICE_PREFIX + suffix;	
 	}
 }

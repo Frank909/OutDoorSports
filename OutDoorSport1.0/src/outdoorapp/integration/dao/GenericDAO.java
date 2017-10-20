@@ -1,7 +1,6 @@
 package outdoorapp.integration.dao;
 
 import outdoorapp.exceptions.DatabaseException;
-import outdoorapp.integration.SessionUtil;
 import outdoorapp.to.ManagerDiSistema;
 import outdoorapp.to.OutDoorSports;
 import outdoorapp.to.Utente;
@@ -26,7 +25,7 @@ import org.hibernate.query.Query;
  *
  * @param <T>
  */
-public abstract class GenericDAO<T extends OutDoorSports>{
+abstract class GenericDAO<T extends OutDoorSports>{
 	
 	private OutDoorSports currentClass;
 	

@@ -1,4 +1,4 @@
-package outdoorapp.integration;
+package outdoorapp.integration.dao;
 
 import outdoorapp.exceptions.DatabaseException;
 
@@ -15,7 +15,7 @@ import org.hibernate.service.ServiceRegistry;
  * @author Francesco Ventura
  *
  */
-public class SessionUtil {
+class SessionUtil {
 	
 	private static SessionFactory sessionFactory = buildSessionFactory();
 
