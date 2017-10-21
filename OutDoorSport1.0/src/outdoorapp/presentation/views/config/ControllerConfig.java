@@ -1,29 +1,17 @@
 package outdoorapp.presentation.views.config;
 
-import java.lang.reflect.Field;
-import java.lang.reflect.Method;
-import java.sql.Date;
 import java.time.LocalDate;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
-import outdoorapp.presentation.frontcontroller.FrontController;
 import outdoorapp.presentation.reqresp.Request;
 import outdoorapp.presentation.reqresp.Response;
 import outdoorapp.presentation.views.generic.ControllerRegistrazione;
-import outdoorapp.presentation.views.generic.GenericViewController;
 import outdoorapp.to.ManagerDiSistema;
-import outdoorapp.to.OutDoorSports;
 import outdoorapp.to.Utente;
-import outdoorapp.utils.Actions;
-import outdoorapp.utils.ViewCache;
-import outdoorapp.utils.Views;
 
 
 /**

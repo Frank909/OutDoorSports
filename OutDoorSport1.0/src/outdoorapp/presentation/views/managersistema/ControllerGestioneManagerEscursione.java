@@ -39,7 +39,8 @@ public class ControllerGestioneManagerEscursione extends GenericViewController{
 	/**
 	 * Metodo che inizializza tutti i campi della finestra
 	 */
-	@FXML public void initialize() {
+	@Override
+	protected void initialize() {
 		
     }
 

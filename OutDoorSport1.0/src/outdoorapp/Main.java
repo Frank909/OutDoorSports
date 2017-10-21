@@ -4,11 +4,9 @@ import javafx.application.Application;
 import javafx.stage.Stage;
 import outdoorapp.presentation.frontcontroller.FrontController;
 import outdoorapp.presentation.reqresp.Request;
-import outdoorapp.presentation.reqresp.RequestView;
 import outdoorapp.presentation.reqresp.Response;
 import outdoorapp.to.ManagerDiSistema;
 import outdoorapp.utils.Actions;
-import outdoorapp.utils.ViewCache;
 
 public class Main extends Application implements Actions{
 	

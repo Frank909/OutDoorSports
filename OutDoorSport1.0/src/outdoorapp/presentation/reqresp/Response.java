@@ -20,18 +20,6 @@ public class Response {
 	 * Costruttore di default
 	 */
 	public Response() {	}
-	
-	/**
-	 * Costruttore che inizializza data e response
-	 * 
-	 * @param data
-	 * @param response
-	 */
-	public void Response(OutDoorSports data, String response, String view) {
-		this.data = data;
-		this.response = response;
-		this.view = view;
-	}
 
 	/**
 	 * @return la view da visualizzare
@@ -74,6 +62,9 @@ public class Response {
 		this.response = response;
 	}
 	
+	/**
+	 * Override toString() di Object che restituisce la risposta effettiva.
+	 */
 	@Override
 	public String toString() {
 		return this.response;

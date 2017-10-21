@@ -86,6 +86,7 @@ class ApplicationServiceManagerDiSistema implements Actions, Views{
 				alert.setTitle("OutDoorSport1.0");
 				alert.showAndWait();
 				response.setResponse(RESP_OK);
+				
 			}else{
 				response.setResponse(RESP_KO);
 			}

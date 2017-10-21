@@ -22,7 +22,6 @@ import outdoorapp.presentation.views.generic.GenericViewController;
 import outdoorapp.to.Partecipante;
 import outdoorapp.to.Utente;
 import outdoorapp.utils.Actions;
-import outdoorapp.utils.ViewCache;
 import outdoorapp.utils.Views;
 
 /**

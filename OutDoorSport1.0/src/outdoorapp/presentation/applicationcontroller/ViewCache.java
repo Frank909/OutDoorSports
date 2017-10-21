@@ -1,4 +1,4 @@
-package outdoorapp.utils;
+package outdoorapp.presentation.applicationcontroller;
 
 import java.util.ArrayDeque;
 import java.util.HashMap;
@@ -80,10 +80,18 @@ public class ViewCache{
 	}
 
 	/**
+	 * 
+	 * @return stageQueue.peak(): Restituisce lo stage della schermata corrente
+	 */
+	public static Stage getCurrentView(){
+		return stageQueue.peek();
+	}
+	
+	/**
 	 * Setta la vista richiesta dall'utente e chiude quella precedente
 	 * @param key: chiave della schermata
 	 */
-	public void setView(String key){	
+	void setView(String key){	
 		if(!stageQueue.isEmpty())
 			stageQueue.poll().close();
 		Stage newStage = new Stage();
@@ -94,21 +102,13 @@ public class ViewCache{
 		newStage.show();
 		stageQueue.add(newStage);
 	}
-	
-	/**
-	 * 
-	 * @return stageQueue.peak(): Restituisce lo stage della schermata corrente
-	 */
-	public static Stage getCurrentView(){
-		return stageQueue.peek();
-	}
 
 	/**
 	 * Metodo che consente di settare la vista di una sotto-schermata richiesta se quest'ultima si trova in una schermata principale
 	 * @param key: chiave sotto-finestra richiesta
 	 * @param parent: finestra genitore
 	 */
-	public void setNestedView(String key, AnchorPane parent){
+	void setNestedView(String key, AnchorPane parent){
 		StackPane panel = (StackPane)mapViews.get(key);
 		setNestedAnchorPane(parent);
 		AnchorPane.setLeftAnchor(panel, 0.0);

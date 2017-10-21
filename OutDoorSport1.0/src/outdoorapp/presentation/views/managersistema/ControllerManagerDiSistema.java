@@ -1,14 +1,15 @@
 package outdoorapp.presentation.views.managersistema;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.StackPane;
-import outdoorapp.presentation.frontcontroller.FrontController;
+import javafx.stage.WindowEvent;
 import outdoorapp.presentation.reqresp.Request;
 import outdoorapp.presentation.views.generic.GenericViewController;
-import outdoorapp.utils.ViewCache;
-import outdoorapp.utils.Views;
 
 /**
  * Gestisce la dashboard del manager di sistema
@@ -24,19 +25,21 @@ public class ControllerManagerDiSistema extends GenericViewController{
 	@FXML private Label lblVisulizzaEscursioniSistema;
 	@FXML private Label lblInserisciManagerEscursione;
 	@FXML private AnchorPane anchorContent;
+	@FXML private AnchorPane anchorManagerSistema;
 	
 	/**
 	 * Costruttore della classe ControllerManagerDiSistema
 	 */
 	public ControllerManagerDiSistema() {
+		
 	}
 	
 	/**
 	 * Metodo che inizializza tutti i campi della finestra
 	 */
-	@FXML public void initialize() {
-		//viewCache.setNestedView(VIEW_GESTIONE_MANAGER_ESCURSIONE, anchorContent);
-    }
+	@Override
+	protected void initialize() {	
+	}
 
 	@FXML protected void viewGestioneManagerEscursione(){
 		this.sendRequest(new Request(anchorContent, VIEW_GESTIONE_MANAGER_ESCURSIONE));
@@ -49,5 +52,6 @@ public class ControllerManagerDiSistema extends GenericViewController{
 	@FXML protected void viewInserisciManagerEscursione(){
 		this.sendRequest(new Request(anchorContent, VIEW_REGISTRAZIONE_MANAGER_ESCURSIONE));
 	}
+
 
 }

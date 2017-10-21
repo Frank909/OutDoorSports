@@ -9,6 +9,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import outdoorapp.presentation.applicationcontroller.ViewCache;
 import outdoorapp.presentation.frontcontroller.FrontController;
 import outdoorapp.presentation.reqresp.Request;
 import outdoorapp.presentation.reqresp.Response;
@@ -18,7 +19,6 @@ import outdoorapp.to.ManagerDiEscursione;
 import outdoorapp.to.Partecipante;
 import outdoorapp.to.Utente;
 import outdoorapp.utils.Actions;
-import outdoorapp.utils.ViewCache;
 import outdoorapp.utils.Views;
 
 /**
@@ -56,7 +56,8 @@ public class ControllerRegistrazioneManagerEscursione extends ControllerRegistra
 	/**
 	 * Metodo che inizializza tutti i campi della finestra
 	 */
-	@FXML protected void initialize() {
+	@Override
+	protected void initialize() {
 		lblErrore.setText("");
     }
 	

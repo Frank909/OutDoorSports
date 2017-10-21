@@ -3,18 +3,25 @@ package outdoorapp.presentation.applicationcontroller;
 import javafx.scene.layout.AnchorPane;
 import outdoorapp.presentation.reqresp.Request;
 import outdoorapp.presentation.reqresp.Response;
-import outdoorapp.utils.ViewCache;
 
 class Dispatcher {
 
-	private static ViewCache vc = ViewCache.getInstance();
+	private static ViewCache vc = null;
+	private static Dispatcher dispatcher = new Dispatcher();;
 	
-	Dispatcher(){
-		try {
-			vc.initialize();
-		} catch (Exception e) {
-			e.printStackTrace();
+	private Dispatcher(){
+	}
+	
+	public static Dispatcher getInstance(){
+		if(vc == null){
+			try {
+				vc = ViewCache.getInstance();
+				vc.initialize();				
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
+		return dispatcher;
 	}
 	
 	private void setView(String request){

@@ -85,6 +85,9 @@ public class Request{
 		this.view = view;
 	}
 	
+	/**
+	 * Override del metodo toString() della classe Object che restituisce la richiesta effettiva
+	 */
 	@Override
 	public String toString() {
 		return this.request;

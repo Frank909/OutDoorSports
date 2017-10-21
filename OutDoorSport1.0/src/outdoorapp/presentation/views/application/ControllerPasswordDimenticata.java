@@ -38,9 +38,9 @@ public class ControllerPasswordDimenticata extends GenericViewController{
 	/**
 	 * Metodo che inizializza tutti i campi della finestra
 	 */
-	@FXML public void initialize() {
+	@Override
+	protected void initialize() {
 		lblErrore.setText("");
-        ///DA COMPLETARE CON TUTTI I CAMPI///
     }
 	
 	/**

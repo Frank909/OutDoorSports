@@ -26,10 +26,17 @@ class ApplicationController{
 	
 	private static ApplicationController applicationController = new ApplicationController();
 	
-	private Dispatcher dispatcher = new Dispatcher();
+	private static Dispatcher dispatcher = Dispatcher.getInstance();
 	
+	/**
+	 * Costruttore privato
+	 */
 	private ApplicationController() {}
 	
+	/**
+	 * 
+	 * @return restituisce l'istanza dell'applicationController
+	 */
 	static ApplicationController getInstance(){
 		if(serviceBusinessDelegate == null){
 			ServiceFactory serviceCreator = ServiceFactory.getServiceCreator();
@@ -43,8 +50,9 @@ class ApplicationController{
 	}
 	
 	/**
-	 * Metodo che invia la richiesta al business delegate e ottiene come risposta
-	 * una azione da mandare al front controller
+	 * Metodo che invia la richiesta al servizio del business delegate e ottiene come risposta
+	 * una azione da mandare al front controller.
+	 * Nel caso in cui ricevesse una richiesta di visualizzazione di una view, la manda al dispatcher.
 	 * 
 	 * @param richiesta che viene passata all'Application Controller
 	 * @return la risposta in base alla richiesta

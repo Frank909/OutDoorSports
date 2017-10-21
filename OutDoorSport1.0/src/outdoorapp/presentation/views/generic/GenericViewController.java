@@ -1,19 +1,10 @@
 package outdoorapp.presentation.views.generic;
 
-import java.lang.reflect.Field;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 import javafx.fxml.FXML;
 import outdoorapp.presentation.frontcontroller.FrontController;
 import outdoorapp.presentation.reqresp.Request;
-import outdoorapp.presentation.reqresp.RequestView;
 import outdoorapp.presentation.reqresp.Response;
-import outdoorapp.to.OutDoorSports;
-import outdoorapp.to.Partecipante;
-import outdoorapp.to.Utente;
 import outdoorapp.utils.Actions;
-import outdoorapp.utils.ViewCache;
 import outdoorapp.utils.Views;
 
 /**
@@ -31,6 +22,11 @@ public abstract class GenericViewController implements Actions, Views{
 	 */
 	@FXML protected abstract void initialize();
 	
+	/**
+	 * 
+	 * @param request
+	 * @return
+	 */
 	protected Response sendRequest(Request request){
 		return FrontController.getInstance().sendRequest(request);
 	}

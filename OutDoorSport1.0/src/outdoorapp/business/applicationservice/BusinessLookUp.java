@@ -12,8 +12,15 @@ class BusinessLookUp{
 
 	private static BusinessLookUp businessLookUp = new BusinessLookUp();
 
+	/**
+	 * Costruttore privato BusinessLookUp
+	 */
 	private BusinessLookUp(){}
 
+	/**
+	 * SingleTon Class
+	 * @return restituisce l'istanza del BusinessLookUp
+	 */
 	static BusinessLookUp getInstance(){
 		return businessLookUp;
 	}

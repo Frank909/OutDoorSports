@@ -31,8 +31,7 @@ class BusinessDelegate{
 	}
 	
 	/**
-	 * 
-	 * @return
+	 * @return restituisce l'istanza del BusinessDelegate
 	 */
 	static BusinessDelegate getInstance(){
 		if(serviceBusinessLookUp == null){
@@ -47,9 +46,8 @@ class BusinessDelegate{
 	}
 	
 	/**
-	 * Metodo che esegue la ricerca dell'opportuno application service. Una volta indentificato il 
-	 * corretto application service, viene utilizzata una reflection per capire quale operazione deve
-	 * essere eseguita, sempre in base alla richiesta. In questo modo l'informazione è ben nascosta.
+	 * Metodo che richiede la ricerca del servizio opportuno, mandando un richiesta alla classe di servizio del
+	 * businessLookUp e ricevendo l'opportuna risposta
 	 * 
 	 * @param richiesta dal quale verrà identificato l'application service opportuno
 	 * @return la risposta in base alla richiesta

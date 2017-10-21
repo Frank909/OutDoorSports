@@ -6,7 +6,6 @@ import javafx.scene.layout.AnchorPane;
 import outdoorapp.presentation.frontcontroller.FrontController;
 import outdoorapp.presentation.reqresp.Request;
 import outdoorapp.presentation.views.generic.GenericViewController;
-import outdoorapp.utils.ViewCache;
 import outdoorapp.utils.Views;
 
 /**
@@ -32,7 +31,8 @@ public class ControllerManagerDiEscursione extends GenericViewController{
 	/**
 	 * Metodo che inizializza tutti i campi della finestra
 	 */
-	@FXML public void initialize() {
+	@Override
+	protected void initialize() {
         ///DA COMPLETARE CON TUTTI I CAMPI///
     }
 	

@@ -1,9 +1,7 @@
 package outdoorapp.presentation.frontcontroller;
 
 import outdoorapp.presentation.reqresp.Request;
-import outdoorapp.presentation.reqresp.RequestView;
 import outdoorapp.presentation.reqresp.Response;
-import outdoorapp.services.AbstractService;
 import outdoorapp.services.Service;
 import outdoorapp.services.ServiceFactory;
 import outdoorapp.services.ServiceType;
@@ -23,10 +21,9 @@ import outdoorapp.services.ServiceType;
 public class FrontController{
 
 	/**
-	 * Riferimento all'application controller.Permette di gestire
+	 * Riferimento al servizio dell'application controller.Permette di gestire
 	 * le richieste e le risposte.
 	 */
-	//private ApplicationController applicationController = new ApplicationController();
 	private static Service serviceApplicationController = null;
 
 	/**
