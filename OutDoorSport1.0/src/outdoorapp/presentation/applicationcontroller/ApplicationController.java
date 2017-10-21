@@ -1,16 +1,11 @@
 package outdoorapp.presentation.applicationcontroller;
 
-import java.lang.reflect.Method;
-
-import javafx.scene.layout.AnchorPane;
-import outdoorapp.business.ServiceBusinessDelegate;
 import outdoorapp.presentation.reqresp.Request;
-import outdoorapp.presentation.reqresp.RequestView;
 import outdoorapp.presentation.reqresp.Response;
+import outdoorapp.services.AbstractService;
 import outdoorapp.services.Service;
 import outdoorapp.services.ServiceFactory;
-import outdoorapp.utils.ViewCache;
-import outdoorapp.utils.Views;
+import outdoorapp.services.ServiceType;
 
 /**
  * Classe che rappresenta un'implementazione dell'Application Controller
@@ -27,10 +22,25 @@ import outdoorapp.utils.Views;
  */
 
 class ApplicationController{
-	private static ServiceBusinessDelegate serviceBusinessDelegate = ServiceBusinessDelegate.getInstance();
+	private static Service serviceBusinessDelegate = null;
+	
 	private static ApplicationController applicationController = new ApplicationController();
+	
 	private Dispatcher dispatcher = new Dispatcher();
+	
 	private ApplicationController() {}
+	
+	static ApplicationController getInstance(){
+		if(serviceBusinessDelegate == null){
+			ServiceFactory serviceCreator = ServiceFactory.getServiceCreator();
+			try {
+				serviceBusinessDelegate = serviceCreator.getService(ServiceType.BusinessDelegate);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return applicationController;
+	}
 	
 	/**
 	 * Metodo che invia la richiesta al business delegate e ottiene come risposta
@@ -39,14 +49,12 @@ class ApplicationController{
 	 * @param richiesta che viene passata all'Application Controller
 	 * @return la risposta in base alla richiesta
 	 */
-	Response getAction(Request request, Service service){
+	Response getAction(Request request, ServiceType serviceType){
 		if(request.toString().contains("VIEW_")){
 			return dispatcher.dispatch(request);
 		}else
-			return serviceBusinessDelegate.sendRequest(request, service);
+			return serviceBusinessDelegate.sendRequest(request, serviceType);
 	}
 	
-	static ApplicationController getInstance(){
-		return applicationController;
-	}
+
 }

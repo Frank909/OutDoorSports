@@ -10,7 +10,7 @@ import javafx.scene.control.TextField;
 import outdoorapp.presentation.frontcontroller.FrontController;
 import outdoorapp.presentation.reqresp.Request;
 import outdoorapp.presentation.reqresp.Response;
-import outdoorapp.presentation.views.generic.GenericController;
+import outdoorapp.presentation.views.generic.GenericViewController;
 import outdoorapp.to.Utente;
 import outdoorapp.utils.Actions;
 import outdoorapp.utils.Views;
@@ -23,7 +23,7 @@ import outdoorapp.utils.Views;
  *
  */
 
-public class ControllerPasswordDimenticata extends GenericController{
+public class ControllerPasswordDimenticata extends GenericViewController{
 
 	@FXML private Button btnRichiediNuovaPassword;
 	@FXML private TextField txtEmail;
@@ -60,7 +60,7 @@ public class ControllerPasswordDimenticata extends GenericController{
 		utente.setEmail(txtEmail.getText());
 		
 		Response response = this.sendRequest(new Request(utente, OUTDOORSPORT_REQUEST_NEW_PASSWORD));
-		if(response.equals(RESP_OK)){
+		if(response.toString().equals(RESP_OK)){
 			Alert alert = new Alert(AlertType.INFORMATION, "La nuova password è stata inviata correttamente!", ButtonType.OK);
 			alert.setTitle("OutDoorSport1.0");
 			alert.showAndWait();

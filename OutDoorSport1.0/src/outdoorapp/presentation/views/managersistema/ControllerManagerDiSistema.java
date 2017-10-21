@@ -6,7 +6,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import outdoorapp.presentation.frontcontroller.FrontController;
 import outdoorapp.presentation.reqresp.Request;
-import outdoorapp.presentation.views.generic.GenericController;
+import outdoorapp.presentation.views.generic.GenericViewController;
 import outdoorapp.utils.ViewCache;
 import outdoorapp.utils.Views;
 
@@ -18,7 +18,7 @@ import outdoorapp.utils.Views;
  *
  */
 
-public class ControllerManagerDiSistema extends GenericController{
+public class ControllerManagerDiSistema extends GenericViewController{
 
 	@FXML private Label lblGestioneManagerEscursione;
 	@FXML private Label lblVisulizzaEscursioniSistema;

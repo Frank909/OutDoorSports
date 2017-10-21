@@ -5,7 +5,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import outdoorapp.presentation.frontcontroller.FrontController;
 import outdoorapp.presentation.reqresp.Request;
-import outdoorapp.presentation.views.generic.GenericController;
+import outdoorapp.presentation.views.generic.GenericViewController;
 import outdoorapp.utils.ViewCache;
 import outdoorapp.utils.Views;
 
@@ -17,7 +17,7 @@ import outdoorapp.utils.Views;
  *
  */
 
-public class ControllerPartecipante extends GenericController{
+public class ControllerPartecipante extends GenericViewController{
 
 	@FXML private AnchorPane anchorContent;
 	@FXML private Label lblLeMieEscursioni;

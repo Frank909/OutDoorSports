@@ -1,9 +1,11 @@
 package outdoorapp.business;
 
-import outdoorapp.business.applicationservice.ServiceBusinessLookUp;
 import outdoorapp.presentation.reqresp.Request;
 import outdoorapp.presentation.reqresp.Response;
+import outdoorapp.services.AbstractService;
 import outdoorapp.services.Service;
+import outdoorapp.services.ServiceFactory;
+import outdoorapp.services.ServiceType;
 
 /**
  * Classe che rappresenta il Business Delegate, ovvero un'astrazione client-side 
@@ -23,7 +25,7 @@ class BusinessDelegate{
 	
 
 	private static BusinessDelegate businessDelegate = new BusinessDelegate();
-	private static ServiceBusinessLookUp serviceBusinessLookUp = ServiceBusinessLookUp.getInstance();
+	private static Service serviceBusinessLookUp = null;
 	
 	private BusinessDelegate(){
 	}
@@ -33,6 +35,14 @@ class BusinessDelegate{
 	 * @return
 	 */
 	static BusinessDelegate getInstance(){
+		if(serviceBusinessLookUp == null){
+			ServiceFactory serviceCreator = ServiceFactory.getServiceCreator();
+			try {
+				serviceBusinessLookUp = serviceCreator.getService(ServiceType.BusinessLookUp);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
 		return businessDelegate;
 	}
 	
@@ -44,7 +54,7 @@ class BusinessDelegate{
 	 * @param richiesta dal quale verrà identificato l'application service opportuno
 	 * @return la risposta in base alla richiesta
 	 */
-	Response lookup(Request request, Service service){
-		return serviceBusinessLookUp.sendRequest(request, service);
+	Response lookup(Request request, ServiceType serviceType){
+		return serviceBusinessLookUp.sendRequest(request, serviceType);
 	}
 }

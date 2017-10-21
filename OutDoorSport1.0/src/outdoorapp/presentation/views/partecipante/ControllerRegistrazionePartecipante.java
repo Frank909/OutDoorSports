@@ -18,7 +18,7 @@ import outdoorapp.presentation.frontcontroller.FrontController;
 import outdoorapp.presentation.reqresp.Request;
 import outdoorapp.presentation.reqresp.Response;
 import outdoorapp.presentation.views.generic.ControllerRegistrazione;
-import outdoorapp.presentation.views.generic.GenericController;
+import outdoorapp.presentation.views.generic.GenericViewController;
 import outdoorapp.to.Partecipante;
 import outdoorapp.to.Utente;
 import outdoorapp.utils.Actions;
@@ -90,7 +90,7 @@ public class ControllerRegistrazionePartecipante extends ControllerRegistrazione
 		Partecipante partecipante = new Partecipante();
 		Response response = this.sendRequest(new Request(partecipante, OUTDOORSPORT_SAVE_SRC_CERTIFICATE));
 		
-		if(response.equals(RESP_OK))
+		if(response.toString().equals(RESP_OK))
 			lblSrcCertificatoSRC.setText(((Partecipante)response.getData()).getCertificatoSrc());
 	}
 	
@@ -121,7 +121,7 @@ public class ControllerRegistrazionePartecipante extends ControllerRegistrazione
 		String result = checkErrors(partecipante);
 		if(result.equals("")){
 			Response response = this.sendRequest(new Request(partecipante, OUTDOORSPORT_SAVE_PARTECIPANTE));
-			if(response.equals(RESP_OK))
+			if(response.toString().equals(RESP_OK))
 				this.sendRequest(new Request(VIEW_LOGIN));
 			else
 				lblErrore.setText("Errore! Email o Username già presenti!");

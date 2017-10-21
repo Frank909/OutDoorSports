@@ -17,14 +17,14 @@ import outdoorapp.utils.ViewCache;
 import outdoorapp.utils.Views;
 
 /**
- * Classe astratta ControllerRegistrazione che conterrà i metodi in comune per gli eventi di registrazione 
+ * Classe astratta GenericViewController che conterrà i metodi in comune per gli eventi di registrazione 
  * di un generico utente.
  * @author Andrea Zito
  * @author Francesco Ventura
  *
  */
 
-public abstract class GenericController implements Actions, Views{
+public abstract class GenericViewController implements Actions, Views{
 	
 	/**
 	 * Metodo che inizializza tutti i campi della finestra

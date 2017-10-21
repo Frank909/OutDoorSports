@@ -9,7 +9,7 @@ import outdoorapp.integration.dao.RuoliDAO;
 import outdoorapp.integration.dao.StatoUtenteDAO;
 import outdoorapp.presentation.reqresp.Request;
 import outdoorapp.presentation.reqresp.Response;
-import outdoorapp.services.ServiceFactory;
+import outdoorapp.services.AbstractService;
 import outdoorapp.to.ManagerDiSistema;
 import outdoorapp.to.Utente;
 import outdoorapp.utils.Actions;

@@ -13,7 +13,7 @@ import outdoorapp.presentation.frontcontroller.FrontController;
 import outdoorapp.presentation.reqresp.Request;
 import outdoorapp.presentation.reqresp.Response;
 import outdoorapp.presentation.views.generic.ControllerRegistrazione;
-import outdoorapp.presentation.views.generic.GenericController;
+import outdoorapp.presentation.views.generic.GenericViewController;
 import outdoorapp.to.ManagerDiEscursione;
 import outdoorapp.to.Partecipante;
 import outdoorapp.to.Utente;
@@ -88,7 +88,7 @@ public class ControllerRegistrazioneManagerEscursione extends ControllerRegistra
 		String result = checkErrors(mde);
 		if(result.equals("")){
 			Response response = this.sendRequest(new Request(mde, OUTDOORSPORT_SAVE_MDE));
-			if(response.equals(RESP_OK))
+			if(response.toString().equals(RESP_OK))
 				this.sendRequest(new Request(ViewCache.getNestedAnchorPane(), VIEW_GESTIONE_MANAGER_ESCURSIONE));
 			else
 				lblErrore.setText("Errore! Email o Username già presenti!");

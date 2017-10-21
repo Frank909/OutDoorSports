@@ -6,7 +6,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import outdoorapp.presentation.frontcontroller.FrontController;
-import outdoorapp.presentation.views.generic.GenericController;
+import outdoorapp.presentation.views.generic.GenericViewController;
 import outdoorapp.to.ManagerDiEscursione;
 
 /**
@@ -19,7 +19,7 @@ import outdoorapp.to.ManagerDiEscursione;
  *
  */
 
-public class ControllerGestioneManagerEscursione extends GenericController{
+public class ControllerGestioneManagerEscursione extends GenericViewController{
 
 	@FXML private TextField txtSearchManagerEscursione;
 	@FXML private Button btnSearchManagerEscursione;

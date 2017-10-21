@@ -17,7 +17,7 @@ import outdoorapp.presentation.frontcontroller.FrontController;
 import outdoorapp.presentation.reqresp.Request;
 import outdoorapp.presentation.reqresp.Response;
 import outdoorapp.presentation.views.generic.ControllerRegistrazione;
-import outdoorapp.presentation.views.generic.GenericController;
+import outdoorapp.presentation.views.generic.GenericViewController;
 import outdoorapp.to.ManagerDiSistema;
 import outdoorapp.to.OutDoorSports;
 import outdoorapp.to.Utente;
@@ -98,7 +98,7 @@ public class ControllerConfig extends ControllerRegistrazione{
 		String result = checkErrors(mds);
 		if(result.equals("")){
 			Response res = this.sendRequest(new Request(mds, OUTDOORSPORT_SAVE_MDS));
-			if(res.equals(RESP_OK))
+			if(res.toString().equals(RESP_OK))
 				this.sendRequest(new Request(VIEW_MANAGER_DI_SISTEMA_CONFIG));
 			else
 				lblErrore.setText("Errore! Email o Username già presenti!");

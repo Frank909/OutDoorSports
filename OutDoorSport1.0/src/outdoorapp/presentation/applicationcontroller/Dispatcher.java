@@ -13,7 +13,6 @@ class Dispatcher {
 		try {
 			vc.initialize();
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -27,10 +26,10 @@ class Dispatcher {
 	}
 
 	Response dispatch(Request request){
-		if(request.getData() == null){
+		if(request.getView() == null){
 			setView(request.toString());
-		}else if(request.getData() instanceof AnchorPane){
-			setNestedView(request.toString(), (AnchorPane)request.getData());
+		}else if(request.getView() instanceof AnchorPane){
+			setNestedView(request.toString(), (AnchorPane)request.getView());
 		}
 		return null;
 	}

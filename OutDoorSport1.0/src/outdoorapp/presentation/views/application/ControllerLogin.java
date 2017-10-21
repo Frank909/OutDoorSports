@@ -5,13 +5,11 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import outdoorapp.business.ServiceBusinessDelegate;
-import outdoorapp.business.applicationservice.ServiceBusinessLookUp;
 import outdoorapp.presentation.frontcontroller.FrontController;
 import outdoorapp.presentation.reqresp.Request;
 import outdoorapp.presentation.reqresp.RequestView;
 import outdoorapp.presentation.reqresp.Response;
-import outdoorapp.presentation.views.generic.GenericController;
+import outdoorapp.presentation.views.generic.GenericViewController;
 import outdoorapp.to.Utente;
 import outdoorapp.utils.Actions;
 import outdoorapp.utils.ViewCache;
@@ -25,7 +23,7 @@ import outdoorapp.utils.Views;
  *
  */
 
-public class ControllerLogin extends GenericController{
+public class ControllerLogin extends GenericViewController{
 
 	@FXML private Button btnLogin;
 	@FXML private Button btnSignIn;
@@ -65,7 +63,7 @@ public class ControllerLogin extends GenericController{
 		Request req = new Request(utente, OUTDOORSPORT_EXECUTE_LOGIN);
 		Response response = this.sendRequest(req);
 		
-		if(response.equals(RESP_OK))
+		if(response.toString().equals(RESP_OK))
 			this.sendRequest(new Request(response.getView()));
 		else
 			lblErrore.setText("Dati non riconosciuti");

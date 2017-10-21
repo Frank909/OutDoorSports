@@ -1,10 +1,12 @@
 package outdoorapp.presentation.frontcontroller;
 
-import outdoorapp.presentation.applicationcontroller.ServiceApplicationController;
 import outdoorapp.presentation.reqresp.Request;
 import outdoorapp.presentation.reqresp.RequestView;
 import outdoorapp.presentation.reqresp.Response;
+import outdoorapp.services.AbstractService;
 import outdoorapp.services.Service;
+import outdoorapp.services.ServiceFactory;
+import outdoorapp.services.ServiceType;
 
 /**
  * Classe che implementa il Front Controller. Grazie a questa classe è possibile centralizzare
@@ -18,30 +20,38 @@ import outdoorapp.services.Service;
  * @author Francesco Ventura
  */
 
-public class FrontController implements Service{
+public class FrontController{
 
 	/**
 	 * Riferimento all'application controller.Permette di gestire
 	 * le richieste e le risposte.
 	 */
 	//private ApplicationController applicationController = new ApplicationController();
-	private static ServiceApplicationController serviceApplicationController = ServiceApplicationController.getInstance();
-	
+	private static Service serviceApplicationController = null;
+
 	/**
 	 * Riferimento all'istanza di FrontController
 	 */
 	private static FrontController fc = new FrontController();
-	
+
 	/**
 	 * Costruttore della classe FrontController privato
 	 */
 	private FrontController(){}
-	
+
 	/**
 	 * Metodo che restituisce l'istanza del FrontController (Singleton)
 	 * @return fc: istanza del FrontController
 	 */
 	public static FrontController getInstance(){
+		if(serviceApplicationController == null){
+			ServiceFactory serviceCreator = ServiceFactory.getServiceCreator();
+			try {
+				serviceApplicationController = serviceCreator.getService(ServiceType.ApplicationController);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
 		return fc;
 	}
 
@@ -53,6 +63,8 @@ public class FrontController implements Service{
 	 * @return la risposta in base alla richiesta
 	 */
 	public Response sendRequest(Request request) {
-		return serviceApplicationController.sendRequest(request, this);
+		return serviceApplicationController.sendRequest(request, ServiceType.FrontController);
 	}
+
+
 }

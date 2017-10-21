@@ -1,14 +1,12 @@
 package outdoorapp.presentation.applicationcontroller;
 
-import javafx.scene.layout.Pane;
-import outdoorapp.presentation.frontcontroller.FrontController;
 import outdoorapp.presentation.reqresp.Request;
-import outdoorapp.presentation.reqresp.RequestView;
 import outdoorapp.presentation.reqresp.Response;
 import outdoorapp.services.Service;
-import outdoorapp.services.ServiceFactory;
+import outdoorapp.services.ServiceType;
+import outdoorapp.services.AbstractService;
 
-public class ServiceApplicationController extends ServiceFactory{
+public class ServiceApplicationController extends AbstractService{
 
 	private static ApplicationController applicationController = ApplicationController.getInstance();
 	private static ServiceApplicationController serviceApplicationController = new ServiceApplicationController();
@@ -16,18 +14,18 @@ public class ServiceApplicationController extends ServiceFactory{
 	private ServiceApplicationController(){
 	}
 	
+	public static ServiceApplicationController getInstance(){
+		return serviceApplicationController;
+	}
+	
 	@Override
-	public Response sendRequest(Request req, Service service) {
-		if(service instanceof FrontController){
+	public Response sendRequest(Request req, ServiceType serviceType) {
+		if(serviceType.equals(ServiceType.FrontController)){
 			setFlag(true);
-			return applicationController.getAction(req, this);
+			return applicationController.getAction(req, ServiceType.ApplicationController);
 		}
 		else 	
 			return null;
-	}
-	
-	public static ServiceApplicationController getInstance(){
-		return serviceApplicationController;
 	}
 
 }

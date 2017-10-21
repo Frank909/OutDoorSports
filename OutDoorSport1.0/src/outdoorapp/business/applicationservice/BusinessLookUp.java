@@ -3,9 +3,9 @@ package outdoorapp.business.applicationservice;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
-import outdoorapp.business.ServiceBusinessDelegate;
 import outdoorapp.presentation.reqresp.Request;
 import outdoorapp.presentation.reqresp.Response;
+import outdoorapp.services.AbstractService;
 import outdoorapp.services.Service;
 
 class BusinessLookUp{
