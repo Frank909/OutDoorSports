@@ -23,21 +23,21 @@ import outdoorapp.to.OutDoorSports;
  */
 public class ViewCache{
 
-	private final String VIEW_LOGIN = "../../resources/fxml/application/login";
-	private final String VIEW_MANAGER_DI_SISTEMA_CONFIG = "../../resources/fxml/manager_sistema/managerDiSistemaConfig";
-	private final String VIEW_DASHBOARD_MANAGER_DI_SISTEMA = "../../resources/fxml/manager_sistema/dashboardManagerSistema";
-	private final String VIEW_DASHBOARD_MANAGER_DI_ESCURSIONE = "../../resources/fxml/manager_escursione/dashboardManagerEscursione";
-	private final String VIEW_DASHBOARD_PARTECIPANTE = "../../resources/fxml/partecipante/dashboardPartecipante";
-	private final String VIEW_PASSWORD_DIMENTICATA = "../../resources/fxml/application/passwordDimenticata";
-	private final String VIEW_REGISTRAZIONE_PARTECIPANTE = "../../resources/fxml/partecipante/registrazionePartecipante";
-	private final String VIEW_GESTIONE_MANAGER_ESCURSIONE = "../../resources/fxml/manager_sistema/gestioneManagerEscursione";
-	private final String VIEW_VISUALIZZA_ESCURSIONI_SISTEMA = "../../resources/fxml/manager_sistema/visualizzaEscursioniSistema";
-	private final String VIEW_REGISTRAZIONE_MANAGER_ESCURSIONE = "../../resources/fxml/manager_sistema/registrazioneManagerEscursione";
-	private final String VIEW_GESTIONE_ESCURSIONI = "../../resources/fxml/manager_escursione/gestioneEscursioni";
-	private final String VIEW_INSERISCI_ESCURSIONE = "../../resources/fxml/manager_escursione/inserimentoEscursione";
-	private final String VIEW_LE_MIE_ESCURSIONI = "../../resources/fxml/partecipante/leMieEscursioniPartecipante";
-	private final String VIEW_VISUALIZZA_ESCURSIONI_APERTE = "../../resources/fxml/partecipante/visualizzaEscursioniAperte";
-	private final String VIEW_IL_MIO_PROFILO = "../../resources/fxml/partecipante/ilMioProfiloPartecipante";
+	private final String VIEW_LOGIN = "../../../resources/fxml/application/login";
+	private final String VIEW_MANAGER_DI_SISTEMA_CONFIG = "../../../resources/fxml/manager_sistema/managerDiSistemaConfig";
+	private final String VIEW_DASHBOARD_MANAGER_DI_SISTEMA = "../../../resources/fxml/manager_sistema/dashboardManagerSistema";
+	private final String VIEW_DASHBOARD_MANAGER_DI_ESCURSIONE = "../../../resources/fxml/manager_escursione/dashboardManagerEscursione";
+	private final String VIEW_DASHBOARD_PARTECIPANTE = "../../../resources/fxml/partecipante/dashboardPartecipante";
+	private final String VIEW_PASSWORD_DIMENTICATA = "../../../resources/fxml/application/passwordDimenticata";
+	private final String VIEW_REGISTRAZIONE_PARTECIPANTE = "../../../resources/fxml/partecipante/registrazionePartecipante";
+	private final String VIEW_GESTIONE_MANAGER_ESCURSIONE = "../../../resources/fxml/manager_sistema/gestioneManagerEscursione";
+	private final String VIEW_VISUALIZZA_ESCURSIONI_SISTEMA = "../../../resources/fxml/manager_sistema/visualizzaEscursioniSistema";
+	private final String VIEW_REGISTRAZIONE_MANAGER_ESCURSIONE = "../../../resources/fxml/manager_sistema/registrazioneManagerEscursione";
+	private final String VIEW_GESTIONE_ESCURSIONI = "../../../resources/fxml/manager_escursione/gestioneEscursioni";
+	private final String VIEW_INSERISCI_ESCURSIONE = "../../../resources/fxml/manager_escursione/inserimentoEscursione";
+	private final String VIEW_LE_MIE_ESCURSIONI = "../../../resources/fxml/partecipante/leMieEscursioniPartecipante";
+	private final String VIEW_VISUALIZZA_ESCURSIONI_APERTE = "../../../resources/fxml/partecipante/visualizzaEscursioniAperte";
+	private final String VIEW_IL_MIO_PROFILO = "../../../resources/fxml/partecipante/ilMioProfiloPartecipante";
 	
 	private static ViewCache viewCache = new ViewCache();
 	private static HashMap<String, Pane> mapViews = new HashMap<>();
