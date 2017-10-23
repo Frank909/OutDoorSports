@@ -10,8 +10,12 @@ import javafx.scene.control.TextField;
 import outdoorapp.presentation.reqresp.Request;
 import outdoorapp.presentation.reqresp.Response;
 import outdoorapp.presentation.views.generic.ControllerRegistrazione;
-import outdoorapp.to.ManagerDiSistema;
-import outdoorapp.to.Utente;
+import outdoorapp.to.FactoryProducerTO;
+import outdoorapp.to.interfaces.ManagerDiSistemaTO;
+import outdoorapp.to.interfaces.TOFactory;
+import outdoorapp.to.interfaces.UtenteTO;
+import outdoorapp.to.interfaces.strings.FactoryEnum;
+import outdoorapp.to.interfaces.strings.UtenteEnum;
 
 
 /**
@@ -39,10 +43,16 @@ public class ControllerConfig extends ControllerRegistrazione{
 	@FXML private DatePicker dateDataNasc;
 	@FXML private Label lblErrore;
 	
+	private ManagerDiSistemaTO mds = null;
+	
 	/**
 	 * Costruttore della classe ControllerConfig 
 	 */
 	public ControllerConfig() {
+		if(mds == null){
+			TOFactory TOFact = FactoryProducerTO.getFactory(FactoryEnum.UtenteTOFactory);
+			mds = (ManagerDiSistemaTO) TOFact.getUtenteTO(UtenteEnum.ManagerDiSistema);
+		}
 	}
 	
 	/**
@@ -67,7 +77,7 @@ public class ControllerConfig extends ControllerRegistrazione{
 	 */
 	private void execRegistraManagerDiSistema(){
 
-		ManagerDiSistema mds = new ManagerDiSistema();
+		
 		mds.setNome(txtNome.getText());
 		mds.setCognome(txtCognome.getText());
 		mds.setCodiceFiscale(txtCF.getText());
@@ -100,7 +110,7 @@ public class ControllerConfig extends ControllerRegistrazione{
 	 * @param utente
 	 */
 	@Override
-	public void checkDatePicker(Utente utente) {
+	public void checkDatePicker(UtenteTO utente) {
 		if(dateDataNasc.getValue() == null)
 			utente.setDataNascita("");
 		else{

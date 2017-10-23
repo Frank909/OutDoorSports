@@ -12,6 +12,8 @@ import javax.persistence.Table;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
 
+import outdoorapp.to.interfaces.ManagerDiSistemaTO;
+
 /**
  * Classe che rappresenta il i dati del Manager di Sistema. Sono fornite tutte le 
  * dichiarazioni dei metodi per la lettura e la scrittura dei dati
@@ -20,13 +22,13 @@ import org.hibernate.annotations.Parameter;
  * @author Francesco Ventura
  *
  */
-public class ManagerDiSistema extends Utente{
+class ManagerDiSistema extends Utente implements ManagerDiSistemaTO{
 
 	private static final long serialVersionUID = 3017572647898485317L;
 	private int idMds;
 	private String telefono;
 
-	public ManagerDiSistema() {
+	ManagerDiSistema() {
 		super.setIdUtente(this.getIdMds());
 	}
 

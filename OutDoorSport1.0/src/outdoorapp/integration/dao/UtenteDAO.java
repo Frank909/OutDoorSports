@@ -2,9 +2,15 @@ package outdoorapp.integration.dao;
 
 import outdoorapp.exceptions.DatabaseException;
 import outdoorapp.integration.dao.interfaces.Utente_DAO;
-import outdoorapp.to.OutDoorSports;
-import outdoorapp.to.StatoUtente;
-import outdoorapp.to.Utente;
+import outdoorapp.to.FactoryProducerTO;
+import outdoorapp.to.interfaces.EscursioneTO;
+import outdoorapp.to.interfaces.OutDoorSports;
+import outdoorapp.to.interfaces.TOFactory;
+import outdoorapp.to.interfaces.UtenteTO;
+import outdoorapp.to.interfaces.strings.FactoryEnum;
+import outdoorapp.to.interfaces.strings.GenericEnum;
+import outdoorapp.to.interfaces.strings.UtenteEnum;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,12 +26,19 @@ import java.util.List;
 class UtenteDAO<T extends OutDoorSports> extends GenericDAO<T> implements Utente_DAO<T>{
 	
 
+	private UtenteTO utente = null;
+	
 	/**
 	 * Il costruttore inizializza l'entità Utente da utilizzare 
 	 * in tutte le operazioni del DAO.
 	 */
 	public UtenteDAO() {
-		this.setCurrentClass(new Utente());
+		if(utente == null){
+			TOFactory tofact = FactoryProducerTO.getFactory(FactoryEnum.UtenteTOFactory);
+			utente = (UtenteTO) tofact.getUtenteTO(UtenteEnum.Utente);
+		}
+		
+		this.setCurrentClass(utente);
 	}
 	
 	/**
@@ -35,16 +48,16 @@ class UtenteDAO<T extends OutDoorSports> extends GenericDAO<T> implements Utente
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
-	public T getUtente(Utente utente) throws DatabaseException {
-		Utente response = null;
+	public T getUtente(UtenteTO utente) throws DatabaseException {
+		UtenteTO response = null;
 		List<String> param = new ArrayList<String>();
 		param.add(utente.getUsername());
 		param.add(utente.getPassword());
 		List<T> list = this.executeParamQuery("getUtente", param);
 		if(list.size() == 1){
-			response = (Utente) list.get(0);
+			response = (UtenteTO) list.get(0);
 		} else {
-			response = new Utente();
+			response = utente;
 		}
 		return (T)response;
 	}
@@ -57,12 +70,12 @@ class UtenteDAO<T extends OutDoorSports> extends GenericDAO<T> implements Utente
 	 */
 	@SuppressWarnings({ "unchecked" })
 	private T getUtenteByQuery(String queryName, List<?> params) throws DatabaseException{
-		Utente response = null;
+		UtenteTO response = null;
 		List<T> list = super.executeParamQuery(queryName, params);
 		if(list.size() == 0){
-			response = new Utente();
+			response = utente;
 		} else {
-			response = (Utente)list.get(0);
+			response = (UtenteTO)list.get(0);
 		}
 		return (T)response;
 	}
@@ -107,7 +120,7 @@ class UtenteDAO<T extends OutDoorSports> extends GenericDAO<T> implements Utente
 	 * @param utente
 	 * @return vero se è un utente nullo, falso altrimenti
 	 */
-	private boolean isNullUtente(Utente utente){
+	private boolean isNullUtente(UtenteTO utente){
 		return utente.getIdUtente() == null;
 	}
 	
@@ -117,11 +130,11 @@ class UtenteDAO<T extends OutDoorSports> extends GenericDAO<T> implements Utente
 	 * @throws DatabaseException
 	 */
 	@Override
-	public boolean esisteUsername(Utente utente) throws DatabaseException {
+	public boolean esisteUsername(UtenteTO utente) throws DatabaseException {
 		boolean response = false;
 		List<String> param = new ArrayList<String>();
 		param.add(utente.getUsername());
-		Utente newUtente = (Utente) this.getUtenteByQuery("getByUsername", param);
+		UtenteTO newUtente = (UtenteTO) this.getUtenteByQuery("getByUsername", param);
 		response = !this.isNullUtente(newUtente);
 		return response;
 	}
@@ -132,11 +145,11 @@ class UtenteDAO<T extends OutDoorSports> extends GenericDAO<T> implements Utente
 	 * @throws DatabaseException
 	 */
 	@Override
-	public boolean esisteEmail(Utente utente) throws DatabaseException {
+	public boolean esisteEmail(UtenteTO utente) throws DatabaseException {
 		boolean response = false;
 		List<String> param = new ArrayList<String>();
 		param.add(utente.getEmail());
-		Utente newUtente = (Utente) this.getUtenteByQuery("getByEmail", param);
+		UtenteTO newUtente = (UtenteTO) this.getUtenteByQuery("getByEmail", param);
 		response = !this.isNullUtente(newUtente);
 		return response;
 	}

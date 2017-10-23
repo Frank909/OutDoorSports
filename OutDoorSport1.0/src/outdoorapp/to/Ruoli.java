@@ -12,6 +12,9 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import outdoorapp.to.interfaces.OutDoorSports;
+import outdoorapp.to.interfaces.RuoliTO;
+
 /**
  * Classe che rappresenta il ruolo dell'Utente. Sono fornite tutte le 
  * dichiarazioni dei metodi per la lettura e la scrittura dei dati
@@ -21,16 +24,16 @@ import javax.persistence.Table;
  *
  */
 
-public class Ruoli implements OutDoorSports{
+class Ruoli implements RuoliTO{
 
 	private static final long serialVersionUID = -5565024038693813756L;
 	private Integer idRuolo;
 	private String nome;
 
-	public Ruoli() {
+	Ruoli() {
 	}
 
-	public Ruoli(String nome) {
+	Ruoli(String nome) {
 		this.nome = nome;
 	}
 

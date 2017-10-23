@@ -17,6 +17,13 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import outdoorapp.to.interfaces.EscursioneTO;
+import outdoorapp.to.interfaces.IscrizioneTO;
+import outdoorapp.to.interfaces.OptionalTO;
+import outdoorapp.to.interfaces.OutDoorSports;
+import outdoorapp.to.interfaces.StatoIscrizioneTO;
+import outdoorapp.to.interfaces.UtenteTO;
+
 /**
  * Classe che rappresenta lo stato dell'Iscrizione. Sono fornite tutte le 
  * dichiarazioni dei metodi per la lettura dei dati
@@ -26,15 +33,15 @@ import javax.persistence.TemporalType;
  *
  */
 
-public class Iscrizione implements OutDoorSports{
+class Iscrizione implements IscrizioneTO{
 
 	private static final long serialVersionUID = 5440407744318413216L;
 	private Integer idIscrizione;
-	private Escursione escursione;
-	private StatoIscrizione statoIscrizione;
-	private Utente utente;
-	private Date data;
-	private Set<Optional> optionals;
+	private EscursioneTO escursione;
+	private StatoIscrizioneTO statoIscrizione;
+	private UtenteTO utente;
+	private String data;
+	private Set<OptionalTO> optionals;
 
 	public Iscrizione() {
 	}
@@ -58,7 +65,7 @@ public class Iscrizione implements OutDoorSports{
 	/**
 	 * @return l'escursione associata a quell'escursione
 	 */
-	public Escursione getEscursione() {
+	public EscursioneTO getEscursione() {
 		return this.escursione;
 	}
 
@@ -67,14 +74,14 @@ public class Iscrizione implements OutDoorSports{
 	 * 
 	 * @param tblEscursione
 	 */
-	public void setEscursione(Escursione escursione) {
+	public void setEscursione(EscursioneTO escursione) {
 		this.escursione = escursione;
 	}
 
 	/**
 	 * @return lo stato dell'iscrizione
 	 */
-	public StatoIscrizione getStatoIscrizione() {
+	public StatoIscrizioneTO getStatoIscrizione() {
 		return this.statoIscrizione;
 	}
 
@@ -83,14 +90,14 @@ public class Iscrizione implements OutDoorSports{
 	 * 
 	 * @param tblStatoIscrizione
 	 */
-	public void setStatoIscrizione(StatoIscrizione statoIscrizione) {
+	public void setStatoIscrizione(StatoIscrizioneTO statoIscrizione) {
 		this.statoIscrizione = statoIscrizione;
 	}
 
 	/**
 	 * @return l'utente relativo a quella iscrizione
 	 */
-	public Utente getUtente() {
+	public UtenteTO getUtente() {
 		return this.utente;
 	}
 
@@ -99,14 +106,14 @@ public class Iscrizione implements OutDoorSports{
 	 * 
 	 * @param tblUtente
 	 */
-	public void setUtente(Utente utente) {
+	public void setUtente(UtenteTO utente) {
 		this.utente = utente;
 	}
 
 	/**
 	 * @return la data di una iscrizione
 	 */
-	public Date getData() {
+	public String getData() {
 		return this.data;
 	}
 
@@ -115,14 +122,14 @@ public class Iscrizione implements OutDoorSports{
 	 * 
 	 * @param data
 	 */
-	public void setData(Date data) {
+	public void setData(String data) {
 		this.data = data;
 	}
 	
 	/**
 	 * @return un set di optional
 	 */
-	public Set<Optional> getOptionals() {
+	public Set<OptionalTO> getOptionals() {
 		return optionals;
 	}
 
@@ -131,7 +138,8 @@ public class Iscrizione implements OutDoorSports{
 	 * 
 	 * @param optionals
 	 */
-	public void setOptionals(Set<Optional> optionals) {
+	@Override
+	public void setOptionals(Set<OptionalTO> optionals) {
 		this.optionals = optionals;
 	}
 }

@@ -1,10 +1,10 @@
 package outdoorapp.integration.dao.interfaces;
 
 import outdoorapp.exceptions.DatabaseException;
-import outdoorapp.to.Ruoli;
+import outdoorapp.to.interfaces.RuoliTO;
 
-public interface Ruoli_DAO extends GEN_DAO<Ruoli> {
-	Ruoli getRuoloManagerDiSistema() throws DatabaseException;
-	Ruoli getRuoloManagerDiEscursione() throws DatabaseException;
-	Ruoli getRuoloPartecipante() throws DatabaseException;
+public interface Ruoli_DAO extends GEN_DAO<RuoliTO> {
+	RuoliTO getRuoloManagerDiSistema() throws DatabaseException;
+	RuoliTO getRuoloManagerDiEscursione() throws DatabaseException;
+	RuoliTO getRuoloPartecipante() throws DatabaseException;
 }

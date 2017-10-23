@@ -12,6 +12,9 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import outdoorapp.to.interfaces.OutDoorSports;
+import outdoorapp.to.interfaces.StatoEscursioneTO;
+
 /**
  * Classe che rappresenta StatoEscursione. Sono fornite tutte le 
  * dichiarazioni dei metodi per la lettura
@@ -20,13 +23,13 @@ import javax.persistence.Table;
  * @author Francesco Ventura
  *
  */
-public class StatoEscursione implements OutDoorSports{
+class StatoEscursione implements StatoEscursioneTO{
 
 	private static final long serialVersionUID = -3317221757629047387L;
 	private Integer idStatoEscursione;
 	private String nome;
 
-	public StatoEscursione() {
+	StatoEscursione() {
 	}
 
 	/**

@@ -2,8 +2,8 @@ package outdoorapp.integration.dao;
 
 import outdoorapp.integration.dao.enums.DAORequest;
 
-public class FactoryProducer {
-	public static AbstractFactoryDAO getFactory(DAORequest choice){
+public class FactoryProducerDAO {
+	public static DAOFactory getFactory(DAORequest choice){
 		switch(choice){
 		case Users:
 			return new UtenteDAOFactory();

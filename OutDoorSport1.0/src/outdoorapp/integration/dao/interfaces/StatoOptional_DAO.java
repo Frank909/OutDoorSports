@@ -1,10 +1,10 @@
 package outdoorapp.integration.dao.interfaces;
 
 import outdoorapp.exceptions.DatabaseException;
-import outdoorapp.to.StatoOptional;
+import outdoorapp.to.interfaces.StatoOptionalTO;
 
-public interface StatoOptional_DAO extends GEN_DAO<StatoOptional> {
-	StatoOptional getStatoDisattivo() throws DatabaseException;
-	StatoOptional getStatoAttivo() throws DatabaseException;
+public interface StatoOptional_DAO extends GEN_DAO<StatoOptionalTO> {
+	StatoOptionalTO getStatoDisattivo() throws DatabaseException;
+	StatoOptionalTO getStatoAttivo() throws DatabaseException;
 
 }

@@ -4,7 +4,6 @@ import java.util.ArrayDeque;
 import java.util.HashMap;
 import java.util.Queue;
 
-import org.jboss.jandex.Main;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -12,7 +11,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
-import outdoorapp.to.OutDoorSports;
 
 /**
  * ViewCache è una classe realizzata allo scopo di pre-caricare le schermate di visualizzazione richieste

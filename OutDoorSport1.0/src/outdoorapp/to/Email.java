@@ -11,23 +11,28 @@ package outdoorapp.to;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Email{
+import outdoorapp.to.interfaces.EmailTO;
+import outdoorapp.to.interfaces.OutDoorSports;
+import outdoorapp.to.interfaces.UtenteTO;
 
-	private List<Utente> listaDestinatari;
+class Email implements EmailTO{
+
+	private static final long serialVersionUID = 1L;
+	private List<UtenteTO> listaDestinatari;
 	private String messaggio;
 	private String oggetto;
 	
 	/**
 	 * Costruttore della classe Email che inizializza la lista dei destinatari
 	 */
-	public Email() {
-		this.listaDestinatari = new ArrayList<Utente>();
+	Email() {
+		this.listaDestinatari = new ArrayList<UtenteTO>();
 	}
 
 	/**
 	 * @return la lista dei destinatari
 	 */
-	public List<Utente> getListaDestinatari() {
+	public List<UtenteTO> getListaDestinatari() {
 		return listaDestinatari;
 	}
 
@@ -36,7 +41,7 @@ public class Email{
 	 * 
 	 * @param listaDestinatari
 	 */
-	public void setListaDestinatari(List<Utente> listaDestinatari) {
+	public void setListaDestinatari(List<UtenteTO> listaDestinatari) {
 		this.listaDestinatari = listaDestinatari;
 	}
 

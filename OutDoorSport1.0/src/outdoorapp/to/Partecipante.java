@@ -15,6 +15,8 @@ import javax.persistence.TemporalType;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
 
+import outdoorapp.to.interfaces.PartecipanteTO;
+
 /**
  * Classe che rappresenta il i dati del Partecipante. Sono fornite tutte le 
  * dichiarazioni dei metodi per la lettura e la scrittura dei dati
@@ -24,7 +26,7 @@ import org.hibernate.annotations.Parameter;
  *
  */
 
-public class Partecipante extends Utente{
+class Partecipante extends Utente implements PartecipanteTO{
 
 	private static final long serialVersionUID = -1029684532506699639L;
 	private int idPartecipante;
@@ -32,7 +34,7 @@ public class Partecipante extends Utente{
 	private String certificatoSrc;
 	private String dataCertificatoSrc;
 
-	public Partecipante() {
+	Partecipante() {
 		super.setIdUtente(this.getIdPartecipante());
 	}
 

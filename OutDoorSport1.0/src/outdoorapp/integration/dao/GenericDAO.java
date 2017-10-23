@@ -2,7 +2,8 @@ package outdoorapp.integration.dao;
 
 import outdoorapp.exceptions.DatabaseException;
 import outdoorapp.integration.dao.interfaces.GEN_DAO;
-import outdoorapp.to.OutDoorSports;
+import outdoorapp.to.interfaces.OutDoorSports;
+
 import java.util.List;
 
 import org.hibernate.HibernateException;

@@ -2,7 +2,12 @@ package outdoorapp.integration.dao;
 
 import outdoorapp.exceptions.DatabaseException;
 import outdoorapp.integration.dao.interfaces.StatoEscursione_DAO;
-import outdoorapp.to.StatoEscursione;
+import outdoorapp.to.FactoryProducerTO;
+import outdoorapp.to.interfaces.StatoEscursioneTO;
+import outdoorapp.to.interfaces.TOFactory;
+import outdoorapp.to.interfaces.strings.FactoryEnum;
+import outdoorapp.to.interfaces.strings.StatoEnum;
+
 import java.util.List;
 
 /** 
@@ -14,14 +19,15 @@ import java.util.List;
  *
  */
 
-class StatoEscursioneDAO extends GenericDAO<StatoEscursione> implements StatoEscursione_DAO{
+class StatoEscursioneDAO extends GenericDAO<StatoEscursioneTO> implements StatoEscursione_DAO{
 
 	/**
 	 * Il costruttore inizializza l'entità StatoEscursione da utilizzare 
 	 * in tutte le operazioni del DAO.
 	 */
 	public StatoEscursioneDAO() {
-		this.setCurrentClass(new StatoEscursione());
+		TOFactory tofact = FactoryProducerTO.getFactory(FactoryEnum.StatoTOFactory);
+		this.setCurrentClass(tofact.getStatoTO(StatoEnum.StatoEscursione));
 	}
 	
 	/**
@@ -29,8 +35,8 @@ class StatoEscursioneDAO extends GenericDAO<StatoEscursione> implements StatoEsc
 	 * @throws DatabaseException
 	 */
 	@Override
-	public StatoEscursione getStatoEscursioneAnnullata() throws DatabaseException {
-		List<StatoEscursione> statoEscursione = super.executeQuery("boooooooooooh");
+	public StatoEscursioneTO getStatoEscursioneAnnullata() throws DatabaseException {
+		List<StatoEscursioneTO> statoEscursione = super.executeQuery("boooooooooooh");
 		return statoEscursione.get(0);
 	}
 	
@@ -39,8 +45,8 @@ class StatoEscursioneDAO extends GenericDAO<StatoEscursione> implements StatoEsc
 	 * @throws DatabaseException
 	 */
 	@Override
-	public StatoEscursione getStatoEscursioneAperta() throws DatabaseException {
-		List<StatoEscursione> statoEscursione = super.executeQuery("booooooooooh");
+	public StatoEscursioneTO getStatoEscursioneAperta() throws DatabaseException {
+		List<StatoEscursioneTO> statoEscursione = super.executeQuery("booooooooooh");
 		return statoEscursione.get(0);
 	}
 	
@@ -49,8 +55,8 @@ class StatoEscursioneDAO extends GenericDAO<StatoEscursione> implements StatoEsc
 	 * @throws DatabaseException
 	 */
 	@Override
-	public StatoEscursione getStatoEscursioneInCorso() throws DatabaseException {
-		List<StatoEscursione> statoEscursione = super.executeQuery("booooooooooh");
+	public StatoEscursioneTO getStatoEscursioneInCorso() throws DatabaseException {
+		List<StatoEscursioneTO> statoEscursione = super.executeQuery("booooooooooh");
 		return statoEscursione.get(0);
 	}
 
@@ -59,8 +65,8 @@ class StatoEscursioneDAO extends GenericDAO<StatoEscursione> implements StatoEsc
 	 * @throws DatabaseException
 	 */
 	@Override
-	public StatoEscursione getStatoEscursioneChiusa() throws DatabaseException {
-		List<StatoEscursione> statoEscursione = super.executeQuery("boooooooooooooh");
+	public StatoEscursioneTO getStatoEscursioneChiusa() throws DatabaseException {
+		List<StatoEscursioneTO> statoEscursione = super.executeQuery("boooooooooooooh");
 		return statoEscursione.get(0);
 	}
 
@@ -69,8 +75,8 @@ class StatoEscursioneDAO extends GenericDAO<StatoEscursione> implements StatoEsc
 	 * @throws DatabaseException
 	 */
 	@Override
-	public StatoEscursione getStatoEscursioneTerminata() throws DatabaseException {
-		List<StatoEscursione> statoEscursione = super.executeQuery("booooooooooooooh");
+	public StatoEscursioneTO getStatoEscursioneTerminata() throws DatabaseException {
+		List<StatoEscursioneTO> statoEscursione = super.executeQuery("booooooooooooooh");
 		return statoEscursione.get(0);
 	}
 }

@@ -1,8 +1,8 @@
 package outdoorapp.integration.dao.interfaces;
 
 import outdoorapp.exceptions.DatabaseException;
-import outdoorapp.to.ManagerDiSistema;
+import outdoorapp.to.interfaces.ManagerDiSistemaTO;
 
-public interface MDS_DAO extends Utente_DAO<ManagerDiSistema> {
+public interface MDS_DAO extends Utente_DAO<ManagerDiSistemaTO> {
 	public boolean verificaManagerDiSistema() throws DatabaseException;
 }

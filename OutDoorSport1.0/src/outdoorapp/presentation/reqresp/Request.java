@@ -1,7 +1,7 @@
 package outdoorapp.presentation.reqresp;
 
 import javafx.scene.layout.Pane;
-import outdoorapp.to.OutDoorSports;
+import outdoorapp.to.interfaces.OutDoorSports;
 
 /**
  * Classe che gestisce le richieste da mandare ai vari livelli

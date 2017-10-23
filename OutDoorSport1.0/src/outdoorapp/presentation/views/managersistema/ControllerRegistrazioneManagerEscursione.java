@@ -8,18 +8,16 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
 import outdoorapp.presentation.applicationcontroller.ViewCache;
-import outdoorapp.presentation.frontcontroller.FrontController;
 import outdoorapp.presentation.reqresp.Request;
 import outdoorapp.presentation.reqresp.Response;
 import outdoorapp.presentation.views.generic.ControllerRegistrazione;
-import outdoorapp.presentation.views.generic.GenericViewController;
-import outdoorapp.to.ManagerDiEscursione;
-import outdoorapp.to.Partecipante;
-import outdoorapp.to.Utente;
-import outdoorapp.utils.Actions;
-import outdoorapp.utils.Views;
+import outdoorapp.to.FactoryProducerTO;
+import outdoorapp.to.interfaces.ManagerDiEscursioneTO;
+import outdoorapp.to.interfaces.TOFactory;
+import outdoorapp.to.interfaces.UtenteTO;
+import outdoorapp.to.interfaces.strings.FactoryEnum;
+import outdoorapp.to.interfaces.strings.UtenteEnum;
 
 /**
  * Gestisce la registrazione di un nuovo Manager di Escursione da parte del Manager
@@ -48,10 +46,16 @@ public class ControllerRegistrazioneManagerEscursione extends ControllerRegistra
 	@FXML private Button btnRegistraManagerDiEscursione;
 	@FXML private Label lblErrore;
 	
+	private ManagerDiEscursioneTO mde = null;
 	/**
 	 * Costruttore della classe ControllerRegistrazioneManagerEscursione
 	 */
-	public ControllerRegistrazioneManagerEscursione() {}
+	public ControllerRegistrazioneManagerEscursione() {
+		if(mde == null){
+			TOFactory TOFact = FactoryProducerTO.getFactory(FactoryEnum.UtenteTOFactory);
+			mde = (ManagerDiEscursioneTO) TOFact.getUtenteTO(UtenteEnum.ManagerDiEscursione);
+		}
+	}
 	
 	/**
 	 * Metodo che inizializza tutti i campi della finestra
@@ -71,7 +75,6 @@ public class ControllerRegistrazioneManagerEscursione extends ControllerRegistra
 	
 	private void execRegistraManagerDiEscursione() {
 		
-		ManagerDiEscursione mde = new ManagerDiEscursione();
 		mde.setNome(txtNome.getText());
 		mde.setCognome(txtCognome.getText());
 		mde.setCodiceFiscale(txtCF.getText());
@@ -98,7 +101,7 @@ public class ControllerRegistrazioneManagerEscursione extends ControllerRegistra
 	}
 	
 	@Override
-	public void checkDatePicker(Utente utente) {
+	public void checkDatePicker(UtenteTO utente) {
 		if(dateDataNasc.getValue() == null)
 			utente.setDataNascita("");
 		else{

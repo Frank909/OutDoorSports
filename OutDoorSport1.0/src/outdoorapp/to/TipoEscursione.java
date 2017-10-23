@@ -12,6 +12,9 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import outdoorapp.to.interfaces.OutDoorSports;
+import outdoorapp.to.interfaces.TipoEscursioneTO;
+
 /**
  * Classe che rappresenta TipoEscursione. Sono fornite tutte le 
  * dichiarazioni dei metodi per la lettura
@@ -21,14 +24,14 @@ import javax.persistence.Table;
  *
  */
 
-public class TipoEscursione implements OutDoorSports{
+class TipoEscursione implements TipoEscursioneTO{
 
 	private static final long serialVersionUID = -8638030899448668159L;
 	private Integer idTipoEscursione;
 	private String nome;
 	private String descrizione;
 
-	public TipoEscursione() {
+	TipoEscursione() {
 	}
 
 	/**

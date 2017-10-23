@@ -1,18 +1,9 @@
 package outdoorapp.to;
 // Generated 14-set-2017 13.06.34 by Hibernate Tools 5.2.3.Final
 
-import java.util.HashSet;
-import java.util.Set;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import static javax.persistence.GenerationType.IDENTITY;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import outdoorapp.to.interfaces.OptionalTO;
+import outdoorapp.to.interfaces.StatoOptionalTO;
+import outdoorapp.to.interfaces.TipoOptionalTO;
 
 /**
  * Classe che rappresenta lo stato dell'Optional. Sono fornite tutte le 
@@ -23,16 +14,16 @@ import javax.persistence.Table;
  *
  */
 
-public class Optional implements OutDoorSports{
+class Optional implements OptionalTO{
 
 	private static final long serialVersionUID = -7068153413865370972L;
 	private Integer idOptional;
-	private StatoOptional statoOptional;
-	private TipoOptional tipoOptional;
+	private StatoOptionalTO statoOptional;
+	private TipoOptionalTO tipoOptional;
 	private String nome;
 	private String descrizione;
 
-	public Optional() {
+	Optional() {
 	}
 
 	/**
@@ -54,7 +45,7 @@ public class Optional implements OutDoorSports{
 	/**
 	 * @return lo stato dell'optional
 	 */
-	public StatoOptional getStatoOptional() {
+	public StatoOptionalTO getStatoOptional() {
 		return this.statoOptional;
 	}
 
@@ -63,14 +54,14 @@ public class Optional implements OutDoorSports{
 	 * 
 	 * @param tblStatoOptional
 	 */
-	public void setStatoOptional(StatoOptional statoOptional) {
+	public void setStatoOptional(StatoOptionalTO statoOptional) {
 		this.statoOptional = statoOptional;
 	}
 
 	/**
 	 * @return il tipo dell'optional
 	 */
-	public TipoOptional getTipoOptional() {
+	public TipoOptionalTO getTipoOptional() {
 		return this.tipoOptional;
 	}
 
@@ -79,7 +70,7 @@ public class Optional implements OutDoorSports{
 	 * 
 	 * @param tblTipoOptional
 	 */
-	public void setTipoOptional(TipoOptional tipoOptional) {
+	public void setTipoOptional(TipoOptionalTO tipoOptional) {
 		this.tipoOptional = tipoOptional;
 	}
 

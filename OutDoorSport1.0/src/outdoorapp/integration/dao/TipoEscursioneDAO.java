@@ -1,7 +1,11 @@
 package outdoorapp.integration.dao;
 
 import outdoorapp.integration.dao.interfaces.TipoEscursione_DAO;
-import outdoorapp.to.TipoEscursione;
+import outdoorapp.to.FactoryProducerTO;
+import outdoorapp.to.interfaces.TOFactory;
+import outdoorapp.to.interfaces.TipoEscursioneTO;
+import outdoorapp.to.interfaces.strings.FactoryEnum;
+import outdoorapp.to.interfaces.strings.TipoEnum;
 
 /** 
  * Data Access Object per tutte le operazioni CRUD per TipoEscursione.
@@ -12,14 +16,19 @@ import outdoorapp.to.TipoEscursione;
  *
  */
 
-class TipoEscursioneDAO extends GenericDAO<TipoEscursione> implements TipoEscursione_DAO{
+class TipoEscursioneDAO extends GenericDAO<TipoEscursioneTO> implements TipoEscursione_DAO{
 
 	/**
 	 * Il costruttore inizializza l'entità TipoEscursione da utilizzare 
 	 * in tutte le operazioni del DAO.
 	 */
+	private TOFactory TOFactory = null;
+	
 	public TipoEscursioneDAO() {
-		this.setCurrentClass(new TipoEscursione());
+		if(TOFactory == null)
+			TOFactory = FactoryProducerTO.getFactory(FactoryEnum.TipoTOFactory);
+		
+		this.setCurrentClass(TOFactory.getTipoTO(TipoEnum.TipoEscursione));
 	}
 
 }

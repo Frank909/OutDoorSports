@@ -2,10 +2,15 @@ package outdoorapp.integration.dao;
 
 import outdoorapp.exceptions.DatabaseException;
 import outdoorapp.integration.dao.interfaces.Iscrizione_DAO;
-import outdoorapp.to.Escursione;
-import outdoorapp.to.Iscrizione;
-import outdoorapp.to.Partecipante;
-import outdoorapp.to.StatoIscrizione;
+import outdoorapp.to.FactoryProducerTO;
+import outdoorapp.to.interfaces.TOFactory;
+import outdoorapp.to.interfaces.EscursioneTO;
+import outdoorapp.to.interfaces.IscrizioneTO;
+import outdoorapp.to.interfaces.PartecipanteTO;
+import outdoorapp.to.interfaces.StatoIscrizioneTO;
+import outdoorapp.to.interfaces.strings.FactoryEnum;
+import outdoorapp.to.interfaces.strings.GenericEnum;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,14 +24,19 @@ import java.util.List;
  *
  */
 
-class IscrizioneDAO extends GenericDAO<Iscrizione> implements Iscrizione_DAO{
+class IscrizioneDAO extends GenericDAO<IscrizioneTO> implements Iscrizione_DAO{
 
 	/**
 	 * Il costruttore inizializza l'entità Iscrizione da utilizzare 
 	 * in tutte le operazioni del DAO.
 	 */
+	private TOFactory TOFactory = null;
+	
 	public IscrizioneDAO() {
-		this.setCurrentClass(new Iscrizione());
+		if(TOFactory == null)
+			TOFactory = FactoryProducerTO.getFactory(FactoryEnum.GenericTOFactory);
+		
+		this.setCurrentClass(TOFactory.getGenericTO(GenericEnum.Iscrizione));
 	}
 	
 	/**
@@ -34,8 +44,8 @@ class IscrizioneDAO extends GenericDAO<Iscrizione> implements Iscrizione_DAO{
 	 * @throws DatabaseException
 	 */
 	@Override
-	public List<Iscrizione> getAll() throws DatabaseException{
-		List<Iscrizione> response = super.getAll();
+	public List<IscrizioneTO> getAll() throws DatabaseException{
+		List<IscrizioneTO> response = super.getAll();
 		return response;
 	}
 	
@@ -45,7 +55,7 @@ class IscrizioneDAO extends GenericDAO<Iscrizione> implements Iscrizione_DAO{
 	 * @throws DatabaseException
 	 */
 	@Override
-	public Iscrizione annullaIscrizione(Iscrizione iscrizione) throws DatabaseException {
+	public IscrizioneTO annullaIscrizione(IscrizioneTO iscrizione) throws DatabaseException {
 		super.update(iscrizione);
 		return iscrizione;
 	}
@@ -56,8 +66,8 @@ class IscrizioneDAO extends GenericDAO<Iscrizione> implements Iscrizione_DAO{
 	 * @throws DatabaseException
 	 */
 	@Override
-	public boolean esisteIscrizione(Iscrizione iscrizione) throws DatabaseException {
-		Iscrizione newIscrizione = this.findOne(iscrizione.getIdIscrizione());
+	public boolean esisteIscrizione(IscrizioneTO iscrizione) throws DatabaseException {
+		IscrizioneTO newIscrizione = this.findOne(iscrizione.getIdIscrizione());
 		return newIscrizione != null;
 	}
 	
@@ -68,10 +78,10 @@ class IscrizioneDAO extends GenericDAO<Iscrizione> implements Iscrizione_DAO{
 	 * @throws DatabaseException
 	 */
 	@Override
-	public List<Iscrizione> getAllIscrizioniAttive(Partecipante partecipante) throws DatabaseException {
-		List<Partecipante> param = new ArrayList<Partecipante>();
+	public List<IscrizioneTO> getAllIscrizioniAttive(PartecipanteTO partecipante) throws DatabaseException {
+		List<PartecipanteTO> param = new ArrayList<PartecipanteTO>();
 		param.add(partecipante);
-		List<Iscrizione> response = super.executeParamQuery("BOOOOOOOOh", param);
+		List<IscrizioneTO> response = super.executeParamQuery("BOOOOOOOOh", param);
 		return response;
 	}
 	
@@ -79,8 +89,8 @@ class IscrizioneDAO extends GenericDAO<Iscrizione> implements Iscrizione_DAO{
 	 * @return lo stato terminato di un iscrizione
 	 * @throws DatabaseException
 	 */
-	private StatoIscrizione getStatoIscrizioneTerminato() throws DatabaseException {
-		StatoIscrizione statoIscrizione = (StatoIscrizione) super.executeQuery("BOOOOOOH");
+	private StatoIscrizioneTO getStatoIscrizioneTerminato() throws DatabaseException {
+		StatoIscrizioneTO statoIscrizione = (StatoIscrizioneTO) super.executeQuery("BOOOOOOH");
 		return statoIscrizione;
 	}
 	
@@ -92,9 +102,9 @@ class IscrizioneDAO extends GenericDAO<Iscrizione> implements Iscrizione_DAO{
 	 * @throws DatabaseException
 	 */
 	@Override
-	public void terminaIscrizioni(Escursione escursione) throws DatabaseException {
-		List<Iscrizione> response = getIscrizioniAttiveEscursione(escursione);
-		for(Iscrizione iscrizione: response){
+	public void terminaIscrizioni(EscursioneTO escursione) throws DatabaseException {
+		List<IscrizioneTO> response = getIscrizioniAttiveEscursione(escursione);
+		for(IscrizioneTO iscrizione: response){
 			iscrizione.setStatoIscrizione(getStatoIscrizioneTerminato());
 			this.update(iscrizione);
 		}
@@ -106,10 +116,10 @@ class IscrizioneDAO extends GenericDAO<Iscrizione> implements Iscrizione_DAO{
 	 * @throws DatabaseException
 	 */
 	@Override
-	public List<Iscrizione> getIscrizioniAttiveEscursione(Escursione escursione) throws DatabaseException {
-		List<Escursione> param = new ArrayList<Escursione>();
+	public List<IscrizioneTO> getIscrizioniAttiveEscursione(EscursioneTO escursione) throws DatabaseException {
+		List<EscursioneTO> param = new ArrayList<EscursioneTO>();
 		param.add(escursione);
-		List<Iscrizione> response = super.executeParamQuery("boooooooooooooooooh", param);
+		List<IscrizioneTO> response = super.executeParamQuery("boooooooooooooooooh", param);
 		return response;
 	}
 
@@ -119,10 +129,10 @@ class IscrizioneDAO extends GenericDAO<Iscrizione> implements Iscrizione_DAO{
 	 * @throws DatabaseException
 	 */
 	@Override
-	public List<Iscrizione> getAllIscrizioniPartecipante(Partecipante partecipante) throws DatabaseException {
-		List<Partecipante> param = new ArrayList<Partecipante>();
+	public List<IscrizioneTO> getAllIscrizioniPartecipante(PartecipanteTO partecipante) throws DatabaseException {
+		List<PartecipanteTO> param = new ArrayList<PartecipanteTO>();
 		param.add(partecipante);
-		List<Iscrizione> res = super.executeParamQuery("booooooooh", param);
+		List<IscrizioneTO> res = super.executeParamQuery("booooooooh", param);
 		return res;
 	}
 }

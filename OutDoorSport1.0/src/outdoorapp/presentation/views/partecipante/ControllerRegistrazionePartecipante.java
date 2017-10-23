@@ -1,11 +1,6 @@
 package outdoorapp.presentation.views.partecipante;
 
-import java.io.File;
-import java.lang.reflect.Field;
 import java.time.LocalDate;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
@@ -13,16 +8,15 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
-import javafx.stage.FileChooser;
-import outdoorapp.presentation.frontcontroller.FrontController;
 import outdoorapp.presentation.reqresp.Request;
 import outdoorapp.presentation.reqresp.Response;
 import outdoorapp.presentation.views.generic.ControllerRegistrazione;
-import outdoorapp.presentation.views.generic.GenericViewController;
-import outdoorapp.to.Partecipante;
-import outdoorapp.to.Utente;
-import outdoorapp.utils.Actions;
-import outdoorapp.utils.Views;
+import outdoorapp.to.FactoryProducerTO;
+import outdoorapp.to.interfaces.PartecipanteTO;
+import outdoorapp.to.interfaces.TOFactory;
+import outdoorapp.to.interfaces.UtenteTO;
+import outdoorapp.to.interfaces.strings.FactoryEnum;
+import outdoorapp.to.interfaces.strings.UtenteEnum;
 
 /**
  * Gestisce la finestra per la registrazione del partecipante
@@ -51,12 +45,21 @@ public class ControllerRegistrazionePartecipante extends ControllerRegistrazione
 	@FXML private DatePicker dataCertificatoSRC;
 	@FXML private Button btnRegistrati;
 	@FXML private Label lblErrore;
-	
+
+
+	private PartecipanteTO partecipante = null;
+
 	/**
 	 * Costruttore della classe ControllerLogin
 	 */
-	public ControllerRegistrazionePartecipante() {}
-	
+
+	public ControllerRegistrazionePartecipante() {
+		if(partecipante == null){
+			TOFactory TOFact = FactoryProducerTO.getFactory(FactoryEnum.UtenteTOFactory);
+			partecipante = (PartecipanteTO) TOFact.getUtenteTO(UtenteEnum.Partecipante);
+		}
+	}
+
 	/**
 	 * Metodo che inizializza tutti i campi della finestra
 	 */
@@ -64,7 +67,7 @@ public class ControllerRegistrazionePartecipante extends ControllerRegistrazione
 	protected void initialize() {
 		lblErrore.setText("");
 	}
-	
+
 	/**
 	 * Evento associato all'invio dei dati della registrazione di un Partecipante
 	 */
@@ -72,7 +75,7 @@ public class ControllerRegistrazionePartecipante extends ControllerRegistrazione
 	protected void registra() {
 		execRegistraPartecipante();
 	}
-	
+
 	/**
 	 * Evento associato al caricamento del certificato src nel sistema. Viene caricato
 	 * il file in un percorso specifico.
@@ -80,27 +83,26 @@ public class ControllerRegistrazionePartecipante extends ControllerRegistrazione
 	@FXML protected void caricaCertificatoSRC(){
 		execCaricaCertificatoSRC();
 	}
-	
+
 	/**
 	 * Metodo di supporto a caricaCertificatoSRC(). Viene recuperata la richiesta di
 	 * caricamento del certificato e viene mandata ai livelli successivi
 	 */
 	private void execCaricaCertificatoSRC() {
-		Partecipante partecipante = new Partecipante();
+
 		Response response = this.sendRequest(new Request(partecipante, OUTDOORSPORT_SAVE_SRC_CERTIFICATE));
-		
+
 		if(response.toString().equals(RESP_OK))
-			lblSrcCertificatoSRC.setText(((Partecipante)response.getData()).getCertificatoSrc());
+			lblSrcCertificatoSRC.setText(((PartecipanteTO)response.getData()).getCertificatoSrc());
 	}
-	
+
 
 	/**
 	 * Metodo di supporto a registra(). Viene recuperata la richiesta di
 	 * registrazione dei partecipanti e viene mandata ai livelli successivi
 	 */
 	private void execRegistraPartecipante() {
-		
-		Partecipante partecipante = new Partecipante();
+
 		partecipante.setNome(txtNome.getText());
 		partecipante.setCognome(txtCognome.getText());
 		partecipante.setCodiceFiscale(txtCF.getText());
@@ -115,8 +117,8 @@ public class ControllerRegistrazionePartecipante extends ControllerRegistrazione
 			partecipante.setSesso(FEMALE);
 		partecipante.setCertificatoSrc(lblSrcCertificatoSRC.getText());
 		partecipante.setTesseraSanitaria(txtNTSanitaria.getText());
-		
-		
+
+
 		String result = checkErrors(partecipante);
 		if(result.equals("")){
 			Response response = this.sendRequest(new Request(partecipante, OUTDOORSPORT_SAVE_PARTECIPANTE));
@@ -127,7 +129,7 @@ public class ControllerRegistrazionePartecipante extends ControllerRegistrazione
 		}else
 			lblErrore.setText(result);
 	}
-	
+
 
 	/**
 	 * Riscrittura del metodo checkDatePicker dell'interfaccia DateFieldCheck che permette di controllare i datepicker delle schermate
@@ -135,19 +137,19 @@ public class ControllerRegistrazionePartecipante extends ControllerRegistrazione
 	 * @param utente
 	 */
 	@Override
-	public void checkDatePicker(Utente utente) {
+	public void checkDatePicker(UtenteTO utente) {
 		if(dateDataNasc.getValue() == null)
 			utente.setDataNascita("");
 		else{
 			if(!(dateDataNasc.getValue().getYear() >= LocalDate.now().getYear() - 15))
 				utente.setDataNascita(dateDataNasc.getValue().toString());
 		}
-		
+
 		if(dataCertificatoSRC.getValue() == null)
-			((Partecipante)utente).setDataCertificatoSrc("");
+			((PartecipanteTO)utente).setDataCertificatoSrc("");
 		else{
 			if(!(dataCertificatoSRC.getValue().getYear() >= LocalDate.now().getYear()))
-				((Partecipante)utente).setDataCertificatoSrc(dataCertificatoSRC.getValue().toString());
+				((PartecipanteTO)utente).setDataCertificatoSrc(dataCertificatoSRC.getValue().toString());
 		}
 	}
 }

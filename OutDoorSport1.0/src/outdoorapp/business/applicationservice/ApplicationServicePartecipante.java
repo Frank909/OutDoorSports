@@ -8,8 +8,8 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.Alert.AlertType;
 import javafx.stage.FileChooser;
 import outdoorapp.exceptions.DatabaseException;
-import outdoorapp.integration.dao.AbstractFactoryDAO;
-import outdoorapp.integration.dao.FactoryProducer;
+import outdoorapp.integration.dao.DAOFactory;
+import outdoorapp.integration.dao.FactoryProducerDAO;
 import outdoorapp.integration.dao.enums.DAORequest;
 import outdoorapp.integration.dao.enums.State;
 import outdoorapp.integration.dao.enums.Type;
@@ -20,8 +20,9 @@ import outdoorapp.integration.dao.interfaces.StatoUtente_DAO;
 import outdoorapp.presentation.applicationcontroller.ViewCache;
 import outdoorapp.presentation.reqresp.Request;
 import outdoorapp.presentation.reqresp.Response;
-import outdoorapp.to.Partecipante;
-import outdoorapp.to.Utente;
+
+import outdoorapp.to.interfaces.PartecipanteTO;
+import outdoorapp.to.interfaces.UtenteTO;
 import outdoorapp.utils.Actions;
 import outdoorapp.utils.Views;
 
@@ -39,19 +40,20 @@ import outdoorapp.utils.Views;
 
 class ApplicationServicePartecipante implements Views, Actions{
 
-	private AbstractFactoryDAO userFactory = null, 
+	private DAOFactory userFactory = null, 
 			statoFactory = null, tipoFactory = null;
 	
 	private Partecipante_DAO partecipante_dao = null;
+	private PartecipanteTO partecipante = null;
 	
 
 	/**
 	 * Costruttore che inizializza il DAO del Partecipante
 	 */
 	public ApplicationServicePartecipante() {
-		userFactory = FactoryProducer.getFactory(DAORequest.Users);
-		statoFactory = FactoryProducer.getFactory(DAORequest.State);
-		tipoFactory = FactoryProducer.getFactory(DAORequest.Type);
+		userFactory = FactoryProducerDAO.getFactory(DAORequest.Users);
+		statoFactory = FactoryProducerDAO.getFactory(DAORequest.State);
+		tipoFactory = FactoryProducerDAO.getFactory(DAORequest.Type);
 		partecipante_dao =  (Partecipante_DAO) userFactory.getUtenteDAO(Users.Partecipante);
 	}
 
@@ -63,7 +65,7 @@ class ApplicationServicePartecipante implements Views, Actions{
 	 * @return response: una response in base alla request
 	 */
 	public Response caricaCertificatoSRC(Request request){
-		Partecipante partecipante = (Partecipante) request.getData();
+		partecipante = (PartecipanteTO) request.getData();
 		Response response = new Response();
 		FileChooser fileChooser = new FileChooser();
 		fileChooser.setTitle("Carica Certificato SRC");
@@ -91,11 +93,11 @@ class ApplicationServicePartecipante implements Views, Actions{
 		Response response = new Response();
 
 		try {
-			if(!partecipante_dao.esisteEmail((Utente)request.getData()) && !partecipante_dao.esisteUsername((Utente)request.getData())){
+			if(!partecipante_dao.esisteEmail((UtenteTO)request.getData()) && !partecipante_dao.esisteUsername((UtenteTO)request.getData())){
 				Ruoli_DAO ruoliDao = (Ruoli_DAO) tipoFactory.getTipoDAO(Type.Ruolo);
 				StatoUtente_DAO statoUtenteDao = (StatoUtente_DAO) statoFactory.getStatoDAO(State.User);
 				
-				Partecipante partecipante = (Partecipante)request.getData();
+				partecipante = (PartecipanteTO)request.getData();
 				uploadCertificatoSRC(partecipante);
 				partecipante.setRuolo(ruoliDao.getRuoloPartecipante());
 				partecipante.setStatoUtente(statoUtenteDao.getStatoAttivo());
@@ -122,7 +124,7 @@ class ApplicationServicePartecipante implements Views, Actions{
 	 * 
 	 * @param username
 	 */
-	private void uploadCertificatoSRC(Partecipante partecipante){
+	private void uploadCertificatoSRC(PartecipanteTO partecipante){
 		File rootDir = new File(ROOT_CERTIFICATE);
 		if (!rootDir.exists()) {
 			try{

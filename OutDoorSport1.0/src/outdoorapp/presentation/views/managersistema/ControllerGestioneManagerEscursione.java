@@ -7,7 +7,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import outdoorapp.presentation.frontcontroller.FrontController;
 import outdoorapp.presentation.views.generic.GenericViewController;
-import outdoorapp.to.ManagerDiEscursione;
+import outdoorapp.to.interfaces.ManagerDiEscursioneTO;
 
 /**
  * Gestisce i manager di escursione da parte del Manager di Sistema. Il Manager
@@ -23,11 +23,11 @@ public class ControllerGestioneManagerEscursione extends GenericViewController{
 
 	@FXML private TextField txtSearchManagerEscursione;
 	@FXML private Button btnSearchManagerEscursione;
-	@FXML private TableView<ManagerDiEscursione> mTableManagerEscursione;
-	@FXML private TableColumn<ManagerDiEscursione, String> columnNomeManagerDiEscursione;
-	@FXML private TableColumn<ManagerDiEscursione, String> columnCognomeManagerDiEscursione;
-	@FXML private TableColumn<ManagerDiEscursione, String> columnEmailManagerDiEscursione;
-	@FXML private TableColumn<ManagerDiEscursione, String> columnCFManagerDiEscursione;
+	@FXML private TableView<ManagerDiEscursioneTO> mTableManagerEscursione;
+	@FXML private TableColumn<ManagerDiEscursioneTO, String> columnNomeManagerDiEscursione;
+	@FXML private TableColumn<ManagerDiEscursioneTO, String> columnCognomeManagerDiEscursione;
+	@FXML private TableColumn<ManagerDiEscursioneTO, String> columnEmailManagerDiEscursione;
+	@FXML private TableColumn<ManagerDiEscursioneTO, String> columnCFManagerDiEscursione;
 	@FXML private Button btnModificaManagerDiEscursione;
 	@FXML private Button btnDettagliManagerDiEscursione;
 	

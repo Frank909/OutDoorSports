@@ -12,6 +12,9 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import outdoorapp.to.interfaces.OutDoorSports;
+import outdoorapp.to.interfaces.TipoOptionalTO;
+
 /**
  * Classe che rappresenta lo stato del TipoOptional. Sono fornite tutte le 
  * dichiarazioni dei metodi per la lettura dei dati
@@ -21,14 +24,14 @@ import javax.persistence.Table;
  *
  */
 
-public class TipoOptional implements OutDoorSports{
+class TipoOptional implements TipoOptionalTO{
 
 	private static final long serialVersionUID = -7551037113422783655L;
 	private Integer idTipoOptional;
 	private String nome;
 	private double costo;
 
-	public TipoOptional() {
+	TipoOptional() {
 	}
 
 	/**

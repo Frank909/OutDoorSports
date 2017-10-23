@@ -4,11 +4,11 @@ import outdoorapp.integration.dao.enums.Generic;
 import outdoorapp.integration.dao.enums.State;
 import outdoorapp.integration.dao.enums.Type;
 import outdoorapp.integration.dao.enums.Users;
-import outdoorapp.to.Utente;
+import outdoorapp.to.interfaces.UtenteTO;
 
-public class UtenteDAOFactory implements AbstractFactoryDAO{
+public class UtenteDAOFactory implements DAOFactory{
 
-	public UtenteDAO<? extends Utente> getUtenteDAO(Users choice){
+	public UtenteDAO<? extends UtenteTO> getUtenteDAO(Users choice){
 		switch(choice){
 		case ManagerDiSistema:
 			return new ManagerDiSistemaDAO();

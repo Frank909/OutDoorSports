@@ -5,7 +5,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import javafx.fxml.FXML;
-import outdoorapp.to.Utente;
+import outdoorapp.to.interfaces.UtenteTO;
 
 public abstract class ControllerRegistrazione extends GenericViewController{
 
@@ -23,7 +23,7 @@ public abstract class ControllerRegistrazione extends GenericViewController{
 	 * @param utente: manager di sistema
 	 * @return result: stringa errori
 	 */
-	protected String checkErrors(Utente utente){
+	protected String checkErrors(UtenteTO utente){
 		String result = "";
 
 		checkDatePicker(utente);
@@ -85,6 +85,6 @@ public abstract class ControllerRegistrazione extends GenericViewController{
 	 * di inserimento dati. Il metodo verrà riscritto in base alle esigenze.
 	 * @param utente: Utente in fase di registrazione su cui applicare i controlli
 	 */
-	public void checkDatePicker(Utente utente){};
+	public void checkDatePicker(UtenteTO utente){};
 	
 }

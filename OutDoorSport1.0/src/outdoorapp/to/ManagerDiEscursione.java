@@ -12,6 +12,8 @@ import javax.persistence.Table;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
 
+import outdoorapp.to.interfaces.ManagerDiEscursioneTO;
+
 /**
  * Metodo che rappresenta il i dati del Manager di Escursione. Sono fornite tutte le 
  * dichiarazioni dei metodi per la lettura e la scrittura dei dati
@@ -21,13 +23,13 @@ import org.hibernate.annotations.Parameter;
  *
  */
 
-public class ManagerDiEscursione extends Utente{
+class ManagerDiEscursione extends Utente implements ManagerDiEscursioneTO{
 
 	private static final long serialVersionUID = -4507785182150099517L;
 	private int idMde;
 	private double stipendio;
 
-	public ManagerDiEscursione() {
+	ManagerDiEscursione() {
 		super.setIdUtente(this.getIdManagerDiEscursione());
 	}
 

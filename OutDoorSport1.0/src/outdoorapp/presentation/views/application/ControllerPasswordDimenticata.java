@@ -7,13 +7,14 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import outdoorapp.presentation.frontcontroller.FrontController;
 import outdoorapp.presentation.reqresp.Request;
 import outdoorapp.presentation.reqresp.Response;
 import outdoorapp.presentation.views.generic.GenericViewController;
-import outdoorapp.to.Utente;
-import outdoorapp.utils.Actions;
-import outdoorapp.utils.Views;
+import outdoorapp.to.FactoryProducerTO;
+import outdoorapp.to.interfaces.TOFactory;
+import outdoorapp.to.interfaces.UtenteTO;
+import outdoorapp.to.interfaces.strings.FactoryEnum;
+import outdoorapp.to.interfaces.strings.UtenteEnum;
 
 /**
  * Gestisce la finestra per il recupero della password
@@ -29,11 +30,17 @@ public class ControllerPasswordDimenticata extends GenericViewController{
 	@FXML private TextField txtEmail;
 	@FXML private Label lblErrore;
 	
+	private UtenteTO utente = null;
 	
 	/**
 	 * Costruttore della classe ControllerPasswordDimenticata
 	 */
-	public ControllerPasswordDimenticata() {}
+	public ControllerPasswordDimenticata() {
+		if(utente == null){
+			TOFactory TOFact = FactoryProducerTO.getFactory(FactoryEnum.UtenteTOFactory);
+			utente = (UtenteTO) TOFact.getUtenteTO(UtenteEnum.Utente);
+		}
+	}
 	
 	/**
 	 * Metodo che inizializza tutti i campi della finestra
@@ -56,7 +63,6 @@ public class ControllerPasswordDimenticata extends GenericViewController{
 	 * effettuata la richiesta di invio di una nuova password.
 	 */
 	private void execRequestNewPassword() {
-		Utente utente = new Utente();
 		utente.setEmail(txtEmail.getText());
 		
 		Response response = this.sendRequest(new Request(utente, OUTDOORSPORT_REQUEST_NEW_PASSWORD));

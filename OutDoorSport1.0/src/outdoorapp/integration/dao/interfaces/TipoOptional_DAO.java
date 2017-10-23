@@ -1,7 +1,7 @@
 package outdoorapp.integration.dao.interfaces;
 
-import outdoorapp.to.TipoOptional;
+import outdoorapp.to.interfaces.TipoOptionalTO;
 
-public interface TipoOptional_DAO extends GEN_DAO<TipoOptional> {
+public interface TipoOptional_DAO extends GEN_DAO<TipoOptionalTO> {
 
 }

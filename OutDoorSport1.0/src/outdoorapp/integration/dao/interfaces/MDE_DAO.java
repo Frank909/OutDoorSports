@@ -1,6 +1,6 @@
 package outdoorapp.integration.dao.interfaces;
 
-import outdoorapp.to.ManagerDiEscursione;
+import outdoorapp.to.interfaces.ManagerDiEscursioneTO;
 
-public interface MDE_DAO extends Utente_DAO<ManagerDiEscursione> {
+public interface MDE_DAO extends Utente_DAO<ManagerDiEscursioneTO> {
 }

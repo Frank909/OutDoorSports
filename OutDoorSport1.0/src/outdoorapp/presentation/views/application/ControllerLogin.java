@@ -8,7 +8,11 @@ import javafx.scene.control.TextField;
 import outdoorapp.presentation.reqresp.Request;
 import outdoorapp.presentation.reqresp.Response;
 import outdoorapp.presentation.views.generic.GenericViewController;
-import outdoorapp.to.Utente;
+import outdoorapp.to.FactoryProducerTO;
+import outdoorapp.to.interfaces.TOFactory;
+import outdoorapp.to.interfaces.UtenteTO;
+import outdoorapp.to.interfaces.strings.FactoryEnum;
+import outdoorapp.to.interfaces.strings.UtenteEnum;
 
 /**
  * Gestisce la view per la schermata di login
@@ -29,7 +33,14 @@ public class ControllerLogin extends GenericViewController{
 	/**
 	 * Costruttore della classe ControllerLogin
 	 */
-	public ControllerLogin() {}
+	private UtenteTO utente = null;
+	
+	public ControllerLogin() {
+		if(utente == null){
+			TOFactory TOFact = FactoryProducerTO.getFactory(FactoryEnum.UtenteTOFactory);
+			utente = (UtenteTO) TOFact.getUtenteTO(UtenteEnum.Utente);
+		}
+	}
 	
 	/**
 	 * Metodo che inizializza tutti i campi della finestra
@@ -53,7 +64,6 @@ public class ControllerLogin extends GenericViewController{
 	 * effettuata la richiesta di login nei livelli sottostanti
 	 */
 	private void execLogin(){
-		Utente utente = new Utente();
 		utente.setUsername(txtUsername.getText());
 		utente.setPassword(txtPassword.getText());
 		Request req = new Request(utente, OUTDOORSPORT_EXECUTE_LOGIN);
@@ -70,7 +80,6 @@ public class ControllerLogin extends GenericViewController{
 	 * Metodo che visualizza a video la finestra per la richiesta di una nuova password
 	 */
 	@FXML protected void richiediNuovaPassword(){
-		//da fare con il frontcontroller
 		this.sendRequest(new Request(VIEW_PASSWORD_DIMENTICATA));
 	}
 	
@@ -78,7 +87,6 @@ public class ControllerLogin extends GenericViewController{
 	 * Metodo che visualizza a video la finestra della registrazione del partecipante
 	 */
 	@FXML protected void eseguiSignIn(){
-		//da fare con il frontcontroller
 		this.sendRequest(new Request(VIEW_REGISTRAZIONE_PARTECIPANTE));
 	}
 }

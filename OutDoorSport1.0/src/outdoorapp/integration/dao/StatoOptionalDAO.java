@@ -2,7 +2,11 @@ package outdoorapp.integration.dao;
 
 import outdoorapp.exceptions.DatabaseException;
 import outdoorapp.integration.dao.interfaces.StatoOptional_DAO;
-import outdoorapp.to.StatoOptional;
+import outdoorapp.to.FactoryProducerTO;
+import outdoorapp.to.interfaces.StatoOptionalTO;
+import outdoorapp.to.interfaces.TOFactory;
+import outdoorapp.to.interfaces.strings.FactoryEnum;
+import outdoorapp.to.interfaces.strings.StatoEnum;
 
 /** 
  * Data Access Object per tutte le operazioni CRUD per StatoOptional.
@@ -13,14 +17,15 @@ import outdoorapp.to.StatoOptional;
  *
  */
 
-class StatoOptionalDAO extends GenericDAO<StatoOptional> implements StatoOptional_DAO{
+class StatoOptionalDAO extends GenericDAO<StatoOptionalTO> implements StatoOptional_DAO{
 
 	/**
 	 * Il costruttore inizializza l'entità StatoOptional da utilizzare 
 	 * in tutte le operazioni del DAO.
 	 */
 	public StatoOptionalDAO() {
-		this.setCurrentClass(new StatoOptional());
+		TOFactory tofact = FactoryProducerTO.getFactory(FactoryEnum.StatoTOFactory);
+		this.setCurrentClass(tofact.getStatoTO(StatoEnum.StatoOptional));
 	}
 	
 	/**
@@ -28,7 +33,7 @@ class StatoOptionalDAO extends GenericDAO<StatoOptional> implements StatoOptiona
 	 * @throws DatabaseException
 	 */
 	@Override
-	public StatoOptional getStatoDisattivo() throws DatabaseException {
+	public StatoOptionalTO getStatoDisattivo() throws DatabaseException {
 		return this.findOne(0);
 	}
 	
@@ -37,7 +42,7 @@ class StatoOptionalDAO extends GenericDAO<StatoOptional> implements StatoOptiona
 	 * @throws DatabaseException
 	 */
 	@Override
-	public StatoOptional getStatoAttivo() throws DatabaseException {
+	public StatoOptionalTO getStatoAttivo() throws DatabaseException {
 		return this.findOne(1);
 	}
 }

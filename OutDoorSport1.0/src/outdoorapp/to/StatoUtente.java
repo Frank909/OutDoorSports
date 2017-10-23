@@ -12,6 +12,9 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import outdoorapp.to.interfaces.OutDoorSports;
+import outdoorapp.to.interfaces.StatoUtenteTO;
+
 /**
  * Classe che rappresenta lo stato dell'Utente. Sono fornite tutte le 
  * dichiarazioni dei metodi per la lettura dei dati
@@ -21,16 +24,16 @@ import javax.persistence.Table;
  *
  */
 
-public class StatoUtente implements OutDoorSports{
+class StatoUtente implements StatoUtenteTO{
 
 	private static final long serialVersionUID = -2947070361442588483L;
 	private Integer idStatoUtente;
 	private String nome;
 
-	public StatoUtente() {
+	StatoUtente() {
 	}
 
-	public StatoUtente(String nome) {
+	StatoUtente(String nome) {
 		this.nome = nome;
 	}
 

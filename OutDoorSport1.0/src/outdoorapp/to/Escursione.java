@@ -2,20 +2,12 @@ package outdoorapp.to;
 // Generated 14-set-2017 13.06.34 by Hibernate Tools 5.2.3.Final
 
 import java.util.Date;
-import java.util.HashSet;
 import java.util.Set;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import static javax.persistence.GenerationType.IDENTITY;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import outdoorapp.to.interfaces.EscursioneTO;
+import outdoorapp.to.interfaces.OptionalTO;
+import outdoorapp.to.interfaces.StatoEscursioneTO;
+import outdoorapp.to.interfaces.TipoEscursioneTO;
+import outdoorapp.to.interfaces.UtenteTO;
 
 /**
  * Classe che rappresenta lo stato dell'Escursione. Sono fornite tutte le 
@@ -26,22 +18,22 @@ import javax.persistence.TemporalType;
  *
  */
 
-public class Escursione implements OutDoorSports{
+class Escursione implements EscursioneTO{
 
 	private static final long serialVersionUID = -8060673121786005549L;
 	private Integer idEscursione;
-	private StatoEscursione statoEscursione;
-	private TipoEscursione tipoEscursione;
-	private Utente utente;
+	private StatoEscursioneTO statoEscursione;
+	private TipoEscursioneTO tipoEscursione;
+	private UtenteTO utente;
 	private String nome;
 	private Date data;
 	private int numberMin;
 	private int numberMax;
 	private double costo;
 	private String descrizione;
-	private Set<Optional> optionals;
+	private Set<OptionalTO> optionals;
 
-	public Escursione() {
+	Escursione() {
 	}
 
 	/**
@@ -63,7 +55,7 @@ public class Escursione implements OutDoorSports{
 	/**
 	 * @return lo stato dell'Escursione
 	 */
-	public StatoEscursione getStatoEscursione() {
+	public StatoEscursioneTO getStatoEscursione() {
 		return this.statoEscursione;
 	}
 
@@ -72,14 +64,14 @@ public class Escursione implements OutDoorSports{
 	 * 
 	 * @param tblStatoEscursione
 	 */
-	public void setStatoEscursione(StatoEscursione statoEscursione) {
+	public void setStatoEscursione(StatoEscursioneTO statoEscursione) {
 		this.statoEscursione = statoEscursione;
 	}
 
 	/**
 	 * @return il tipo dell'escursione
 	 */
-	public TipoEscursione getTipoEscursione() {
+	public TipoEscursioneTO getTipoEscursione() {
 		return this.tipoEscursione;
 	}
 
@@ -88,14 +80,14 @@ public class Escursione implements OutDoorSports{
 	 * 
 	 * @param tblTipoEscursione
 	 */
-	public void setTipoEscursione(TipoEscursione tipoEscursione) {
+	public void setTipoEscursione(TipoEscursioneTO tipoEscursione) {
 		this.tipoEscursione = tipoEscursione;
 	}
 
 	/**
 	 * @return l'utente associato a una determinata Escursione
 	 */
-	public Utente getUtente() {
+	public UtenteTO getUtente() {
 		return this.utente;
 	}
 
@@ -104,7 +96,7 @@ public class Escursione implements OutDoorSports{
 	 * 
 	 * @param tblUtente
 	 */
-	public void setUtente(Utente utente) {
+	public void setUtente(UtenteTO utente) {
 		this.utente = utente;
 	}
 
@@ -207,7 +199,7 @@ public class Escursione implements OutDoorSports{
 	/**
 	 * @return un set di optional
 	 */
-	public Set<Optional> getOptionals() {
+	public Set<OptionalTO> getOptionals() {
 		return optionals;
 	}
 
@@ -216,7 +208,7 @@ public class Escursione implements OutDoorSports{
 	 * 
 	 * @param optionals
 	 */
-	public void setOptionals(Set<Optional> optionals) {
+	public void setOptionals(Set<OptionalTO> optionals) {
 		this.optionals = optionals;
 	}
 

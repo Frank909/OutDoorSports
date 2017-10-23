@@ -1,7 +1,6 @@
 package outdoorapp.presentation.reqresp;
 
-import outdoorapp.to.OutDoorSports;
-import outdoorapp.to.Utente;
+import outdoorapp.to.interfaces.OutDoorSports;
 
 /**
  * Classe che gestisce le risposte da ricevere dai vari livelli

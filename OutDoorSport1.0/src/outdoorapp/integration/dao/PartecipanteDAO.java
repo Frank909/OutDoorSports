@@ -2,7 +2,13 @@ package outdoorapp.integration.dao;
 
 import outdoorapp.exceptions.DatabaseException;
 import outdoorapp.integration.dao.interfaces.Partecipante_DAO;
-import outdoorapp.to.Partecipante;
+import outdoorapp.to.FactoryProducerTO;
+import outdoorapp.to.interfaces.ManagerDiEscursioneTO;
+import outdoorapp.to.interfaces.PartecipanteTO;
+import outdoorapp.to.interfaces.TOFactory;
+import outdoorapp.to.interfaces.strings.FactoryEnum;
+import outdoorapp.to.interfaces.strings.UtenteEnum;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,14 +21,15 @@ import java.util.List;
  *
  */
 
-class PartecipanteDAO extends UtenteDAO<Partecipante> implements Partecipante_DAO{
+class PartecipanteDAO extends UtenteDAO<PartecipanteTO> implements Partecipante_DAO{
 
 	/**
 	 * Il costruttore inizializza l'entità Partecipante da utilizzare 
 	 * in tutte le operazioni del DAO.
 	 */
 	public PartecipanteDAO() {
-		this.setCurrentClass(new Partecipante());
+		TOFactory tofact = FactoryProducerTO.getFactory(FactoryEnum.UtenteTOFactory);
+		this.setCurrentClass(tofact.getUtenteTO(UtenteEnum.Partecipante));
 	}
 	
 	/**
@@ -31,11 +38,11 @@ class PartecipanteDAO extends UtenteDAO<Partecipante> implements Partecipante_DA
 	 * @throws DatabaseException
 	 */
 	@Override
-	public Partecipante readByCodiceFiscale(String codiceFiscale) throws DatabaseException {
+	public PartecipanteTO readByCodiceFiscale(String codiceFiscale) throws DatabaseException {
 		List<String> param = new ArrayList<String>();
 		param.add(codiceFiscale);
-		List<Partecipante> list = super.executeParamQuery("booooooooooooooooooh", param);
-		Partecipante response = (Partecipante)list.get(0);
+		List<PartecipanteTO> list = super.executeParamQuery("booooooooooooooooooh", param);
+		PartecipanteTO response = (PartecipanteTO)list.get(0);
 		return response;
 	}
 	
@@ -45,11 +52,11 @@ class PartecipanteDAO extends UtenteDAO<Partecipante> implements Partecipante_DA
 	 * @throws DatabaseException
 	 */
 	@Override
-	public Partecipante readByUsername(String username) throws DatabaseException {
+	public PartecipanteTO readByUsername(String username) throws DatabaseException {
 		List<String> param = new ArrayList<String>();
 		param.add(username);
-		List<Partecipante> list = super.executeParamQuery("boooooooooooooh", param);
-		Partecipante response = (Partecipante)list.get(0);
+		List<PartecipanteTO> list = super.executeParamQuery("boooooooooooooh", param);
+		PartecipanteTO response = (PartecipanteTO)list.get(0);
 		return response;
 	}
 	
@@ -58,7 +65,7 @@ class PartecipanteDAO extends UtenteDAO<Partecipante> implements Partecipante_DA
 	 * @throws DatabaseException
 	 */
 	@Override
-	public List<Partecipante> getAllPartecipante() throws DatabaseException {
+	public List<PartecipanteTO> getAllPartecipante() throws DatabaseException {
 		return super.executeQuery("boooooooooooooooooooh");
 	}
 }

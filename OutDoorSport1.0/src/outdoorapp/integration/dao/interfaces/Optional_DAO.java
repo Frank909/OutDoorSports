@@ -3,12 +3,12 @@ package outdoorapp.integration.dao.interfaces;
 import java.util.List;
 
 import outdoorapp.exceptions.DatabaseException;
-import outdoorapp.to.Optional;
-import outdoorapp.to.TipoOptional;
+import outdoorapp.to.interfaces.OptionalTO;
+import outdoorapp.to.interfaces.TipoOptionalTO;
 
-public interface Optional_DAO extends GEN_DAO<Optional> {
-	Optional disattivaOptional(Optional optional) throws DatabaseException;
-	List<Optional> getOptionalAttiviByTipo(TipoOptional tipoOptional) throws DatabaseException;
-	List<Optional> getOptionalByTipo(TipoOptional tipoOptional) throws DatabaseException ;
+public interface Optional_DAO extends GEN_DAO<OptionalTO> {
+	OptionalTO disattivaOptional(OptionalTO optional) throws DatabaseException;
+	List<OptionalTO> getOptionalAttiviByTipo(TipoOptionalTO tipoOptional) throws DatabaseException;
+	List<OptionalTO> getOptionalByTipo(TipoOptionalTO tipoOptional) throws DatabaseException ;
 	
 }

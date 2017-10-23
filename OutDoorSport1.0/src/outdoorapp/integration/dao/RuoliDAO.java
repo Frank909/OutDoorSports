@@ -2,7 +2,13 @@ package outdoorapp.integration.dao;
 
 import outdoorapp.exceptions.DatabaseException;
 import outdoorapp.integration.dao.interfaces.Ruoli_DAO;
-import outdoorapp.to.Ruoli;
+import outdoorapp.to.FactoryProducerTO;
+import outdoorapp.to.interfaces.ManagerDiEscursioneTO;
+import outdoorapp.to.interfaces.RuoliTO;
+import outdoorapp.to.interfaces.TOFactory;
+import outdoorapp.to.interfaces.strings.FactoryEnum;
+import outdoorapp.to.interfaces.strings.TipoEnum;
+import outdoorapp.to.interfaces.strings.UtenteEnum;
 
 /** 
  * Data Access Object per tutte le operazioni CRUD per Ruoli.
@@ -13,14 +19,15 @@ import outdoorapp.to.Ruoli;
  *
  */
 
-class RuoliDAO extends GenericDAO<Ruoli> implements Ruoli_DAO{
+class RuoliDAO extends GenericDAO<RuoliTO> implements Ruoli_DAO{
 
 	/**
 	 * Il costruttore inizializza l'entità Ruoli da utilizzare 
 	 * in tutte le operazioni del DAO.
 	 */
 	public RuoliDAO() {
-		this.setCurrentClass(new Ruoli());
+		TOFactory tofact = FactoryProducerTO.getFactory(FactoryEnum.TipoTOFactory);
+		this.setCurrentClass(tofact.getTipoTO(TipoEnum.Ruoli));
 	}
 	
 	/**
@@ -28,7 +35,7 @@ class RuoliDAO extends GenericDAO<Ruoli> implements Ruoli_DAO{
 	 * @throws DatabaseException
 	 */
 	@Override
-	public Ruoli getRuoloManagerDiSistema() throws DatabaseException {
+	public RuoliTO getRuoloManagerDiSistema() throws DatabaseException {
 		return this.findOne(0);
 	}
 	
@@ -37,7 +44,7 @@ class RuoliDAO extends GenericDAO<Ruoli> implements Ruoli_DAO{
 	 * @throws DatabaseException
 	 */
 	@Override
-	public Ruoli getRuoloManagerDiEscursione() throws DatabaseException {
+	public RuoliTO getRuoloManagerDiEscursione() throws DatabaseException {
 		return this.findOne(1);
 	}
 	
@@ -46,7 +53,7 @@ class RuoliDAO extends GenericDAO<Ruoli> implements Ruoli_DAO{
 	 * @throws DatabaseException
 	 */
 	@Override
-	public Ruoli getRuoloPartecipante() throws DatabaseException {
+	public RuoliTO getRuoloPartecipante() throws DatabaseException {
 		return this.findOne(2);
 	}
 

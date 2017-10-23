@@ -14,6 +14,12 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import outdoorapp.to.interfaces.EscursioneTO;
+import outdoorapp.to.interfaces.OptionalEscursioneTO;
+import outdoorapp.to.interfaces.OptionalIscrizioneTO;
+import outdoorapp.to.interfaces.OptionalTO;
+import outdoorapp.to.interfaces.OutDoorSports;
+
 /**
  * Classe che rappresenta lo stato di OptionalEscursione. Sono fornite tutte le 
  * dichiarazioni dei metodi per la lettura dei dati
@@ -22,24 +28,24 @@ import javax.persistence.Table;
  * @author Francesco Ventura
  *
  */
-public class OptionalEscursione implements OutDoorSports{
+class OptionalEscursione implements OptionalEscursioneTO{
 
 	private static final long serialVersionUID = -2717683768500440335L;
 	private Integer id;
-	private Escursione tblEscursione;
-	private Optional tblOptional;
-	private Set<OptionalIscrizione> tblOptionalIscriziones = new HashSet<OptionalIscrizione>(0);
+	private EscursioneTO tblEscursione;
+	private OptionalTO tblOptional;
+	private Set<OptionalIscrizioneTO> tblOptionalIscriziones = new HashSet<OptionalIscrizioneTO>(0);
 
-	public OptionalEscursione() {
+	OptionalEscursione() {
 	}
 
-	public OptionalEscursione(Escursione tblEscursione, Optional tblOptional) {
+	OptionalEscursione(EscursioneTO tblEscursione, OptionalTO tblOptional) {
 		this.tblEscursione = tblEscursione;
 		this.tblOptional = tblOptional;
 	}
 
-	public OptionalEscursione(Escursione tblEscursione, Optional tblOptional,
-			Set<OptionalIscrizione> tblOptionalIscriziones) {
+	OptionalEscursione(EscursioneTO tblEscursione, OptionalTO tblOptional,
+			Set<OptionalIscrizioneTO> tblOptionalIscriziones) {
 		this.tblEscursione = tblEscursione;
 		this.tblOptional = tblOptional;
 		this.tblOptionalIscriziones = tblOptionalIscriziones;
@@ -64,7 +70,7 @@ public class OptionalEscursione implements OutDoorSports{
 	/**
 	 * @return l'escursione collegata all'optional
 	 */
-	public Escursione getEscursione() {
+	public EscursioneTO getEscursione() {
 		return this.tblEscursione;
 	}
 
@@ -73,14 +79,14 @@ public class OptionalEscursione implements OutDoorSports{
 	 * 
 	 * @param tblEscursione
 	 */
-	public void setEscursione(Escursione tblEscursione) {
+	public void setEscursione(EscursioneTO tblEscursione) {
 		this.tblEscursione = tblEscursione;
 	}
 
 	/**
 	 * @return l'optional collegato all'escursione
 	 */
-	public Optional getOptional() {
+	public OptionalTO getOptional() {
 		return this.tblOptional;
 	}
 
@@ -89,14 +95,14 @@ public class OptionalEscursione implements OutDoorSports{
 	 * 
 	 * @param tblOptional
 	 */
-	public void setOptional(Optional tblOptional) {
+	public void setOptional(OptionalTO tblOptional) {
 		this.tblOptional = tblOptional;
 	}
 
 	/**
 	 * @return gli optional dell'iscrizione
 	 */
-	public Set<OptionalIscrizione> getOptionalIscrizione() {
+	public Set<OptionalIscrizioneTO> getOptionalIscrizione() {
 		return this.tblOptionalIscriziones;
 	}
 
@@ -105,7 +111,7 @@ public class OptionalEscursione implements OutDoorSports{
 	 * 
 	 * @param tblOptionalIscriziones
 	 */
-	public void setOptionalIscrizione(Set<OptionalIscrizione> tblOptionalIscriziones) {
+	public void setOptionalIscrizione(Set<OptionalIscrizioneTO> tblOptionalIscriziones) {
 		this.tblOptionalIscriziones = tblOptionalIscriziones;
 	}
 

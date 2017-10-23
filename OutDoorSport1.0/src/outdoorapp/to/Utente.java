@@ -23,6 +23,10 @@ import javax.persistence.UniqueConstraint;
 import org.hibernate.annotations.NamedQueries;
 import org.hibernate.annotations.NamedQuery;
 
+import outdoorapp.to.interfaces.RuoliTO;
+import outdoorapp.to.interfaces.StatoUtenteTO;
+import outdoorapp.to.interfaces.UtenteTO;
+
 /**
  * Classe che rappresenta Utente. Sono fornite tutte le 
  * dichiarazioni dei metodi per la lettura e la scrittura dei dati
@@ -32,12 +36,12 @@ import org.hibernate.annotations.NamedQuery;
  *
  */
 
-public class Utente implements OutDoorSports{
+class Utente implements UtenteTO{
 
 	private static final long serialVersionUID = 625888613100910416L;
 	private Integer idUtente;
-	private Ruoli ruolo;
-	private StatoUtente statoUtente;
+	private RuoliTO ruolo;
+	private StatoUtenteTO statoUtente;
 	private String username;
 	private String password;
 	private String nome;
@@ -49,10 +53,10 @@ public class Utente implements OutDoorSports{
 	private String indirizzo;
 	private String citta;
 
-	public Utente() {
+	Utente() {
 	}
 
-	public Utente(Ruoli ruolo, StatoUtente statoUtente, String username, String password, String nome,
+	Utente(Ruoli ruolo, StatoUtente statoUtente, String username, String password, String nome,
 			String cognome, String email, String codiceFiscale, String dataNascita, String sesso, String indirizzo,
 			String citta) {
 		this.ruolo = ruolo;
@@ -88,7 +92,7 @@ public class Utente implements OutDoorSports{
 	/**
 	 * @return il ruolo relativo a un determinato utente
 	 */
-	public Ruoli getRuolo() {
+	public RuoliTO getRuolo() {
 		return this.ruolo;
 	}
 
@@ -97,14 +101,14 @@ public class Utente implements OutDoorSports{
 	 * 
 	 * @param tblRuoli
 	 */
-	public void setRuolo(Ruoli ruolo) {
+	public void setRuolo(RuoliTO ruolo) {
 		this.ruolo = ruolo;
 	}
 
 	/**
 	 * @return lo stato utente relativo a un determinato utente
 	 */
-	public StatoUtente getStatoUtente() {
+	public StatoUtenteTO getStatoUtente() {
 		return this.statoUtente;
 	}
 
@@ -113,7 +117,7 @@ public class Utente implements OutDoorSports{
 	 * 
 	 * @param tblStatoUtente
 	 */
-	public void setStatoUtente(StatoUtente tblStatoUtente) {
+	public void setStatoUtente(StatoUtenteTO tblStatoUtente) {
 		this.statoUtente = tblStatoUtente;
 	}
 

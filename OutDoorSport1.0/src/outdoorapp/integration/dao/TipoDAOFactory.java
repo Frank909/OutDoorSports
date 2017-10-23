@@ -5,7 +5,7 @@ import outdoorapp.integration.dao.enums.State;
 import outdoorapp.integration.dao.enums.Type;
 import outdoorapp.integration.dao.enums.Users;
 
-public class TipoDAOFactory implements AbstractFactoryDAO{
+public class TipoDAOFactory implements DAOFactory{
 
 	@Override
 	public GenericDAO<?> getTipoDAO(Type choice){

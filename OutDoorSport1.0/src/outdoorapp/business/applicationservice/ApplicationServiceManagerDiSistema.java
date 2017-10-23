@@ -4,8 +4,8 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Alert.AlertType;
 import outdoorapp.exceptions.DatabaseException;
-import outdoorapp.integration.dao.AbstractFactoryDAO;
-import outdoorapp.integration.dao.FactoryProducer;
+import outdoorapp.integration.dao.DAOFactory;
+import outdoorapp.integration.dao.FactoryProducerDAO;
 import outdoorapp.integration.dao.enums.DAORequest;
 import outdoorapp.integration.dao.enums.State;
 import outdoorapp.integration.dao.enums.Type;
@@ -15,8 +15,8 @@ import outdoorapp.integration.dao.interfaces.Ruoli_DAO;
 import outdoorapp.integration.dao.interfaces.StatoUtente_DAO;
 import outdoorapp.presentation.reqresp.Request;
 import outdoorapp.presentation.reqresp.Response;
-import outdoorapp.to.ManagerDiSistema;
-import outdoorapp.to.Utente;
+import outdoorapp.to.interfaces.ManagerDiSistemaTO;
+import outdoorapp.to.interfaces.UtenteTO;
 import outdoorapp.utils.Actions;
 import outdoorapp.utils.Views;
 
@@ -34,18 +34,19 @@ import outdoorapp.utils.Views;
 
 class ApplicationServiceManagerDiSistema implements Actions, Views{
 
-	private AbstractFactoryDAO userFactory = null, 
+	private DAOFactory userFactory = null, 
 			statoFactory = null, tipoFactory = null;
 	
 	private MDS_DAO mds_dao = null;
+	private ManagerDiSistemaTO mds = null;
 	
 	/**
 	 * Costruttore che inizializza il DAO del Manager di Sistema
 	 */
 	public ApplicationServiceManagerDiSistema() {
-		userFactory = FactoryProducer.getFactory(DAORequest.Users);
-		statoFactory = FactoryProducer.getFactory(DAORequest.State);
-		tipoFactory = FactoryProducer.getFactory(DAORequest.Type);
+		userFactory = FactoryProducerDAO.getFactory(DAORequest.Users);
+		statoFactory = FactoryProducerDAO.getFactory(DAORequest.State);
+		tipoFactory = FactoryProducerDAO.getFactory(DAORequest.Type);
 		mds_dao =  (MDS_DAO) userFactory.getUtenteDAO(Users.ManagerDiSistema);
 	}
 	
@@ -56,9 +57,6 @@ class ApplicationServiceManagerDiSistema implements Actions, Views{
 	 */
 	public Response verificaManagerDiSistema(Request request){
 		Response response = new Response();
-		
-		
-
 		
 		boolean result = false;
 		try {
@@ -88,11 +86,11 @@ class ApplicationServiceManagerDiSistema implements Actions, Views{
 		Response response = new Response();
 		
 		try {
-			if(!mds_dao.esisteEmail((Utente)request.getData()) && !mds_dao.esisteUsername((Utente)request.getData())){
+			if(!mds_dao.esisteEmail((UtenteTO)request.getData()) && !mds_dao.esisteUsername((UtenteTO)request.getData())){
 				Ruoli_DAO ruoliDao = (Ruoli_DAO) tipoFactory.getTipoDAO(Type.Ruolo);
 				StatoUtente_DAO statoUtenteDao = (StatoUtente_DAO) statoFactory.getStatoDAO(State.User);
 
-				ManagerDiSistema mds = (ManagerDiSistema)request.getData();
+				mds = (ManagerDiSistemaTO)request.getData();
 				mds.setRuolo(ruoliDao.getRuoloManagerDiSistema());
 				mds.setStatoUtente(statoUtenteDao.getStatoAttivo());
 				mds_dao.create(mds);

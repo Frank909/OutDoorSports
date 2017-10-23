@@ -2,8 +2,14 @@ package outdoorapp.integration.dao;
 
 import outdoorapp.exceptions.DatabaseException;
 import outdoorapp.integration.dao.interfaces.Optional_DAO;
-import outdoorapp.to.Optional;
-import outdoorapp.to.TipoOptional;
+import outdoorapp.to.FactoryProducerTO;
+import outdoorapp.to.interfaces.ManagerDiEscursioneTO;
+import outdoorapp.to.interfaces.OptionalTO;
+import outdoorapp.to.interfaces.TOFactory;
+import outdoorapp.to.interfaces.TipoOptionalTO;
+import outdoorapp.to.interfaces.strings.FactoryEnum;
+import outdoorapp.to.interfaces.strings.OptionalEnum;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,14 +22,15 @@ import java.util.List;
  *
  */
 
-class OptionalDAO extends GenericDAO<Optional> implements Optional_DAO{
+class OptionalDAO extends GenericDAO<OptionalTO> implements Optional_DAO{
 
 	/**
 	 * Il costruttore inizializza l'entità Optional da utilizzare 
 	 * in tutte le operazioni del DAO.
 	 */
 	public OptionalDAO() {
-		this.setCurrentClass(new Optional());
+		TOFactory tofact = FactoryProducerTO.getFactory(FactoryEnum.OptionalTOFactory);
+		this.setCurrentClass(tofact.getOptionalTO(OptionalEnum.Optional));
 	}
 	
 	/**
@@ -32,7 +39,7 @@ class OptionalDAO extends GenericDAO<Optional> implements Optional_DAO{
 	 * @throws DatabaseException
 	 */
 	@Override
-	public Optional disattivaOptional(Optional optional) throws DatabaseException {
+	public OptionalTO disattivaOptional(OptionalTO optional) throws DatabaseException {
 		return super.update(optional);
 	}
 	
@@ -42,10 +49,10 @@ class OptionalDAO extends GenericDAO<Optional> implements Optional_DAO{
 	 * @throws DatabaseException
 	 */
 	@Override
-	public List<Optional> getOptionalAttiviByTipo(TipoOptional tipoOptional) throws DatabaseException {
+	public List<OptionalTO> getOptionalAttiviByTipo(TipoOptionalTO tipoOptional) throws DatabaseException {
 		List<String> param = new ArrayList<String>();
 		param.add(tipoOptional.getNome());
-		List<Optional> response = super.executeParamQuery("boooooooooooooooooooh", param);
+		List<OptionalTO> response = super.executeParamQuery("boooooooooooooooooooh", param);
 		return response;
 	}
 
@@ -55,10 +62,10 @@ class OptionalDAO extends GenericDAO<Optional> implements Optional_DAO{
 	 * @throws DatabaseException
 	 */	
 	@Override
-	public List<Optional> getOptionalByTipo(TipoOptional tipoOptional) throws DatabaseException {
+	public List<OptionalTO> getOptionalByTipo(TipoOptionalTO tipoOptional) throws DatabaseException {
 		List<String> param = new ArrayList<String>();
 		param.add(tipoOptional.getNome());
-		List<Optional> response = super.executeParamQuery("gbooooooooooooooooooooh", param);
+		List<OptionalTO> response = super.executeParamQuery("gbooooooooooooooooooooh", param);
 		return response;
 	}
 }

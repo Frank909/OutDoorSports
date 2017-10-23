@@ -2,7 +2,11 @@ package outdoorapp.integration.dao;
 
 import outdoorapp.exceptions.DatabaseException;
 import outdoorapp.integration.dao.interfaces.StatoUtente_DAO;
-import outdoorapp.to.StatoUtente;
+import outdoorapp.to.FactoryProducerTO;
+import outdoorapp.to.interfaces.StatoUtenteTO;
+import outdoorapp.to.interfaces.TOFactory;
+import outdoorapp.to.interfaces.strings.FactoryEnum;
+import outdoorapp.to.interfaces.strings.StatoEnum;
 
 /** 
  * Data Access Object per tutte le operazioni CRUD per StatoUtente.
@@ -13,14 +17,15 @@ import outdoorapp.to.StatoUtente;
  *
  */
 
-class StatoUtenteDAO extends GenericDAO<StatoUtente> implements StatoUtente_DAO{
+class StatoUtenteDAO extends GenericDAO<StatoUtenteTO> implements StatoUtente_DAO{
 
 	/**
 	 * Il costruttore inizializza l'entità StatoUtente da utilizzare 
 	 * in tutte le operazioni del DAO.
 	 */
 	public StatoUtenteDAO() {
-		this.setCurrentClass(new StatoUtente());
+		TOFactory tofact = FactoryProducerTO.getFactory(FactoryEnum.StatoTOFactory);
+		this.setCurrentClass(tofact.getStatoTO(StatoEnum.StatoUtente));
 	}
 
 	/**
@@ -28,7 +33,7 @@ class StatoUtenteDAO extends GenericDAO<StatoUtente> implements StatoUtente_DAO{
 	 * @throws DatabaseException
 	 */
 	@Override
-	public StatoUtente getStatoDisattivo() throws DatabaseException {
+	public StatoUtenteTO getStatoDisattivo() throws DatabaseException {
 		return this.findOne(0);
 	}
 	
@@ -37,7 +42,7 @@ class StatoUtenteDAO extends GenericDAO<StatoUtente> implements StatoUtente_DAO{
 	 * @throws DatabaseException
 	 */
 	@Override
-	public StatoUtente getStatoAttivo() throws DatabaseException {
+	public StatoUtenteTO getStatoAttivo() throws DatabaseException {
 		return this.findOne(1);
 	}
 }

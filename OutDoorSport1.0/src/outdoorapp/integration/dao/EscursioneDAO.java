@@ -2,8 +2,13 @@ package outdoorapp.integration.dao;
 
 import outdoorapp.exceptions.DatabaseException;
 import outdoorapp.integration.dao.interfaces.Escursione_DAO;
-import outdoorapp.to.Escursione;
-import outdoorapp.to.ManagerDiEscursione;
+import outdoorapp.to.FactoryProducerTO;
+import outdoorapp.to.interfaces.EscursioneTO;
+import outdoorapp.to.interfaces.ManagerDiEscursioneTO;
+import outdoorapp.to.interfaces.TOFactory;
+import outdoorapp.to.interfaces.strings.FactoryEnum;
+import outdoorapp.to.interfaces.strings.GenericEnum;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,14 +22,15 @@ import java.util.List;
  *
  */
 
-class EscursioneDAO extends GenericDAO<Escursione> implements Escursione_DAO{
+class EscursioneDAO extends GenericDAO<EscursioneTO> implements Escursione_DAO{
 
 	/**
 	 * Il costruttore inizializza l'entità Escursione da utilizzare 
 	 * in tutte le operazioni del DAO.
 	 */
 	public EscursioneDAO() {
-		this.setCurrentClass(new Escursione());
+		TOFactory tofact = FactoryProducerTO.getFactory(FactoryEnum.GenericTOFactory);
+		this.setCurrentClass(tofact.getGenericTO(GenericEnum.Escursione));
 	}
 	
 	/**
@@ -33,8 +39,8 @@ class EscursioneDAO extends GenericDAO<Escursione> implements Escursione_DAO{
 	 * @throws DatabaseException
 	 */
 	@Override
-	public Escursione readById(Integer id) throws DatabaseException{
-		Escursione response = super.findOne(id);
+	public EscursioneTO readById(Integer id) throws DatabaseException{
+		EscursioneTO response = super.findOne(id);
 		return response;
 	}
 	
@@ -43,7 +49,7 @@ class EscursioneDAO extends GenericDAO<Escursione> implements Escursione_DAO{
 	 * @throws DatabaseException
 	 */
 	@Override
-	public List<Escursione> readEscursioniAttive() throws DatabaseException { 
+	public List<EscursioneTO> readEscursioniAttive() throws DatabaseException { 
 		return super.executeQuery("BOOOOOHHHH");
 	}
 	
@@ -52,7 +58,7 @@ class EscursioneDAO extends GenericDAO<Escursione> implements Escursione_DAO{
 	 * @throws DatabaseException
 	 */
 	@Override
-	public List<Escursione> readEscursioniAperte() throws DatabaseException{
+	public List<EscursioneTO> readEscursioniAperte() throws DatabaseException{
 		return super.executeQuery("BOOOOOHHHH");
 	}
 	
@@ -63,7 +69,7 @@ class EscursioneDAO extends GenericDAO<Escursione> implements Escursione_DAO{
 	 * @throws DatabaseException
 	 */
 	@Override
-	public Escursione annullaEscursione(Escursione escursione)
+	public EscursioneTO annullaEscursione(EscursioneTO escursione)
 			throws DatabaseException {
 		return super.update(escursione);	
 	}
@@ -74,10 +80,10 @@ class EscursioneDAO extends GenericDAO<Escursione> implements Escursione_DAO{
 	 * @throws DatabaseException
 	 */
 	@Override
-	public List<Escursione> readEscursioniByManagerDiEscursione(ManagerDiEscursione mde) throws DatabaseException {
-		List<ManagerDiEscursione> param = new ArrayList<ManagerDiEscursione>();
+	public List<EscursioneTO> readEscursioniByManagerDiEscursione(ManagerDiEscursioneTO mde) throws DatabaseException {
+		List<ManagerDiEscursioneTO> param = new ArrayList<ManagerDiEscursioneTO>();
 		param.add(mde);
-		List<Escursione> response = super.executeParamQuery("BOOOOOOOHHHH", param);
+		List<EscursioneTO> response = super.executeParamQuery("BOOOOOOOHHHH", param);
 		return response;
 	}
 	
@@ -87,10 +93,10 @@ class EscursioneDAO extends GenericDAO<Escursione> implements Escursione_DAO{
 	 * @throws DatabaseException
 	 */
 	@Override
-	public List<Escursione> readEscursioniAttiveByManagerDiEscursione(ManagerDiEscursione mde) throws DatabaseException {
-		List<ManagerDiEscursione> param = new ArrayList<ManagerDiEscursione>();
+	public List<EscursioneTO> readEscursioniAttiveByManagerDiEscursione(ManagerDiEscursioneTO mde) throws DatabaseException {
+		List<ManagerDiEscursioneTO> param = new ArrayList<ManagerDiEscursioneTO>();
 		param.add(mde);
-		List<Escursione> response = super.executeParamQuery("BOOOOOOOHHHH", param);
+		List<EscursioneTO> response = super.executeParamQuery("BOOOOOOOHHHH", param);
 		return response;
 	}
 }

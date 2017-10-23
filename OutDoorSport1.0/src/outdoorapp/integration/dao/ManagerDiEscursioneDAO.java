@@ -2,7 +2,14 @@ package outdoorapp.integration.dao;
 
 import outdoorapp.exceptions.DatabaseException;
 import outdoorapp.integration.dao.interfaces.MDE_DAO;
-import outdoorapp.to.ManagerDiEscursione;
+import outdoorapp.to.FactoryProducerTO;
+import outdoorapp.to.interfaces.EscursioneTO;
+import outdoorapp.to.interfaces.ManagerDiEscursioneTO;
+import outdoorapp.to.interfaces.TOFactory;
+import outdoorapp.to.interfaces.strings.FactoryEnum;
+import outdoorapp.to.interfaces.strings.GenericEnum;
+import outdoorapp.to.interfaces.strings.UtenteEnum;
+
 import java.util.List;
 
 /** 
@@ -14,19 +21,20 @@ import java.util.List;
  *
  */
 
-class ManagerDiEscursioneDAO extends UtenteDAO<ManagerDiEscursione> implements MDE_DAO{
+class ManagerDiEscursioneDAO extends UtenteDAO<ManagerDiEscursioneTO> implements MDE_DAO{
 
 	/**
 	 * Il costruttore inizializza l'entità Manager di Escursione da utilizzare 
 	 * in tutte le operazioni del DAO.
 	 */
 	public ManagerDiEscursioneDAO() {
-		this.setCurrentClass(new ManagerDiEscursione());
+		TOFactory tofact = FactoryProducerTO.getFactory(FactoryEnum.UtenteTOFactory);
+		this.setCurrentClass(tofact.getUtenteTO(UtenteEnum.ManagerDiEscursione));
 	}
 	
 	@Override
-	public List<ManagerDiEscursione> getAll() throws DatabaseException{
-		List<ManagerDiEscursione> response = super.getAll();
+	public List<ManagerDiEscursioneTO> getAll() throws DatabaseException{
+		List<ManagerDiEscursioneTO> response = super.getAll();
 		return response;
 	}
 	

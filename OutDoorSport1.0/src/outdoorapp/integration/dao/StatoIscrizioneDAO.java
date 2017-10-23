@@ -2,7 +2,11 @@ package outdoorapp.integration.dao;
 
 import outdoorapp.exceptions.DatabaseException;
 import outdoorapp.integration.dao.interfaces.StatoIscrizione_DAO;
-import outdoorapp.to.StatoIscrizione;
+import outdoorapp.to.FactoryProducerTO;
+import outdoorapp.to.interfaces.StatoIscrizioneTO;
+import outdoorapp.to.interfaces.TOFactory;
+import outdoorapp.to.interfaces.strings.FactoryEnum;
+import outdoorapp.to.interfaces.strings.StatoEnum;
 
 /** 
  * Data Access Object per tutte le operazioni CRUD per StatoIscrizione.
@@ -13,14 +17,15 @@ import outdoorapp.to.StatoIscrizione;
  *
  */
 
-class StatoIscrizioneDAO extends GenericDAO<StatoIscrizione> implements StatoIscrizione_DAO{
+class StatoIscrizioneDAO extends GenericDAO<StatoIscrizioneTO> implements StatoIscrizione_DAO{
 
 	/**
 	 * Il costruttore inizializza l'entità StatoIscrizione da utilizzare 
 	 * in tutte le operazioni del DAO.
 	 */
 	public StatoIscrizioneDAO() {
-		this.setCurrentClass(new StatoIscrizione());
+		TOFactory tofact = FactoryProducerTO.getFactory(FactoryEnum.StatoTOFactory);
+		this.setCurrentClass(tofact.getStatoTO(StatoEnum.StatoIscrizione));
 	}
 	
 	/**
@@ -28,7 +33,7 @@ class StatoIscrizioneDAO extends GenericDAO<StatoIscrizione> implements StatoIsc
 	 * @throws DatabaseException
 	 */
 	@Override
-	public StatoIscrizione getStatoAttivo() throws DatabaseException {
+	public StatoIscrizioneTO getStatoAttivo() throws DatabaseException {
 		return this.findOne(1);
 	}
 
@@ -37,7 +42,7 @@ class StatoIscrizioneDAO extends GenericDAO<StatoIscrizione> implements StatoIsc
 	 * @throws DatabaseException
 	 */
 	@Override
-	public StatoIscrizione getStatoDisattivo() throws DatabaseException {
+	public StatoIscrizioneTO getStatoDisattivo() throws DatabaseException {
 		return this.findOne(0);
 	}
 
@@ -46,7 +51,7 @@ class StatoIscrizioneDAO extends GenericDAO<StatoIscrizione> implements StatoIsc
 	 * @throws DatabaseException
 	 */
 	@Override
-	public StatoIscrizione getStatoIscrizioneTerminato() throws DatabaseException {
+	public StatoIscrizioneTO getStatoIscrizioneTerminato() throws DatabaseException {
 		return this.findOne(2);
 	}
 
