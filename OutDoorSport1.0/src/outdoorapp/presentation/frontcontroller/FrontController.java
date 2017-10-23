@@ -3,7 +3,7 @@ package outdoorapp.presentation.frontcontroller;
 import outdoorapp.presentation.reqresp.Request;
 import outdoorapp.presentation.reqresp.Response;
 import outdoorapp.services.Service;
-import outdoorapp.services.ServiceFactory;
+import outdoorapp.services.ServiceLocator;
 import outdoorapp.services.ServiceType;
 
 /**
@@ -18,13 +18,13 @@ import outdoorapp.services.ServiceType;
  * @author Francesco Ventura
  */
 
-public class FrontController{
+public class FrontController extends Service{
 
 	/**
 	 * Riferimento al servizio dell'application controller.Permette di gestire
 	 * le richieste e le risposte.
 	 */
-	private static Service serviceApplicationController = null;
+	private static Service service = null;
 
 	/**
 	 * Riferimento all'istanza di FrontController
@@ -41,10 +41,9 @@ public class FrontController{
 	 * @return fc: istanza del FrontController
 	 */
 	public static FrontController getInstance(){
-		if(serviceApplicationController == null){
-			ServiceFactory serviceCreator = ServiceFactory.getServiceCreator();
+		if(service == null){
 			try {
-				serviceApplicationController = serviceCreator.getService(ServiceType.ApplicationController);
+				service = ServiceLocator.getService(ServiceType.ApplicationController);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -59,9 +58,13 @@ public class FrontController{
 	 * @param richiesta che viene passata al front controller
 	 * @return la risposta in base alla richiesta
 	 */
+	@Override
 	public Response sendRequest(Request request) {
-		return serviceApplicationController.sendRequest(request, ServiceType.FrontController);
+		return this.handle(request, service);
 	}
 
-
+	@Override
+	public ServiceType getType() {
+		return ServiceType.FrontController;
+	}
 }

@@ -1,8 +1,5 @@
 package outdoorapp.business.applicationservice;
 
-
-import outdoorapp.services.AbstractService;
-
 /**
  * Classe utilizzata dal Business Delegate per identificare il giusto Application Service 
  * in base alla richiesta inviata

@@ -2,9 +2,8 @@ package outdoorapp.presentation.applicationcontroller;
 
 import outdoorapp.presentation.reqresp.Request;
 import outdoorapp.presentation.reqresp.Response;
-import outdoorapp.services.AbstractService;
 import outdoorapp.services.Service;
-import outdoorapp.services.ServiceFactory;
+import outdoorapp.services.ServiceLocator;
 import outdoorapp.services.ServiceType;
 
 /**
@@ -21,8 +20,8 @@ import outdoorapp.services.ServiceType;
  *
  */
 
-class ApplicationController{
-	private static Service serviceBusinessDelegate = null;
+class ApplicationController extends Service{
+	private static Service service = null;
 	
 	private static ApplicationController applicationController = new ApplicationController();
 	
@@ -38,10 +37,9 @@ class ApplicationController{
 	 * @return restituisce l'istanza dell'applicationController
 	 */
 	static ApplicationController getInstance(){
-		if(serviceBusinessDelegate == null){
-			ServiceFactory serviceCreator = ServiceFactory.getServiceCreator();
+		if(service == null){
 			try {
-				serviceBusinessDelegate = serviceCreator.getService(ServiceType.BusinessDelegate);
+				service = ServiceLocator.getService(ServiceType.BusinessDelegate);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -57,11 +55,22 @@ class ApplicationController{
 	 * @param richiesta che viene passata all'Application Controller
 	 * @return la risposta in base alla richiesta
 	 */
-	Response getAction(Request request, ServiceType serviceType){
+	Response getAction(Request request){
+		return this.sendRequest(request);
+	}
+
+	@Override
+	public ServiceType getType() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	protected Response sendRequest(Request request) {
 		if(request.toString().contains("VIEW_")){
 			return dispatcher.dispatch(request);
 		}else
-			return serviceBusinessDelegate.sendRequest(request, serviceType);
+			return this.handle(request, service);
 	}
 	
 

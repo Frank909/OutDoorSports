@@ -2,9 +2,8 @@ package outdoorapp.business;
 
 import outdoorapp.presentation.reqresp.Request;
 import outdoorapp.presentation.reqresp.Response;
-import outdoorapp.services.AbstractService;
 import outdoorapp.services.Service;
-import outdoorapp.services.ServiceFactory;
+import outdoorapp.services.ServiceLocator;
 import outdoorapp.services.ServiceType;
 
 /**
@@ -21,11 +20,11 @@ import outdoorapp.services.ServiceType;
  *
  */
 
-class BusinessDelegate{
+class BusinessDelegate extends Service{
 	
 
 	private static BusinessDelegate businessDelegate = new BusinessDelegate();
-	private static Service serviceBusinessLookUp = null;
+	private static Service service = null;
 	
 	private BusinessDelegate(){
 	}
@@ -34,10 +33,9 @@ class BusinessDelegate{
 	 * @return restituisce l'istanza del BusinessDelegate
 	 */
 	static BusinessDelegate getInstance(){
-		if(serviceBusinessLookUp == null){
-			ServiceFactory serviceCreator = ServiceFactory.getServiceCreator();
+		if(service == null){
 			try {
-				serviceBusinessLookUp = serviceCreator.getService(ServiceType.BusinessLookUp);
+				service = ServiceLocator.getService(ServiceType.BusinessLookUp);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -52,7 +50,18 @@ class BusinessDelegate{
 	 * @param richiesta dal quale verrà identificato l'application service opportuno
 	 * @return la risposta in base alla richiesta
 	 */
-	Response lookup(Request request, ServiceType serviceType){
-		return serviceBusinessLookUp.sendRequest(request, serviceType);
+	Response lookup(Request request){
+		return this.sendRequest(request);
+	}
+
+	@Override
+	public ServiceType getType() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	protected Response sendRequest(Request request) {
+		return this.handle(request, service);
 	}
 }

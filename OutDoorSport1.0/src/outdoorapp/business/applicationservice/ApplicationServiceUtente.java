@@ -13,7 +13,6 @@ import outdoorapp.integration.dao.PartecipanteDAO;
 import outdoorapp.integration.dao.UtenteDAO;
 import outdoorapp.presentation.reqresp.Request;
 import outdoorapp.presentation.reqresp.Response;
-import outdoorapp.services.AbstractService;
 import outdoorapp.to.Email;
 import outdoorapp.to.ManagerDiEscursione;
 import outdoorapp.to.ManagerDiSistema;

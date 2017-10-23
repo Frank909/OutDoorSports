@@ -4,7 +4,6 @@ import outdoorapp.presentation.reqresp.Request;
 import outdoorapp.presentation.reqresp.Response;
 import outdoorapp.services.Service;
 import outdoorapp.services.ServiceType;
-import outdoorapp.services.AbstractService;
 
 /**
  * Classe di servizio/supporto al businessLookUp realizzato allo scopo di nascondere dettagli
@@ -12,38 +11,27 @@ import outdoorapp.services.AbstractService;
  * @author Andrea Zito
  * @author Francesco Ventura
  */
-public class ServiceApplicationController extends AbstractService{
+public class ServiceApplicationController extends Service{
 
 	private static ApplicationController applicationController = ApplicationController.getInstance();
-	private static ServiceApplicationController serviceApplicationController = new ServiceApplicationController();
 	
-	/**
-	 * Costruttore privato
-	 */
-	private ServiceApplicationController(){
+	public ServiceApplicationController(){
 	}
 	
-	/**
-	 * 
-	 * @return restituisce l'istanza del ServiceApplicationController
-	 */
-	public static ServiceApplicationController getInstance(){
-		return serviceApplicationController;
-	}
 	
+	@Override
+	public ServiceType getType() {
+		return ServiceType.ApplicationController;
+	}
+
 	/**
 	 * Override del metodo dell'interfaccia Service ereditata dalla classe astratta AbstractService.
 	 * Metodo che manda una richiesta all'applicationController e restituisce una risposta 
 	 * a seconda del tipo di richiesta in ingresso controllando che il servizio arrivi dal livello esatto.
 	 */
 	@Override
-	public Response sendRequest(Request req, ServiceType serviceType) {
-		if(serviceType.equals(ServiceType.FrontController)){
-			setTunneled(true);
-			return applicationController.getAction(req, ServiceType.ApplicationController);
-		}
-		else 	
-			return null;
+	protected Response sendRequest(Request request) {
+		return applicationController.getAction(request);
 	}
 
 }
