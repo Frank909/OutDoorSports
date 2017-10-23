@@ -1,5 +1,6 @@
 package outdoorapp.integration.dao;
 
+import outdoorapp.integration.dao.interfaces.TipoOptional_DAO;
 import outdoorapp.to.TipoOptional;
 
 /** 
@@ -11,7 +12,7 @@ import outdoorapp.to.TipoOptional;
  *
  */
 
-public class TipoOptionalDAO extends GenericDAO<TipoOptional>{
+class TipoOptionalDAO extends GenericDAO<TipoOptional> implements TipoOptional_DAO{
 
 	/**
 	 * Il costruttore inizializza l'entità TipoOptional da utilizzare 

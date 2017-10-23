@@ -1,5 +1,6 @@
 package outdoorapp.integration.dao;
 
+import outdoorapp.integration.dao.interfaces.TipoEscursione_DAO;
 import outdoorapp.to.TipoEscursione;
 
 /** 
@@ -11,7 +12,7 @@ import outdoorapp.to.TipoEscursione;
  *
  */
 
-public class TipoEscursioneDAO extends GenericDAO<TipoEscursione>{
+class TipoEscursioneDAO extends GenericDAO<TipoEscursione> implements TipoEscursione_DAO{
 
 	/**
 	 * Il costruttore inizializza l'entità TipoEscursione da utilizzare 

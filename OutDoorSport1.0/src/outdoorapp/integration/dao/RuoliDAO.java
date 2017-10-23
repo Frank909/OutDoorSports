@@ -1,6 +1,7 @@
 package outdoorapp.integration.dao;
 
 import outdoorapp.exceptions.DatabaseException;
+import outdoorapp.integration.dao.interfaces.Ruoli_DAO;
 import outdoorapp.to.Ruoli;
 
 /** 
@@ -12,7 +13,7 @@ import outdoorapp.to.Ruoli;
  *
  */
 
-public class RuoliDAO extends GenericDAO<Ruoli>{
+class RuoliDAO extends GenericDAO<Ruoli> implements Ruoli_DAO{
 
 	/**
 	 * Il costruttore inizializza l'entità Ruoli da utilizzare 
@@ -26,6 +27,7 @@ public class RuoliDAO extends GenericDAO<Ruoli>{
 	 * @return il ruolo di Manager di Sistema
 	 * @throws DatabaseException
 	 */
+	@Override
 	public Ruoli getRuoloManagerDiSistema() throws DatabaseException {
 		return this.findOne(0);
 	}
@@ -34,6 +36,7 @@ public class RuoliDAO extends GenericDAO<Ruoli>{
 	 * @return il ruolo di Manager di Escursione
 	 * @throws DatabaseException
 	 */
+	@Override
 	public Ruoli getRuoloManagerDiEscursione() throws DatabaseException {
 		return this.findOne(1);
 	}
@@ -42,6 +45,7 @@ public class RuoliDAO extends GenericDAO<Ruoli>{
 	 * @return il ruolo di Partecipante
 	 * @throws DatabaseException
 	 */
+	@Override
 	public Ruoli getRuoloPartecipante() throws DatabaseException {
 		return this.findOne(2);
 	}

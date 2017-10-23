@@ -1,6 +1,7 @@
 package outdoorapp.integration.dao;
 
 import outdoorapp.exceptions.DatabaseException;
+import outdoorapp.integration.dao.interfaces.MDS_DAO;
 import outdoorapp.to.ManagerDiSistema;
 import outdoorapp.utils.Actions;
 
@@ -15,7 +16,7 @@ import java.util.List;
  *
  */
 
-public class ManagerDiSistemaDAO extends UtenteDAO<ManagerDiSistema> implements Actions{
+class ManagerDiSistemaDAO extends UtenteDAO<ManagerDiSistema> implements Actions, MDS_DAO{
 
 	/**
 	 * Il costruttore inizializza l'entità Manager di Sistema da utilizzare 
@@ -29,6 +30,7 @@ public class ManagerDiSistemaDAO extends UtenteDAO<ManagerDiSistema> implements 
 	 * @return vero se esiste il manager di sistema, falso altrimenti
 	 * @throws DatabaseException
 	 */
+	@Override
 	public boolean verificaManagerDiSistema() throws DatabaseException {
 		boolean response;
 		List<ManagerDiSistema> list = super.executeQuery("getAllMDS");

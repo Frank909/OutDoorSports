@@ -4,9 +4,15 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Alert.AlertType;
 import outdoorapp.exceptions.DatabaseException;
-import outdoorapp.integration.dao.ManagerDiSistemaDAO;
-import outdoorapp.integration.dao.RuoliDAO;
-import outdoorapp.integration.dao.StatoUtenteDAO;
+import outdoorapp.integration.dao.AbstractFactoryDAO;
+import outdoorapp.integration.dao.FactoryProducer;
+import outdoorapp.integration.dao.enums.DAORequest;
+import outdoorapp.integration.dao.enums.State;
+import outdoorapp.integration.dao.enums.Type;
+import outdoorapp.integration.dao.enums.Users;
+import outdoorapp.integration.dao.interfaces.MDS_DAO;
+import outdoorapp.integration.dao.interfaces.Ruoli_DAO;
+import outdoorapp.integration.dao.interfaces.StatoUtente_DAO;
 import outdoorapp.presentation.reqresp.Request;
 import outdoorapp.presentation.reqresp.Response;
 import outdoorapp.to.ManagerDiSistema;
@@ -28,13 +34,19 @@ import outdoorapp.utils.Views;
 
 class ApplicationServiceManagerDiSistema implements Actions, Views{
 
-	private ManagerDiSistemaDAO mds_dao;
+	private AbstractFactoryDAO userFactory = null, 
+			statoFactory = null, tipoFactory = null;
+	
+	private MDS_DAO mds_dao = null;
 	
 	/**
 	 * Costruttore che inizializza il DAO del Manager di Sistema
 	 */
 	public ApplicationServiceManagerDiSistema() {
-		mds_dao = new ManagerDiSistemaDAO();
+		userFactory = FactoryProducer.getFactory(DAORequest.Users);
+		statoFactory = FactoryProducer.getFactory(DAORequest.State);
+		tipoFactory = FactoryProducer.getFactory(DAORequest.Type);
+		mds_dao =  (MDS_DAO) userFactory.getUtenteDAO(Users.ManagerDiSistema);
 	}
 	
 	/**
@@ -44,6 +56,9 @@ class ApplicationServiceManagerDiSistema implements Actions, Views{
 	 */
 	public Response verificaManagerDiSistema(Request request){
 		Response response = new Response();
+		
+		
+
 		
 		boolean result = false;
 		try {
@@ -74,9 +89,9 @@ class ApplicationServiceManagerDiSistema implements Actions, Views{
 		
 		try {
 			if(!mds_dao.esisteEmail((Utente)request.getData()) && !mds_dao.esisteUsername((Utente)request.getData())){
-				
-				RuoliDAO ruoliDao = new RuoliDAO();
-				StatoUtenteDAO statoUtenteDao = new StatoUtenteDAO();
+				Ruoli_DAO ruoliDao = (Ruoli_DAO) tipoFactory.getTipoDAO(Type.Ruolo);
+				StatoUtente_DAO statoUtenteDao = (StatoUtente_DAO) statoFactory.getStatoDAO(State.User);
+
 				ManagerDiSistema mds = (ManagerDiSistema)request.getData();
 				mds.setRuolo(ruoliDao.getRuoloManagerDiSistema());
 				mds.setStatoUtente(statoUtenteDao.getStatoAttivo());

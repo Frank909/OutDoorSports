@@ -1,6 +1,7 @@
 package outdoorapp.integration.dao;
 
 import outdoorapp.exceptions.DatabaseException;
+import outdoorapp.integration.dao.interfaces.MDE_DAO;
 import outdoorapp.to.ManagerDiEscursione;
 import java.util.List;
 
@@ -13,7 +14,7 @@ import java.util.List;
  *
  */
 
-public class ManagerDiEscursioneDAO extends UtenteDAO<ManagerDiEscursione>{
+class ManagerDiEscursioneDAO extends UtenteDAO<ManagerDiEscursione> implements MDE_DAO{
 
 	/**
 	 * Il costruttore inizializza l'entità Manager di Escursione da utilizzare 
@@ -23,6 +24,7 @@ public class ManagerDiEscursioneDAO extends UtenteDAO<ManagerDiEscursione>{
 		this.setCurrentClass(new ManagerDiEscursione());
 	}
 	
+	@Override
 	public List<ManagerDiEscursione> getAll() throws DatabaseException{
 		List<ManagerDiEscursione> response = super.getAll();
 		return response;
@@ -31,8 +33,8 @@ public class ManagerDiEscursioneDAO extends UtenteDAO<ManagerDiEscursione>{
 	/**
 	 * @return la lista di tutti i Manager di Escursione
 	 * @throws DatabaseException
-	 */
+	 *//*
 	public List<ManagerDiEscursione> getAllManagerDiEscursione() throws DatabaseException {
 		return super.executeQuery("booooooooooooohhhh");
-	}
+	}*/
 }

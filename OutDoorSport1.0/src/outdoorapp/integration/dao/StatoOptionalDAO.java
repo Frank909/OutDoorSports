@@ -1,6 +1,7 @@
 package outdoorapp.integration.dao;
 
 import outdoorapp.exceptions.DatabaseException;
+import outdoorapp.integration.dao.interfaces.StatoOptional_DAO;
 import outdoorapp.to.StatoOptional;
 
 /** 
@@ -12,7 +13,7 @@ import outdoorapp.to.StatoOptional;
  *
  */
 
-public class StatoOptionalDAO extends GenericDAO<StatoOptional> {
+class StatoOptionalDAO extends GenericDAO<StatoOptional> implements StatoOptional_DAO{
 
 	/**
 	 * Il costruttore inizializza l'entità StatoOptional da utilizzare 
@@ -26,6 +27,7 @@ public class StatoOptionalDAO extends GenericDAO<StatoOptional> {
 	 * @return stato disattivo dell'optional
 	 * @throws DatabaseException
 	 */
+	@Override
 	public StatoOptional getStatoDisattivo() throws DatabaseException {
 		return this.findOne(0);
 	}
@@ -34,6 +36,7 @@ public class StatoOptionalDAO extends GenericDAO<StatoOptional> {
 	 * @return stato attivo dell'optional
 	 * @throws DatabaseException
 	 */
+	@Override
 	public StatoOptional getStatoAttivo() throws DatabaseException {
 		return this.findOne(1);
 	}

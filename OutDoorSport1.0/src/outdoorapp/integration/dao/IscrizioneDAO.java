@@ -1,6 +1,7 @@
 package outdoorapp.integration.dao;
 
 import outdoorapp.exceptions.DatabaseException;
+import outdoorapp.integration.dao.interfaces.Iscrizione_DAO;
 import outdoorapp.to.Escursione;
 import outdoorapp.to.Iscrizione;
 import outdoorapp.to.Partecipante;
@@ -18,7 +19,7 @@ import java.util.List;
  *
  */
 
-public class IscrizioneDAO extends GenericDAO<Iscrizione>{
+class IscrizioneDAO extends GenericDAO<Iscrizione> implements Iscrizione_DAO{
 
 	/**
 	 * Il costruttore inizializza l'entità Iscrizione da utilizzare 
@@ -32,6 +33,7 @@ public class IscrizioneDAO extends GenericDAO<Iscrizione>{
 	 * @return la lista di tutte le iscrizioni
 	 * @throws DatabaseException
 	 */
+	@Override
 	public List<Iscrizione> getAll() throws DatabaseException{
 		List<Iscrizione> response = super.getAll();
 		return response;
@@ -42,6 +44,7 @@ public class IscrizioneDAO extends GenericDAO<Iscrizione>{
 	 * @return l'iscrizione cambiando lo stato in annullata
 	 * @throws DatabaseException
 	 */
+	@Override
 	public Iscrizione annullaIscrizione(Iscrizione iscrizione) throws DatabaseException {
 		super.update(iscrizione);
 		return iscrizione;
@@ -52,6 +55,7 @@ public class IscrizioneDAO extends GenericDAO<Iscrizione>{
 	 * @return vero se esiste l'iscrizione, falso altrimenti
 	 * @throws DatabaseException
 	 */
+	@Override
 	public boolean esisteIscrizione(Iscrizione iscrizione) throws DatabaseException {
 		Iscrizione newIscrizione = this.findOne(iscrizione.getIdIscrizione());
 		return newIscrizione != null;
@@ -63,6 +67,7 @@ public class IscrizioneDAO extends GenericDAO<Iscrizione>{
 	 * @return la lista delle iscrizioni attive di un partecipante
 	 * @throws DatabaseException
 	 */
+	@Override
 	public List<Iscrizione> getAllIscrizioniAttive(Partecipante partecipante) throws DatabaseException {
 		List<Partecipante> param = new ArrayList<Partecipante>();
 		param.add(partecipante);
@@ -86,6 +91,7 @@ public class IscrizioneDAO extends GenericDAO<Iscrizione>{
 	 * @param escursione
 	 * @throws DatabaseException
 	 */
+	@Override
 	public void terminaIscrizioni(Escursione escursione) throws DatabaseException {
 		List<Iscrizione> response = getIscrizioniAttiveEscursione(escursione);
 		for(Iscrizione iscrizione: response){
@@ -99,6 +105,7 @@ public class IscrizioneDAO extends GenericDAO<Iscrizione>{
 	 * @return la lista delle Iscrizioni attive per una determitata Escursione
 	 * @throws DatabaseException
 	 */
+	@Override
 	public List<Iscrizione> getIscrizioniAttiveEscursione(Escursione escursione) throws DatabaseException {
 		List<Escursione> param = new ArrayList<Escursione>();
 		param.add(escursione);
@@ -111,6 +118,7 @@ public class IscrizioneDAO extends GenericDAO<Iscrizione>{
 	 * @return tutte le iscrizioni di un partecipante
 	 * @throws DatabaseException
 	 */
+	@Override
 	public List<Iscrizione> getAllIscrizioniPartecipante(Partecipante partecipante) throws DatabaseException {
 		List<Partecipante> param = new ArrayList<Partecipante>();
 		param.add(partecipante);

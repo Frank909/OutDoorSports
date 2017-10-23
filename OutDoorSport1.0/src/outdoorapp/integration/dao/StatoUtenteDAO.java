@@ -1,6 +1,7 @@
 package outdoorapp.integration.dao;
 
 import outdoorapp.exceptions.DatabaseException;
+import outdoorapp.integration.dao.interfaces.StatoUtente_DAO;
 import outdoorapp.to.StatoUtente;
 
 /** 
@@ -12,7 +13,7 @@ import outdoorapp.to.StatoUtente;
  *
  */
 
-public class StatoUtenteDAO extends GenericDAO<StatoUtente> {
+class StatoUtenteDAO extends GenericDAO<StatoUtente> implements StatoUtente_DAO{
 
 	/**
 	 * Il costruttore inizializza l'entità StatoUtente da utilizzare 
@@ -26,6 +27,7 @@ public class StatoUtenteDAO extends GenericDAO<StatoUtente> {
 	 * @return stato disattivo dell'utente
 	 * @throws DatabaseException
 	 */
+	@Override
 	public StatoUtente getStatoDisattivo() throws DatabaseException {
 		return this.findOne(0);
 	}
@@ -34,6 +36,7 @@ public class StatoUtenteDAO extends GenericDAO<StatoUtente> {
 	 * @return stato attivo dell'utente
 	 * @throws DatabaseException
 	 */
+	@Override
 	public StatoUtente getStatoAttivo() throws DatabaseException {
 		return this.findOne(1);
 	}

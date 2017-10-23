@@ -1,6 +1,7 @@
 package outdoorapp.integration.dao;
 
 import outdoorapp.exceptions.DatabaseException;
+import outdoorapp.integration.dao.interfaces.Partecipante_DAO;
 import outdoorapp.to.Partecipante;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,7 +15,7 @@ import java.util.List;
  *
  */
 
-public class PartecipanteDAO extends UtenteDAO<Partecipante>{
+class PartecipanteDAO extends UtenteDAO<Partecipante> implements Partecipante_DAO{
 
 	/**
 	 * Il costruttore inizializza l'entità Partecipante da utilizzare 
@@ -29,6 +30,7 @@ public class PartecipanteDAO extends UtenteDAO<Partecipante>{
 	 * @return il Partecipante con un determinato codice fiscale 
 	 * @throws DatabaseException
 	 */
+	@Override
 	public Partecipante readByCodiceFiscale(String codiceFiscale) throws DatabaseException {
 		List<String> param = new ArrayList<String>();
 		param.add(codiceFiscale);
@@ -42,6 +44,7 @@ public class PartecipanteDAO extends UtenteDAO<Partecipante>{
 	 * @return il Partecipante con un determinato username
 	 * @throws DatabaseException
 	 */
+	@Override
 	public Partecipante readByUsername(String username) throws DatabaseException {
 		List<String> param = new ArrayList<String>();
 		param.add(username);
@@ -54,6 +57,7 @@ public class PartecipanteDAO extends UtenteDAO<Partecipante>{
 	 * @return la lista di tutti i partecipanti
 	 * @throws DatabaseException
 	 */
+	@Override
 	public List<Partecipante> getAllPartecipante() throws DatabaseException {
 		return super.executeQuery("boooooooooooooooooooh");
 	}

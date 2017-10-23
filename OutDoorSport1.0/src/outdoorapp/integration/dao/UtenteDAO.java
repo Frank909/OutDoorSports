@@ -1,6 +1,8 @@
 package outdoorapp.integration.dao;
 
 import outdoorapp.exceptions.DatabaseException;
+import outdoorapp.integration.dao.interfaces.Utente_DAO;
+import outdoorapp.to.OutDoorSports;
 import outdoorapp.to.StatoUtente;
 import outdoorapp.to.Utente;
 import java.util.ArrayList;
@@ -15,9 +17,9 @@ import java.util.List;
  *
  */
 
-public class UtenteDAO<T extends Utente> extends GenericDAO<T>{
+class UtenteDAO<T extends OutDoorSports> extends GenericDAO<T> implements Utente_DAO<T>{
 	
-	
+
 	/**
 	 * Il costruttore inizializza l'entità Utente da utilizzare 
 	 * in tutte le operazioni del DAO.
@@ -32,6 +34,7 @@ public class UtenteDAO<T extends Utente> extends GenericDAO<T>{
 	 * @throws DatabaseException
 	 */
 	@SuppressWarnings("unchecked")
+	@Override
 	public T getUtente(Utente utente) throws DatabaseException {
 		Utente response = null;
 		List<String> param = new ArrayList<String>();
@@ -39,7 +42,7 @@ public class UtenteDAO<T extends Utente> extends GenericDAO<T>{
 		param.add(utente.getPassword());
 		List<T> list = this.executeParamQuery("getUtente", param);
 		if(list.size() == 1){
-			response = list.get(0);
+			response = (Utente) list.get(0);
 		} else {
 			response = new Utente();
 		}
@@ -69,6 +72,7 @@ public class UtenteDAO<T extends Utente> extends GenericDAO<T>{
 	 * @return un'istanza T sottoclasse di Utente in base all'username
 	 * @throws DatabaseException
 	 */
+	@Override
 	public T getByUsername(String username) throws DatabaseException {
 		List<String> param = new ArrayList<String>();
 		param.add(username);
@@ -80,6 +84,7 @@ public class UtenteDAO<T extends Utente> extends GenericDAO<T>{
 	 * @return un'istanza T sottoclasse di Utente in base all'email
 	 * @throws DatabaseException
 	 */
+	@Override
 	public T getByEmail(String email) throws DatabaseException {
 		List<String> param = new ArrayList<String>();
 		param.add(email);
@@ -91,6 +96,7 @@ public class UtenteDAO<T extends Utente> extends GenericDAO<T>{
 	 * @return un'istanza T sottoclasse di Utente in base all'id
 	 * @throws DatabaseException
 	 */
+	@Override
 	public T getByID(Integer id) throws DatabaseException {
 		List<Integer> param = new ArrayList<Integer>();
 		param.add(id);
@@ -110,11 +116,12 @@ public class UtenteDAO<T extends Utente> extends GenericDAO<T>{
 	 * @return vero se esiste l'username dell'utente, falso altrimenti
 	 * @throws DatabaseException
 	 */
+	@Override
 	public boolean esisteUsername(Utente utente) throws DatabaseException {
 		boolean response = false;
 		List<String> param = new ArrayList<String>();
 		param.add(utente.getUsername());
-		Utente newUtente = this.getUtenteByQuery("getByUsername", param);
+		Utente newUtente = (Utente) this.getUtenteByQuery("getByUsername", param);
 		response = !this.isNullUtente(newUtente);
 		return response;
 	}
@@ -124,11 +131,12 @@ public class UtenteDAO<T extends Utente> extends GenericDAO<T>{
 	 * @return vero se esiste l'email dell'utente, falso altrimenti
 	 * @throws DatabaseException
 	 */
+	@Override
 	public boolean esisteEmail(Utente utente) throws DatabaseException {
 		boolean response = false;
 		List<String> param = new ArrayList<String>();
 		param.add(utente.getEmail());
-		Utente newUtente = this.getUtenteByQuery("getByEmail", param);
+		Utente newUtente = (Utente) this.getUtenteByQuery("getByEmail", param);
 		response = !this.isNullUtente(newUtente);
 		return response;
 	}

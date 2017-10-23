@@ -1,16 +1,16 @@
 package outdoorapp.business.applicationservice;
-
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-import java.text.MessageFormat;
 import java.util.ArrayList;
-import java.util.Random;
+
 
 import outdoorapp.exceptions.DatabaseException;
-import outdoorapp.integration.dao.ManagerDiEscursioneDAO;
-import outdoorapp.integration.dao.ManagerDiSistemaDAO;
-import outdoorapp.integration.dao.PartecipanteDAO;
-import outdoorapp.integration.dao.UtenteDAO;
+import outdoorapp.integration.dao.AbstractFactoryDAO;
+import outdoorapp.integration.dao.FactoryProducer;
+import outdoorapp.integration.dao.enums.DAORequest;
+import outdoorapp.integration.dao.enums.Users;
+import outdoorapp.integration.dao.interfaces.MDE_DAO;
+import outdoorapp.integration.dao.interfaces.MDS_DAO;
+import outdoorapp.integration.dao.interfaces.Partecipante_DAO;
+import outdoorapp.integration.dao.interfaces.Utente_DAO;
 import outdoorapp.presentation.reqresp.Request;
 import outdoorapp.presentation.reqresp.Response;
 import outdoorapp.to.Email;
@@ -38,15 +38,20 @@ import outdoorapp.utils.Views;
 
 class ApplicationServiceUtente implements Views, Actions{
 
-	private UtenteDAO<Utente> utente_dao;
-	
+	private AbstractFactoryDAO userFactory = null;
+
+	private Utente_DAO<Utente> utente_dao = null;
+
 	/**
 	 * Costruttore che inizializza il DAO dell'Utente
 	 */
+	@SuppressWarnings("unchecked")
 	public ApplicationServiceUtente() {
-		utente_dao = new UtenteDAO<>();
+
+		userFactory = FactoryProducer.getFactory(DAORequest.Users);
+		utente_dao = (Utente_DAO<Utente>) userFactory.getUtenteDAO(Users.Utente);
 	}
-	
+
 	/**
 	 * Autenticazione dell'Utente.
 	 * 
@@ -57,12 +62,12 @@ class ApplicationServiceUtente implements Views, Actions{
 		Utente utente = new Utente();
 		Response response = new Response();
 		try {
-			utente = utente_dao.getUtente((Utente) request.getData());
-			
+			utente = (Utente) utente_dao.getUtente((Utente) request.getData());
+
 			if(utente.getIdUtente() != null){
 				OutDoorSports newUtente = checkUserTipe(utente);	
 				response.setData(newUtente);
-				
+
 				response.setResponse(RESP_OK);
 				if(utente instanceof ManagerDiSistema)
 					response.setView(VIEW_DASHBOARD_MANAGER_DI_SISTEMA);
@@ -79,7 +84,7 @@ class ApplicationServiceUtente implements Views, Actions{
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Metodo che invia una mail al destinatario (se la mail esiste) con la nuova password
 	 * 
@@ -89,37 +94,37 @@ class ApplicationServiceUtente implements Views, Actions{
 	public Response richiediNuovaPassword(Request request){
 		Utente utente = (Utente) request.getData();
 		Response response = new Response();
-		
+
 		try {
 			if(utente_dao.esisteEmail(utente)){
-				utente = utente_dao.getByEmail(utente.getEmail());
-				
+				utente = (Utente) utente_dao.getByEmail(utente.getEmail());
+
 				RandomString randomString = new RandomString(8);
 				String newPassword = randomString.nextString();
-				
-				
+
+
 				utente.setPassword(newPassword);
-				utente_dao.update(utente);
-				
+				utente_dao.create(utente);
+
 				Email email = new Email();
-				
+
 				String mailOggetto = "OutDoorSports | Recupero Password";
 				String mailMessaggio = "Gentile ";
 				mailMessaggio += utente.getNome() + " " + utente.getCognome() + ", \n";
 				mailMessaggio += "La sua nuova password per lo username ";
 				mailMessaggio += utente.getUsername() + " è: \n";
 				mailMessaggio += newPassword;
-				
+
 				email.setOggetto(mailOggetto);
 				email.setMessaggio(mailMessaggio);
-				
+
 				ArrayList<Utente> listaDestinatari = new ArrayList<>();
 				listaDestinatari.add(utente);
 				email.setListaDestinatari(listaDestinatari);
-				
+
 				EmailConfig emailConfig = new EmailConfig();
 				emailConfig.sendEmail(email);
-				
+
 				response.setResponse(RESP_OK);
 			}
 			else{
@@ -128,27 +133,29 @@ class ApplicationServiceUtente implements Views, Actions{
 		} catch (DatabaseException e) {
 			e.printStackTrace();
 		}
-		
+
 		return response;
 	}
-	
+
 	/**
 	 * Metodo privato che identifica il tipo di utente che si è autenticato
 	 * 
 	 * @param utente
 	 * @return una nuova istanza del tipo di utente che si è autenticato
 	 */
-	
+
 	private OutDoorSports checkUserTipe(Utente utente){
-		
+
 		OutDoorSports result = null;
-		PartecipanteDAO partecipante_dao = new PartecipanteDAO();
-		ManagerDiSistemaDAO mds_dao = new ManagerDiSistemaDAO();
-		ManagerDiEscursioneDAO mde_dao = new ManagerDiEscursioneDAO();
+		
+		Partecipante_DAO partecipante_dao = (Partecipante_DAO) userFactory.getUtenteDAO(Users.Partecipante);
+		MDS_DAO mds_dao = (MDS_DAO) userFactory.getUtenteDAO(Users.ManagerDiSistema);
+		MDE_DAO mde_dao = (MDE_DAO) userFactory.getUtenteDAO(Users.ManagerDiEscursione);
+		
 		Partecipante partecipante = new Partecipante();
 		ManagerDiSistema mds = new ManagerDiSistema();
 		ManagerDiEscursione mde = new ManagerDiEscursione();
-		
+
 		try {
 			partecipante = partecipante_dao.findOne(utente.getIdUtente());
 			if(partecipante != null){
@@ -168,11 +175,11 @@ class ApplicationServiceUtente implements Views, Actions{
 		} catch (DatabaseException e) {
 			e.printStackTrace();
 		}
-		
+
 		return result;
 	}
-	
-	
+
+
 	/**
 	 * Metodo di supporto a checkUserTipe, inserisce i dati raccolti in precedenza
 	 * nella nuova istanza dopo aver identificato il tipo 

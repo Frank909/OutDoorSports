@@ -8,9 +8,15 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.Alert.AlertType;
 import javafx.stage.FileChooser;
 import outdoorapp.exceptions.DatabaseException;
-import outdoorapp.integration.dao.PartecipanteDAO;
-import outdoorapp.integration.dao.RuoliDAO;
-import outdoorapp.integration.dao.StatoUtenteDAO;
+import outdoorapp.integration.dao.AbstractFactoryDAO;
+import outdoorapp.integration.dao.FactoryProducer;
+import outdoorapp.integration.dao.enums.DAORequest;
+import outdoorapp.integration.dao.enums.State;
+import outdoorapp.integration.dao.enums.Type;
+import outdoorapp.integration.dao.enums.Users;
+import outdoorapp.integration.dao.interfaces.Partecipante_DAO;
+import outdoorapp.integration.dao.interfaces.Ruoli_DAO;
+import outdoorapp.integration.dao.interfaces.StatoUtente_DAO;
 import outdoorapp.presentation.applicationcontroller.ViewCache;
 import outdoorapp.presentation.reqresp.Request;
 import outdoorapp.presentation.reqresp.Response;
@@ -33,13 +39,20 @@ import outdoorapp.utils.Views;
 
 class ApplicationServicePartecipante implements Views, Actions{
 
-	private PartecipanteDAO partecipante_dao;
+	private AbstractFactoryDAO userFactory = null, 
+			statoFactory = null, tipoFactory = null;
+	
+	private Partecipante_DAO partecipante_dao = null;
+	
 
 	/**
 	 * Costruttore che inizializza il DAO del Partecipante
 	 */
 	public ApplicationServicePartecipante() {
-		partecipante_dao = new PartecipanteDAO();
+		userFactory = FactoryProducer.getFactory(DAORequest.Users);
+		statoFactory = FactoryProducer.getFactory(DAORequest.State);
+		tipoFactory = FactoryProducer.getFactory(DAORequest.Type);
+		partecipante_dao =  (Partecipante_DAO) userFactory.getUtenteDAO(Users.Partecipante);
 	}
 
 	/**
@@ -79,8 +92,9 @@ class ApplicationServicePartecipante implements Views, Actions{
 
 		try {
 			if(!partecipante_dao.esisteEmail((Utente)request.getData()) && !partecipante_dao.esisteUsername((Utente)request.getData())){
-				RuoliDAO ruoliDao = new RuoliDAO();
-				StatoUtenteDAO statoUtenteDao = new StatoUtenteDAO();
+				Ruoli_DAO ruoliDao = (Ruoli_DAO) tipoFactory.getTipoDAO(Type.Ruolo);
+				StatoUtente_DAO statoUtenteDao = (StatoUtente_DAO) statoFactory.getStatoDAO(State.User);
+				
 				Partecipante partecipante = (Partecipante)request.getData();
 				uploadCertificatoSRC(partecipante);
 				partecipante.setRuolo(ruoliDao.getRuoloPartecipante());

@@ -4,14 +4,18 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Alert.AlertType;
 import outdoorapp.exceptions.DatabaseException;
-import outdoorapp.integration.dao.ManagerDiEscursioneDAO;
-import outdoorapp.integration.dao.ManagerDiSistemaDAO;
-import outdoorapp.integration.dao.RuoliDAO;
-import outdoorapp.integration.dao.StatoUtenteDAO;
+import outdoorapp.integration.dao.AbstractFactoryDAO;
+import outdoorapp.integration.dao.FactoryProducer;
+import outdoorapp.integration.dao.enums.DAORequest;
+import outdoorapp.integration.dao.enums.State;
+import outdoorapp.integration.dao.enums.Type;
+import outdoorapp.integration.dao.enums.Users;
+import outdoorapp.integration.dao.interfaces.MDE_DAO;
+import outdoorapp.integration.dao.interfaces.Ruoli_DAO;
+import outdoorapp.integration.dao.interfaces.StatoUtente_DAO;
 import outdoorapp.presentation.reqresp.Request;
 import outdoorapp.presentation.reqresp.Response;
 import outdoorapp.to.ManagerDiEscursione;
-import outdoorapp.to.ManagerDiSistema;
 import outdoorapp.to.Utente;
 import outdoorapp.utils.Actions;
 import outdoorapp.utils.Views;
@@ -30,13 +34,19 @@ import outdoorapp.utils.Views;
  */
 class ApplicationServiceManagerDiEscursione implements Actions, Views{
 	
-	private ManagerDiEscursioneDAO mde_dao;
+	private AbstractFactoryDAO userFactory = null, 
+			statoFactory = null, tipoFactory = null;
+	
+	private MDE_DAO mde_dao = null;
 	
 	/**
 	 * Costruttore che inizializza il DAO del Manager di Escursione
 	 */
 	public ApplicationServiceManagerDiEscursione() {
-		mde_dao = new ManagerDiEscursioneDAO();
+		userFactory = FactoryProducer.getFactory(DAORequest.Users);
+		statoFactory = FactoryProducer.getFactory(DAORequest.State);
+		tipoFactory = FactoryProducer.getFactory(DAORequest.Type);
+		mde_dao =  (MDE_DAO) userFactory.getUtenteDAO(Users.ManagerDiEscursione);
 	}
 	
 	/**
@@ -50,10 +60,11 @@ class ApplicationServiceManagerDiEscursione implements Actions, Views{
 		try {
 			if(!mde_dao.esisteEmail((Utente)request.getData()) && !mde_dao.esisteUsername((Utente)request.getData())){
 				
-				RuoliDAO ruoliDao = new RuoliDAO();
-				StatoUtenteDAO statoUtenteDao = new StatoUtenteDAO();
+				Ruoli_DAO ruoliDao = (Ruoli_DAO) tipoFactory.getTipoDAO(Type.Ruolo);
+				StatoUtente_DAO statoUtenteDao = (StatoUtente_DAO) statoFactory.getStatoDAO(State.User);
+
 				ManagerDiEscursione mde = (ManagerDiEscursione)request.getData();
-				mde.setRuolo(ruoliDao.getRuoloManagerDiEscursione());
+				mde.setRuolo(ruoliDao.getRuoloManagerDiSistema());
 				mde.setStatoUtente(statoUtenteDao.getStatoAttivo());
 				mde_dao.create(mde);
 				Alert alert = new Alert(AlertType.INFORMATION, "Il Manager di Escursione è stato inserito correttamente!", ButtonType.OK);

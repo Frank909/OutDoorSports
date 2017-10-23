@@ -1,11 +1,8 @@
 package outdoorapp.integration.dao;
 
 import outdoorapp.exceptions.DatabaseException;
-import outdoorapp.to.ManagerDiSistema;
+import outdoorapp.integration.dao.interfaces.GEN_DAO;
 import outdoorapp.to.OutDoorSports;
-import outdoorapp.to.Utente;
-
-import java.time.LocalDate;
 import java.util.List;
 
 import org.hibernate.HibernateException;
@@ -25,7 +22,7 @@ import org.hibernate.query.Query;
  *
  * @param <T>
  */
-abstract class GenericDAO<T extends OutDoorSports>{
+class GenericDAO<T extends OutDoorSports> implements GEN_DAO<T>{
 	
 	private OutDoorSports currentClass;
 	
@@ -43,7 +40,7 @@ abstract class GenericDAO<T extends OutDoorSports>{
 	 * 
 	 * @param currentClass
 	 */
-	protected void setCurrentClass( final OutDoorSports currentClass){
+	protected void setCurrentClass(final OutDoorSports currentClass){
 		this.currentClass = currentClass;
 	}
 
@@ -54,6 +51,7 @@ abstract class GenericDAO<T extends OutDoorSports>{
 	 * @return l'entità di tipo T
 	 * @throws DatabaseException
 	 */
+	@Override
 	public T create(final T entity) throws DatabaseException{
 		Transaction transaction = null;
 		Session session = null;
@@ -83,6 +81,7 @@ abstract class GenericDAO<T extends OutDoorSports>{
 	 * @return l'entità di tipo T
 	 * @throws DatabaseException
 	 */
+	@Override
 	@SuppressWarnings("unchecked")
 	public T findOne(final int id) throws DatabaseException{
 		T entity = null;
@@ -113,6 +112,7 @@ abstract class GenericDAO<T extends OutDoorSports>{
 	 * @return lista di entità di tipo T
 	 * @throws DatabaseException
 	 */
+	@Override
 	@SuppressWarnings("unchecked")
 	public List<T> getAll() throws DatabaseException{
 		List<T> result = null;
