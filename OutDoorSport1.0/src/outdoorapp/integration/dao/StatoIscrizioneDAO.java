@@ -3,14 +3,14 @@ package outdoorapp.integration.dao;
 import outdoorapp.exceptions.DatabaseException;
 import outdoorapp.integration.dao.interfaces.StatoIscrizione_DAO;
 import outdoorapp.to.FactoryProducerTO;
+import outdoorapp.to.enums.FactoryEnum;
+import outdoorapp.to.enums.StatoEnum;
 import outdoorapp.to.interfaces.StatoIscrizioneTO;
 import outdoorapp.to.interfaces.TOFactory;
-import outdoorapp.to.interfaces.strings.FactoryEnum;
-import outdoorapp.to.interfaces.strings.StatoEnum;
 
 /** 
- * Data Access Object per tutte le operazioni CRUD per StatoIscrizione.
- * Sono presenti i metodi di lettura e modifica.
+ * Classe che implementa i Data Access Object per 
+ * tutte le operazioni CRUD per StatoIscrizione.
  * 
  * @author Andrea Zito
  * @author Francesco Ventura
@@ -28,28 +28,16 @@ class StatoIscrizioneDAO extends GenericDAO<StatoIscrizioneTO> implements StatoI
 		this.setCurrentClass(tofact.getStatoTO(StatoEnum.StatoIscrizione));
 	}
 	
-	/**
-	 * @return lo stato attivo di una iscrizione
-	 * @throws DatabaseException
-	 */
 	@Override
 	public StatoIscrizioneTO getStatoAttivo() throws DatabaseException {
 		return this.findOne(1);
 	}
 
-	/**
-	 * @return lo stato disattivo di una iscrizione
-	 * @throws DatabaseException
-	 */
 	@Override
 	public StatoIscrizioneTO getStatoDisattivo() throws DatabaseException {
 		return this.findOne(0);
 	}
 
-	/**
-	 * @return lo stato terminato di una iscrizione
-	 * @throws DatabaseException
-	 */
 	@Override
 	public StatoIscrizioneTO getStatoIscrizioneTerminato() throws DatabaseException {
 		return this.findOne(2);

@@ -6,6 +6,14 @@ import java.lang.reflect.Method;
 import outdoorapp.presentation.reqresp.Request;
 import outdoorapp.presentation.reqresp.Response;
 
+/**
+ * Classe che implementa il servizio di lookup chiamato
+ * dal Business Delegate
+ * 
+ * @author Andrea Zito
+ * @author Francesco Ventura
+ *
+ */
 class BusinessLookUp{
 
 	private static BusinessLookUp businessLookUp = new BusinessLookUp();
@@ -65,7 +73,6 @@ class BusinessLookUp{
 		}
 
 		return response;
-
 	}
 
 }

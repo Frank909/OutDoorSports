@@ -16,8 +16,7 @@ import outdoorapp.to.interfaces.OutDoorSports;
 import outdoorapp.to.interfaces.StatoEscursioneTO;
 
 /**
- * Classe che rappresenta StatoEscursione. Sono fornite tutte le 
- * dichiarazioni dei metodi per la lettura
+ * Classe che implementa StatoEscursione.
  * 
  * @author Andrea Zito
  * @author Francesco Ventura
@@ -32,34 +31,22 @@ class StatoEscursione implements StatoEscursioneTO{
 	StatoEscursione() {
 	}
 
-	/**
-	 * @return l'id dello stato escursione
-	 */
+	@Override
 	public Integer getIdStatoEscursione() {
 		return this.idStatoEscursione;
 	}
 
-	/**
-	 * Metodo che setta lo stato dell'escursione
-	 * 
-	 * @param idStatoEscursione
-	 */
+	@Override
 	public void setIdStatoEscursione(Integer idStatoEscursione) {
 		this.idStatoEscursione = idStatoEscursione;
 	}
 
-	/**
-	 * @return il nome dello stato escursione
-	 */
+	@Override
 	public String getNome() {
 		return this.nome;
 	}
 
-	/**
-	 * Metodo che setta il nome dello stato escursione
-	 * 
-	 * @param nome
-	 */
+	@Override
 	public void setNome(String nome) {
 		this.nome = nome;
 	}

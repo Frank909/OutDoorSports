@@ -10,8 +10,7 @@ import outdoorapp.to.interfaces.TipoEscursioneTO;
 import outdoorapp.to.interfaces.UtenteTO;
 
 /**
- * Classe che rappresenta lo stato dell'Escursione. Sono fornite tutte le 
- * dichiarazioni dei metodi per la lettura dei dati
+ * Classe che implementa lo stato dell'Escursione.
  * 
  * @author Andrea Zito
  * @author Francesco Ventura
@@ -36,178 +35,113 @@ class Escursione implements EscursioneTO{
 	Escursione() {
 	}
 
-	/**
-	 * @return l'id dell'Escursione
-	 */
+	@Override
 	public Integer getIdEscursione() {
 		return this.idEscursione;
 	}
 
-	/**
-	 * Metodo che setta l'id dell'escursione
-	 * 
-	 * @param idEscursione
-	 */
+	@Override
 	public void setIdEscursione(Integer idEscursione) {
 		this.idEscursione = idEscursione;
 	}
 
-	/**
-	 * @return lo stato dell'Escursione
-	 */
+	@Override
 	public StatoEscursioneTO getStatoEscursione() {
 		return this.statoEscursione;
 	}
 
-	/**
-	 * Metodo che setta lo stato dell'Escursione
-	 * 
-	 * @param tblStatoEscursione
-	 */
+	@Override
 	public void setStatoEscursione(StatoEscursioneTO statoEscursione) {
 		this.statoEscursione = statoEscursione;
 	}
 
-	/**
-	 * @return il tipo dell'escursione
-	 */
+	@Override
 	public TipoEscursioneTO getTipoEscursione() {
 		return this.tipoEscursione;
 	}
 
-	/**
-	 * Metodo che setta il Tipo dell'Escursione
-	 * 
-	 * @param tblTipoEscursione
-	 */
+	@Override
 	public void setTipoEscursione(TipoEscursioneTO tipoEscursione) {
 		this.tipoEscursione = tipoEscursione;
 	}
 
-	/**
-	 * @return l'utente associato a una determinata Escursione
-	 */
+	@Override
 	public UtenteTO getUtente() {
 		return this.utente;
 	}
 
-	/**
-	 * Metodo che setta l'utente associato all'escursione
-	 * 
-	 * @param tblUtente
-	 */
+	@Override
 	public void setUtente(UtenteTO utente) {
 		this.utente = utente;
 	}
 
-	/**
-	 * @return il nome dell'escursione
-	 */
+	@Override
 	public String getNome() {
 		return this.nome;
 	}
 
-	/**
-	 * Metodo che setta il nome dell'escursione
-	 * 
-	 * @param nome
-	 */
+	@Override
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
 
-	/**
-	 * @return la data dell'escursione
-	 */
+	@Override
 	public Date getData() {
 		return this.data;
 	}
 
-	/**
-	 * Metodo che setta la data dell'escursione
-	 * 
-	 * @param data
-	 */
+	@Override
 	public void setData(Date data) {
 		this.data = data;
 	}
 
-	/**
-	 * @return numero minimo di partecipanti della escursione
-	 */
+	
+	@Override
 	public int getNumberMin() {
 		return this.numberMin;
 	}
 
-	/**
-	 * Metodo che setta il numero minimo dei partecipanti della escursione
-	 * 
-	 * @param numberMin
-	 */
+	@Override
 	public void setNumberMin(int numberMin) {
 		this.numberMin = numberMin;
 	}
 
-	/**
-	 * @return numero massimo di partecipanti della escursione
-	 */
+	@Override
 	public int getNumberMax() {
 		return this.numberMax;
 	}
 
-	/**
-	 * Metodo che setta il numero massimo dei partecipanti alla escursione
-	 * 
-	 * @param numberMax
-	 */
+	@Override
 	public void setNumberMax(int numberMax) {
 		this.numberMax = numberMax;
 	}
 
-	/**
-	 * @return il costo della escursione
-	 */
+	@Override
 	public double getCosto() {
 		return this.costo;
 	}
 
-	/**
-	 * Metodo che setta il costo della escursione
-	 * 
-	 * @param costo
-	 */
+	@Override
 	public void setCosto(double costo) {
 		this.costo = costo;
 	}
 
-	/**
-	 * @return la descrizione della escursione
-	 */
+	@Override
 	public String getDescrizione() {
 		return this.descrizione;
 	}
 
-	/**
-	 * Metodo che setta la descrizione della escursione
-	 * 
-	 * @param descrizione
-	 */
+	@Override
 	public void setDescrizione(String descrizione) {
 		this.descrizione = descrizione;
 	}
 	
-	/**
-	 * @return un set di optional
-	 */
+	@Override
 	public Set<OptionalTO> getOptionals() {
 		return optionals;
 	}
 
-	/**
-	 * Metodo che setta gli optional per una determinata escursione
-	 * 
-	 * @param optionals
-	 */
+	@Override
 	public void setOptionals(Set<OptionalTO> optionals) {
 		this.optionals = optionals;
 	}

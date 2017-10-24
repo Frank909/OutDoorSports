@@ -12,18 +12,15 @@ import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
 /**
- * classe astratta rappresenta una generalizzazione del pattern DAO per 
- * tutti i DAO presenti all'interno del package. In particolare rappresenta
- * i nomi dei metodi del CRUD di una tabella del database, che sono generici per tutti.
- * Inoltre sono stati inseriti i nomi dei metodi per generalizzare le esecuzioni di 
- * una query con o senza parametri.
+ * Classe astratta che implementa una generalizzazione del pattern DAO per 
+ * tutti i DAO presenti all'interno del package.
  * 
  * @author Andrea Zito
  * @author Francesco Ventura
  *
  * @param <T>
  */
-class GenericDAO<T extends OutDoorSports> implements GEN_DAO<T>{
+abstract class GenericDAO<T extends OutDoorSports> implements GEN_DAO<T>{
 	
 	private OutDoorSports currentClass;
 	
@@ -45,13 +42,6 @@ class GenericDAO<T extends OutDoorSports> implements GEN_DAO<T>{
 		this.currentClass = currentClass;
 	}
 
-	/**
-	 * Inserisce l'entità di tipo T nel database
-	 * 
-	 * @param entity
-	 * @return l'entità di tipo T
-	 * @throws DatabaseException
-	 */
 	@Override
 	public T create(final T entity) throws DatabaseException{
 		Transaction transaction = null;
@@ -74,14 +64,7 @@ class GenericDAO<T extends OutDoorSports> implements GEN_DAO<T>{
 		return entity;
 	}
 	
-	/**
-	 * Restituisce una specifica entità di tipo T presente nel database
-	 * in base al suo id
-	 * 
-	 * @param id
-	 * @return l'entità di tipo T
-	 * @throws DatabaseException
-	 */
+	
 	@Override
 	@SuppressWarnings("unchecked")
 	public T findOne(final int id) throws DatabaseException{
@@ -106,13 +89,6 @@ class GenericDAO<T extends OutDoorSports> implements GEN_DAO<T>{
 		return entity; 
 	}
 	
-	/**
-	 * Restituisce la lista di tutte le entità di tipo T presenti in una
-	 * tabella del database.
-	 * 
-	 * @return lista di entità di tipo T
-	 * @throws DatabaseException
-	 */
 	@Override
 	@SuppressWarnings("unchecked")
 	public List<T> getAll() throws DatabaseException{
@@ -136,13 +112,7 @@ class GenericDAO<T extends OutDoorSports> implements GEN_DAO<T>{
 		return result; 
 	}
 	
-	/**
-	 * Aggiorna una specifica entità già presente nel database
-	 * 
-	 * @param entity
-	 * @return l'entità di tipo T
-	 * @throws DatabaseException
-	 */
+	@Override
 	public T update(final T entity) throws DatabaseException{
 		Transaction transaction = null;
 		Session session = null;
@@ -166,12 +136,7 @@ class GenericDAO<T extends OutDoorSports> implements GEN_DAO<T>{
 		return entity;
 	}
 	
-	/**
-	 * Elimina una entità già presente nel database
-	 * 
-	 * @param entity
-	 * @throws DatabaseException 
-	 */
+	@Override
 	public void delete(final T entity) throws DatabaseException{
 		Transaction transaction = null;
 		Session session = null;

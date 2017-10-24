@@ -3,18 +3,18 @@ package outdoorapp.integration.dao;
 import outdoorapp.exceptions.DatabaseException;
 import outdoorapp.integration.dao.interfaces.Partecipante_DAO;
 import outdoorapp.to.FactoryProducerTO;
+import outdoorapp.to.enums.FactoryEnum;
+import outdoorapp.to.enums.UtenteEnum;
 import outdoorapp.to.interfaces.ManagerDiEscursioneTO;
 import outdoorapp.to.interfaces.PartecipanteTO;
 import outdoorapp.to.interfaces.TOFactory;
-import outdoorapp.to.interfaces.strings.FactoryEnum;
-import outdoorapp.to.interfaces.strings.UtenteEnum;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /** 
- * Data Access Object per tutte le operazioni CRUD per Partecipante.
- * Sono presenti i metodi di lettura e modifica.
+ * Classe che implementa i Data Access Object per 
+ * tutte le operazioni CRUD per Partecipante.
  * 
  * @author Andrea Zito
  * @author Francesco Ventura
@@ -32,11 +32,6 @@ class PartecipanteDAO extends UtenteDAO<PartecipanteTO> implements Partecipante_
 		this.setCurrentClass(tofact.getUtenteTO(UtenteEnum.Partecipante));
 	}
 	
-	/**
-	 * @param codiceFiscale
-	 * @return il Partecipante con un determinato codice fiscale 
-	 * @throws DatabaseException
-	 */
 	@Override
 	public PartecipanteTO readByCodiceFiscale(String codiceFiscale) throws DatabaseException {
 		List<String> param = new ArrayList<String>();
@@ -46,11 +41,6 @@ class PartecipanteDAO extends UtenteDAO<PartecipanteTO> implements Partecipante_
 		return response;
 	}
 	
-	/**
-	 * @param username
-	 * @return il Partecipante con un determinato username
-	 * @throws DatabaseException
-	 */
 	@Override
 	public PartecipanteTO readByUsername(String username) throws DatabaseException {
 		List<String> param = new ArrayList<String>();
@@ -60,10 +50,6 @@ class PartecipanteDAO extends UtenteDAO<PartecipanteTO> implements Partecipante_
 		return response;
 	}
 	
-	/**
-	 * @return la lista di tutti i partecipanti
-	 * @throws DatabaseException
-	 */
 	@Override
 	public List<PartecipanteTO> getAllPartecipante() throws DatabaseException {
 		return super.executeQuery("boooooooooooooooooooh");

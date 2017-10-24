@@ -6,7 +6,7 @@ import outdoorapp.exceptions.DatabaseException;
 import outdoorapp.integration.dao.DAOFactory;
 import outdoorapp.integration.dao.FactoryProducerDAO;
 import outdoorapp.integration.dao.enums.DAORequest;
-import outdoorapp.integration.dao.enums.Users;
+import outdoorapp.integration.dao.enums.UtenteDAOEnum;
 import outdoorapp.integration.dao.interfaces.MDE_DAO;
 import outdoorapp.integration.dao.interfaces.MDS_DAO;
 import outdoorapp.integration.dao.interfaces.Partecipante_DAO;
@@ -14,6 +14,9 @@ import outdoorapp.integration.dao.interfaces.Utente_DAO;
 import outdoorapp.presentation.reqresp.Request;
 import outdoorapp.presentation.reqresp.Response;
 import outdoorapp.to.FactoryProducerTO;
+import outdoorapp.to.enums.FactoryEnum;
+import outdoorapp.to.enums.GenericEnum;
+import outdoorapp.to.enums.UtenteEnum;
 import outdoorapp.to.interfaces.EmailTO;
 import outdoorapp.to.interfaces.ManagerDiEscursioneTO;
 import outdoorapp.to.interfaces.ManagerDiSistemaTO;
@@ -21,9 +24,6 @@ import outdoorapp.to.interfaces.OutDoorSports;
 import outdoorapp.to.interfaces.PartecipanteTO;
 import outdoorapp.to.interfaces.TOFactory;
 import outdoorapp.to.interfaces.UtenteTO;
-import outdoorapp.to.interfaces.strings.FactoryEnum;
-import outdoorapp.to.interfaces.strings.GenericEnum;
-import outdoorapp.to.interfaces.strings.UtenteEnum;
 import outdoorapp.utils.Actions;
 import outdoorapp.utils.EmailConfig;
 import outdoorapp.utils.RandomString;
@@ -56,7 +56,7 @@ class ApplicationServiceUtente implements Views, Actions{
 	public ApplicationServiceUtente() {
 		if(utente_dao == null){
 			DAOFact = FactoryProducerDAO.getFactory(DAORequest.Users);
-			utente_dao = (Utente_DAO<UtenteTO>) DAOFact.getUtenteDAO(Users.Utente);
+			utente_dao = (Utente_DAO<UtenteTO>) DAOFact.getUtenteDAO(UtenteDAOEnum.Utente);
 		}
 		if(utente == null){
 			TOFact = FactoryProducerTO.getFactory(FactoryEnum.UtenteTOFactory);
@@ -160,9 +160,9 @@ class ApplicationServiceUtente implements Views, Actions{
 
 		OutDoorSports result = null;
 
-		Partecipante_DAO partecipante_dao = (Partecipante_DAO) DAOFact.getUtenteDAO(Users.Partecipante);
-		MDS_DAO mds_dao = (MDS_DAO) DAOFact.getUtenteDAO(Users.ManagerDiSistema);
-		MDE_DAO mde_dao = (MDE_DAO) DAOFact.getUtenteDAO(Users.ManagerDiEscursione);
+		Partecipante_DAO partecipante_dao = (Partecipante_DAO) DAOFact.getUtenteDAO(UtenteDAOEnum.Partecipante);
+		MDS_DAO mds_dao = (MDS_DAO) DAOFact.getUtenteDAO(UtenteDAOEnum.ManagerDiSistema);
+		MDE_DAO mde_dao = (MDE_DAO) DAOFact.getUtenteDAO(UtenteDAOEnum.ManagerDiEscursione);
 
 		PartecipanteTO partecipante = (PartecipanteTO) TOFact.getUtenteTO(UtenteEnum.Partecipante);
 		ManagerDiSistemaTO mds = (ManagerDiSistemaTO) TOFact.getUtenteTO(UtenteEnum.ManagerDiSistema);

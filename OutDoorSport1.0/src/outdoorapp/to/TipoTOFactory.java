@@ -1,38 +1,36 @@
 package outdoorapp.to;
 
+/**
+ * Classe che restituisce l'istanza dell'entità desiderata
+ * della categoria Tipo in base alla richiesta. 
+ * 
+ * @author Andrea Zito
+ * @author Francesco Ventura
+ *
+ */
+
 import outdoorapp.to.interfaces.TOFactory;
+import outdoorapp.to.enums.GenericEnum;
+import outdoorapp.to.enums.OptionalEnum;
+import outdoorapp.to.enums.StatoEnum;
+import outdoorapp.to.enums.TipoEnum;
+import outdoorapp.to.enums.UtenteEnum;
 import outdoorapp.to.interfaces.OutDoorSports;
-import outdoorapp.to.interfaces.strings.GenericEnum;
-import outdoorapp.to.interfaces.strings.OptionalEnum;
-import outdoorapp.to.interfaces.strings.StatoEnum;
-import outdoorapp.to.interfaces.strings.TipoEnum;
-import outdoorapp.to.interfaces.strings.UtenteEnum;
 
-public class TipoTOFactory implements TOFactory{
+class TipoTOFactory implements TOFactory{
 
-	public TipoTOFactory() {
-		// TODO Auto-generated constructor stub
-	}
-
-	public OutDoorSports getTipoTO(OutDoorSports choice){
-		if(choice instanceof TipoOptional)
-			return new TipoOptional();
-		if(choice instanceof Ruoli)
-			return new Ruoli();
-		if(choice instanceof TipoEscursione)
-			return new TipoEscursione();
-		return null;
-	}
+	/**
+	 *  Costruttore di TipoTOFactory
+	 */
+	public TipoTOFactory() {}
 
 	@Override
 	public OutDoorSports getGenericTO(GenericEnum choice) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public OutDoorSports getUtenteTO(UtenteEnum choice) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
@@ -43,6 +41,8 @@ public class TipoTOFactory implements TOFactory{
 			return new TipoEscursione();
 		case TipoOptional:
 			return new TipoOptional();
+		case Ruoli:
+			return new Ruoli();
 		default:
 			return null;
 		}
@@ -50,13 +50,11 @@ public class TipoTOFactory implements TOFactory{
 
 	@Override
 	public OutDoorSports getOptionalTO(OptionalEnum choice) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public OutDoorSports getStatoTO(StatoEnum choice) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 }

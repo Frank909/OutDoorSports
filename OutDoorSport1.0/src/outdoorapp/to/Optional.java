@@ -6,8 +6,7 @@ import outdoorapp.to.interfaces.StatoOptionalTO;
 import outdoorapp.to.interfaces.TipoOptionalTO;
 
 /**
- * Classe che rappresenta lo stato dell'Optional. Sono fornite tutte le 
- * dichiarazioni dei metodi per la lettura dei dati
+ * Classe che implementa lo stato dell'Optional.
  * 
  * @author Andrea Zito
  * @author Francesco Ventura
@@ -26,82 +25,52 @@ class Optional implements OptionalTO{
 	Optional() {
 	}
 
-	/**
-	 * @return l'id dell'optional
-	 */
+	@Override
 	public Integer getIdOptional() {
 		return this.idOptional;
 	}
 
-	/**
-	 * Metodo che setta l'id dell'Optional
-	 * 
-	 * @param idOptional
-	 */
+	@Override
 	public void setIdOptional(Integer idOptional) {
 		this.idOptional = idOptional;
 	}
 
-	/**
-	 * @return lo stato dell'optional
-	 */
+	@Override
 	public StatoOptionalTO getStatoOptional() {
 		return this.statoOptional;
 	}
 
-	/**
-	 * Metodo che setta lo stato dell'optional
-	 * 
-	 * @param tblStatoOptional
-	 */
+	@Override
 	public void setStatoOptional(StatoOptionalTO statoOptional) {
 		this.statoOptional = statoOptional;
 	}
 
-	/**
-	 * @return il tipo dell'optional
-	 */
+	@Override
 	public TipoOptionalTO getTipoOptional() {
 		return this.tipoOptional;
 	}
 
-	/**
-	 * Metodo che setta il tipo dell'optional
-	 * 
-	 * @param tblTipoOptional
-	 */
+	
 	public void setTipoOptional(TipoOptionalTO tipoOptional) {
 		this.tipoOptional = tipoOptional;
 	}
 
-	/**
-	 * @return il nome dell'optional
-	 */
+	
 	public String getNome() {
 		return this.nome;
 	}
 
-	/**
-	 * Metodo che setta il nome dell'optional
-	 * 
-	 * @param nome
-	 */
+	
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
 
-	/**
-	 * @return la descrizione dell'optional
-	 */
+	
 	public String getDescrizione() {
 		return this.descrizione;
 	}
 
-	/**
-	 * Metodo che setta la descrizione dell'optional
-	 * 
-	 * @param descrizione
-	 */
+	
 	public void setDescrizione(String descrizione) {
 		this.descrizione = descrizione;
 	}

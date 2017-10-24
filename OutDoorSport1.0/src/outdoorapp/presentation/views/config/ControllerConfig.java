@@ -11,11 +11,11 @@ import outdoorapp.presentation.reqresp.Request;
 import outdoorapp.presentation.reqresp.Response;
 import outdoorapp.presentation.views.generic.ControllerRegistrazione;
 import outdoorapp.to.FactoryProducerTO;
+import outdoorapp.to.enums.FactoryEnum;
+import outdoorapp.to.enums.UtenteEnum;
 import outdoorapp.to.interfaces.ManagerDiSistemaTO;
 import outdoorapp.to.interfaces.TOFactory;
 import outdoorapp.to.interfaces.UtenteTO;
-import outdoorapp.to.interfaces.strings.FactoryEnum;
-import outdoorapp.to.interfaces.strings.UtenteEnum;
 
 
 /**
@@ -97,7 +97,7 @@ public class ControllerConfig extends ControllerRegistrazione{
 		if(result.equals("")){
 			Response res = this.sendRequest(new Request(mds, OUTDOORSPORT_SAVE_MDS));
 			if(res.toString().equals(RESP_OK))
-				this.sendRequest(new Request(VIEW_MANAGER_DI_SISTEMA_CONFIG));
+				this.sendRequest(new Request(VIEW_LOGIN));
 			else
 				lblErrore.setText("Errore! Email o Username già presenti!");
 		}else

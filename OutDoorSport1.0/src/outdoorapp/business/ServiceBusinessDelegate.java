@@ -5,25 +5,28 @@ import outdoorapp.presentation.reqresp.Request;
 import outdoorapp.presentation.reqresp.Response;
 import outdoorapp.services.Service;
 import outdoorapp.services.ServiceType;
+
 /**
- * Classe di servizio/supporto al businessLookUp realizzato allo scopo di nascondere dettagli
- * implementativi fungendo da tunneling fra BusinessDelegate e BusinessLookUp
+ * Classe di servizio, invocata dal Service Locator, per collegare 
+ * l'Application Controller al Business Delegate. In questo modo si nascondono 
+ * i vari passaggi della richiesta e non possono essere richiamati da altre
+ * parti.
+ * 
+ * 
  * @author Andrea Zito
  * @author Francesco Ventura
  */
+
 public class ServiceBusinessDelegate extends Service{
 
+	/**
+	 * Richiama l'istanza di BusinessDelegate
+	 */
 	private static BusinessDelegate businessDelegate = BusinessDelegate.getInstance();
 
 	public ServiceBusinessDelegate(){
 	}
 	
-	/**
-	 * Override del metodo dell'interfaccia Service ereditata dalla classe astratta AbstractService.
-	 * Metodo che manda una richiesta al businessDelegate e restituisce una risposta 
-	 * a seconda del tipo di richiesta in ingresso controllando che il servizio arrivi dal livello esatto.
-	 */
-
 	@Override
 	public ServiceType getType() {
 		return ServiceType.BusinessDelegate;

@@ -2,7 +2,6 @@ package outdoorapp.to;
 
 /**
  * Classe che implementa un oggetto Email. 
- * Sono quindi forniti tutti i metodi per gestire l'invio di una email.
  * 
  * @author Andrea Zito
  * @author Francesco Ventura
@@ -29,50 +28,32 @@ class Email implements EmailTO{
 		this.listaDestinatari = new ArrayList<UtenteTO>();
 	}
 
-	/**
-	 * @return la lista dei destinatari
-	 */
+	@Override
 	public List<UtenteTO> getListaDestinatari() {
 		return listaDestinatari;
 	}
 
-	/**
-	 * Metodo che setta la lista dei destinatari
-	 * 
-	 * @param listaDestinatari
-	 */
+	@Override
 	public void setListaDestinatari(List<UtenteTO> listaDestinatari) {
 		this.listaDestinatari = listaDestinatari;
 	}
 
-	/**
-	 * @return il corpo del messaggio
-	 */
+	@Override
 	public String getMessaggio() {
 		return messaggio;
 	}
 
-	/**
-	 * Metodo che setta il corpo del messaggio
-	 * 
-	 * @param messaggio
-	 */
+	@Override
 	public void setMessaggio(String messaggio) {
 		this.messaggio = messaggio;
 	}
 
-	/**
-	 * @return restituisce l'oggetto della mail
-	 */
+	@Override
 	public String getOggetto() {
 		return oggetto;
 	}
 
-	/**
-	 * Metodo che setta l'oggetto della mail
-	 * 
-	 * @param oggetto
-	 */
+	@Override
 	public void setOggetto(String oggetto) {
 		this.oggetto = oggetto;
 	}

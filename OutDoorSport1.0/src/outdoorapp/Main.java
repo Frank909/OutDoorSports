@@ -6,10 +6,10 @@ import outdoorapp.presentation.frontcontroller.FrontController;
 import outdoorapp.presentation.reqresp.Request;
 import outdoorapp.presentation.reqresp.Response;
 import outdoorapp.to.FactoryProducerTO;
+import outdoorapp.to.enums.FactoryEnum;
+import outdoorapp.to.enums.UtenteEnum;
 import outdoorapp.to.interfaces.TOFactory;
 import outdoorapp.to.interfaces.ManagerDiSistemaTO;
-import outdoorapp.to.interfaces.strings.FactoryEnum;
-import outdoorapp.to.interfaces.strings.UtenteEnum;
 import outdoorapp.utils.Actions;
 
 public class Main extends Application implements Actions{

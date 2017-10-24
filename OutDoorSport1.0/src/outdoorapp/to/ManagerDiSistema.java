@@ -15,8 +15,7 @@ import org.hibernate.annotations.Parameter;
 import outdoorapp.to.interfaces.ManagerDiSistemaTO;
 
 /**
- * Classe che rappresenta il i dati del Manager di Sistema. Sono fornite tutte le 
- * dichiarazioni dei metodi per la lettura e la scrittura dei dati
+ * Classe che implementa il i dati del Manager di Sistema.
  * 
  * @author Andrea Zito
  * @author Francesco Ventura
@@ -32,35 +31,22 @@ class ManagerDiSistema extends Utente implements ManagerDiSistemaTO{
 		super.setIdUtente(this.getIdMds());
 	}
 
-
-	/**
-	 * @return l'id del manager di sistema
-	 */
+	@Override
 	public int getIdMds() {
 		return this.idMds;
 	}
 
-	/**
-	 * Metodo che setta il manager di sistema
-	 * 
-	 * @param idMds
-	 */
+	@Override
 	public void setIdMds(int idMds) {
 		this.idMds = idMds;
 	}
 
-	/**
-	 * @return il numero di telefono del manager di sistema
-	 */
+	@Override
 	public String getTelefono() {
 		return this.telefono;
 	}
 
-	/**
-	 * Metodo che setta il numero di telefono del manager di sistema
-	 * 
-	 * @param telefono
-	 */
+	@Override
 	public void setTelefono(String telefono) {
 		this.telefono = telefono;
 	}

@@ -13,17 +13,17 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import outdoorapp.to.interfaces.OutDoorSports;
+import outdoorapp.to.interfaces.StatoIscrizioneTO;
 
 /**
- * Classe che rappresenta lo stato di StatoIscrizione. Sono fornite tutte le 
- * dichiarazioni dei metodi per la lettura dei dati
+ * Classe che implementa lo stato di StatoIscrizione.
  * 
  * @author Andrea Zito
  * @author Francesco Ventura
  *
  */
 
-class StatoIscrizione implements OutDoorSports{
+class StatoIscrizione implements StatoIscrizioneTO{
 
 	private static final long serialVersionUID = -8626250321580095948L;
 	private Integer idStatoIscrizione;
@@ -36,34 +36,22 @@ class StatoIscrizione implements OutDoorSports{
 		this.nome = nome;
 	}
 
-	/**
-	 * @return l'id dello statoIscrizione
-	 */
+	@Override
 	public Integer getIdStatoIscrizione() {
 		return this.idStatoIscrizione;
 	}
 
-	/**
-	 * Metodo che setta lo stato dell'iscrizione
-	 * 
-	 * @param idStatoIscrizione
-	 */
+@Override
 	public void setIdStatoIscrizione(Integer idStatoIscrizione) {
 		this.idStatoIscrizione = idStatoIscrizione;
 	}
 
-	/**
-	 * @return il nome dello stato iscrizione
-	 */
+	@Override
 	public String getNome() {
 		return this.nome;
 	}
 
-	/**
-	 * Metodo che setta il nome dello stato iscrizione
-	 * 
-	 * @param nome
-	 */
+@Override
 	public void setNome(String nome) {
 		this.nome = nome;
 	}

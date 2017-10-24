@@ -58,7 +58,7 @@
               </rowConstraints>
                <children>
                   <Button fx:id="btnModificaManagerDiEscursione" mnemonicParsing="false" text="Modifica Manager di Escursione" GridPane.halignment="RIGHT" />
-                  <Button fx:id="btnDettagliManagerDiEscursione" mnemonicParsing="false" text="Dettagli Manager di Escursione" GridPane.columnIndex="1" GridPane.halignment="RIGHT">
+                  <Button fx:id="btnDettagliManagerDiEscursione" mnemonicParsing="false" onMouseClicked="#getAllManagerDiEscursione" text="Dettagli Manager di Escursione" GridPane.columnIndex="1" GridPane.halignment="RIGHT">
                      <GridPane.margin>
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                      </GridPane.margin>

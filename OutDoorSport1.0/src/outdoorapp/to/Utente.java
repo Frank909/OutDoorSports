@@ -28,8 +28,7 @@ import outdoorapp.to.interfaces.StatoUtenteTO;
 import outdoorapp.to.interfaces.UtenteTO;
 
 /**
- * Classe che rappresenta Utente. Sono fornite tutte le 
- * dichiarazioni dei metodi per la lettura e la scrittura dei dati
+ * Classe che implementa Utente.
  * 
  * @author Andrea Zito
  * @author Francesco Ventura
@@ -73,210 +72,132 @@ class Utente implements UtenteTO{
 		this.citta = citta;
 	}
 
-	/**
-	 * @return l'id dell'utente
-	 */
+	@Override
 	public Integer getIdUtente() {
 		return this.idUtente;
 	}
 
-	/**
-	 * Metodo che setta l'id dell'utente
-	 * 
-	 * @param idUtente
-	 */
+	@Override
 	public void setIdUtente(Integer idUtente) {
 		this.idUtente = idUtente;
 	}
 
-	/**
-	 * @return il ruolo relativo a un determinato utente
-	 */
+	@Override
 	public RuoliTO getRuolo() {
 		return this.ruolo;
 	}
 
-	/**
-	 * Metodo che setta il ruolo relativo a un determinato utente
-	 * 
-	 * @param tblRuoli
-	 */
+	@Override
 	public void setRuolo(RuoliTO ruolo) {
 		this.ruolo = ruolo;
 	}
 
-	/**
-	 * @return lo stato utente relativo a un determinato utente
-	 */
+	@Override
 	public StatoUtenteTO getStatoUtente() {
 		return this.statoUtente;
 	}
 
-	/**
-	 * Metodo che setta lo stato utente relativo a un determinato utente
-	 * 
-	 * @param tblStatoUtente
-	 */
+	@Override
 	public void setStatoUtente(StatoUtenteTO tblStatoUtente) {
 		this.statoUtente = tblStatoUtente;
 	}
 
-	/**
-	 * @return l'username dell'utente
-	 */
+	@Override
 	public String getUsername() {
 		return this.username;
 	}
 
-	/**
-	 * Metodo che setta l'username dell'utente
-	 * 
-	 * @param username
-	 */
+	@Override
 	public void setUsername(String username) {
 		this.username = username;
 	}
 
-	/**
-	 * @return la password dell'utente
-	 */
+	@Override
 	public String getPassword() {
 		return this.password;
 	}
 
-	/**
-	 * Metodo che setta la password dell'utente
-	 * 
-	 * @param password
-	 */
+	@Override
 	public void setPassword(String password) {
 		this.password = password;
 	}
 
-	/**
-	 * @return il nome dell'utente
-	 */
+	@Override
 	public String getNome() {
 		return this.nome;
 	}
 
-	/**
-	 * Metodo che setta il nome dell'utente
-	 * 
-	 * @param nome
-	 */
+	@Override
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
 
-	/**
-	 * @return il cognome dell'utente
-	 */
+	@Override
 	public String getCognome() {
 		return this.cognome;
 	}
 
-	/**
-	 * Metodo che setta il cognome dell'utente
-	 * 
-	 * @param cognome
-	 */
+	@Override
 	public void setCognome(String cognome) {
 		this.cognome = cognome;
 	}
 
-	/**
-	 * @return l'email dell'utente
-	 */
+	@Override
 	public String getEmail() {
 		return this.email;
 	}
 
-	/**
-	 * Metodo che setta l'email dell'utente
-	 * 
-	 * @param email
-	 */
+	@Override
 	public void setEmail(String email) {
 		this.email = email;
 	}
 
-	/**
-	 * @return il codice fiscale dell'utente
-	 */ 
+	@Override
 	public String getCodiceFiscale() {
 		return this.codiceFiscale;
 	}
 
-	/**
-	 * Metodo che setta il codice fiscale dell'utente
-	 * 
-	 * @param codiceFiscale
-	 */
+	@Override
 	public void setCodiceFiscale(String codiceFiscale) {
 		this.codiceFiscale = codiceFiscale;
 	}
 
-	/**
-	 * @return la data di nascia dell'utente
-	 */
+	@Override
 	public String getDataNascita() {
 		return this.dataNascita;
 	}
 
-	/**
-	 * Metodo che setta la data di nascita dell'utente
-	 * 
-	 * @param localDate
-	 */
+	@Override
 	public void setDataNascita(String localDate) {
 		this.dataNascita = localDate;
 	}
 
-	/**
-	 * @return il sesso dell'utente
-	 */
+	@Override
 	public String getSesso() {
 		return this.sesso;
 	}
 
-	/**
-	 * Metodo che setta il sesso dell'utente
-	 * 
-	 * @param sesso
-	 */
+	@Override
 	public void setSesso(String sesso) {
 		this.sesso = sesso;
 	}
 
-	/**
-	 * @return l'indirizzo dell'utente
-	 */
+	@Override
 	public String getIndirizzo() {
 		return this.indirizzo;
 	}
 
-	/**
-	 * Metodo che setta l'indirizzo dell'utente
-	 * 
-	 * @param indirizzo
-	 */
+	@Override
 	public void setIndirizzo(String indirizzo) {
 		this.indirizzo = indirizzo;
 	}
 
-	/**
-	 * @return la città dell'utente
-	 */
+	@Override
 	public String getCitta() {
 		return this.citta;
 	}
 
-	/**
-	 * Metodo che setta la città dell'utente
-	 * 
-	 * @param citta
-	 */
+	@Override
 	public void setCitta(String citta) {
 		this.citta = citta;
 	}

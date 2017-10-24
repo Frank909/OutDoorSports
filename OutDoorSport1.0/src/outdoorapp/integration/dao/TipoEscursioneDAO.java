@@ -2,14 +2,14 @@ package outdoorapp.integration.dao;
 
 import outdoorapp.integration.dao.interfaces.TipoEscursione_DAO;
 import outdoorapp.to.FactoryProducerTO;
+import outdoorapp.to.enums.FactoryEnum;
+import outdoorapp.to.enums.TipoEnum;
 import outdoorapp.to.interfaces.TOFactory;
 import outdoorapp.to.interfaces.TipoEscursioneTO;
-import outdoorapp.to.interfaces.strings.FactoryEnum;
-import outdoorapp.to.interfaces.strings.TipoEnum;
 
 /** 
- * Data Access Object per tutte le operazioni CRUD per TipoEscursione.
- * Sono presenti i metodi di lettura e modifica.
+ * Classe che implementa i Data Access Object per 
+ * tutte le operazioni CRUD per TipoEscursione.
  * 
  * @author Andrea Zito
  * @author Francesco Ventura
@@ -24,6 +24,9 @@ class TipoEscursioneDAO extends GenericDAO<TipoEscursioneTO> implements TipoEscu
 	 */
 	private TOFactory TOFactory = null;
 	
+	/**
+	 * Costruttore che inizializza il Transfer Object relativo al TipoEscursione
+	 */
 	public TipoEscursioneDAO() {
 		if(TOFactory == null)
 			TOFactory = FactoryProducerTO.getFactory(FactoryEnum.TipoTOFactory);

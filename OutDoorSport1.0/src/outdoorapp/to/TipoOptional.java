@@ -16,8 +16,7 @@ import outdoorapp.to.interfaces.OutDoorSports;
 import outdoorapp.to.interfaces.TipoOptionalTO;
 
 /**
- * Classe che rappresenta lo stato del TipoOptional. Sono fornite tutte le 
- * dichiarazioni dei metodi per la lettura dei dati
+ * Classe che implementa lo stato del TipoOptional.
  * 
  * @author Andrea Zito
  * @author Francesco Ventura
@@ -34,50 +33,32 @@ class TipoOptional implements TipoOptionalTO{
 	TipoOptional() {
 	}
 
-	/**
-	 * @return l'id del tipo optional
-	 */
+	@Override
 	public Integer getIdTipoOptional() {
 		return this.idTipoOptional;
 	}
 
-	/**
-	 * Metodo che setta l'id del tipo optional
-	 * 
-	 * @param idTipoOptional
-	 */
+	@Override
 	public void setIdTipoOptional(Integer idTipoOptional) {
 		this.idTipoOptional = idTipoOptional;
 	}
 
-	/**
-	 * @return il nome del tipo optional
-	 */
+	@Override
 	public String getNome() {
 		return this.nome;
 	}
 
-	/**
-	 * Metodo che setta il nome del tipo optional
-	 * 
-	 * @param nome
-	 */
+	@Override
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
 
-	/**
-	 * @return il costo di un optional
-	 */
+	@Override
 	public double getCosto() {
 		return this.costo;
 	}
 
-	/**
-	 * Metodo che setta il costo di un optional
-	 * 
-	 * @param costo
-	 */
+	
 	public void setCosto(double costo) {
 		this.costo = costo;
 	}

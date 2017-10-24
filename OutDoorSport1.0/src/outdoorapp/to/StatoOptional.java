@@ -1,5 +1,4 @@
 package outdoorapp.to;
-// Generated 14-set-2017 13.06.34 by Hibernate Tools 5.2.3.Final
 
 import java.util.HashSet;
 import java.util.Set;
@@ -16,8 +15,7 @@ import outdoorapp.to.interfaces.OutDoorSports;
 import outdoorapp.to.interfaces.StatoOptionalTO;
 
 /**
- * Classe che rappresenta lo stato di StatoOptional. Sono fornite tutte le 
- * dichiarazioni dei metodi per la lettura dei dati
+ * Classe che implementa lo stato di StatoOptional.
  * 
  * @author Andrea Zito
  * @author Francesco Ventura
@@ -33,34 +31,22 @@ class StatoOptional implements StatoOptionalTO{
 	StatoOptional() {
 	}
 
-	/**
-	 * @return l'id dello stato dell'optional
-	 */
+	@Override
 	public Integer getIdStatoOptional() {
 		return this.idStatoOptional;
 	}
 
-	/**
-	 * Metodo che setta l'id dello stato dell'optional
-	 * 
-	 * @param idStatoOptional
-	 */
+	@Override
 	public void setIdStatoOptional(Integer idStatoOptional) {
 		this.idStatoOptional = idStatoOptional;
 	}
 
-	/**
-	 * @return il nome dello stato dell'optional
-	 */
+	@Override
 	public String getNome() {
 		return this.nome;
 	}
 
-	/**
-	 * Metodo che setta il nome dello stato dell'optional
-	 * 
-	 * @param nome
-	 */
+	@Override
 	public void setNome(String nome) {
 		this.nome = nome;
 	}

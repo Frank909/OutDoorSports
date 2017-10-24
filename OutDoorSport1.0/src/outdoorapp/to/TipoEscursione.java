@@ -16,8 +16,7 @@ import outdoorapp.to.interfaces.OutDoorSports;
 import outdoorapp.to.interfaces.TipoEscursioneTO;
 
 /**
- * Classe che rappresenta TipoEscursione. Sono fornite tutte le 
- * dichiarazioni dei metodi per la lettura
+ * Classe che implementa lo stato di TipoEscursione.
  * 
  * @author Andrea Zito
  * @author Francesco Ventura
@@ -34,50 +33,32 @@ class TipoEscursione implements TipoEscursioneTO{
 	TipoEscursione() {
 	}
 
-	/**
-	 * @return l'id del tipo escursione
-	 */
+	@Override
 	public Integer getIdTipoEscursione() {
 		return this.idTipoEscursione;
 	}
 
-	/**
-	 * Metodo che setta l'id del tipo escursione
-	 * 
-	 * @param idTipoEscursione
-	 */
+	@Override
 	public void setIdTipoEscursione(Integer idTipoEscursione) {
 		this.idTipoEscursione = idTipoEscursione;
 	}
 
-	/**
-	 * @return il nome del tipo escursione
-	 */
+	@Override
 	public String getNome() {
 		return this.nome;
 	}
 	
-	/**
-	 * Metodo che setta il nome del tipo escursione
-	 * 
-	 * @param nome
-	 */
+	@Override
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
 
-	/** 
-	 * @return la descrizione del tipoEscursione
-	 */
+	@Override
 	public String getDescrizione() {
 		return this.descrizione;
 	}
 
-	/**
-	 * Metodo che setta la descrizione del tipo escursione
-	 * 
-	 * @param decrizione
-	 */
+	@Override
 	public void setDescrizione(String decrizione) {
 		this.descrizione = decrizione;
 	}

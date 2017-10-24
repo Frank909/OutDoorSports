@@ -15,8 +15,7 @@ import org.hibernate.annotations.Parameter;
 import outdoorapp.to.interfaces.ManagerDiEscursioneTO;
 
 /**
- * Metodo che rappresenta il i dati del Manager di Escursione. Sono fornite tutte le 
- * dichiarazioni dei metodi per la lettura e la scrittura dei dati
+ * Classe che implementa il i dati del Manager di Escursione.
  * 
  * @author Andrea Zito
  * @author Francesco Ventura
@@ -33,34 +32,22 @@ class ManagerDiEscursione extends Utente implements ManagerDiEscursioneTO{
 		super.setIdUtente(this.getIdManagerDiEscursione());
 	}
 
-	/**
-	 * @return l'id del manager di escursione
-	 */ 
+	@Override
 	public int getIdManagerDiEscursione() {
 		return this.idMde;
 	}
 
-	/**
-	 * Metodo che setta l'id del manager di escursione
-	 * 
-	 * @param idMde
-	 */
+	@Override
 	public void setIdManagerDiEscursione(int idMde) {
 		this.idMde = idMde;
 	}
 
-	/**
-	 * @return lo stipendio del manager di escursione
-	 */
+	@Override
 	public double getStipendio() {
 		return this.stipendio;
 	}
 
-	/**
-	 * Metodo che setta lo stipendio del manager di escursione
-	 * 
-	 * @param stipendio
-	 */
+	@Override
 	public void setStipendio(double stipendio) {
 		this.stipendio = stipendio;
 	}

@@ -18,8 +18,7 @@ import org.hibernate.annotations.Parameter;
 import outdoorapp.to.interfaces.PartecipanteTO;
 
 /**
- * Classe che rappresenta il i dati del Partecipante. Sono fornite tutte le 
- * dichiarazioni dei metodi per la lettura e la scrittura dei dati
+ * Classe che implementa lo stato del Partecipante.
  * 
  * @author Andrea Zito
  * @author Francesco Ventura
@@ -38,66 +37,42 @@ class Partecipante extends Utente implements PartecipanteTO{
 		super.setIdUtente(this.getIdPartecipante());
 	}
 
-	/**
-	 * @return l'id del partecipante
-	 */
+	@Override
 	public int getIdPartecipante() {
 		return this.idPartecipante;
 	}
 
-	/**
-	 * Metodo che setta l'id del partecipante
-	 * 
-	 * @param idPartecipante
-	 */
+	@Override
 	public void setIdPartecipante(int idPartecipante) {
 		this.idPartecipante = idPartecipante;
 	}
 
-	/**
-	 * @return il numero di tessera sanitaria del partecipante
-	 */
+	@Override
 	public String getTesseraSanitaria() {
 		return this.tesseraSanitaria;
 	}
 
-	/**
-	 * Metodo che setta il numero di tessera sanitaria del partecipante
-	 * 
-	 * @param NTesseraSanitaria
-	 */
+	@Override
 	public void setTesseraSanitaria(String tesseraSanitaria) {
 		this.tesseraSanitaria = tesseraSanitaria;
 	}
 
-	/**
-	 * @return il certificato src del partecipante
-	 */
+	@Override
 	public String getCertificatoSrc() {
 		return this.certificatoSrc;
 	}
 
-	/**
-	 * Metodo che setta il certificato src del partecipante
-	 * 
-	 * @param certificatoSrc
-	 */
+	@Override
 	public void setCertificatoSrc(String certificatoSrc) {
 		this.certificatoSrc = certificatoSrc;
 	}
 
-	/**
-	 * @return la data di rilascio del certificato src del partecipante
-	 */
+	@Override
 	public String getDataCertificatoSrc() {
 		return this.dataCertificatoSrc;
 	}
-
-	/**
-	 * Metodo che setta la data di rilascio del certificato del partecipante
-	 * 
-	 * @param string
-	 */
+	
+	@Override
 	public void setDataCertificatoSrc(String string) {
 		this.dataCertificatoSrc = string;
 	}

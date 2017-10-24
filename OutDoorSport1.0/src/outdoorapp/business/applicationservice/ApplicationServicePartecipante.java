@@ -11,9 +11,9 @@ import outdoorapp.exceptions.DatabaseException;
 import outdoorapp.integration.dao.DAOFactory;
 import outdoorapp.integration.dao.FactoryProducerDAO;
 import outdoorapp.integration.dao.enums.DAORequest;
-import outdoorapp.integration.dao.enums.State;
-import outdoorapp.integration.dao.enums.Type;
-import outdoorapp.integration.dao.enums.Users;
+import outdoorapp.integration.dao.enums.StatoDAOEnum;
+import outdoorapp.integration.dao.enums.TipoDAOEnum;
+import outdoorapp.integration.dao.enums.UtenteDAOEnum;
 import outdoorapp.integration.dao.interfaces.Partecipante_DAO;
 import outdoorapp.integration.dao.interfaces.Ruoli_DAO;
 import outdoorapp.integration.dao.interfaces.StatoUtente_DAO;
@@ -54,7 +54,7 @@ class ApplicationServicePartecipante implements Views, Actions{
 		userFactory = FactoryProducerDAO.getFactory(DAORequest.Users);
 		statoFactory = FactoryProducerDAO.getFactory(DAORequest.State);
 		tipoFactory = FactoryProducerDAO.getFactory(DAORequest.Type);
-		partecipante_dao =  (Partecipante_DAO) userFactory.getUtenteDAO(Users.Partecipante);
+		partecipante_dao =  (Partecipante_DAO) userFactory.getUtenteDAO(UtenteDAOEnum.Partecipante);
 	}
 
 	/**
@@ -94,8 +94,8 @@ class ApplicationServicePartecipante implements Views, Actions{
 
 		try {
 			if(!partecipante_dao.esisteEmail((UtenteTO)request.getData()) && !partecipante_dao.esisteUsername((UtenteTO)request.getData())){
-				Ruoli_DAO ruoliDao = (Ruoli_DAO) tipoFactory.getTipoDAO(Type.Ruolo);
-				StatoUtente_DAO statoUtenteDao = (StatoUtente_DAO) statoFactory.getStatoDAO(State.User);
+				Ruoli_DAO ruoliDao = (Ruoli_DAO) tipoFactory.getTipoDAO(TipoDAOEnum.Ruolo);
+				StatoUtente_DAO statoUtenteDao = (StatoUtente_DAO) statoFactory.getStatoDAO(StatoDAOEnum.User);
 				
 				partecipante = (PartecipanteTO)request.getData();
 				uploadCertificatoSRC(partecipante);

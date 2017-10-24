@@ -16,8 +16,7 @@ import outdoorapp.to.interfaces.OutDoorSports;
 import outdoorapp.to.interfaces.StatoUtenteTO;
 
 /**
- * Classe che rappresenta lo stato dell'Utente. Sono fornite tutte le 
- * dichiarazioni dei metodi per la lettura dei dati
+ * Classe che implementa lo stato dell'Utente.
  * 
  * @author Andrea Zito
  * @author Francesco Ventura
@@ -37,34 +36,22 @@ class StatoUtente implements StatoUtenteTO{
 		this.nome = nome;
 	}
 
-	/**
-	 * @return l'id dello stato utente
-	 */
+	@Override
 	public Integer getIdStatoUtente() {
 		return this.idStatoUtente;
 	}
 
-	/**
-	 * Metodo che setta l'id dello stato utente
-	 * 
-	 * @param idStatoUtente
-	 */
+	@Override
 	public void setIdStatoUtente(Integer idStatoUtente) {
 		this.idStatoUtente = idStatoUtente;
 	}
 
-	/**
-	 * @return il nome dello stato utente
-	 */
+	@Override
 	public String getNome() {
 		return this.nome;
 	}
 
-	/**
-	 * Metodo che setta il nome dello stato utente
-	 * 
-	 * @param nome
-	 */
+	@Override
 	public void setNome(String nome) {
 		this.nome = nome;
 	}

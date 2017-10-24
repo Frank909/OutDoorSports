@@ -3,18 +3,18 @@ package outdoorapp.integration.dao;
 import outdoorapp.exceptions.DatabaseException;
 import outdoorapp.integration.dao.interfaces.MDS_DAO;
 import outdoorapp.to.FactoryProducerTO;
+import outdoorapp.to.enums.FactoryEnum;
+import outdoorapp.to.enums.UtenteEnum;
 import outdoorapp.to.interfaces.ManagerDiEscursioneTO;
 import outdoorapp.to.interfaces.ManagerDiSistemaTO;
 import outdoorapp.to.interfaces.TOFactory;
-import outdoorapp.to.interfaces.strings.FactoryEnum;
-import outdoorapp.to.interfaces.strings.UtenteEnum;
 import outdoorapp.utils.Actions;
 
 import java.util.List;
 
 /** 
- * Data Access Object per tutte le operazioni CRUD per Manager di Sistema.
- * Sono presenti i metodi di lettura e modifica.
+ * Classe che implementa i Data Access Object per tutte le operazioni 
+ * CRUD per Manager di Sistema.
  * 
  * @author Andrea Zito
  * @author Francesco Ventura
@@ -32,10 +32,6 @@ class ManagerDiSistemaDAO extends UtenteDAO<ManagerDiSistemaTO> implements Actio
 		this.setCurrentClass(tofact.getUtenteTO(UtenteEnum.ManagerDiSistema));
 	}
 	
-	/**
-	 * @return vero se esiste il manager di sistema, falso altrimenti
-	 * @throws DatabaseException
-	 */
 	@Override
 	public boolean verificaManagerDiSistema() throws DatabaseException {
 		boolean response;

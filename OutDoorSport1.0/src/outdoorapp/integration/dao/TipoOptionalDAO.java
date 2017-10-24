@@ -2,15 +2,15 @@ package outdoorapp.integration.dao;
 
 import outdoorapp.integration.dao.interfaces.TipoOptional_DAO;
 import outdoorapp.to.FactoryProducerTO;
+import outdoorapp.to.enums.FactoryEnum;
+import outdoorapp.to.enums.StatoEnum;
+import outdoorapp.to.enums.TipoEnum;
 import outdoorapp.to.interfaces.TOFactory;
 import outdoorapp.to.interfaces.TipoOptionalTO;
-import outdoorapp.to.interfaces.strings.FactoryEnum;
-import outdoorapp.to.interfaces.strings.StatoEnum;
-import outdoorapp.to.interfaces.strings.TipoEnum;
 
 /** 
- * Data Access Object per tutte le operazioni CRUD per TipoOptional.
- * Sono presenti i metodi di lettura e modifica.
+ * Classe che implementa i Data Access Object per tutte 
+ * le operazioni CRUD per TipoOptional.
  * 
  * @author Andrea Zito
  * @author Francesco Ventura

@@ -11,7 +11,7 @@ import outdoorapp.to.interfaces.OutDoorSports;
 
 public class Response {
 
-	private OutDoorSports data;
+	private Object data;
 	private String response;
 	private String view;
 	
@@ -39,7 +39,7 @@ public class Response {
 	/**
 	 * @return i dati da ricevere
 	 */
-	public OutDoorSports getData() {
+	public Object getData() {
 		return data;
 	}
 
@@ -48,7 +48,7 @@ public class Response {
 	 * 
 	 * @param data
 	 */
-	public void setData(OutDoorSports data) {
+	public void setData(Object data) {
 		this.data = data;
 	}
 	

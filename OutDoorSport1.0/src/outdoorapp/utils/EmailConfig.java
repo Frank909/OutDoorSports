@@ -6,11 +6,11 @@ import javax.mail.internet.*;
 import java.util.Properties;
 
 import outdoorapp.to.FactoryProducerTO;
+import outdoorapp.to.enums.FactoryEnum;
+import outdoorapp.to.enums.GenericEnum;
 import outdoorapp.to.interfaces.EmailTO;
 import outdoorapp.to.interfaces.TOFactory;
 import outdoorapp.to.interfaces.UtenteTO;
-import outdoorapp.to.interfaces.strings.FactoryEnum;
-import outdoorapp.to.interfaces.strings.GenericEnum;
 
 /**
  * Classe che permette di configurare l'email

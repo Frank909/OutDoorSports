@@ -12,7 +12,7 @@ import outdoorapp.to.interfaces.OutDoorSports;
 
 public class Request{
 
-	private OutDoorSports data;
+	private Object data;
 	private Pane view;
 	private String request;
 	
@@ -56,7 +56,7 @@ public class Request{
 	/**
 	 * @return i dati da inviare
 	 */
-	public OutDoorSports getData() {
+	public Object getData() {
 		return data;
 	}
 	
@@ -65,7 +65,7 @@ public class Request{
 	 * 
 	 * @param data
 	 */
-	public void setData(OutDoorSports data) {
+	public void setData(Object data) {
 		this.data = data;
 	}
 	

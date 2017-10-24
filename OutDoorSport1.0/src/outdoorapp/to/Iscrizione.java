@@ -25,8 +25,7 @@ import outdoorapp.to.interfaces.StatoIscrizioneTO;
 import outdoorapp.to.interfaces.UtenteTO;
 
 /**
- * Classe che rappresenta lo stato dell'Iscrizione. Sono fornite tutte le 
- * dichiarazioni dei metodi per la lettura dei dati
+ * Classe che implementa lo stato dell'Iscrizione.
  * 
  * @author Andrea Zito
  * @author Francesco Ventura
@@ -45,99 +44,62 @@ class Iscrizione implements IscrizioneTO{
 
 	public Iscrizione() {
 	}
-
-	/**
-	 * @return id dell'iscrizione
-	 */
+	
+	@Override
 	public Integer getIdIscrizione() {
 		return this.idIscrizione;
 	}
 
-	/**
-	 * Metodo che setta l'id dell'iscrizione
-	 * 
-	 * @param idIscrizione
-	 */
+	@Override
 	public void setIdIscrizione(Integer idIscrizione) {
 		this.idIscrizione = idIscrizione;
 	}
 
-	/**
-	 * @return l'escursione associata a quell'escursione
-	 */
+	@Override
 	public EscursioneTO getEscursione() {
 		return this.escursione;
 	}
 
-	/**
-	 * Metodo che setta l'escursione della relativa iscrizione
-	 * 
-	 * @param tblEscursione
-	 */
+	@Override
 	public void setEscursione(EscursioneTO escursione) {
 		this.escursione = escursione;
 	}
 
-	/**
-	 * @return lo stato dell'iscrizione
-	 */
+	@Override
 	public StatoIscrizioneTO getStatoIscrizione() {
 		return this.statoIscrizione;
 	}
 
-	/**
-	 * Metodo che setta lo stato dell'iscrizione
-	 * 
-	 * @param tblStatoIscrizione
-	 */
+	@Override
 	public void setStatoIscrizione(StatoIscrizioneTO statoIscrizione) {
 		this.statoIscrizione = statoIscrizione;
 	}
 
-	/**
-	 * @return l'utente relativo a quella iscrizione
-	 */
+	@Override
 	public UtenteTO getUtente() {
 		return this.utente;
 	}
 
-	/**
-	 * Metodo che setta l'utente relativo a quella iscrizione
-	 * 
-	 * @param tblUtente
-	 */
+	@Override
 	public void setUtente(UtenteTO utente) {
 		this.utente = utente;
 	}
 
-	/**
-	 * @return la data di una iscrizione
-	 */
+	@Override
 	public String getData() {
 		return this.data;
 	}
 
-	/**
-	 * Metodo che setta la data di una iscrizione
-	 * 
-	 * @param data
-	 */
+	@Override
 	public void setData(String data) {
 		this.data = data;
 	}
 	
-	/**
-	 * @return un set di optional
-	 */
+	@Override
 	public Set<OptionalTO> getOptionals() {
 		return optionals;
 	}
 
-	/**
-	 * Metodo che setta gli optional per una determinata iscrizione
-	 * 
-	 * @param optionals
-	 */
 	@Override
 	public void setOptionals(Set<OptionalTO> optionals) {
 		this.optionals = optionals;

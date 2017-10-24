@@ -21,8 +21,7 @@ import outdoorapp.to.interfaces.OptionalTO;
 import outdoorapp.to.interfaces.OutDoorSports;
 
 /**
- * Classe che rappresenta lo stato di OptionalEscursione. Sono fornite tutte le 
- * dichiarazioni dei metodi per la lettura dei dati
+ * Classe che implementa lo stato di OptionalEscursione.
  * 
  * @author Andrea Zito
  * @author Francesco Ventura
@@ -51,66 +50,42 @@ class OptionalEscursione implements OptionalEscursioneTO{
 		this.tblOptionalIscriziones = tblOptionalIscriziones;
 	}
 
-	/**
-	 * @return l'id di OptionalEscursione
-	 */
+	@Override
 	public Integer getId() {
 		return this.id;
 	}
 
-	/**
-	 * Metodo che setta l'id di OptionalEscursione
-	 * 
-	 * @param id
-	 */
+	@Override
 	public void setId(Integer id) {
 		this.id = id;
 	}
 
-	/**
-	 * @return l'escursione collegata all'optional
-	 */
+	@Override
 	public EscursioneTO getEscursione() {
 		return this.tblEscursione;
 	}
 
-	/**
-	 * Metodo che setta l'escursione collegata all'optional
-	 * 
-	 * @param tblEscursione
-	 */
+	@Override
 	public void setEscursione(EscursioneTO tblEscursione) {
 		this.tblEscursione = tblEscursione;
 	}
 
-	/**
-	 * @return l'optional collegato all'escursione
-	 */
+	@Override
 	public OptionalTO getOptional() {
 		return this.tblOptional;
 	}
 
-	/**
-	 * Metodo che setta l'optional collegato all'escursione
-	 * 
-	 * @param tblOptional
-	 */
+	@Override
 	public void setOptional(OptionalTO tblOptional) {
 		this.tblOptional = tblOptional;
 	}
 
-	/**
-	 * @return gli optional dell'iscrizione
-	 */
+	@Override
 	public Set<OptionalIscrizioneTO> getOptionalIscrizione() {
 		return this.tblOptionalIscriziones;
 	}
 
-	/**
-	 * Metodo che setta gli optional relativi all'iscrizione
-	 * 
-	 * @param tblOptionalIscriziones
-	 */
+	@Override
 	public void setOptionalIscrizione(Set<OptionalIscrizioneTO> tblOptionalIscriziones) {
 		this.tblOptionalIscriziones = tblOptionalIscriziones;
 	}

@@ -9,6 +9,9 @@ package outdoorapp.services;
  */
 interface ServiceInterface{
 	
+	/**
+	 * @return il tipo del servizio richiesto
+	 */
 	ServiceType getType();
 
 }

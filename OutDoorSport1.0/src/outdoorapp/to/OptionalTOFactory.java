@@ -1,34 +1,41 @@
 package outdoorapp.to;
 
 import outdoorapp.to.interfaces.TOFactory;
+import outdoorapp.to.enums.GenericEnum;
+import outdoorapp.to.enums.OptionalEnum;
+import outdoorapp.to.enums.StatoEnum;
+import outdoorapp.to.enums.TipoEnum;
+import outdoorapp.to.enums.UtenteEnum;
 import outdoorapp.to.interfaces.OutDoorSports;
-import outdoorapp.to.interfaces.strings.GenericEnum;
-import outdoorapp.to.interfaces.strings.OptionalEnum;
-import outdoorapp.to.interfaces.strings.StatoEnum;
-import outdoorapp.to.interfaces.strings.TipoEnum;
-import outdoorapp.to.interfaces.strings.UtenteEnum;
 
-public class OptionalTOFactory implements TOFactory{
+/**
+ * Classe che restituisce l'istanza dell'entità desiderata
+ * della categoria Optional in base alla richiesta. 
+ * 
+ * @author Andrea Zito
+ * @author Francesco Ventura
+ *
+ */
 
-	public OptionalTOFactory() {
-		// TODO Auto-generated constructor stub
-	}
+class OptionalTOFactory implements TOFactory{
+
+	/**
+	 * Costruttore di OriginalTOFactory
+	 */
+	public OptionalTOFactory() {}
 
 	@Override
 	public OutDoorSports getGenericTO(GenericEnum choice) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public OutDoorSports getUtenteTO(UtenteEnum choice) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public OutDoorSports getTipoTO(TipoEnum choice) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
@@ -48,7 +55,6 @@ public class OptionalTOFactory implements TOFactory{
 
 	@Override
 	public OutDoorSports getStatoTO(StatoEnum choice) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 

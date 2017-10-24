@@ -1,14 +1,23 @@
 package outdoorapp.integration.dao;
 
-import outdoorapp.integration.dao.enums.Generic;
-import outdoorapp.integration.dao.enums.State;
-import outdoorapp.integration.dao.enums.Type;
-import outdoorapp.integration.dao.enums.Users;
+import outdoorapp.integration.dao.enums.GenericDAOEnum;
+import outdoorapp.integration.dao.enums.StatoDAOEnum;
+import outdoorapp.integration.dao.enums.TipoDAOEnum;
+import outdoorapp.integration.dao.enums.UtenteDAOEnum;
 
-public class TipoDAOFactory implements DAOFactory{
+/**
+ * Classe che restituisce l'istanza dell'entità desiderata
+ * della categoria TipoDAO in base alla richiesta. 
+ * 
+ * @author Andrea Zito
+ * @author Francesco Ventura
+ *
+ */
+
+class TipoDAOFactory implements DAOFactory{
 
 	@Override
-	public GenericDAO<?> getTipoDAO(Type choice){
+	public GenericDAO<?> getTipoDAO(TipoDAOEnum choice){
 		switch(choice){
 		case Escursione:
 			return new TipoEscursioneDAO();
@@ -20,17 +29,17 @@ public class TipoDAOFactory implements DAOFactory{
 	}
 
 	@Override
-	public UtenteDAO<?> getUtenteDAO(Users choice) {
+	public UtenteDAO<?> getUtenteDAO(UtenteDAOEnum choice) {
 		return null;
 	}
 
 	@Override
-	public GenericDAO<?> getGenericDAO(Generic choice) {
+	public GenericDAO<?> getGenericDAO(GenericDAOEnum choice) {
 		return null;
 	}
 
 	@Override
-	public GenericDAO<?> getStatoDAO(State choice) {
+	public GenericDAO<?> getStatoDAO(StatoDAOEnum choice) {
 		return null;
 	}
 

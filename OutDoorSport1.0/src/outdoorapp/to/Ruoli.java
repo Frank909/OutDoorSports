@@ -16,7 +16,7 @@ import outdoorapp.to.interfaces.OutDoorSports;
 import outdoorapp.to.interfaces.RuoliTO;
 
 /**
- * Classe che rappresenta il ruolo dell'Utente. Sono fornite tutte le 
+ * Classe che implementa il ruolo dell'Utente. Sono fornite tutte le 
  * dichiarazioni dei metodi per la lettura e la scrittura dei dati
  * 
  * @author Andrea Zito
@@ -37,34 +37,22 @@ class Ruoli implements RuoliTO{
 		this.nome = nome;
 	}
 
-	/**
-	 * @return l'id del ruolo dell'utente
-	 */
+	@Override
 	public Integer getIdRuolo() {
 		return this.idRuolo;
 	}
 
-	/**
-	 * Metodo che setta il ruolo dell'utente
-	 * 
-	 * @param idRuolo
-	 */
+	@Override
 	public void setIdRuolo(Integer idRuolo) {
 		this.idRuolo = idRuolo;
 	}
 
-	/**
-	 * @return il nome del ruolo 
-	 */
+	@Override
 	public String getNome() {
 		return this.nome;
 	}
 
-	/**
-	 * Metodo che setta il nome del ruolo
-	 * 
-	 * @param nome
-	 */
+	@Override
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
