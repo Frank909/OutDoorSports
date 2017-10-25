@@ -42,19 +42,21 @@ public class ControllerConfig extends ControllerRegistrazione{
 	@FXML private Button btnRegistrati;
 	@FXML private DatePicker dateDataNasc;
 	@FXML private Label lblErrore;
-	
+
 	private ManagerDiSistemaTO mds = null;
-	
+	private TOFactory TOFact = null;
+
 	/**
 	 * Costruttore della classe ControllerConfig 
 	 */
 	public ControllerConfig() {
 		if(mds == null){
-			TOFactory TOFact = FactoryProducerTO.getFactory(FactoryEnum.UtenteTOFactory);
+			TOFact = FactoryProducerTO.getFactory(FactoryEnum.UtenteTOFactory);
 			mds = (ManagerDiSistemaTO) TOFact.getUtenteTO(UtenteEnum.ManagerDiSistema);
 		}
+
 	}
-	
+
 	/**
 	 * Metodo che inizializza tutti i campi della finestra
 	 */
@@ -62,7 +64,7 @@ public class ControllerConfig extends ControllerRegistrazione{
 	protected void initialize() {
 		lblErrore.setText("");
 	}
-	
+
 	/**
 	 * Evento associato all'invio dei dati della configurazione iniziale del manager di sistema
 	 */
@@ -70,14 +72,14 @@ public class ControllerConfig extends ControllerRegistrazione{
 	protected void registra() {
 		execRegistraManagerDiSistema();
 	}
-	
+
 	/**
 	 * Metodo che esegue la registrazione del manager di sistema controllando che tutte le informazioni siano state inserite
 	 * correttamente
 	 */
 	private void execRegistraManagerDiSistema(){
 
-		
+
 		mds.setNome(txtNome.getText());
 		mds.setCognome(txtCognome.getText());
 		mds.setCodiceFiscale(txtCF.getText());
@@ -92,7 +94,7 @@ public class ControllerConfig extends ControllerRegistrazione{
 			mds.setSesso(FEMALE);
 		mds.setTelefono(txtTelefono.getText());
 
-		
+
 		String result = checkErrors(mds);
 		if(result.equals("")){
 			Response res = this.sendRequest(new Request(mds, OUTDOORSPORT_SAVE_MDS));
@@ -118,7 +120,7 @@ public class ControllerConfig extends ControllerRegistrazione{
 				utente.setDataNascita(dateDataNasc.getValue().toString());
 		}
 	}
-	
+
 }
 
 

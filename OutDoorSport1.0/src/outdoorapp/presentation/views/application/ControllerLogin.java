@@ -11,6 +11,7 @@ import outdoorapp.presentation.views.generic.GenericViewController;
 import outdoorapp.to.FactoryProducerTO;
 import outdoorapp.to.enums.FactoryEnum;
 import outdoorapp.to.enums.UtenteEnum;
+import outdoorapp.to.interfaces.ManagerDiEscursioneTO;
 import outdoorapp.to.interfaces.TOFactory;
 import outdoorapp.to.interfaces.UtenteTO;
 
@@ -34,12 +35,14 @@ public class ControllerLogin extends GenericViewController{
 	 * Costruttore della classe ControllerLogin
 	 */
 	private UtenteTO utente = null;
+	private TOFactory TOFact = null;
 	
 	public ControllerLogin() {
 		if(utente == null){
-			TOFactory TOFact = FactoryProducerTO.getFactory(FactoryEnum.UtenteTOFactory);
-			utente = (UtenteTO) TOFact.getUtenteTO(UtenteEnum.Utente);
+			TOFact = FactoryProducerTO.getFactory(FactoryEnum.UtenteTOFactory);
+			utente = (UtenteTO) TOFact.getUtenteTO(UtenteEnum.Utente); 
 		}
+		
 	}
 	
 	/**

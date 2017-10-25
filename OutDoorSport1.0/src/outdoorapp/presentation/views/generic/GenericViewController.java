@@ -9,7 +9,31 @@ import outdoorapp.presentation.frontcontroller.FrontController;
 import outdoorapp.presentation.reqresp.Request;
 import outdoorapp.presentation.reqresp.Response;
 import outdoorapp.presentation.views.models.ManagerDiEscursioneModel;
+import outdoorapp.to.FactoryProducerTO;
+import outdoorapp.to.enums.FactoryEnum;
+import outdoorapp.to.enums.GenericEnum;
+import outdoorapp.to.enums.OptionalEnum;
+import outdoorapp.to.enums.StatoEnum;
+import outdoorapp.to.enums.TipoEnum;
+import outdoorapp.to.enums.UtenteEnum;
+import outdoorapp.to.interfaces.EmailTO;
+import outdoorapp.to.interfaces.EscursioneTO;
+import outdoorapp.to.interfaces.IscrizioneTO;
 import outdoorapp.to.interfaces.ManagerDiEscursioneTO;
+import outdoorapp.to.interfaces.ManagerDiSistemaTO;
+import outdoorapp.to.interfaces.OptionalEscursioneTO;
+import outdoorapp.to.interfaces.OptionalIscrizioneTO;
+import outdoorapp.to.interfaces.OptionalTO;
+import outdoorapp.to.interfaces.PartecipanteTO;
+import outdoorapp.to.interfaces.RuoliTO;
+import outdoorapp.to.interfaces.StatoEscursioneTO;
+import outdoorapp.to.interfaces.StatoIscrizioneTO;
+import outdoorapp.to.interfaces.StatoOptionalTO;
+import outdoorapp.to.interfaces.StatoUtenteTO;
+import outdoorapp.to.interfaces.TOFactory;
+import outdoorapp.to.interfaces.TipoEscursioneTO;
+import outdoorapp.to.interfaces.TipoOptionalTO;
+import outdoorapp.to.interfaces.UtenteTO;
 import outdoorapp.utils.Actions;
 import outdoorapp.utils.Views;
 
@@ -25,7 +49,7 @@ public abstract class GenericViewController implements Actions, Views{
 	
 	/**
 	 * Metodo che inizializza tutti i campi della finestra
-	 */
+	 */	
 	@FXML protected abstract void initialize();
 	
 	/**
@@ -36,4 +60,5 @@ public abstract class GenericViewController implements Actions, Views{
 	protected Response sendRequest(Request request){
 		return FrontController.getInstance().sendRequest(request);
 	}
+	
 }

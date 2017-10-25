@@ -13,6 +13,7 @@ import outdoorapp.presentation.views.generic.GenericViewController;
 import outdoorapp.to.FactoryProducerTO;
 import outdoorapp.to.enums.FactoryEnum;
 import outdoorapp.to.enums.UtenteEnum;
+import outdoorapp.to.interfaces.ManagerDiEscursioneTO;
 import outdoorapp.to.interfaces.TOFactory;
 import outdoorapp.to.interfaces.UtenteTO;
 
@@ -31,15 +32,17 @@ public class ControllerPasswordDimenticata extends GenericViewController{
 	@FXML private Label lblErrore;
 	
 	private UtenteTO utente = null;
+	private TOFactory TOFact = null;
 	
 	/**
 	 * Costruttore della classe ControllerPasswordDimenticata
 	 */
 	public ControllerPasswordDimenticata() {
 		if(utente == null){
-			TOFactory TOFact = FactoryProducerTO.getFactory(FactoryEnum.UtenteTOFactory);
-			utente = (UtenteTO) TOFact.getUtenteTO(UtenteEnum.Utente);
+			TOFact = FactoryProducerTO.getFactory(FactoryEnum.UtenteTOFactory);
+			utente = (UtenteTO) TOFact.getUtenteTO(UtenteEnum.Utente); 
 		}
+		
 	}
 	
 	/**

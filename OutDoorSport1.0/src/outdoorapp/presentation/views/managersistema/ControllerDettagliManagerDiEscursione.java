@@ -34,7 +34,7 @@ public class ControllerDettagliManagerDiEscursione extends GenericViewController
 	@FXML private Label mDataNascitaProfilo;
 	@FXML private Button mBtnIndietro;
 	@FXML private StackPane stpDettagliManagerEscursione;
-	private static ManagerDiEscursioneModel mde = null;
+	private ManagerDiEscursioneModel mde = null;
 	
 	@Override
 	protected void initialize() {

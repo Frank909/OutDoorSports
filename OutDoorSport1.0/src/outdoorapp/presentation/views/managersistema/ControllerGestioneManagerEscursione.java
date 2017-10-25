@@ -57,7 +57,8 @@ public class ControllerGestioneManagerEscursione extends GenericViewController{
 	private TOFactory TOFact = null;
 	private ManagerDiEscursioneTO mde = null;
 	private List<ManagerDiEscursioneTO> list_mde = null;
-	ManagerDiEscursioneModel mde_model = null;
+	private ManagerDiEscursioneModel mde_model = null;
+	private TableView<ManagerDiEscursioneModel> table = null;
 	
 	/**
 	 * Costruttore della classe ControllerGestioneManagerEscursione
@@ -122,6 +123,8 @@ public class ControllerGestioneManagerEscursione extends GenericViewController{
 		}
 	}
 	
+	
+	@SuppressWarnings("unchecked")
 	private void allManagerDiEscursione(){
 		Response response = this.sendRequest(new Request(mde, OUTDOORSPORT_GET_ALL_MDE));
 		list_mde = (ArrayList<ManagerDiEscursioneTO>) response.getData();
@@ -138,7 +141,7 @@ public class ControllerGestioneManagerEscursione extends GenericViewController{
 		mTableManagerEscursione.addEventFilter(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>(){
 			@Override
 			public void handle(MouseEvent event) {
-				TableView<ManagerDiEscursioneModel> table = (TableView<ManagerDiEscursioneModel>) event.getSource();
+				table = (TableView<ManagerDiEscursioneModel>) event.getSource();
 				mde_model = table.getSelectionModel().getSelectedItem();
 				if(mde_model != null){
 					if(event.getClickCount() == 2){
@@ -151,7 +154,6 @@ public class ControllerGestioneManagerEscursione extends GenericViewController{
 	
 	private ObservableList<ManagerDiEscursioneModel> getListTabellaManagerDiEscursione(List<ManagerDiEscursioneTO> list_mde){
 		ObservableList<ManagerDiEscursioneModel> res = FXCollections.observableArrayList();
-		ManagerDiEscursioneModel mde_model = null;
 
 		for(ManagerDiEscursioneTO mde : list_mde){
 			mde_model = new ManagerDiEscursioneModel(mde);

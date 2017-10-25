@@ -68,7 +68,7 @@ class ApplicationServiceManagerDiEscursione implements Actions, Views{
 				StatoUtente_DAO statoUtenteDao = (StatoUtente_DAO) statoFactory.getStatoDAO(StatoDAOEnum.User);
 
 				mde = (ManagerDiEscursioneTO)request.getData();
-				mde.setRuolo(ruoliDao.getRuoloManagerDiSistema());
+				mde.setRuolo(ruoliDao.getRuoloManagerDiEscursione());
 				mde.setStatoUtente(statoUtenteDao.getStatoAttivo());
 				mde_dao.create(mde);
 				Alert alert = new Alert(AlertType.INFORMATION, "Il Manager di Escursione è stato inserito correttamente!", ButtonType.OK);
