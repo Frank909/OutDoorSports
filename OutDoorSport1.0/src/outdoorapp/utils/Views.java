@@ -24,4 +24,5 @@ public interface Views {
 	public static final String VIEW_LE_MIE_ESCURSIONI = "VIEW_LE_MIE_ESCURSIONI";
 	public static final String VIEW_VISUALIZZA_ESCURSIONI_APERTE = "VIEW_VISUALIZZA_ESCURSIONI_APERTE";
 	public static final String VIEW_IL_MIO_PROFILO = "VIEW_IL_MIO_PROFILO";
+	public static final String VIEW_DETTAGLI_MANAGER_DI_ESCURSIONE = "VIEW_DETTAGLI_MANAGER_DI_ESCURSIONE";
 }

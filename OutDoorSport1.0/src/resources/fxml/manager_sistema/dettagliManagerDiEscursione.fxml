@@ -6,7 +6,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<StackPane fx:id="ilMioProfiloPartecipante" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="558.0" prefWidth="722.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ControllerLogin">
+<StackPane fx:id="stpDettagliManagerEscursione" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="558.0" prefWidth="722.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="outdoorapp.presentation.views.managersistema.ControllerDettagliManagerDiEscursione">
    <children>
       <GridPane>
         <columnConstraints>
@@ -93,7 +93,7 @@
                               <Insets bottom="20.0" left="40.0" right="20.0" top="20.0" />
                            </GridPane.margin>
                         </Label>
-                        <Label fx:id="mTessSanProfilo" text="Stipendio: 3 milioni di euro" GridPane.rowIndex="4">
+                        <Label fx:id="mStipendioProfilo" text="Stipendio: 3 milioni di euro" GridPane.rowIndex="4">
                            <font>
                               <Font size="18.0" />
                            </font>
@@ -143,7 +143,7 @@
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                      </rowConstraints>
                   </GridPane>
-                  <Button fx:id="mBtnModificaDatiAnagrafici" mnemonicParsing="false" prefHeight="40.0" prefWidth="150.0" text="Indietro" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+                  <Button fx:id="mBtnIndietro" mnemonicParsing="false" prefHeight="40.0" prefWidth="150.0" onMouseClicked="#gestioneManagerDiEscursione" text="Indietro" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
                </children>
             </GridPane>
          </children>

@@ -33,12 +33,24 @@ public class Request{
 	}
 	
 	/**
-	 * Costruttore che inizializza data e request
+	 * Costruttore che inizializza la view e la request
 	 * 
 	 * @param data
 	 * @param request
 	 */
 	public Request(Pane view, String request) {
+		this.view = view;
+		this.request = request;
+	}
+	
+	/**
+	 * Costruttore che inizializza data, la view, e request
+	 * 
+	 * @param data
+	 * @param request
+	 */
+	public Request(Object data, Pane view, String request) {
+		this.data = data;
 		this.view = view;
 		this.request = request;
 	}

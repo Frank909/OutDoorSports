@@ -31,7 +31,7 @@
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                      </GridPane.margin>
                   </TextField>
-                  <Button fx:id="btnSearchManagerEscursione" mnemonicParsing="false" text="Cerca Manager di Escursione" GridPane.columnIndex="1" GridPane.halignment="CENTER">
+                  <Button fx:id="btnSearchManagerEscursione" mnemonicParsing="false" onMouseClicked="#cercaManagerDiEscursione" text="Cerca Manager di Escursione" GridPane.columnIndex="1" GridPane.halignment="CENTER">
                      <GridPane.margin>
                         <Insets right="10.0" />
                      </GridPane.margin></Button>
@@ -39,10 +39,10 @@
             </GridPane>
             <TableView fx:id="mTableManagerEscursione" prefHeight="461.0" prefWidth="800.0" GridPane.rowIndex="1">
               <columns>
-                  <TableColumn fx:id="columnNomeManagerDiEscursione" editable="false" prefWidth="146.0" text="Nome" />
-                <TableColumn fx:id="columnCognomeManagerDiEscursione" editable="false" prefWidth="142.0" text="Cognome" />
-                <TableColumn fx:id="columnEmailManagerDiEscursione" editable="false" minWidth="0.0" prefWidth="146.0" text="Email" />
-                  <TableColumn fx:id="columnCFManagerDiEscursione" editable="false" minWidth="0.0" prefWidth="267.0" text="Codice Fiscale" />
+                  <TableColumn fx:id="columnNomeManagerDiEscursione" editable="false" prefWidth="146.0" resizable="false" text="Nome" />
+                <TableColumn fx:id="columnCognomeManagerDiEscursione" editable="false" prefWidth="142.0" resizable="false" text="Cognome" />
+                <TableColumn fx:id="columnEmailManagerDiEscursione" editable="false" minWidth="0.0" prefWidth="146.0" resizable="false" text="Email" />
+                  <TableColumn fx:id="columnCFManagerDiEscursione" editable="false" minWidth="0.0" prefWidth="267.0" resizable="false" text="Codice Fiscale" />
               </columns>
                <GridPane.margin>
                   <Insets left="10.0" right="10.0" />
@@ -58,7 +58,7 @@
               </rowConstraints>
                <children>
                   <Button fx:id="btnModificaManagerDiEscursione" mnemonicParsing="false" text="Modifica Manager di Escursione" GridPane.halignment="RIGHT" />
-                  <Button fx:id="btnDettagliManagerDiEscursione" mnemonicParsing="false" onMouseClicked="#getAllManagerDiEscursione" text="Dettagli Manager di Escursione" GridPane.columnIndex="1" GridPane.halignment="RIGHT">
+                  <Button fx:id="btnDettagliManagerDiEscursione" mnemonicParsing="false" onMouseClicked="#getDettagliManagerDiEscursione" text="Dettagli Manager di Escursione" GridPane.columnIndex="1" GridPane.halignment="RIGHT">
                      <GridPane.margin>
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                      </GridPane.margin>

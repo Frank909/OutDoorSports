@@ -43,7 +43,7 @@ class Dispatcher {
 	 * alla cache delle view.
 	 * @param request: richiesta in ingresso
 	 */
-	private void setView(String request){
+	private void setView(Request request){
 		vc.setView(request);
 	}
 	
@@ -52,7 +52,7 @@ class Dispatcher {
 	 * alla cache delle view.
 	 * @param request: richiesta in ingresso
 	 */
-	private void setNestedView(String request, AnchorPane pane){
+	private void setNestedView(Request request, AnchorPane pane){
 		vc.setNestedView(request, pane);
 	}
 
@@ -64,9 +64,9 @@ class Dispatcher {
 	 */
 	Response dispatch(Request request){
 		if(request.getView() == null){
-			setView(request.toString());
+			setView(request);
 		}else if(request.getView() instanceof AnchorPane){
-			setNestedView(request.toString(), (AnchorPane)request.getView());
+			setNestedView(request, (AnchorPane)request.getView());
 		}
 		return null;
 	}

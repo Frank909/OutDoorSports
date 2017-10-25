@@ -11,6 +11,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import outdoorapp.presentation.reqresp.Request;
 
 /**
  * ViewCache è una classe realizzata allo scopo di pre-caricare le schermate di visualizzazione richieste
@@ -36,11 +37,13 @@ public class ViewCache{
 	private final String VIEW_LE_MIE_ESCURSIONI = "../../../resources/fxml/partecipante/leMieEscursioniPartecipante";
 	private final String VIEW_VISUALIZZA_ESCURSIONI_APERTE = "../../../resources/fxml/partecipante/visualizzaEscursioniAperte";
 	private final String VIEW_IL_MIO_PROFILO = "../../../resources/fxml/partecipante/ilMioProfiloPartecipante";
+	private final String VIEW_DETTAGLI_MANAGER_DI_ESCURSIONE = "../../../resources/fxml/manager_sistema/dettagliManagerDiEscursione";
 	
 	private static ViewCache viewCache = new ViewCache();
 	private static HashMap<String, Pane> mapViews = new HashMap<>();
 	private static Queue<Stage> stageQueue = new ArrayDeque<>();
 	private static AnchorPane nestedAnchorPane;
+	private static Object currentData = null; 
 
 	/**
 	 * Costruttore privato - Singleton Class
@@ -60,21 +63,22 @@ public class ViewCache{
 	 * @throws Exception
 	 */
 	public void initialize() throws Exception{
-		loadForm("VIEW_LOGIN", VIEW_LOGIN);
-		loadForm("VIEW_MANAGER_DI_SISTEMA_CONFIG",VIEW_MANAGER_DI_SISTEMA_CONFIG);
-		loadForm("VIEW_DASHBOARD_MANAGER_DI_SISTEMA",VIEW_DASHBOARD_MANAGER_DI_SISTEMA);
-		loadForm("VIEW_DASHBOARD_MANAGER_DI_ESCURSIONE",VIEW_DASHBOARD_MANAGER_DI_ESCURSIONE);
-		loadForm("VIEW_DASHBOARD_PARTECIPANTE",VIEW_DASHBOARD_PARTECIPANTE);
-		loadForm("VIEW_PASSWORD_DIMENTICATA",VIEW_PASSWORD_DIMENTICATA);
-		loadForm("VIEW_REGISTRAZIONE_PARTECIPANTE",VIEW_REGISTRAZIONE_PARTECIPANTE);
-		loadForm("VIEW_GESTIONE_MANAGER_ESCURSIONE",VIEW_GESTIONE_MANAGER_ESCURSIONE);
-		loadForm("VIEW_VISUALIZZA_ESCURSIONI_SISTEMA",VIEW_VISUALIZZA_ESCURSIONI_SISTEMA);
-		loadForm("VIEW_REGISTRAZIONE_MANAGER_ESCURSIONE",VIEW_REGISTRAZIONE_MANAGER_ESCURSIONE);
-		loadForm("VIEW_GESTIONE_ESCURSIONI", VIEW_GESTIONE_ESCURSIONI);
-		loadForm("VIEW_INSERISCI_ESCURSIONE", VIEW_INSERISCI_ESCURSIONE);
-		loadForm("VIEW_LE_MIE_ESCURSIONI",VIEW_LE_MIE_ESCURSIONI);
-		loadForm("VIEW_VISUALIZZA_ESCURSIONI_APERTE", VIEW_VISUALIZZA_ESCURSIONI_APERTE);
-		loadForm("VIEW_IL_MIO_PROFILO", VIEW_IL_MIO_PROFILO);
+		loadForm("VIEW_LOGIN", VIEW_LOGIN, true);
+		loadForm("VIEW_MANAGER_DI_SISTEMA_CONFIG",VIEW_MANAGER_DI_SISTEMA_CONFIG, true);
+		loadForm("VIEW_DASHBOARD_MANAGER_DI_SISTEMA",VIEW_DASHBOARD_MANAGER_DI_SISTEMA, true);
+		loadForm("VIEW_DASHBOARD_MANAGER_DI_ESCURSIONE",VIEW_DASHBOARD_MANAGER_DI_ESCURSIONE, true);
+		loadForm("VIEW_DASHBOARD_PARTECIPANTE",VIEW_DASHBOARD_PARTECIPANTE, true);
+		loadForm("VIEW_PASSWORD_DIMENTICATA",VIEW_PASSWORD_DIMENTICATA, true);
+		loadForm("VIEW_REGISTRAZIONE_PARTECIPANTE",VIEW_REGISTRAZIONE_PARTECIPANTE, true);
+		loadForm("VIEW_GESTIONE_MANAGER_ESCURSIONE",VIEW_GESTIONE_MANAGER_ESCURSIONE, false);
+		loadForm("VIEW_VISUALIZZA_ESCURSIONI_SISTEMA",VIEW_VISUALIZZA_ESCURSIONI_SISTEMA, false);
+		loadForm("VIEW_REGISTRAZIONE_MANAGER_ESCURSIONE",VIEW_REGISTRAZIONE_MANAGER_ESCURSIONE, false);
+		loadForm("VIEW_GESTIONE_ESCURSIONI", VIEW_GESTIONE_ESCURSIONI, false);
+		loadForm("VIEW_INSERISCI_ESCURSIONE", VIEW_INSERISCI_ESCURSIONE, false);
+		loadForm("VIEW_LE_MIE_ESCURSIONI",VIEW_LE_MIE_ESCURSIONI, false);
+		loadForm("VIEW_VISUALIZZA_ESCURSIONI_APERTE", VIEW_VISUALIZZA_ESCURSIONI_APERTE, false);
+		loadForm("VIEW_IL_MIO_PROFILO", VIEW_IL_MIO_PROFILO, false);
+		loadForm("VIEW_DETTAGLI_MANAGER_DI_ESCURSIONE", VIEW_DETTAGLI_MANAGER_DI_ESCURSIONE, false);
 	}
 
 	/**
@@ -89,13 +93,14 @@ public class ViewCache{
 	 * Setta la vista richiesta dall'utente e chiude quella precedente
 	 * @param key: chiave della schermata
 	 */
-	void setView(String key){	
+	void setView(Request key){	
 		if(!stageQueue.isEmpty())
 			stageQueue.poll().close();
+		currentData = key.getData();
 		Stage newStage = new Stage();
 		newStage.setTitle("OutDoorSports 1.0");
 		newStage.setResizable(false);
-		Scene myScene = new Scene(mapViews.get(key));
+		Scene myScene = new Scene(mapViews.get(key.toString()));
 		newStage.setScene(myScene);
 		newStage.show();
 		stageQueue.add(newStage);
@@ -106,14 +111,19 @@ public class ViewCache{
 	 * @param key: chiave sotto-finestra richiesta
 	 * @param parent: finestra genitore
 	 */
-	void setNestedView(String key, AnchorPane parent){
-		StackPane panel = (StackPane)mapViews.get(key);
+	void setNestedView(Request key, AnchorPane parent){
+		StackPane panel = (StackPane)mapViews.get(key.toString());
+		currentData = key.getData();
 		setNestedAnchorPane(parent);
 		AnchorPane.setLeftAnchor(panel, 0.0);
 		AnchorPane.setRightAnchor(panel, 0.0);
 		AnchorPane.setTopAnchor(panel, 0.0);
 		AnchorPane.setBottomAnchor(panel, 0.0);
+		if(!parent.getChildren().isEmpty())
+			parent.getChildren().get(0).setVisible(false);
 		parent.getChildren().clear();
+		if(!panel.isVisible())
+			panel.setVisible(true);
 		parent.getChildren().add(panel);
 	}
 
@@ -121,10 +131,12 @@ public class ViewCache{
 	 * Metodo di caricamento nella cache della singola schermata
 	 * @param key: chiave schermata
 	 * @param resource: percorso risorsa da caricare
+	 * @param visibility: imposta quale view deve essere subito visibile e quale no
 	 */
-	private void loadForm(String key, String resource){
+	private void loadForm(String key, String resource, boolean visibility){
 		try {
 			Pane newPane = FXMLLoader.load(getClass().getResource(resource + ".fxml"));
+			newPane.setVisible(visibility);
 			mapViews.put(key, newPane);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -137,5 +149,9 @@ public class ViewCache{
 	
 	public static AnchorPane getNestedAnchorPane(){
 		return nestedAnchorPane;
+	}
+	
+	public static Object getCurrentData(){
+		return currentData;
 	}
 }
