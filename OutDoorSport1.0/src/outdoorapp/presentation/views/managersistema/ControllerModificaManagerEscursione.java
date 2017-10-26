@@ -1,6 +1,5 @@
 package outdoorapp.presentation.views.managersistema;
 
-import java.awt.TextField;
 import java.time.LocalDate;
 
 import javax.transaction.Transactional.TxType;
@@ -12,6 +11,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.StackPane;
 import javafx.util.converter.LocalDateStringConverter;
 import outdoorapp.presentation.applicationcontroller.ViewCache;
@@ -27,9 +27,9 @@ import outdoorapp.to.interfaces.ManagerDiEscursioneTO;
 import outdoorapp.to.interfaces.TOFactory;
 import outdoorapp.to.interfaces.UtenteTO;
 
-public class ControllerModificaManagerDiEscursione extends ControllerRegistrazione{
+public class ControllerModificaManagerEscursione extends ControllerRegistrazione{
 
-	@FXML private StackPane stpModificaManagerDiEscursione;
+	@FXML private StackPane stpModificaManagerEscursione;
 	@FXML private TextField txtNome;
 	@FXML private TextField txtCognome;
 	@FXML private TextField txtCF;
@@ -47,7 +47,10 @@ public class ControllerModificaManagerDiEscursione extends ControllerRegistrazio
 	
 	private ManagerDiEscursioneModel mde_model = null;
 	
-	public ControllerModificaManagerDiEscursione() {
+	public ControllerModificaManagerEscursione() {}
+
+	@Override
+	protected void initialize() {
 		ChangeListener<Boolean> visibilityListener = new ChangeListener<Boolean>() {
 
 			@Override
@@ -59,7 +62,7 @@ public class ControllerModificaManagerDiEscursione extends ControllerRegistrazio
 					txtCF.setText(mde_model.getCodice_fiscale());
 					txtUsername.setText(mde_model.getUsername());
 					txtPassword.setText(mde_model.getPassword());
-					txtStipendio.setText(mde_model.getStipendio());
+					txtStipendio.setText(Double.toString(mde_model.getStipendio()));
 					txtEmail.setText(mde_model.getEmail());
 					if(mde_model.getSesso().equals("M")){
 						radioM.setSelected(true);
@@ -75,11 +78,7 @@ public class ControllerModificaManagerDiEscursione extends ControllerRegistrazio
 			}
 		};
 
-		stpModificaManagerDiEscursione.visibleProperty().addListener(visibilityListener);
-	}
-
-	@Override
-	protected void initialize() {
+		stpModificaManagerEscursione.visibleProperty().addListener(visibilityListener);
 		lblErrore.setText("");
 	}
 	
@@ -87,6 +86,8 @@ public class ControllerModificaManagerDiEscursione extends ControllerRegistrazio
 		TOFactory to_fact = FactoryProducerTO.getFactory(FactoryEnum.UtenteTOFactory);
 		ManagerDiEscursioneTO mde = (ManagerDiEscursioneTO) to_fact.getUtenteTO(UtenteEnum.ManagerDiEscursione);
 		
+		mde.setIdManagerDiEscursione(mde_model.getId());
+		mde.setIdUtente(mde_model.getId());
 		mde.setNome(txtNome.getText());
 		mde.setCognome(txtCognome.getText());
 		mde.setCodiceFiscale(txtCF.getText());
@@ -103,7 +104,7 @@ public class ControllerModificaManagerDiEscursione extends ControllerRegistrazio
 		
 		String result = checkErrors(mde);
 		if(result.equals("")){
-			Response response = this.sendRequest(new Request(mde, OUTDOORSPORT_SAVE_MDE));
+			Response response = this.sendRequest(new Request(mde, OUTDOORSPORT_MODIFY_MDE));
 			if(response.toString().equals(RESP_OK))
 				this.sendRequest(new Request(ViewCache.getNestedAnchorPane(), VIEW_GESTIONE_MANAGER_ESCURSIONE));
 			else
@@ -114,8 +115,7 @@ public class ControllerModificaManagerDiEscursione extends ControllerRegistrazio
 
 	@Override
 	protected void registra() {
-		// TODO Auto-generated method stub
-		
+		execModificaManagerDiEscursione();
 	}
 	
 	@Override

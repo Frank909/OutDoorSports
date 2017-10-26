@@ -1,10 +1,11 @@
 package outdoorapp.presentation.views.models;
 
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 
 abstract class UtenteModel {
 
-	protected SimpleStringProperty id;
+	protected SimpleIntegerProperty id;
 	protected SimpleStringProperty nome;
 	protected SimpleStringProperty cognome;
 	protected SimpleStringProperty email;
@@ -16,7 +17,7 @@ abstract class UtenteModel {
 	protected SimpleStringProperty indirizzo;
 	protected SimpleStringProperty citta;
 	
-	public String getId() {
+	public Integer getId() {
 		return id.get();
 	}
 	

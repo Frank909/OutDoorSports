@@ -57,7 +57,7 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Button fx:id="btnModificaManagerDiEscursione" mnemonicParsing="false" text="Modifica Manager di Escursione" GridPane.halignment="RIGHT" />
+                  <Button fx:id="btnModificaManagerDiEscursione" mnemonicParsing="false" onMouseClicked="#modificaManagerDiEscursione" text="Modifica Manager di Escursione" GridPane.halignment="RIGHT" />
                   <Button fx:id="btnDettagliManagerDiEscursione" mnemonicParsing="false" onMouseClicked="#getDettagliManagerDiEscursione" text="Dettagli Manager di Escursione" GridPane.columnIndex="1" GridPane.halignment="RIGHT">
                      <GridPane.margin>
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />

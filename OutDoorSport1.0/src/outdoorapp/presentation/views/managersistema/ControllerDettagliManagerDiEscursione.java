@@ -47,7 +47,7 @@ public class ControllerDettagliManagerDiEscursione extends GenericViewController
 					mUsernameProfilo.setText(mde.getUsername());
 					mNomeCognomeProfilo.setText(mde.getNome() + " " + mde.getCognome());
 					mIndirizzoProfilo.setText("in: " + mde.getIndirizzo());
-					mStipendioProfilo.setText(mde.getStipendio());
+					mStipendioProfilo.setText(Double.toString(mde.getStipendio()));
 					mEmailProfilo.setText(mde.getEmail());
 					mCFProfilo.setText(mde.getCodice_fiscale());
 					mDataNascitaProfilo.setText(mde.getData_nascita());

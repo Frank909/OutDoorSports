@@ -1,15 +1,17 @@
 package outdoorapp.presentation.views.models;
 
+import javafx.beans.property.SimpleDoubleProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import outdoorapp.to.interfaces.ManagerDiEscursioneTO;
 
 public class ManagerDiEscursioneModel extends UtenteModel{
 
-	private SimpleStringProperty stipendio;
+	private SimpleDoubleProperty stipendio;
 	private ManagerDiEscursioneTO mde;
 	
 	public ManagerDiEscursioneModel(ManagerDiEscursioneTO mde) {
-		this.id = new SimpleStringProperty(Integer.toString(mde.getIdUtente()));
+		this.id = new SimpleIntegerProperty(mde.getIdUtente());
 		this.nome = new SimpleStringProperty(mde.getNome());
 		this.cognome = new SimpleStringProperty(mde.getCognome());
 		this.email = new SimpleStringProperty(mde.getEmail());
@@ -20,12 +22,12 @@ public class ManagerDiEscursioneModel extends UtenteModel{
 		this.sesso = new SimpleStringProperty(mde.getSesso());
 		this.indirizzo = new SimpleStringProperty(mde.getIndirizzo());
 		this.citta = new SimpleStringProperty(mde.getCitta());
-		this.stipendio = new SimpleStringProperty(Double.toString(mde.getStipendio()));
+		this.stipendio = new SimpleDoubleProperty(mde.getStipendio());
 		
 		this.mde = mde;
 	}
 
-	public String getStipendio() {
+	public Double getStipendio() {
 		return stipendio.get();
 	}
 }

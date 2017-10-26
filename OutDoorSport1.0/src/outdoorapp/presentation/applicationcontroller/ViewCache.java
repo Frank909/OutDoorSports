@@ -38,6 +38,7 @@ public class ViewCache{
 	private final String VIEW_VISUALIZZA_ESCURSIONI_APERTE = "../../../resources/fxml/partecipante/visualizzaEscursioniAperte";
 	private final String VIEW_IL_MIO_PROFILO = "../../../resources/fxml/partecipante/ilMioProfiloPartecipante";
 	private final String VIEW_DETTAGLI_MANAGER_DI_ESCURSIONE = "../../../resources/fxml/manager_sistema/dettagliManagerDiEscursione";
+	private final String VIEW_MODIFICA_MANAGER_DI_ESCURSIONE = "../../../resources/fxml/manager_sistema/modificaManagerEscursione";
 	
 	private static ViewCache viewCache = new ViewCache();
 	private static HashMap<String, Pane> mapViews = new HashMap<>();
@@ -79,6 +80,7 @@ public class ViewCache{
 		loadForm("VIEW_VISUALIZZA_ESCURSIONI_APERTE", VIEW_VISUALIZZA_ESCURSIONI_APERTE, false);
 		loadForm("VIEW_IL_MIO_PROFILO", VIEW_IL_MIO_PROFILO, false);
 		loadForm("VIEW_DETTAGLI_MANAGER_DI_ESCURSIONE", VIEW_DETTAGLI_MANAGER_DI_ESCURSIONE, false);
+		loadForm("VIEW_MODIFICA_MANAGER_DI_ESCURSIONE", VIEW_MODIFICA_MANAGER_DI_ESCURSIONE, false);
 	}
 
 	/**

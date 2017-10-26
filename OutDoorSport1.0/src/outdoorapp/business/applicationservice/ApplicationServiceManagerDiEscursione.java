@@ -87,6 +87,39 @@ class ApplicationServiceManagerDiEscursione implements Actions, Views{
 	}
 	
 	/**
+	 * Metodo che restituisce la risposta rispetto alla richiesta di modificare un manager di escursione
+	 * esistente
+	 * @param request: Richiesta in ingresso
+	 * @return response: Risposta rispetto alla richiesta
+	 */
+	public Response modificaManagerDiEscursione(Request request){
+		Response response = new Response();
+		mde = (ManagerDiEscursioneTO)request.getData();
+		
+		try {
+			if(mde_dao.esisteEmail(mde) && !mde_dao.esisteEmail(mde)){
+				Ruoli_DAO ruoliDao = (Ruoli_DAO) tipoFactory.getTipoDAO(TipoDAOEnum.Ruolo);
+				StatoUtente_DAO statoUtenteDao = (StatoUtente_DAO) statoFactory.getStatoDAO(StatoDAOEnum.User);
+						
+				mde.setRuolo(ruoliDao.getRuoloManagerDiEscursione());
+				mde.setStatoUtente(statoUtenteDao.getStatoAttivo());
+				mde_dao.update(mde);
+				Alert alert = new Alert(AlertType.INFORMATION, "Il Manager di Escursione è stato modificato correttamente!", ButtonType.OK);
+				alert.setTitle("OutDoorSport1.0");
+				alert.showAndWait();
+				response.setResponse(RESP_OK);
+			}else{
+				response.setResponse(RESP_KO);
+			}
+			response.setData(null);
+		} catch (DatabaseException e) {
+			e.printStackTrace();
+		}
+		
+		return response;
+	}
+	
+	/**
 	 * Metodo che restituisce tutti i Manager di Escursione 
 	 * presenti nel sistema
 	 * 
