@@ -89,6 +89,10 @@ public class ControllerGestioneManagerEscursione extends GenericViewController{
 		dettagliManagerDiEscursione();
 	}
 	
+	/**
+	 * Evento associato al Button per la modifica di un Manager di Escursione. Viene inviata una 
+	 * richiesta per il caricamento della view desiderata e vengono mandati i dati necessari
+	 */
 	@FXML protected void modificaManagerDiEscursione(){
 		mde_model = mTableManagerEscursione.getSelectionModel().getSelectedItem();
 		if(mde_model != null)
@@ -100,6 +104,10 @@ public class ControllerGestioneManagerEscursione extends GenericViewController{
 		}
 	}
 	
+	/**
+	 * Evento associato al Button per la ricerca di un Manager di Escursione. La tabella presente nella View
+	 * verrà ricaricata in base ai parametri inseriti nella casella di testo.
+	 */
 	@FXML protected void cercaManagerDiEscursione(){
 		String param = txtSearchManagerEscursione.getText();
 		List<ManagerDiEscursioneTO> list_mde = new ArrayList<>();
@@ -123,6 +131,9 @@ public class ControllerGestioneManagerEscursione extends GenericViewController{
 		mTableManagerEscursione.setItems(data);
 	}
 	
+	/**
+	 * Metodo che carica la View con i dettagli di un determinato Manager di Escursione.
+	 */
 	private void dettagliManagerDiEscursione(){
 		mde_model = mTableManagerEscursione.getSelectionModel().getSelectedItem();
 		if(mde_model != null)
@@ -134,7 +145,9 @@ public class ControllerGestioneManagerEscursione extends GenericViewController{
 		}
 	}
 	
-	
+	/**
+	 * Metodo che carica tutti i Manager di Escursione presente nel database
+	 */
 	@SuppressWarnings("unchecked")
 	private void allManagerDiEscursione(){
 		Response response = this.sendRequest(new Request(mde, OUTDOORSPORT_GET_ALL_MDE));
@@ -163,6 +176,12 @@ public class ControllerGestioneManagerEscursione extends GenericViewController{
 		});
 	}
 	
+	/**
+	 * Metodo che inizializza il modello che servirà per visualizzare i dati nella tabella
+	 * 
+	 * @param lista di Manager di Escursione
+	 * @return res: il modello per la tabella
+	 */
 	private ObservableList<ManagerDiEscursioneModel> getListTabellaManagerDiEscursione(List<ManagerDiEscursioneTO> list_mde){
 		ObservableList<ManagerDiEscursioneModel> res = FXCollections.observableArrayList();
 
@@ -174,6 +193,13 @@ public class ControllerGestioneManagerEscursione extends GenericViewController{
 		return res;
 	}
 	
+	/**
+	 * Metodo che associa la colonna ai dati che deve visualizzare
+	 * 
+	 * @param colonna della View
+	 * @param nome dell'attributo di riferimento per quei dati
+	 * @return col: la colonna con le associazioni
+	 */
 	private <S,T> TableColumn<S, T> initColumn(TableColumn<S, T> col, String colName){
 		col.setCellValueFactory(new PropertyValueFactory<S, T>(colName));
 		return col;

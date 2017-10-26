@@ -5,6 +5,16 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import outdoorapp.to.interfaces.ManagerDiEscursioneTO;
 
+/**
+ * Classe che implementa il modello che servirà per la rappresentazione
+ * dei dati nella tabella di una View. In questa classe è presentato il
+ * Manager di escursione. La classe estende il modello dell'Utente perchè
+ * avrà dei dati in comune.
+ * 
+ * @author Andrea Zito
+ * @author Francesco Ventura
+ */
+
 public class ManagerDiEscursioneModel extends UtenteModel{
 
 	private SimpleDoubleProperty stipendio;
@@ -27,6 +37,9 @@ public class ManagerDiEscursioneModel extends UtenteModel{
 		this.mde = mde;
 	}
 
+	/**
+	 * @return lo stipendio del Manager di Escursione
+	 */
 	public Double getStipendio() {
 		return stipendio.get();
 	}

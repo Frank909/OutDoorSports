@@ -27,6 +27,16 @@ import outdoorapp.to.interfaces.ManagerDiEscursioneTO;
 import outdoorapp.to.interfaces.TOFactory;
 import outdoorapp.to.interfaces.UtenteTO;
 
+/**
+ * Gestisce la modifica di un manager di escursione da parte del Manager di Sistema selezionato
+ * dalla tabella. Il Manager di Sistema può modificare alcuni dati sensibili e inviarli al 
+ * database.
+ * 
+ * @author Andrea Zito
+ * @author Francesco Ventura
+ *
+ */
+
 public class ControllerModificaManagerEscursione extends ControllerRegistrazione{
 
 	@FXML private StackPane stpModificaManagerEscursione;
@@ -81,6 +91,13 @@ public class ControllerModificaManagerEscursione extends ControllerRegistrazione
 		stpModificaManagerEscursione.visibleProperty().addListener(visibilityListener);
 		lblErrore.setText("");
 	}
+	
+	/**
+	 * Metodo che invia la richiesta ai livelli più bassi per effettuare la modifica 
+	 * di un Manager di Escursione. Se la risposta è positiva, la modifica viene confermata,
+	 * altrimenti un messaggio di errore avvisa il Manager di Sistema che non sono 
+	 * state apportate modifiche
+	 */
 	
 	private void execModificaManagerDiEscursione() {
 		TOFactory to_fact = FactoryProducerTO.getFactory(FactoryEnum.UtenteTOFactory);
