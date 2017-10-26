@@ -1,13 +1,17 @@
 package outdoorapp.presentation.views.managersistema;
 
 import java.time.LocalDate;
+import java.util.Optional;
 
 import javax.transaction.Transactional.TxType;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
@@ -54,9 +58,9 @@ public class ControllerModificaManagerEscursione extends ControllerRegistrazione
 	@FXML private DatePicker dataNasc;
 	@FXML private Button btnModificaMDE;
 	@FXML private Label lblErrore;
-	
+
 	private ManagerDiEscursioneModel mde_model = null;
-	
+
 	public ControllerModificaManagerEscursione() {}
 
 	@Override
@@ -91,52 +95,61 @@ public class ControllerModificaManagerEscursione extends ControllerRegistrazione
 		stpModificaManagerEscursione.visibleProperty().addListener(visibilityListener);
 		lblErrore.setText("");
 	}
-	
+
 	/**
-	 * Metodo che invia la richiesta ai livelli più bassi per effettuare la modifica 
+	 * Metodo che invia la richiesta ai livelli più bassi per effettuare la modifica, chiedendo conferma, 
 	 * di un Manager di Escursione. Se la risposta è positiva, la modifica viene confermata,
 	 * altrimenti un messaggio di errore avvisa il Manager di Sistema che non sono 
-	 * state apportate modifiche
+	 * state apportate modifiche. 
 	 */
-	
+
 	private void execModificaManagerDiEscursione() {
-		TOFactory to_fact = FactoryProducerTO.getFactory(FactoryEnum.UtenteTOFactory);
-		ManagerDiEscursioneTO mde = (ManagerDiEscursioneTO) to_fact.getUtenteTO(UtenteEnum.ManagerDiEscursione);
+		Alert alert = new Alert(AlertType.CONFIRMATION);
+		alert.setTitle("OutDoorSports 1.0");
+		alert.setHeaderText("Modifica informazioni Manager di Escursione");
+		alert.setContentText("Confermare le modifiche?");
+		Optional<ButtonType> res = alert.showAndWait();
 		
-		lblErrore.setText("");
-		
-		mde.setIdManagerDiEscursione(mde_model.getId());
-		mde.setIdUtente(mde_model.getId());
-		mde.setNome(txtNome.getText());
-		mde.setCognome(txtCognome.getText());
-		mde.setCodiceFiscale(txtCF.getText());
-		mde.setUsername(txtUsername.getText());
-		mde.setPassword(txtPassword.getText());
-		mde.setIndirizzo(txtIndirizzo.getText());
-		mde.setCitta(txtCitta.getText());
-		mde.setEmail(txtEmail.getText());
-		if(radioM.isSelected())
-			mde.setSesso(MALE);
-		else if(radioF.isSelected())
-			mde.setSesso(FEMALE);
-		mde.setStipendio(Double.parseDouble(txtStipendio.getText()));
-		
-		String result = checkErrors(mde);
-		if(result.equals("")){
-			Response response = this.sendRequest(new Request(mde, OUTDOORSPORT_MODIFY_MDE));
-			if(response.toString().equals(RESP_OK))
-				this.sendRequest(new Request(ViewCache.getNestedAnchorPane(), VIEW_GESTIONE_MANAGER_ESCURSIONE));
-			else
-				lblErrore.setText("Errore! Email o Username già presenti!");
-		}else
-			lblErrore.setText(result);
+		if(res.get() == ButtonType.OK){
+
+			TOFactory to_fact = FactoryProducerTO.getFactory(FactoryEnum.UtenteTOFactory);
+			ManagerDiEscursioneTO mde = (ManagerDiEscursioneTO) to_fact.getUtenteTO(UtenteEnum.ManagerDiEscursione);
+
+			lblErrore.setText("");
+
+			mde.setIdManagerDiEscursione(mde_model.getId());
+			mde.setIdUtente(mde_model.getId());
+			mde.setNome(txtNome.getText());
+			mde.setCognome(txtCognome.getText());
+			mde.setCodiceFiscale(txtCF.getText());
+			mde.setUsername(txtUsername.getText());
+			mde.setPassword(txtPassword.getText());
+			mde.setIndirizzo(txtIndirizzo.getText());
+			mde.setCitta(txtCitta.getText());
+			mde.setEmail(txtEmail.getText());
+			if(radioM.isSelected())
+				mde.setSesso(MALE);
+			else if(radioF.isSelected())
+				mde.setSesso(FEMALE);
+			mde.setStipendio(Double.parseDouble(txtStipendio.getText()));
+
+			String result = checkErrors(mde);
+			if(result.equals("")){
+				Response response = this.sendRequest(new Request(mde, OUTDOORSPORT_MODIFY_MDE));
+				if(response.toString().equals(RESP_OK))
+					this.sendRequest(new Request(ViewCache.getNestedAnchorPane(), VIEW_GESTIONE_MANAGER_ESCURSIONE));
+				else
+					lblErrore.setText("Errore! Email o Username già presenti!");
+			}else
+				lblErrore.setText(result);
+		}
 	}
 
 	@Override
 	protected void registra() {
 		execModificaManagerDiEscursione();
 	}
-	
+
 	@Override
 	public void checkDatePicker(UtenteTO utente) {
 		if(dataNasc.getValue() == null)
