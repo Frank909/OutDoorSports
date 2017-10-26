@@ -114,7 +114,6 @@ class ApplicationServiceUtente implements Views, Actions{
 				RandomString randomString = new RandomString(8);
 				String newPassword = randomString.nextString();
 
-
 				utente.setPassword(newPassword);
 				utente_dao.create(utente);
 				

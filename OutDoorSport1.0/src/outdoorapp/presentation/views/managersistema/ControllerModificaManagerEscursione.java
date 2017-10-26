@@ -86,6 +86,8 @@ public class ControllerModificaManagerEscursione extends ControllerRegistrazione
 		TOFactory to_fact = FactoryProducerTO.getFactory(FactoryEnum.UtenteTOFactory);
 		ManagerDiEscursioneTO mde = (ManagerDiEscursioneTO) to_fact.getUtenteTO(UtenteEnum.ManagerDiEscursione);
 		
+		lblErrore.setText("");
+		
 		mde.setIdManagerDiEscursione(mde_model.getId());
 		mde.setIdUtente(mde_model.getId());
 		mde.setNome(txtNome.getText());

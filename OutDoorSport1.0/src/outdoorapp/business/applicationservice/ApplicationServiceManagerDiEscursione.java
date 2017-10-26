@@ -1,5 +1,6 @@
 package outdoorapp.business.applicationservice;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javafx.scene.control.Alert;
@@ -17,10 +18,14 @@ import outdoorapp.integration.dao.interfaces.Ruoli_DAO;
 import outdoorapp.integration.dao.interfaces.StatoUtente_DAO;
 import outdoorapp.presentation.reqresp.Request;
 import outdoorapp.presentation.reqresp.Response;
+import outdoorapp.to.enums.GenericEnum;
+import outdoorapp.to.interfaces.EmailTO;
 import outdoorapp.to.interfaces.ManagerDiEscursioneTO;
 import outdoorapp.to.interfaces.ManagerDiSistemaTO;
+import outdoorapp.to.interfaces.TOFactory;
 import outdoorapp.to.interfaces.UtenteTO;
 import outdoorapp.utils.Actions;
+import outdoorapp.utils.EmailConfig;
 import outdoorapp.utils.Views;
 
 
@@ -42,6 +47,7 @@ class ApplicationServiceManagerDiEscursione implements Actions, Views{
 	
 	private MDE_DAO mde_dao = null;
 	private ManagerDiEscursioneTO mde = null;
+	private TOFactory TOFact = null;
 	
 	/**
 	 * Costruttore che inizializza il DAO del Manager di Escursione
@@ -95,15 +101,46 @@ class ApplicationServiceManagerDiEscursione implements Actions, Views{
 	public Response modificaManagerDiEscursione(Request request){
 		Response response = new Response();
 		mde = (ManagerDiEscursioneTO)request.getData();
+		UtenteTO temp = null;
+		int id_temp = -1;
 		
 		try {
-			if(mde_dao.esisteEmail(mde) && !mde_dao.esisteEmail(mde)){
+			temp = mde_dao.getByEmail(mde.getEmail());
+			if(temp.getIdUtente() != null)
+				id_temp = temp.getIdUtente();
+		} catch (DatabaseException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
+		try {
+			if(!(mde_dao.esisteEmail(mde) || temp == null) || (mde_dao.esisteEmail(mde) && mde.getIdUtente() == id_temp)){
 				Ruoli_DAO ruoliDao = (Ruoli_DAO) tipoFactory.getTipoDAO(TipoDAOEnum.Ruolo);
 				StatoUtente_DAO statoUtenteDao = (StatoUtente_DAO) statoFactory.getStatoDAO(StatoDAOEnum.User);
 						
 				mde.setRuolo(ruoliDao.getRuoloManagerDiEscursione());
 				mde.setStatoUtente(statoUtenteDao.getStatoAttivo());
 				mde_dao.update(mde);
+				
+				EmailTO email = (EmailTO) TOFact.getGenericTO(GenericEnum.Email);
+
+				String mailOggetto = "OutDoorSports | Modifica Dati Manager Di Escursione";
+				String mailMessaggio = "Gentile ";
+				mailMessaggio += mde.getNome() + " " + mde.getCognome() + ", \n";
+				mailMessaggio += "I dati relativi al suo account sono stati modificati dal Manager di Sistema! \n";
+				mailMessaggio += "Username: " + mde.getUsername() + "\n";
+				mailMessaggio += "Password: " + mde.getPassword() + "\n";
+
+				email.setOggetto(mailOggetto);
+				email.setMessaggio(mailMessaggio);
+
+				ArrayList<UtenteTO> listaDestinatari = new ArrayList<>();
+				listaDestinatari.add(mde);
+				email.setListaDestinatari(listaDestinatari);
+
+				EmailConfig emailConfig = new EmailConfig();
+				emailConfig.sendEmail(email);
+				
 				Alert alert = new Alert(AlertType.INFORMATION, "Il Manager di Escursione è stato modificato correttamente!", ButtonType.OK);
 				alert.setTitle("OutDoorSport1.0");
 				alert.showAndWait();
