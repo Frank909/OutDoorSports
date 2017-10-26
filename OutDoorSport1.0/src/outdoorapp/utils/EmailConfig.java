@@ -3,7 +3,14 @@ package outdoorapp.utils;
 import javax.mail.*;  
 import javax.mail.internet.*;
 
+import javafx.application.Platform;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.Alert.AlertType;
+
 import java.util.Properties;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import outdoorapp.to.FactoryProducerTO;
 import outdoorapp.to.enums.FactoryEnum;
@@ -51,36 +58,65 @@ public class EmailConfig {
 	}
 
 	/**
-	 * Metodo che viene utilizzato per mandare l'email.
+	 * Metodo che viene utilizzato per mandare l'email, notificando l'avvenuto invio, in caso contrario mostra un
+	 * messaggio di errore.
 	 * @param email: Email in ingresso da mandare
 	 */
 	public void sendEmail(EmailTO email) {
-		final String username = "outdoorsportszitoventura@gmail.com";
-		final String password = "20172018";
+		ExecutorService emailExecutor = Executors.newSingleThreadExecutor();
+		emailExecutor.execute(new Runnable(){
 
-		Properties props = createMailProperties();
+			@Override
+			public void run() {
+				final String username = "outdoorsportszitoventura@gmail.com";
+				final String password = "20172018";
 
-		Session session = Session.getInstance(props, new javax.mail.Authenticator() {
-			protected PasswordAuthentication getPasswordAuthentication() {
-				return new PasswordAuthentication(username, password);
-			}
-		});
+				Properties props = createMailProperties();
 
-		try {
-			Message message = new MimeMessage(session);
-			message.setFrom(new InternetAddress(username));
+				Session session = Session.getInstance(props, new javax.mail.Authenticator() {
+					protected PasswordAuthentication getPasswordAuthentication() {
+						return new PasswordAuthentication(username, password);
+					}
+				});
+
+				try {
+					Message message = new MimeMessage(session);
+					message.setFrom(new InternetAddress(username));
 
 
-			message.setSubject(email.getOggetto());
-			message.setText(email.getMessaggio());
+					message.setSubject(email.getOggetto());
+					message.setText(email.getMessaggio());
 
-			for(UtenteTO utente: email.getListaDestinatari()){
-				message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(utente.getEmail()));
-				Transport.send(message);
-			}
-		} catch (MessagingException e) {
-			e.printStackTrace();
-		}
-		return;
+					for(UtenteTO utente: email.getListaDestinatari()){
+						message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(utente.getEmail()));
+						Transport.send(message);
+					}
+					
+					Platform.runLater(new Runnable() {
+						@Override
+						public void run() {
+							Alert alert = new Alert(AlertType.INFORMATION, "Email di servizio inviata con successo!", ButtonType.OK);
+							alert.setTitle("OutDoorSport 1.0");
+							alert.setHeaderText("Email Service");
+							alert.showAndWait();
+						}
+					});
+					
+				} catch (MessagingException e) {
+					Platform.runLater(new Runnable() {
+						@Override
+						public void run() {
+							Alert alert = new Alert(AlertType.ERROR, "Invio dell'email di servizio fallita.", ButtonType.OK);
+							alert.setTitle("OutDoorSport 1.0");
+							alert.setHeaderText("Email Service");
+							alert.showAndWait();
+						}
+					});
+				}
+				
+			}});
+		
+		
+		
 	}
 }

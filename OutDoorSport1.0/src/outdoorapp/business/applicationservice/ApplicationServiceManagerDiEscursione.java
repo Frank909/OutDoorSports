@@ -2,6 +2,7 @@ package outdoorapp.business.applicationservice;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
@@ -18,6 +19,8 @@ import outdoorapp.integration.dao.interfaces.Ruoli_DAO;
 import outdoorapp.integration.dao.interfaces.StatoUtente_DAO;
 import outdoorapp.presentation.reqresp.Request;
 import outdoorapp.presentation.reqresp.Response;
+import outdoorapp.to.FactoryProducerTO;
+import outdoorapp.to.enums.FactoryEnum;
 import outdoorapp.to.enums.GenericEnum;
 import outdoorapp.to.interfaces.EmailTO;
 import outdoorapp.to.interfaces.ManagerDiEscursioneTO;
@@ -94,7 +97,7 @@ class ApplicationServiceManagerDiEscursione implements Actions, Views{
 	
 	/**
 	 * Metodo che restituisce la risposta rispetto alla richiesta di modificare un manager di escursione
-	 * esistente
+	 * esistente, notificando il manager, via email, delle avvenute modifiche
 	 * @param request: Richiesta in ingresso
 	 * @return response: Risposta rispetto alla richiesta
 	 */
@@ -108,9 +111,8 @@ class ApplicationServiceManagerDiEscursione implements Actions, Views{
 			temp = mde_dao.getByEmail(mde.getEmail());
 			if(temp.getIdUtente() != null)
 				id_temp = temp.getIdUtente();
-		} catch (DatabaseException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
+		} catch (DatabaseException e) {
+			e.printStackTrace();
 		}
 		
 		try {
@@ -122,6 +124,8 @@ class ApplicationServiceManagerDiEscursione implements Actions, Views{
 				mde.setStatoUtente(statoUtenteDao.getStatoAttivo());
 				mde_dao.update(mde);
 				
+				
+				TOFact = FactoryProducerTO.getFactory(FactoryEnum.GenericTOFactory);
 				EmailTO email = (EmailTO) TOFact.getGenericTO(GenericEnum.Email);
 
 				String mailOggetto = "OutDoorSports | Modifica Dati Manager Di Escursione";
@@ -139,11 +143,16 @@ class ApplicationServiceManagerDiEscursione implements Actions, Views{
 				email.setListaDestinatari(listaDestinatari);
 
 				EmailConfig emailConfig = new EmailConfig();
-				emailConfig.sendEmail(email);
 				
 				Alert alert = new Alert(AlertType.INFORMATION, "Il Manager di Escursione è stato modificato correttamente!", ButtonType.OK);
 				alert.setTitle("OutDoorSport1.0");
-				alert.showAndWait();
+				
+				Optional<ButtonType> res = alert.showAndWait();
+				
+				if(res.get() == ButtonType.OK)
+					emailConfig.sendEmail(email);
+					
+				
 				response.setResponse(RESP_OK);
 			}else{
 				response.setResponse(RESP_KO);
