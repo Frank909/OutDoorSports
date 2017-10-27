@@ -6,7 +6,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<StackPane fx:id="ilMioProfiloPartecipante" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="558.0" prefWidth="722.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="outdoorapp.presentation.views.managersistema.ControllerDettagliManagerDiEscursione">
+<StackPane fx:id="stpDettagliEscursione" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="558.0" prefWidth="722.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="outdoorapp.presentation.views.managersistema.ControllerDettagliEscursione">
    <children>
       <GridPane>
         <columnConstraints>
@@ -137,11 +137,12 @@
                               <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
                            </GridPane.margin>
                         </Label>
-                        <Button mnemonicParsing="false" prefHeight="38.0" prefWidth="176.0" text="Visualizza Iscritti" GridPane.halignment="CENTER" GridPane.rowIndex="6">
+                        <Button fx:id="btnVisualizzaIscritti" mnemonicParsing="false" onMouseClicked="#visualizzaIscritti" prefHeight="38.0" prefWidth="176.0" text="Visualizza Iscritti" GridPane.halignment="CENTER" GridPane.rowIndex="4">
                            <GridPane.margin>
                               <Insets />
                            </GridPane.margin>
                         </Button>
+                        <Button fx:id="btnIndietro" mnemonicParsing="false" onMouseClicked="#visualizzaEscursioniSistema" prefHeight="38.0" prefWidth="176.0" text="Indietro" GridPane.halignment="CENTER" GridPane.rowIndex="6" />
                      </children>
                      <columnConstraints>
                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />

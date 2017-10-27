@@ -7,7 +7,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import outdoorapp.presentation.reqresp.Request;
 import outdoorapp.presentation.reqresp.Response;
-import outdoorapp.presentation.views.generic.GenericViewController;
+import outdoorapp.presentation.views.generic.GenericController;
 import outdoorapp.to.FactoryProducerTO;
 import outdoorapp.to.enums.FactoryEnum;
 import outdoorapp.to.enums.UtenteEnum;
@@ -23,7 +23,7 @@ import outdoorapp.to.interfaces.UtenteTO;
  *
  */
 
-public class ControllerLogin extends GenericViewController{
+public class ControllerLogin extends GenericController{
 
 	@FXML private Button btnLogin;
 	@FXML private Button btnSignIn;
@@ -73,7 +73,7 @@ public class ControllerLogin extends GenericViewController{
 		Response response = this.sendRequest(req);
 		
 		if(response.toString().equals(RESP_OK)){
-			this.sendRequest(new Request(response.getView()));
+			this.sendRequest(new Request(response.getData(), response.getView()));
 		}
 		else
 			lblErrore.setText("Dati non riconosciuti");

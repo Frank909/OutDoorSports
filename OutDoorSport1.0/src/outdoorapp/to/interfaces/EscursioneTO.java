@@ -78,14 +78,14 @@ public interface EscursioneTO extends OutDoorSports{
 	/**
 	 * @return la data dell'escursione
 	 */
-	public Date getData();
+	public String getData();
 	
 	/**
 	 * Metodo che setta la data dell'escursione
 	 * 
 	 * @param data
 	 */
-	public void setData(Date data);
+	public void setData(String data);
 	
 	/**
 	 * @return numero minimo di partecipanti della escursione

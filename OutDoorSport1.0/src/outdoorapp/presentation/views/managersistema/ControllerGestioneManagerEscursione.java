@@ -20,17 +20,18 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.StackPane;
-import outdoorapp.presentation.applicationcontroller.ViewCache;
 import outdoorapp.presentation.frontcontroller.FrontController;
 import outdoorapp.presentation.reqresp.Request;
 import outdoorapp.presentation.reqresp.Response;
-import outdoorapp.presentation.views.generic.GenericViewController;
+import outdoorapp.presentation.views.generic.ControllerTableView;
+import outdoorapp.presentation.views.generic.GenericController;
 import outdoorapp.presentation.views.models.ManagerDiEscursioneModel;
 import outdoorapp.to.FactoryProducerTO;
 import outdoorapp.to.enums.FactoryEnum;
 import outdoorapp.to.enums.UtenteEnum;
 import outdoorapp.to.interfaces.ManagerDiEscursioneTO;
 import outdoorapp.to.interfaces.TOFactory;
+import outdoorapp.utils.SessionCache;
 
 /**
  * Gestisce i manager di escursione da parte del Manager di Sistema. Il Manager
@@ -42,7 +43,7 @@ import outdoorapp.to.interfaces.TOFactory;
  *
  */
 
-public class ControllerGestioneManagerEscursione extends GenericViewController{
+public class ControllerGestioneManagerEscursione extends ControllerTableView{
 
 	@FXML private TextField txtSearchManagerEscursione;
 	@FXML private Button btnSearchManagerEscursione;
@@ -58,7 +59,6 @@ public class ControllerGestioneManagerEscursione extends GenericViewController{
 	private ManagerDiEscursioneTO mde = null;
 	private List<ManagerDiEscursioneTO> list_mde = null;
 	private ManagerDiEscursioneModel mde_model = null;
-	private TableView<ManagerDiEscursioneModel> table = null;
 	
 	/**
 	 * Costruttore della classe ControllerGestioneManagerEscursione
@@ -96,7 +96,7 @@ public class ControllerGestioneManagerEscursione extends GenericViewController{
 	@FXML protected void modificaManagerDiEscursione(){
 		mde_model = mTableManagerEscursione.getSelectionModel().getSelectedItem();
 		if(mde_model != null)
-			sendRequest(new Request(mde_model, ViewCache.getNestedAnchorPane(), VIEW_MODIFICA_MANAGER_DI_ESCURSIONE));
+			sendRequest(new Request(mde_model, SessionCache.getNestedAnchorPane(), VIEW_MODIFICA_MANAGER_DI_ESCURSIONE));
 		else{
 			Alert alert = new Alert(AlertType.ERROR, "Nessun Manager di Escursione Selezionato", ButtonType.OK);
 			alert.setTitle("OutDoorSport1.0");
@@ -122,11 +122,6 @@ public class ControllerGestioneManagerEscursione extends GenericViewController{
 		}
 		
 		ObservableList<ManagerDiEscursioneModel> data = FXCollections.observableArrayList(getListTabellaManagerDiEscursione(list_mde));
-		
-		this.initColumn(columnNomeManagerDiEscursione, "nome");
-		this.initColumn(columnCognomeManagerDiEscursione, "cognome");
-		this.initColumn(columnEmailManagerDiEscursione, "email");
-		this.initColumn(columnCFManagerDiEscursione, "codice_fiscale");
 
 		mTableManagerEscursione.setItems(data);
 	}
@@ -137,7 +132,7 @@ public class ControllerGestioneManagerEscursione extends GenericViewController{
 	private void dettagliManagerDiEscursione(){
 		mde_model = mTableManagerEscursione.getSelectionModel().getSelectedItem();
 		if(mde_model != null)
-			sendRequest(new Request(mde_model, ViewCache.getNestedAnchorPane(), VIEW_DETTAGLI_MANAGER_DI_ESCURSIONE));
+			sendRequest(new Request(mde_model, SessionCache.getNestedAnchorPane(), VIEW_DETTAGLI_MANAGER_DI_ESCURSIONE));
 		else{
 			Alert alert = new Alert(AlertType.ERROR, "Nessun Manager di Escursione Selezionato", ButtonType.OK);
 			alert.setTitle("OutDoorSport1.0");
@@ -165,11 +160,11 @@ public class ControllerGestioneManagerEscursione extends GenericViewController{
 		mTableManagerEscursione.addEventFilter(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>(){
 			@Override
 			public void handle(MouseEvent event) {
-				table = (TableView<ManagerDiEscursioneModel>) event.getSource();
+				TableView<ManagerDiEscursioneModel> table = (TableView<ManagerDiEscursioneModel>) event.getSource();
 				mde_model = table.getSelectionModel().getSelectedItem();
 				if(mde_model != null){
 					if(event.getClickCount() == 2){
-		                sendRequest(new Request(mde_model, ViewCache.getNestedAnchorPane(), VIEW_DETTAGLI_MANAGER_DI_ESCURSIONE));
+		                sendRequest(new Request(mde_model, SessionCache.getNestedAnchorPane(), VIEW_DETTAGLI_MANAGER_DI_ESCURSIONE));
 		            }
 				}
 			}
@@ -191,17 +186,5 @@ public class ControllerGestioneManagerEscursione extends GenericViewController{
 		}
 
 		return res;
-	}
-	
-	/**
-	 * Metodo che associa la colonna ai dati che deve visualizzare
-	 * 
-	 * @param colonna della View
-	 * @param nome dell'attributo di riferimento per quei dati
-	 * @return col: la colonna con le associazioni
-	 */
-	private <S,T> TableColumn<S, T> initColumn(TableColumn<S, T> col, String colName){
-		col.setCellValueFactory(new PropertyValueFactory<S, T>(colName));
-		return col;
 	}
 }

@@ -6,11 +6,11 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
-import outdoorapp.presentation.applicationcontroller.ViewCache;
 import outdoorapp.presentation.reqresp.Request;
-import outdoorapp.presentation.views.generic.GenericViewController;
+import outdoorapp.presentation.views.generic.GenericController;
 import outdoorapp.presentation.views.models.ManagerDiEscursioneModel;
 import outdoorapp.to.interfaces.ManagerDiEscursioneTO;
+import outdoorapp.utils.SessionCache;
 
 /**
  * Gestisce i dettagli di un manager di escursione da parte del Manager di Sistema selezionato
@@ -22,7 +22,7 @@ import outdoorapp.to.interfaces.ManagerDiEscursioneTO;
  *
  */
 
-public class ControllerDettagliManagerDiEscursione extends GenericViewController{
+public class ControllerDettagliManagerDiEscursione extends GenericController{
 
 	@FXML private Label mUsernameProfilo;
 	@FXML private Label mNomeCognomeProfilo;
@@ -43,7 +43,7 @@ public class ControllerDettagliManagerDiEscursione extends GenericViewController
 			@Override
 			public void changed(ObservableValue<? extends Boolean> arg0, Boolean oldValue, Boolean newValue) {
 				if(newValue){
-					mde = (ManagerDiEscursioneModel) ViewCache.getCurrentData();
+					mde = (ManagerDiEscursioneModel) SessionCache.getCurrentData(mde.getClass().getName());
 					mUsernameProfilo.setText(mde.getUsername());
 					mNomeCognomeProfilo.setText(mde.getNome() + " " + mde.getCognome());
 					mIndirizzoProfilo.setText("in: " + mde.getIndirizzo());
@@ -62,6 +62,6 @@ public class ControllerDettagliManagerDiEscursione extends GenericViewController
 	public ControllerDettagliManagerDiEscursione() {}
 	
 	@FXML protected void gestioneManagerDiEscursione(){
-		this.sendRequest(new Request(ViewCache.getNestedAnchorPane(), VIEW_GESTIONE_MANAGER_ESCURSIONE));
+		this.sendRequest(new Request(SessionCache.getNestedAnchorPane(), VIEW_GESTIONE_MANAGER_ESCURSIONE));
 	}
 }

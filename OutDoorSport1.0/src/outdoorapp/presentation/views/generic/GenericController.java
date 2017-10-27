@@ -45,7 +45,7 @@ import outdoorapp.utils.Views;
  *
  */
 
-public abstract class GenericViewController implements Actions, Views{
+public abstract class GenericController implements Actions, Views{
 	
 	/**
 	 * Metodo che inizializza tutti i campi della finestra
@@ -53,12 +53,14 @@ public abstract class GenericViewController implements Actions, Views{
 	@FXML protected abstract void initialize();
 	
 	/**
+	 * Metodo che invia una richiesta ai livelli più bassi per
+	 * reperire delle informazioni. Restituisce una risposta
+	 * in base alla richiesta 
 	 * 
-	 * @param request
-	 * @return
+	 * @param request: richiesta da inviare
+	 * @return response: risposta in base alla richiesta
 	 */
 	protected Response sendRequest(Request request){
 		return FrontController.getInstance().sendRequest(request);
 	}
-	
 }

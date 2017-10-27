@@ -18,11 +18,10 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.StackPane;
 import javafx.util.converter.LocalDateStringConverter;
-import outdoorapp.presentation.applicationcontroller.ViewCache;
 import outdoorapp.presentation.reqresp.Request;
 import outdoorapp.presentation.reqresp.Response;
 import outdoorapp.presentation.views.generic.ControllerRegistrazione;
-import outdoorapp.presentation.views.generic.GenericViewController;
+import outdoorapp.presentation.views.generic.GenericController;
 import outdoorapp.presentation.views.models.ManagerDiEscursioneModel;
 import outdoorapp.to.FactoryProducerTO;
 import outdoorapp.to.enums.FactoryEnum;
@@ -30,6 +29,7 @@ import outdoorapp.to.enums.UtenteEnum;
 import outdoorapp.to.interfaces.ManagerDiEscursioneTO;
 import outdoorapp.to.interfaces.TOFactory;
 import outdoorapp.to.interfaces.UtenteTO;
+import outdoorapp.utils.SessionCache;
 
 /**
  * Gestisce la modifica di un manager di escursione da parte del Manager di Sistema selezionato
@@ -70,7 +70,7 @@ public class ControllerModificaManagerEscursione extends ControllerRegistrazione
 			@Override
 			public void changed(ObservableValue<? extends Boolean> arg0, Boolean oldValue, Boolean newValue) {
 				if(newValue){
-					mde_model = (ManagerDiEscursioneModel) ViewCache.getCurrentData();
+					mde_model = (ManagerDiEscursioneModel) SessionCache.getCurrentData(mde_model.getClass().getName());
 					txtNome.setText(mde_model.getNome());
 					txtCognome.setText(mde_model.getCognome());
 					txtCF.setText(mde_model.getCodice_fiscale());
@@ -137,7 +137,7 @@ public class ControllerModificaManagerEscursione extends ControllerRegistrazione
 			if(result.equals("")){
 				Response response = this.sendRequest(new Request(mde, OUTDOORSPORT_MODIFY_MDE));
 				if(response.toString().equals(RESP_OK))
-					this.sendRequest(new Request(ViewCache.getNestedAnchorPane(), VIEW_GESTIONE_MANAGER_ESCURSIONE));
+					this.sendRequest(new Request(SessionCache.getNestedAnchorPane(), VIEW_GESTIONE_MANAGER_ESCURSIONE));
 				else
 					lblErrore.setText("Errore! Email o Username già presenti!");
 			}else

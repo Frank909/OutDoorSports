@@ -50,7 +50,7 @@ abstract class GenericDAO<T extends OutDoorSports> implements GEN_DAO<T>{
 		try {
 			session = this.getSession();
 			transaction = session.beginTransaction();
-			session.saveOrUpdate(entity);
+			session.save(entity);
 			transaction.commit();
 		} catch (Exception e){
 			if (transaction != null){

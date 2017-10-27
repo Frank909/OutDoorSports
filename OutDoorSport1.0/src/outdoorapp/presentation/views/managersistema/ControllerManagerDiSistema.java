@@ -9,7 +9,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.WindowEvent;
 import outdoorapp.presentation.reqresp.Request;
-import outdoorapp.presentation.views.generic.GenericViewController;
+import outdoorapp.presentation.views.generic.GenericController;
 
 /**
  * Gestisce la dashboard del manager di sistema
@@ -19,7 +19,7 @@ import outdoorapp.presentation.views.generic.GenericViewController;
  *
  */
 
-public class ControllerManagerDiSistema extends GenericViewController{
+public class ControllerManagerDiSistema extends GenericController{
 
 	@FXML private Label lblGestioneManagerEscursione;
 	@FXML private Label lblVisulizzaEscursioniSistema;

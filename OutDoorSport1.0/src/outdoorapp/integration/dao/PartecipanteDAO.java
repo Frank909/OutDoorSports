@@ -52,6 +52,6 @@ class PartecipanteDAO extends UtenteDAO<PartecipanteTO> implements Partecipante_
 	
 	@Override
 	public List<PartecipanteTO> getAllPartecipante() throws DatabaseException {
-		return super.executeQuery("boooooooooooooooooooh");
+		return super.executeQuery("getAllPartecipanti");
 	}
 }

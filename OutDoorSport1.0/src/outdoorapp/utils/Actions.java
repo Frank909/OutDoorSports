@@ -25,4 +25,8 @@ public interface Actions {
 	public static final String OUTDOORSPORT_MODIFY_MDE = "modificaManagerDiEscursione";
 	public static final String OUTDOORSPORT_GET_ALL_MDE = "getAllManagerDiEscursione";
 	public static final String ROOT_CERTIFICATE = "certificatiSRC";
+	public static final String OUTDOORSPORT_GET_ALL_ESCURSIONI = "getAllEscursioni";
+	public static final String OUTDOORSPORT_GET_ALL_PARTECIPANTI = "getAllPartecipanti";
+	public static final String OUTDOORSPORT_GET_ALL_PARTECIPANTI_FOR_MDE = "getPartecipantiForMde";
+	public static final String OUTDOORSPORT_GET_ALL_ESCURSIONI_FROM_MDE = "getAllEscursioniFromMDE";
 }

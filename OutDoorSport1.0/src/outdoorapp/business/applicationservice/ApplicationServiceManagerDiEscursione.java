@@ -178,12 +178,11 @@ class ApplicationServiceManagerDiEscursione implements Actions, Views{
 		try {
 			List<ManagerDiEscursioneTO> list_mde = mde_dao.getAll();
 			response.setData(list_mde);
-			response.setResponse(RESP_KO);
+			response.setResponse(RESP_OK);
 		} catch (DatabaseException e) {
 			e.printStackTrace();
 			response.setResponse(RESP_KO);
 		}
 		return response;
 	}
-	
 }

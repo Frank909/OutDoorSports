@@ -105,7 +105,10 @@
         <![CDATA[ from outdoorapp.to.ManagerDiSistema m where m.statoUtente.idStatoUtente = 1 and m.id = ? ]]></query>    
         
     <query name="getMde">
-        <![CDATA[ from outdoorapp.to.ManagerDiEscursione m where m.statoUtente.idStatoUtente = 1 and m.id = ? ]]></query>   
+        <![CDATA[ from outdoorapp.to.ManagerDiEscursione m where m.statoUtente.idStatoUtente = 1 and m.id = ? ]]></query>
+        
+    <query name="getAllPartecipanti">
+		<![CDATA[ from outdoorapp.to.Partecipante m where m.statoUtente.idStatoUtente = 1 ]]></query>
 	
 	<!--<query name="checkMds">
 		<![CDATA[ from agroludos.to.Utente m where m.statoUtente.id = 1 and m.tipoUtente.id = 0 ]]></query>
@@ -117,8 +120,7 @@
 	<query name="getPartecipanteByCF">
         <![CDATA[ from agroludos.to.Partecipante p where p.statoUtente.id = 1 and p.cf = ? ]]></query>
 	<query name="getAllManagerDiCompetizione">
-		<![CDATA[ from agroludos.to.ManagerDiCompetizione m where m.statoUtente.id = 1]]></query>
-	<query name="getAllPartecipante">
-		<![CDATA[ from agroludos.to.Partecipante m where m.statoUtente.id = 1 ]]></query>-->
+		<![CDATA[ from agroludos.to.ManagerDiCompetizione m where m.statoUtente.id = 1]]></query>-->
+	
 	
 </hibernate-mapping>

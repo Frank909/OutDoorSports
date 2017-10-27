@@ -17,13 +17,13 @@ import outdoorapp.integration.dao.enums.UtenteDAOEnum;
 import outdoorapp.integration.dao.interfaces.Partecipante_DAO;
 import outdoorapp.integration.dao.interfaces.Ruoli_DAO;
 import outdoorapp.integration.dao.interfaces.StatoUtente_DAO;
-import outdoorapp.presentation.applicationcontroller.ViewCache;
 import outdoorapp.presentation.reqresp.Request;
 import outdoorapp.presentation.reqresp.Response;
 
 import outdoorapp.to.interfaces.PartecipanteTO;
 import outdoorapp.to.interfaces.UtenteTO;
 import outdoorapp.utils.Actions;
+import outdoorapp.utils.SessionCache;
 import outdoorapp.utils.Views;
 
 /**
@@ -71,7 +71,7 @@ class ApplicationServicePartecipante implements Views, Actions{
 		fileChooser.setTitle("Carica Certificato SRC");
 		fileChooser.getExtensionFilters().addAll(
 				new FileChooser.ExtensionFilter("TXT", "*.txt"));
-		File fileCertificatoSRC = fileChooser.showOpenDialog(ViewCache.getCurrentView());
+		File fileCertificatoSRC = fileChooser.showOpenDialog(SessionCache.getCurrentView());
 		if(fileCertificatoSRC != null){
 			partecipante.setCertificatoSrc(fileCertificatoSRC.getPath());
 			response.setResponse(RESP_OK);
@@ -153,6 +153,17 @@ class ApplicationServicePartecipante implements Views, Actions{
 		}catch(Exception e){
 			e.printStackTrace();
 		}
-
+	}
+	
+	/**
+	 * Metodo che restituisce tutti i Partecipanti
+	 * presenti nel sistema
+	 * 
+	 * @param request: Richiesta in ingresso
+	 * @return response: Risposta rispetto alla richiesta
+	 */
+	public Response getAllPartecipanti(Request request){
+		return null;
+		
 	}
 }

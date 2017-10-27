@@ -5,7 +5,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import outdoorapp.presentation.frontcontroller.FrontController;
 import outdoorapp.presentation.reqresp.Request;
-import outdoorapp.presentation.views.generic.GenericViewController;
+import outdoorapp.presentation.views.generic.GenericController;
 import outdoorapp.utils.Views;
 
 /**
@@ -16,7 +16,7 @@ import outdoorapp.utils.Views;
  *
  */
 
-public class ControllerManagerDiEscursione extends GenericViewController{
+public class ControllerManagerDiEscursione extends GenericController{
 
 	@FXML private AnchorPane anchorContent;
 	@FXML private Label lblGestisciEscursione;

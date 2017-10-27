@@ -27,7 +27,7 @@ public class Request{
 	 * @param data
 	 * @param request
 	 */
-	public Request(OutDoorSports data, String request) {
+	public Request(Object data, String request) {
 		this.data = data;
 		this.request = request;
 	}

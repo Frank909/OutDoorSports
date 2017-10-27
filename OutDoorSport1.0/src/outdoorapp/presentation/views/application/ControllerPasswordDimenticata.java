@@ -9,7 +9,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import outdoorapp.presentation.reqresp.Request;
 import outdoorapp.presentation.reqresp.Response;
-import outdoorapp.presentation.views.generic.GenericViewController;
+import outdoorapp.presentation.views.generic.GenericController;
 import outdoorapp.to.FactoryProducerTO;
 import outdoorapp.to.enums.FactoryEnum;
 import outdoorapp.to.enums.UtenteEnum;
@@ -25,7 +25,7 @@ import outdoorapp.to.interfaces.UtenteTO;
  *
  */
 
-public class ControllerPasswordDimenticata extends GenericViewController{
+public class ControllerPasswordDimenticata extends GenericController{
 
 	@FXML private Button btnRichiediNuovaPassword;
 	@FXML private TextField txtEmail;

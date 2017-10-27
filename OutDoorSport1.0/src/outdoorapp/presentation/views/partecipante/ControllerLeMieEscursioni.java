@@ -1,8 +1,8 @@
 package outdoorapp.presentation.views.partecipante;
 
-import outdoorapp.presentation.views.generic.GenericViewController;
+import outdoorapp.presentation.views.generic.GenericController;
 
-public class ControllerLeMieEscursioni extends GenericViewController {
+public class ControllerLeMieEscursioni extends GenericController {
 
 	public ControllerLeMieEscursioni() {
 		// TODO Auto-generated constructor stub

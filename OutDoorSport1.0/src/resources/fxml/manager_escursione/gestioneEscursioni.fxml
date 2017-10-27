@@ -5,7 +5,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<StackPane fx:id="leMieEscursioniPartecipante" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="558.0" prefWidth="722.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="outdoorapp.presentation.views.managerescursione.ControllerGestioneEscursioni">
+<StackPane fx:id="stpGestioneEscursioniMDE" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="558.0" prefWidth="722.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="outdoorapp.presentation.views.managerescursione.ControllerGestioneEscursioni">
    <children>
       <GridPane>
         <columnConstraints>
@@ -31,7 +31,7 @@
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                      </GridPane.margin>
                   </TextField>
-                  <Button fx:id="btnSearchEscursione" mnemonicParsing="false" text="Cerca Escursione" GridPane.columnIndex="1" GridPane.halignment="CENTER">
+                  <Button fx:id="btnSearchEscursione" mnemonicParsing="false" onMouseClicked="#cercaEscursione" text="Cerca Escursione" GridPane.columnIndex="1" GridPane.halignment="CENTER">
                      <GridPane.margin>
                         <Insets right="10.0" />
                      </GridPane.margin></Button>
@@ -39,18 +39,19 @@
             </GridPane>
             <TableView fx:id="mTableEscursioni" prefHeight="461.0" prefWidth="800.0" GridPane.rowIndex="1">
               <columns>
-                  <TableColumn prefWidth="158.0" text="Nome" />
-                <TableColumn fx:id="mColNameEscursioni" prefWidth="130.0" text="Tipo Escursione" />
-                <TableColumn fx:id="mColDataEscursioni" minWidth="0.0" prefWidth="76.0" text="Data" />
-                  <TableColumn fx:id="mColNMinEscursioni" minWidth="0.0" prefWidth="70.0" text="Min/Max" />
-                  <TableColumn fx:id="mColCostoEscursioni" minWidth="0.0" prefWidth="65.0" text="Costo" />
-                  <TableColumn prefWidth="83.0" text="Stato" />
+                  <TableColumn fx:id="mColumnNome" prefWidth="221.0" text="Nome" />
+                <TableColumn fx:id="mColumnTipoEscursione" prefWidth="143.0" text="Tipo Escursione" />
+                <TableColumn fx:id="mColumnDataEscursione" minWidth="0.0" prefWidth="88.0" text="Data" />
+                  <TableColumn fx:id="mColumnMin" minWidth="0.0" prefWidth="49.0" text="Min" />
+                  <TableColumn fx:id="mColumnMax" minWidth="0.0" prefWidth="45.0" text="Max" />
+                  <TableColumn fx:id="mColumnCosto" minWidth="0.0" prefWidth="68.0" text="Costo" />
+                  <TableColumn fx:id="mColumnStato" prefWidth="87.0" text="Stato" />
               </columns>
                <GridPane.margin>
                   <Insets left="10.0" right="10.0" />
                </GridPane.margin>
             </TableView>
-            <Button mnemonicParsing="false" text="Dettagli Escursione" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
+            <Button fx:id="btnDettagliEscursione" mnemonicParsing="false" text="Dettagli Escursione" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
                <GridPane.margin>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </GridPane.margin>

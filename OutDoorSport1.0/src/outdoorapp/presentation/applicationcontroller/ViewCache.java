@@ -12,6 +12,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import outdoorapp.presentation.reqresp.Request;
+import outdoorapp.utils.SessionCache;
 
 /**
  * ViewCache è una classe realizzata allo scopo di pre-caricare le schermate di visualizzazione richieste
@@ -20,7 +21,7 @@ import outdoorapp.presentation.reqresp.Request;
  * @author Francesco Ventura
  *
  */
-public class ViewCache{
+class ViewCache{
 
 	private final String VIEW_LOGIN = "../../../resources/fxml/application/login";
 	private final String VIEW_MANAGER_DI_SISTEMA_CONFIG = "../../../resources/fxml/manager_sistema/managerDiSistemaConfig";
@@ -39,12 +40,11 @@ public class ViewCache{
 	private final String VIEW_IL_MIO_PROFILO = "../../../resources/fxml/partecipante/ilMioProfiloPartecipante";
 	private final String VIEW_DETTAGLI_MANAGER_DI_ESCURSIONE = "../../../resources/fxml/manager_sistema/dettagliManagerDiEscursione";
 	private final String VIEW_MODIFICA_MANAGER_DI_ESCURSIONE = "../../../resources/fxml/manager_sistema/modificaManagerEscursione";
+	private final String VIEW_DETTAGLI_ESCURSIONI = "../../../resources/fxml/manager_sistema/dettagliEscursione";
+	private final String VIEW_DETTAGLI_PARTECIPANTE = "../../../resources/fxml/manager_sistema/dettagliPartecipante";
+	private final String VIEW_DETTAGLI_ESCURSIONI_FROM_MDE = "../../../resources/fxml/manager_escursione/dettagliEscursione";
 	
 	private static ViewCache viewCache = new ViewCache();
-	private static HashMap<String, Pane> mapViews = new HashMap<>();
-	private static Queue<Stage> stageQueue = new ArrayDeque<>();
-	private static AnchorPane nestedAnchorPane;
-	private static Object currentData = null; 
 
 	/**
 	 * Costruttore privato - Singleton Class
@@ -81,14 +81,9 @@ public class ViewCache{
 		loadForm("VIEW_IL_MIO_PROFILO", VIEW_IL_MIO_PROFILO, false);
 		loadForm("VIEW_DETTAGLI_MANAGER_DI_ESCURSIONE", VIEW_DETTAGLI_MANAGER_DI_ESCURSIONE, false);
 		loadForm("VIEW_MODIFICA_MANAGER_DI_ESCURSIONE", VIEW_MODIFICA_MANAGER_DI_ESCURSIONE, false);
-	}
-
-	/**
-	 * 
-	 * @return stageQueue.peak(): Restituisce lo stage della schermata corrente
-	 */
-	public static Stage getCurrentView(){
-		return stageQueue.peek();
+		loadForm("VIEW_DETTAGLI_ESCURSIONI", VIEW_DETTAGLI_ESCURSIONI, false);
+		loadForm("VIEW_DETTAGLI_PARTECIPANTE", VIEW_DETTAGLI_PARTECIPANTE, false);
+		loadForm("VIEW_DETTAGLI_ESCURSIONI_FROM_MDE", VIEW_DETTAGLI_ESCURSIONI_FROM_MDE, false);
 	}
 	
 	/**
@@ -96,16 +91,17 @@ public class ViewCache{
 	 * @param key: chiave della schermata
 	 */
 	void setView(Request key){	
-		if(!stageQueue.isEmpty())
-			stageQueue.poll().close();
-		currentData = key.getData();
+		if(!SessionCache.stageQueue.isEmpty())
+			SessionCache.stageQueue.poll().close();
+		if(key.getData() != null)
+			SessionCache.currentData.put(key.getData().getClass().getSimpleName(), key.getData());
 		Stage newStage = new Stage();
 		newStage.setTitle("OutDoorSports 1.0");
 		newStage.setResizable(false);
-		Scene myScene = new Scene(mapViews.get(key.toString()));
+		Scene myScene = new Scene(SessionCache.mapViews.get(key.toString()));
 		newStage.setScene(myScene);
 		newStage.show();
-		stageQueue.add(newStage);
+		SessionCache.stageQueue.add(newStage);
 	}
 
 	/**
@@ -114,8 +110,9 @@ public class ViewCache{
 	 * @param parent: finestra genitore
 	 */
 	void setNestedView(Request key, AnchorPane parent){
-		StackPane panel = (StackPane)mapViews.get(key.toString());
-		currentData = key.getData();
+		StackPane panel = (StackPane)SessionCache.mapViews.get(key.toString());
+		if(key.getData() != null)
+			SessionCache.currentData.put(key.getData().getClass().getSimpleName(), key.getData());
 		setNestedAnchorPane(parent);
 		AnchorPane.setLeftAnchor(panel, 0.0);
 		AnchorPane.setRightAnchor(panel, 0.0);
@@ -139,21 +136,18 @@ public class ViewCache{
 		try {
 			Pane newPane = FXMLLoader.load(getClass().getResource(resource + ".fxml"));
 			newPane.setVisible(visibility);
-			mapViews.put(key, newPane);
+			SessionCache.mapViews.put(key, newPane);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 	
+	/**
+	 * Metodo che setta la view innestata corrente
+	 * 
+	 * @param anchorPane: la view genitore che deve contenere la nuova view
+	 */
 	private void setNestedAnchorPane(AnchorPane anchorPane){
-		ViewCache.nestedAnchorPane = anchorPane;
-	}
-	
-	public static AnchorPane getNestedAnchorPane(){
-		return nestedAnchorPane;
-	}
-	
-	public static Object getCurrentData(){
-		return currentData;
+		SessionCache.nestedAnchorPane = anchorPane;
 	}
 }

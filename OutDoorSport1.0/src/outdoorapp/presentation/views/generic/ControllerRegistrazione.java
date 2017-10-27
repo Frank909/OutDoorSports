@@ -7,7 +7,17 @@ import java.util.regex.Pattern;
 import javafx.fxml.FXML;
 import outdoorapp.to.interfaces.UtenteTO;
 
-public abstract class ControllerRegistrazione extends GenericViewController{
+/**
+ * 
+ * Classe astratta che incorpora tutti i controller che servono 
+ * nella fase di registrazione
+ * 
+ * @author Andrea Zito
+ * @author Francesco Ventura
+ *
+ */
+
+public abstract class ControllerRegistrazione extends GenericController{
 
 	public ControllerRegistrazione() {
 		// TODO Auto-generated constructor stub
