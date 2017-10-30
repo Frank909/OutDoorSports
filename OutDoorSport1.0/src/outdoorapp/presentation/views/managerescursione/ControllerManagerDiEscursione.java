@@ -18,9 +18,10 @@ import outdoorapp.utils.Views;
 
 public class ControllerManagerDiEscursione extends GenericController{
 
-	@FXML private AnchorPane anchorContent;
 	@FXML private Label lblGestisciEscursione;
 	@FXML private Label lblInserisciEscursione;
+	@FXML private AnchorPane anchorContent;
+	@FXML private AnchorPane anchorManagerEscursione;
 	
 	/**
 	 * Costruttore della classe ControllerManagerDiEscursione

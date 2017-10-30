@@ -6,11 +6,13 @@ import java.util.Set;
 
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleSetProperty;
 import javafx.beans.property.SimpleStringProperty;
 import outdoorapp.to.interfaces.EscursioneTO;
 import outdoorapp.to.interfaces.ManagerDiEscursioneTO;
 import outdoorapp.to.interfaces.OptionalTO;
+import outdoorapp.to.interfaces.UtenteTO;
 
 /**
  * Classe che implementa il modello che servirà per la rappresentazione
@@ -32,7 +34,10 @@ public class EscursioneModel {
 	private SimpleIntegerProperty numberMax;
 	private SimpleDoubleProperty costo;
 	private SimpleStringProperty descrizione;
+	private SimpleObjectProperty<UtenteTO> utente;
 	private SimpleSetProperty<OptionalTO> optionals;
+	
+	public EscursioneModel(){}
 	
 	public EscursioneModel(EscursioneTO e) {
 		this.idEscursione = new SimpleIntegerProperty(e.getIdEscursione());
@@ -45,6 +50,14 @@ public class EscursioneModel {
 		this.costo = new SimpleDoubleProperty(e.getCosto());
 		this.descrizione = new SimpleStringProperty(e.getDescrizione());
 		//this.optionals.addAll(e.getOptionals());
+		this.utente = new SimpleObjectProperty<>(e.getUtente());
+	}
+
+	/**
+	 * @return il manager di escursione
+	 */
+	public UtenteTO getUtente() {
+		return utente.get();
 	}
 
 	/**

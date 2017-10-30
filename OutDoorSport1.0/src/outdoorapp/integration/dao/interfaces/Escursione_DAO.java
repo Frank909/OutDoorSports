@@ -59,4 +59,12 @@ public interface Escursione_DAO extends GEN_DAO<EscursioneTO>{
 	 * @throws DatabaseException
 	 */
 	List<EscursioneTO> readEscursioniAttiveByManagerDiEscursione(ManagerDiEscursioneTO mde) throws DatabaseException;
+	
+	/**
+	 * Verifica se esiste o meno l'escursione che si vuole inserire
+	 * 
+	 * @return vero se l'escursione esiste, falso altrimenti
+	 * @throws DatabaseException 
+	 */
+	boolean esisteEscursione(EscursioneTO escursione)  throws DatabaseException;
 }

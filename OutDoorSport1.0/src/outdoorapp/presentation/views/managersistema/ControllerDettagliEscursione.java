@@ -12,6 +12,16 @@ import outdoorapp.presentation.views.models.EscursioneModel;
 import outdoorapp.presentation.views.models.ManagerDiEscursioneModel;
 import outdoorapp.utils.SessionCache;
 
+/**
+ * Visualizza i dettagli di una determinata Escursione. Il Manager
+ * di Sistema può visualizzare tutti i Partecipanti iscritti
+ * all'escursione
+ * 
+ * @author Andrea Zito
+ * @author Francesco Ventura
+ *
+ */
+
 public class ControllerDettagliEscursione extends GenericController{
 
 	@FXML private Label lblNomeEscursione;
@@ -24,8 +34,9 @@ public class ControllerDettagliEscursione extends GenericController{
 	@FXML private Label lblOptionalEscursione;
 	@FXML private Label lblDescrizioneEscursione;
 	@FXML private Button btnVisualizzaIscritti;
+	@FXML private Label lblMDE;
 	@FXML private StackPane stpDettagliEscursione;
-	private EscursioneModel escursione = null;
+	private EscursioneModel escursione = new EscursioneModel();
 	
 	public ControllerDettagliEscursione() {
 		// TODO Auto-generated constructor stub
@@ -38,7 +49,7 @@ public class ControllerDettagliEscursione extends GenericController{
 			@Override
 			public void changed(ObservableValue<? extends Boolean> arg0, Boolean oldValue, Boolean newValue) {
 				if(newValue){
-					escursione = (EscursioneModel) SessionCache.getCurrentData(escursione.getClass().getName());
+					escursione = (EscursioneModel) SessionCache.getCurrentData(escursione.getClass().getSimpleName());
 					lblNomeEscursione.setText(escursione.getNome());
 					lblStatoEscursione.setText("Stato: " + escursione.getStatoEscursione());
 					lblTipoEscursione.setText("Tipo: " + escursione.getTipoEscursione());
@@ -46,8 +57,9 @@ public class ControllerDettagliEscursione extends GenericController{
 					lblNumMin.setText("Minimo " + escursione.getNumberMin() + " Partecipanti");
 					lblNumMax.setText("Massimo " + escursione.getNumberMax() + " Partecipanti");
 					lblCostoEscursione.setText("Costo: " + escursione.getCosto());
-					lblOptionalEscursione.setText("Optional: " + escursione.getOptionals().toString());
+					//lblOptionalEscursione.setText("Optional: " + escursione.getOptionals().toString());
 					lblDescrizioneEscursione.setText("Descrizione: " + escursione.getDescrizione());
+					lblMDE.setText("Manager: " + escursione.getUtente().getNome() + " " + escursione.getUtente().getCognome());
 				}
 			}
 		};

@@ -146,4 +146,16 @@ public interface EscursioneTO extends OutDoorSports{
 	 * @param optionals
 	 */
 	public void setOptionals(Set<OptionalTO> optionals);
+	
+	/**
+	 * Metodo che setta l'id del Manager di Escursione
+	 * 
+	 * @param id_mde
+	 */
+	public void setIdMde(int id_mde);
+	
+	/**
+	 * @return l'id del manager di escursione
+	 */
+	public int getIdMde();
 }

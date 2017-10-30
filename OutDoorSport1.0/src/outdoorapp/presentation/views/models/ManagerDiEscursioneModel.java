@@ -20,6 +20,8 @@ public class ManagerDiEscursioneModel extends UtenteModel{
 	private SimpleDoubleProperty stipendio;
 	private ManagerDiEscursioneTO mde;
 	
+	public ManagerDiEscursioneModel(){}
+	
 	public ManagerDiEscursioneModel(ManagerDiEscursioneTO mde) {
 		this.id = new SimpleIntegerProperty(mde.getIdUtente());
 		this.nome = new SimpleStringProperty(mde.getNome());
@@ -33,7 +35,6 @@ public class ManagerDiEscursioneModel extends UtenteModel{
 		this.indirizzo = new SimpleStringProperty(mde.getIndirizzo());
 		this.citta = new SimpleStringProperty(mde.getCitta());
 		this.stipendio = new SimpleDoubleProperty(mde.getStipendio());
-		
 		this.mde = mde;
 	}
 

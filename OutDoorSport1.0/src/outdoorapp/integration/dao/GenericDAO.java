@@ -177,7 +177,6 @@ abstract class GenericDAO<T extends OutDoorSports> implements GEN_DAO<T>{
 			transaction = session.beginTransaction();
 
 			Query query = session.getNamedQuery(queryName);
-			//Query query = session.createQuery(queryName);
 			int index = 0;
 
 			for(Object param : parameters){

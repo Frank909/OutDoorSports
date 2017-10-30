@@ -24,6 +24,7 @@ class Escursione implements EscursioneTO{
 	private StatoEscursioneTO statoEscursione;
 	private TipoEscursioneTO tipoEscursione;
 	private UtenteTO utente;
+	private int idMDE;
 	private String nome;
 	private String data;
 	private int numberMin;
@@ -144,6 +145,16 @@ class Escursione implements EscursioneTO{
 	@Override
 	public void setOptionals(Set<OptionalTO> optionals) {
 		this.optionals = optionals;
+	}
+
+	@Override
+	public void setIdMde(int id_mde) {
+		this.idMDE = id_mde;
+	}
+
+	@Override
+	public int getIdMde() {
+		return this.idMDE;
 	}
 
 }

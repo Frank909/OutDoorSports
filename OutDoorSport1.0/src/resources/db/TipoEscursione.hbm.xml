@@ -16,6 +16,6 @@
 		</property>
 	</class>
 	
-	<!-- <query name="getAllTipoCompetizione">
-        <![CDATA[ from agroludos.to.TipoCompetizione c ]]></query> -->
+	<query name="getAllTipiEscursione">
+        <![CDATA[ from outdoorapp.to.TipoEscursione c ]]></query>
 </hibernate-mapping>

@@ -51,7 +51,7 @@
                   <Insets left="10.0" right="10.0" />
                </GridPane.margin>
             </TableView>
-            <Button fx:id="btnDettagliEscursione" mnemonicParsing="false" text="Dettagli Escursione" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
+            <Button fx:id="btnDettagliEscursione" mnemonicParsing="false" onMouseClicked="#dettagliEscursione" text="Dettagli Escursione" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
                <GridPane.margin>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </GridPane.margin>

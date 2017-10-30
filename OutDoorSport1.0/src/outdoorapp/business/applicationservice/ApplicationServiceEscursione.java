@@ -1,22 +1,33 @@
 package outdoorapp.business.applicationservice;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.Action;
 
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.Alert.AlertType;
 import outdoorapp.exceptions.DatabaseException;
 import outdoorapp.integration.dao.DAOFactory;
 import outdoorapp.integration.dao.FactoryProducerDAO;
 import outdoorapp.integration.dao.enums.DAORequest;
 import outdoorapp.integration.dao.enums.GenericDAOEnum;
+import outdoorapp.integration.dao.enums.StatoDAOEnum;
+import outdoorapp.integration.dao.enums.TipoDAOEnum;
 import outdoorapp.integration.dao.enums.UtenteDAOEnum;
 import outdoorapp.integration.dao.interfaces.Escursione_DAO;
 import outdoorapp.integration.dao.interfaces.MDE_DAO;
+import outdoorapp.integration.dao.interfaces.Ruoli_DAO;
+import outdoorapp.integration.dao.interfaces.StatoEscursione_DAO;
+import outdoorapp.integration.dao.interfaces.StatoUtente_DAO;
+import outdoorapp.integration.dao.interfaces.TipoEscursione_DAO;
 import outdoorapp.presentation.reqresp.Request;
 import outdoorapp.presentation.reqresp.Response;
 import outdoorapp.to.interfaces.EscursioneTO;
 import outdoorapp.to.interfaces.ManagerDiEscursioneTO;
 import outdoorapp.to.interfaces.TOFactory;
+import outdoorapp.to.interfaces.UtenteTO;
 import outdoorapp.utils.Actions;
 import outdoorapp.utils.SessionCache;
 
@@ -77,8 +88,52 @@ class ApplicationServiceEscursione implements Actions {
 	public Response getAllEscursioniFromMDE(Request request){
 		Response response = new Response();
 		
-		SessionCache.getCurrentData("ManagerDiEscursione");
-		
-		return null;
+		;
+		try {
+			List<EscursioneTO> list_escursioni = escursione_dao.readEscursioniByManagerDiEscursione((ManagerDiEscursioneTO)SessionCache.getCurrentData("ManagerDiEscursione"));
+			response.setData(list_escursioni);
+			response.setResponse(RESP_OK);
+		} catch (DatabaseException e) {
+			e.printStackTrace();
+			response.setResponse(RESP_KO);
+		}
+		return response;
 	}
+	
+	/**
+	 * Metodo che restituisce una risposta in base a una richiesta, e inserisce 
+	 * una nuova Escursione nel sistema
+	 * 
+	 * @param request
+	 * @return
+	 */
+	public Response nuovaEscursione(Request request){
+		Response response = new Response();
+		
+		try {
+			if(!escursione_dao.esisteEscursione((EscursioneTO)request.getData())){
+				
+				StatoEscursione_DAO statoEscursioneDao = (StatoEscursione_DAO) tipoFactory.getStatoDAO(StatoDAOEnum.Escursione);
+				TipoEscursione_DAO tipoEscursioneDao = (TipoEscursione_DAO) statoFactory.getTipoDAO(TipoDAOEnum.Escursione);
+
+				escursione = (EscursioneTO)request.getData();
+				escursione.setStatoEscursione(statoEscursioneDao.getStatoEscursioneAperta());
+				ManagerDiEscursioneTO mde = (ManagerDiEscursioneTO) SessionCache.getCurrentData("ManagerDiEscursione");
+				escursione.setIdMde(mde.getIdManagerDiEscursione());
+				escursione_dao.create(escursione);
+				Alert alert = new Alert(AlertType.INFORMATION, "Il Manager di Escursione è stato inserito correttamente!", ButtonType.OK);
+				alert.setTitle("OutDoorSport1.0");
+				alert.showAndWait();
+				response.setResponse(RESP_OK);
+			}else{
+				response.setResponse(RESP_KO);
+			}
+			response.setData(null);
+		} catch (DatabaseException e) {
+			e.printStackTrace();
+		}
+		
+		return response;
+	}
+	
 }

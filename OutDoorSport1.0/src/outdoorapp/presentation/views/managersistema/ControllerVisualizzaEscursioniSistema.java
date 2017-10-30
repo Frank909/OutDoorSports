@@ -33,6 +33,16 @@ import outdoorapp.to.interfaces.ManagerDiEscursioneTO;
 import outdoorapp.to.interfaces.TOFactory;
 import outdoorapp.utils.SessionCache;
 
+/**
+ * Gestisce la visualizzazione di tutte le escursioni presenti nel sistema.
+ * Il Manager di Sistema può visualizzare i dettagli di una Escursione
+ * e visualizzare i Partecipanti iscritti
+ * 
+ * @author Andrea Zito
+ * @author Francesco Ventura
+ *
+ */
+
 public class ControllerVisualizzaEscursioniSistema extends ControllerTableView{
 
 	@FXML private StackPane stpVisualizzaEscursioniSistema;
@@ -52,7 +62,9 @@ public class ControllerVisualizzaEscursioniSistema extends ControllerTableView{
 	private List<EscursioneTO> list_escursioni = null;
 	private EscursioneModel escursione_model = null;
 	
-	
+	/**
+	 * Costruttore della classe ControllerVisualizzaEscursioniSistema
+	 */
 	public ControllerVisualizzaEscursioniSistema() {
 		TOFact = FactoryProducerTO.getFactory(FactoryEnum.GenericTOFactory);
 		escursione = (EscursioneTO) TOFact.getGenericTO(GenericEnum.Escursione);
@@ -95,6 +107,11 @@ public class ControllerVisualizzaEscursioniSistema extends ControllerTableView{
 		mTableEscursioni.setItems(data);
 	}
 	
+	/**
+	 * Evento associato alla visualizzazione dei dettagli di una escursione. Una volta selezionata
+	 * l'escursione desiderata, il Manager di Sistema, premendo il tasto, potrà visualizzare i 
+	 * dettagli dell'Escursione
+	 */
 	@FXML protected void dettagliEscursione(){
 		escursione_model = mTableEscursioni.getSelectionModel().getSelectedItem();
 		if(escursione_model != null)

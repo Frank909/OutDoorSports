@@ -42,8 +42,8 @@
                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
               </columnConstraints>
               <rowConstraints>
-                <RowConstraints maxHeight="374.0" minHeight="10.0" prefHeight="355.0" vgrow="SOMETIMES" />
-                <RowConstraints maxHeight="198.0" minHeight="10.0" prefHeight="128.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="395.0" minHeight="10.0" prefHeight="395.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="198.0" minHeight="10.0" prefHeight="48.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
                   <GridPane prefHeight="277.0" prefWidth="401.0">
@@ -119,7 +119,7 @@
                         </Label>
                      </children>
                   </GridPane>
-                  <GridPane prefHeight="151.0" prefWidth="300.0" GridPane.columnIndex="1">
+                  <GridPane prefHeight="385.0" prefWidth="361.0" GridPane.columnIndex="1">
                      <children>
                         <Label fx:id="lblDescrizioneEscursione" prefHeight="59.0" prefWidth="321.0" text="Descrizione:" GridPane.rowIndex="2">
                            <font>
@@ -137,26 +137,28 @@
                               <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
                            </GridPane.margin>
                         </Label>
-                        <Button fx:id="btnModificaEscursione" mnemonicParsing="false" prefHeight="40.0" prefWidth="150.0" text="Modifica Escursione" GridPane.halignment="LEFT" GridPane.rowIndex="4">
+                        <Button fx:id="btnModificaEscursione" mnemonicParsing="false" onMouseClicked="#modificaEscursione" prefHeight="40.0" prefWidth="150.0" text="Modifica Escursione" GridPane.halignment="LEFT" GridPane.rowIndex="4">
                            <GridPane.margin>
                               <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                            </GridPane.margin>
                         </Button>
-                        <Button fx:id="btnAnnullaEscursione" mnemonicParsing="false" prefHeight="40.0" prefWidth="150.0" text="Annulla Escursione" GridPane.halignment="RIGHT" GridPane.rowIndex="4">
+                        <Button fx:id="btnAnnullaEscursione" mnemonicParsing="false" onMouseClicked="#annullaEscursione" prefHeight="40.0" prefWidth="150.0" text="Annulla Escursione" GridPane.halignment="RIGHT" GridPane.rowIndex="4">
                            <GridPane.margin>
                               <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                            </GridPane.margin>
                         </Button>
-                        <Button mnemonicParsing="false" prefHeight="38.0" prefWidth="176.0" text="Visualizza Iscritti" GridPane.halignment="CENTER" GridPane.rowIndex="6">
+                        <Button fx:id="btnVisualizzaIscritti" mnemonicParsing="false" onMouseClicked="#visualizzaIscritti" prefHeight="38.0" prefWidth="176.0" text="Visualizza Iscritti" GridPane.halignment="CENTER" GridPane.rowIndex="6">
                            <GridPane.margin>
                               <Insets />
                            </GridPane.margin>
                         </Button>
+                        <Button fx:id="btnIndietro" mnemonicParsing="false" onMouseClicked="#visualizzaEscursioniSistema" prefHeight="38.0" prefWidth="176.0" text="Indietro" GridPane.halignment="CENTER" GridPane.rowIndex="7" />
                      </children>
                      <columnConstraints>
                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                      </columnConstraints>
                      <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />

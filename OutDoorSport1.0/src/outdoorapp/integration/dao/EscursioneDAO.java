@@ -8,6 +8,7 @@ import outdoorapp.to.enums.GenericEnum;
 import outdoorapp.to.interfaces.EscursioneTO;
 import outdoorapp.to.interfaces.ManagerDiEscursioneTO;
 import outdoorapp.to.interfaces.TOFactory;
+import outdoorapp.to.interfaces.UtenteTO;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,6 +23,7 @@ import java.util.List;
 
 class EscursioneDAO extends GenericDAO<EscursioneTO> implements Escursione_DAO{
 
+	private EscursioneTO escursione = null;
 	/**
 	 * Il costruttore inizializza l'entità Escursione da utilizzare 
 	 * in tutte le operazioni del DAO.
@@ -55,9 +57,9 @@ class EscursioneDAO extends GenericDAO<EscursioneTO> implements Escursione_DAO{
 
 	@Override
 	public List<EscursioneTO> readEscursioniByManagerDiEscursione(ManagerDiEscursioneTO mde) throws DatabaseException {
-		List<ManagerDiEscursioneTO> param = new ArrayList<ManagerDiEscursioneTO>();
-		param.add(mde);
-		List<EscursioneTO> response = super.executeParamQuery("BOOOOOOOHHHH", param);
+		List<Integer> param = new ArrayList<Integer>();
+		param.add(mde.getIdUtente());
+		List<EscursioneTO> response = super.executeParamQuery("readEscursioniByManagerDiEscursione", param);
 		return response;
 	}
 	
@@ -66,6 +68,42 @@ class EscursioneDAO extends GenericDAO<EscursioneTO> implements Escursione_DAO{
 		List<ManagerDiEscursioneTO> param = new ArrayList<ManagerDiEscursioneTO>();
 		param.add(mde);
 		List<EscursioneTO> response = super.executeParamQuery("BOOOOOOOHHHH", param);
+		return response;
+	}
+	
+	@Override
+	public boolean esisteEscursione(EscursioneTO escursione) throws DatabaseException{
+		boolean response = false;
+		List<String> param = new ArrayList<String>();
+		param.add(escursione.getNome());
+		EscursioneTO newEscursione = (EscursioneTO) this.getEscursioneByQuery("getEscursioneByName", param);
+		response = !this.isNullEscursione(newEscursione);
+		return response;
+	}
+	
+	/**
+	 * @param escursione
+	 * @return vero se è una escursione è nulla, falso altrimenti
+	 */
+	private boolean isNullEscursione(EscursioneTO escursione){
+		return escursione.getIdEscursione() == null;
+	}
+
+	/**
+	 * @param queryName
+	 * @param params
+	 * @return un'istanza di Escursione tramite query
+	 * @throws DatabaseException
+	 */
+	@SuppressWarnings({ "unchecked" })
+	private EscursioneTO getEscursioneByQuery(String queryName, List<?> params) throws DatabaseException{
+		EscursioneTO response = null;
+		List<EscursioneTO> list = super.executeParamQuery(queryName, params);
+		if(list.size() == 0){
+			response = escursione;
+		} else {
+			response = (EscursioneTO)list.get(0);
+		}
 		return response;
 	}
 }

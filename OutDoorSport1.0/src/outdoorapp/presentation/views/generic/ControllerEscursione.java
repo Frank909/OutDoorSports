@@ -11,40 +11,40 @@ import outdoorapp.to.interfaces.UtenteTO;
 /**
  * 
  * Classe astratta che incorpora tutti i controller che servono 
- * nella fase di registrazione
+ * nella fase di inserimento di una escursione
  * 
  * @author Andrea Zito
  * @author Francesco Ventura
  *
  */
 
-public abstract class ControllerRegistrazione extends GenericController{
+public abstract class ControllerEscursione extends GenericController{
 
-	public ControllerRegistrazione() {
+	public ControllerEscursione() {
 		// TODO Auto-generated constructor stub
 	}
 	
 	@FXML 
 	protected abstract void registra();
-
+	
 	/**
 	 * Funzione che restituisce la stringa degli errori rispetto alle informazioni inserite in maniera non corretta 
-	 * per registrare il manager di sistema nella configurazione iniziale
+	 * per inserire una nuova escursione
 	 * 
-	 * @param utente: manager di sistema
+	 * @param escursione: escursione da controllare
 	 * @return result: stringa errori
 	 */
-	protected String checkErrors(UtenteTO utente){
+	protected String checkErrors(EscursioneTO escursione){
 		String result = "";
 
-		checkDatePicker(utente);
+		checkDatePicker(escursione);
 
 		int i = 0;
 
-		for (Field f : utente.getClass().getSuperclass().getDeclaredFields()) {
+		for (Field f : escursione.getClass().getSuperclass().getDeclaredFields()) {
 			f.setAccessible(true);
 			try {
-				if ((f.get(utente) == null || f.get(utente).equals(""))) {
+				if ((f.get(escursione) == null || f.get(escursione).equals(""))) {
 					if(!(f.getName().equals("ruolo") || f.getName().equals("statoUtente"))){
 						if(!f.getName().equals("email")){
 							result += f.getName() + ", ";
@@ -61,10 +61,10 @@ public abstract class ControllerRegistrazione extends GenericController{
 			}
 		}
 		
-		for (Field f : utente.getClass().getDeclaredFields()) {
+		for (Field f : escursione.getClass().getDeclaredFields()) {
 			f.setAccessible(true);
 			try {
-				if (f.get(utente) == null || f.get(utente).equals("")) {
+				if (f.get(escursione) == null || f.get(escursione).equals("")) {
 					result += f.getName() + ", ";
 					i++;
 					if(i == 2){
@@ -77,14 +77,6 @@ public abstract class ControllerRegistrazione extends GenericController{
 			}
 		}
 
-
-		Pattern pattern = Pattern.compile(REGEX);
-		Matcher matcher = pattern.matcher(utente.getEmail());
-
-		if(!matcher.matches()){
-			result += "email";
-		}
-
 		if(!result.equals(""))
 			result += " non corretti!";
 
@@ -94,15 +86,7 @@ public abstract class ControllerRegistrazione extends GenericController{
 	/**
 	 * Metodo dell'interfaccia DateFieldCheck che permette di controllare i datepicker delle schermate
 	 * di inserimento dati. Il metodo verrà riscritto in base alle esigenze.
-	 * @param utente: Utente in fase di registrazione su cui applicare i controlli
-	 */
-	public void checkDatePicker(UtenteTO utente){};
-	
-	/**
-	 * Metodo dell'interfaccia DateFieldCheck che permette di controllare i datepicker delle schermate
-	 * di inserimento dati. Il metodo verrà riscritto in base alle esigenze.
 	 * @param escursione: Data escursione in fase di inserimento della stessa
 	 */
 	public void checkDatePicker(EscursioneTO escursione){};
-	
 }

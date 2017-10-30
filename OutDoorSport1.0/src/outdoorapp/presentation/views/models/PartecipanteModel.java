@@ -23,6 +23,8 @@ public class PartecipanteModel extends UtenteModel{
 	private SimpleStringProperty dataCertificatoSRC;
 	private PartecipanteTO partecipante;
 	
+	public PartecipanteModel(){}
+	
 	public PartecipanteModel(PartecipanteTO partecipante) {
 		this.id = new SimpleIntegerProperty(partecipante.getIdUtente());
 		this.nome = new SimpleStringProperty(partecipante.getNome());

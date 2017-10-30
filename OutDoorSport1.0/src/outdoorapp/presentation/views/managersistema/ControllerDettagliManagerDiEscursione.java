@@ -34,7 +34,7 @@ public class ControllerDettagliManagerDiEscursione extends GenericController{
 	@FXML private Label mDataNascitaProfilo;
 	@FXML private Button mBtnIndietro;
 	@FXML private StackPane stpDettagliManagerEscursione;
-	private ManagerDiEscursioneModel mde = null;
+	private ManagerDiEscursioneModel mde = new ManagerDiEscursioneModel();
 	
 	@Override
 	protected void initialize() {
@@ -43,7 +43,7 @@ public class ControllerDettagliManagerDiEscursione extends GenericController{
 			@Override
 			public void changed(ObservableValue<? extends Boolean> arg0, Boolean oldValue, Boolean newValue) {
 				if(newValue){
-					mde = (ManagerDiEscursioneModel) SessionCache.getCurrentData(mde.getClass().getName());
+					mde = (ManagerDiEscursioneModel) SessionCache.getCurrentData(mde.getClass().getSimpleName());
 					mUsernameProfilo.setText(mde.getUsername());
 					mNomeCognomeProfilo.setText(mde.getNome() + " " + mde.getCognome());
 					mIndirizzoProfilo.setText("in: " + mde.getIndirizzo());

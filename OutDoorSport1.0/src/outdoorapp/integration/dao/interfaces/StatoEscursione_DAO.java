@@ -32,16 +32,4 @@ public interface StatoEscursione_DAO extends GEN_DAO<StatoEscursioneTO> {
 	 * @throws DatabaseException
 	 */
 	StatoEscursioneTO getStatoEscursioneChiusa() throws DatabaseException;
-	
-	/**
-	 * @return lo stato in corso della escursione
-	 * @throws DatabaseException
-	 */
-	StatoEscursioneTO getStatoEscursioneInCorso() throws DatabaseException;
-	
-	/**
-	 * @return lo stato terminata dell'escursione
-	 * @throws DatabaseException
-	 */
-	StatoEscursioneTO getStatoEscursioneTerminata() throws DatabaseException;
 }

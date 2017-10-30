@@ -29,4 +29,6 @@ public interface Actions {
 	public static final String OUTDOORSPORT_GET_ALL_PARTECIPANTI = "getAllPartecipanti";
 	public static final String OUTDOORSPORT_GET_ALL_PARTECIPANTI_FOR_MDE = "getPartecipantiForMde";
 	public static final String OUTDOORSPORT_GET_ALL_ESCURSIONI_FROM_MDE = "getAllEscursioniFromMDE";
+	public static final String OUTDOORSPORT_SAVE_ESCURSIONE = "nuovaEscursione";
+	public static final String OUTDOORSPORT_GET_ALL_TIPI_ESCURSIONE = "getAllTipiEscursione";
 }

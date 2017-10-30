@@ -29,6 +29,16 @@ import outdoorapp.to.interfaces.EscursioneTO;
 import outdoorapp.to.interfaces.TOFactory;
 import outdoorapp.utils.SessionCache;
 
+/**
+ * Gestisce la visualizzazione di tutte le escursioni del Manager di Escursione.
+ * Il Manager di Escursione può visualizzare i dettagli di una Escursione e 
+ * operare su di essa.
+ * 
+ * @author Andrea Zito
+ * @author Francesco Ventura
+ *
+ */
+
 public class ControllerGestioneEscursioni extends ControllerTableView{
 
 	@FXML private TextField txtSearchEscursione;
@@ -61,7 +71,7 @@ public class ControllerGestioneEscursioni extends ControllerTableView{
 			@Override
 			public void changed(ObservableValue<? extends Boolean> arg0, Boolean oldValue, Boolean newValue) {
 				if(newValue);
-					//allEscursioniFromMDE();
+					allEscursioniFromMDE();
 			}
 		};
 
@@ -142,6 +152,12 @@ public class ControllerGestioneEscursioni extends ControllerTableView{
 		return res;
 	}
 	
+	
+	/**
+	 * Evento associato alla visualizzazione dei dettagli di una escursione. Una volta selezionata
+	 * l'escursione desiderata, il Manager di Escursione, premendo il tasto, potrà visualizzare i 
+	 * dettagli dell'Escursione
+	 */
 	@FXML protected void dettagliEscursione(){
 		escursione_model = mTableEscursioni.getSelectionModel().getSelectedItem();
 		if(escursione_model != null)
