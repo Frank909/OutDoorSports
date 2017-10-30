@@ -5,6 +5,11 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableArray;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
@@ -18,9 +23,11 @@ import outdoorapp.presentation.reqresp.Request;
 import outdoorapp.presentation.reqresp.Response;
 import outdoorapp.presentation.views.generic.ControllerEscursione;
 import outdoorapp.presentation.views.generic.ControllerRegistrazione;
+import outdoorapp.presentation.views.models.EscursioneModel;
 import outdoorapp.to.FactoryProducerTO;
 import outdoorapp.to.enums.FactoryEnum;
 import outdoorapp.to.enums.GenericEnum;
+import outdoorapp.to.enums.TipoEnum;
 import outdoorapp.to.enums.UtenteEnum;
 import outdoorapp.to.interfaces.EscursioneTO;
 import outdoorapp.to.interfaces.ManagerDiEscursioneTO;
@@ -49,7 +56,7 @@ public class ControllerInserimentoEscursione extends ControllerEscursione{
 	@FXML private DatePicker dataEscursione;
 	@FXML private TextArea txtDescrizione;
 	@FXML private ChoiceBox<String> chbSelezionaOptional;
-	@FXML private ChoiceBox<List<String>> chbTipoEscursione;
+	@FXML private ChoiceBox<String> chbTipoEscursione;
 	@FXML private ListView<String> listAreaOptionalScelti;
 	@FXML private Button btnRimuoviOptional;
 	@FXML private Button btnInviaDati;
@@ -58,6 +65,7 @@ public class ControllerInserimentoEscursione extends ControllerEscursione{
 	private EscursioneTO escursione = null;
 	private TipoEscursioneTO tipo_escursione = null;
 	private List<TipoEscursioneTO> list_tipo_escursione = new ArrayList<>();
+	ObservableList<String> data = null;
 	
 	/**
 	 * Costruttore della classe ControllerInserimentoEscursione
@@ -67,22 +75,40 @@ public class ControllerInserimentoEscursione extends ControllerEscursione{
 			TOFactory TOFact = FactoryProducerTO.getFactory(FactoryEnum.GenericTOFactory);
 			escursione = (EscursioneTO) TOFact.getGenericTO(GenericEnum.Escursione);
 		}
+		if(tipo_escursione == null){
+			TOFactory TOFact = FactoryProducerTO.getFactory(FactoryEnum.TipoTOFactory);
+			tipo_escursione = (TipoEscursioneTO) TOFact.getTipoTO(TipoEnum.TipoEscursione);
+		}
 	}
 
 	@Override
 	protected void initialize() {
 		lblErrore.setText("");
+		
+		ChangeListener<Boolean> visibilityListener = new ChangeListener<Boolean>() {
+
+			@Override
+			public void changed(ObservableValue<? extends Boolean> arg0, Boolean oldValue, Boolean newValue) {
+				if(newValue){
+					if(SessionCache.getCurrentData("TipiEscursione") != null){
+						list_tipo_escursione.addAll((ArrayList<TipoEscursioneTO>) SessionCache.getCurrentData("TipiEscursione"));
+						ArrayList<String> strings = new ArrayList<>();
+						for(TipoEscursioneTO tipoescursione: list_tipo_escursione){
+							strings.add(tipoescursione.getNome());
+						}
+						data = FXCollections.observableArrayList(strings);
+						chbTipoEscursione.setItems(data);
+					}
+				}
+			}
+		};
+
+		stpInserimentoEscursione.visibleProperty().addListener(visibilityListener);
 	}
 	
 	@Override
 	protected void registra() {
-		Response response = this.sendRequest(new Request(tipo_escursione, OUTDOORSPORT_GET_ALL_TIPI_ESCURSIONE));
-		list_tipo_escursione.addAll((ArrayList<TipoEscursioneTO>) response.getData());
-		List<String> strings = new ArrayList<>();
-		for(TipoEscursioneTO tipoescursione: list_tipo_escursione)
-			strings.add(tipoescursione.getNome());
-		chbTipoEscursione.setValue(strings);
-		//execInserisciEscursione();
+		execInserisciEscursione();
 	}
 	
 	private void execInserisciEscursione() {

@@ -1,5 +1,7 @@
 package outdoorapp.business.applicationservice;
 
+import java.util.List;
+
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Alert.AlertType;
@@ -13,11 +15,16 @@ import outdoorapp.integration.dao.enums.UtenteDAOEnum;
 import outdoorapp.integration.dao.interfaces.MDS_DAO;
 import outdoorapp.integration.dao.interfaces.Ruoli_DAO;
 import outdoorapp.integration.dao.interfaces.StatoUtente_DAO;
+import outdoorapp.integration.dao.interfaces.TipoEscursione_DAO;
 import outdoorapp.presentation.reqresp.Request;
 import outdoorapp.presentation.reqresp.Response;
+import outdoorapp.to.FactoryProducerTO;
+import outdoorapp.to.enums.FactoryEnum;
 import outdoorapp.to.interfaces.ManagerDiSistemaTO;
+import outdoorapp.to.interfaces.TipoEscursioneTO;
 import outdoorapp.to.interfaces.UtenteTO;
 import outdoorapp.utils.Actions;
+import outdoorapp.utils.SessionCache;
 import outdoorapp.utils.Views;
 
 /**
@@ -36,9 +43,12 @@ class ApplicationServiceManagerDiSistema implements Actions, Views{
 
 	private DAOFactory userFactory = null, 
 			statoFactory = null, tipoFactory = null;
-	
+
 	private MDS_DAO mds_dao = null;
+	private TipoEscursione_DAO tipo_escursione_dao = null;
+	
 	private ManagerDiSistemaTO mds = null;
+	private List<TipoEscursioneTO> list_tipi_escursione = null;
 	
 	/**
 	 * Costruttore che inizializza il DAO del Manager di Sistema
@@ -48,6 +58,7 @@ class ApplicationServiceManagerDiSistema implements Actions, Views{
 		statoFactory = FactoryProducerDAO.getFactory(DAORequest.State);
 		tipoFactory = FactoryProducerDAO.getFactory(DAORequest.Type);
 		mds_dao =  (MDS_DAO) userFactory.getUtenteDAO(UtenteDAOEnum.ManagerDiSistema);
+		tipo_escursione_dao = (TipoEscursione_DAO) tipoFactory.getTipoDAO(TipoDAOEnum.Escursione);
 	}
 	
 	/**
@@ -65,9 +76,16 @@ class ApplicationServiceManagerDiSistema implements Actions, Views{
 			e.printStackTrace();
 		}
 		
+		try {
+			list_tipi_escursione = tipo_escursione_dao.getAllTipiEscursione();
+			SessionCache.currentData.put("TipiEscursione", list_tipi_escursione);
+		} catch (DatabaseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		response.setData(null);
 		if(result){
-			response.setResponse(RESP_OK);
 			response.setView(VIEW_LOGIN);
 		}else{
 			response.setView(VIEW_MANAGER_DI_SISTEMA_CONFIG);
