@@ -3,12 +3,20 @@ package outdoorapp.presentation.views.managerescursione;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.StackPane;
 import outdoorapp.presentation.reqresp.Request;
 import outdoorapp.presentation.views.generic.GenericController;
 import outdoorapp.presentation.views.models.EscursioneModel;
+import outdoorapp.to.FactoryProducerTO;
+import outdoorapp.to.enums.FactoryEnum;
+import outdoorapp.to.enums.GenericEnum;
+import outdoorapp.to.interfaces.EscursioneTO;
+import outdoorapp.to.interfaces.TOFactory;
 import outdoorapp.utils.SessionCache;
 
 /**
@@ -85,7 +93,21 @@ public class ControllerDettagliEscursione extends GenericController{
 	 * Evento associato alla modifica di una escursione
 	 */
 	@FXML protected void modificaEscursione(){
-		
+		if(escursione.getStatoEscursione().getNome().equals("APERTA"))
+			this.sendRequest(new Request(SessionCache.getNestedAnchorPane(), VIEW_MODIFICA_ESCURSIONE));
+		else if(escursione.getStatoEscursione().getNome().equals("IN CORSO")){
+			Alert alert = new Alert(AlertType.ERROR, "Non è possibile modificare una escursione in corso!", ButtonType.OK);
+			alert.setTitle("OutDoorSport1.0");
+			alert.showAndWait();
+		}else if(escursione.getStatoEscursione().getNome().equals("CHIUSA")){
+			Alert alert = new Alert(AlertType.ERROR, "Non è possibile modificare una escursione chiusa!", ButtonType.OK);
+			alert.setTitle("OutDoorSport1.0");
+			alert.showAndWait();
+		}else if(escursione.getStatoEscursione().getNome().equals("ANNULLATA")){
+			Alert alert = new Alert(AlertType.ERROR, "Non è possibile modificare una escursione annullata!", ButtonType.OK);
+			alert.setTitle("OutDoorSport1.0");
+			alert.showAndWait();
+		}		
 	}
 	
 	/**

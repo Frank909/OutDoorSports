@@ -24,6 +24,7 @@ import outdoorapp.integration.dao.interfaces.StatoUtente_DAO;
 import outdoorapp.integration.dao.interfaces.TipoEscursione_DAO;
 import outdoorapp.presentation.reqresp.Request;
 import outdoorapp.presentation.reqresp.Response;
+import outdoorapp.presentation.views.models.EscursioneModel;
 import outdoorapp.to.interfaces.EscursioneTO;
 import outdoorapp.to.interfaces.ManagerDiEscursioneTO;
 import outdoorapp.to.interfaces.TOFactory;
@@ -54,6 +55,7 @@ class ApplicationServiceEscursione implements Actions {
 	
 	public ApplicationServiceEscursione() {
 		genericFactory = FactoryProducerDAO.getFactory(DAORequest.Generic);
+		statoFactory = FactoryProducerDAO.getFactory(DAORequest.State);
 		escursione_dao =  (Escursione_DAO) genericFactory.getGenericDAO(GenericDAOEnum.Escursione);
 	}
 	
@@ -105,7 +107,7 @@ class ApplicationServiceEscursione implements Actions {
 	 * una nuova Escursione nel sistema
 	 * 
 	 * @param request
-	 * @return
+	 * @return una risposta in base alla richiesta
 	 */
 	public Response nuovaEscursione(Request request){
 		Response response = new Response();
@@ -113,18 +115,67 @@ class ApplicationServiceEscursione implements Actions {
 		try {
 			if(!escursione_dao.esisteEscursione((EscursioneTO)request.getData())){
 				
-				StatoEscursione_DAO statoEscursioneDao = (StatoEscursione_DAO) tipoFactory.getStatoDAO(StatoDAOEnum.Escursione);
-				TipoEscursione_DAO tipoEscursioneDao = (TipoEscursione_DAO) statoFactory.getTipoDAO(TipoDAOEnum.Escursione);
+				StatoEscursione_DAO statoEscursioneDao = (StatoEscursione_DAO) statoFactory.getStatoDAO(StatoDAOEnum.Escursione);
 
 				escursione = (EscursioneTO)request.getData();
 				escursione.setStatoEscursione(statoEscursioneDao.getStatoEscursioneAperta());
 				ManagerDiEscursioneTO mde = (ManagerDiEscursioneTO) SessionCache.getCurrentData("ManagerDiEscursione");
 				escursione.setIdMde(mde.getIdManagerDiEscursione());
+				escursione.setUtente(mde);
 				escursione_dao.create(escursione);
-				Alert alert = new Alert(AlertType.INFORMATION, "Il Manager di Escursione è stato inserito correttamente!", ButtonType.OK);
+				Alert alert = new Alert(AlertType.INFORMATION, "L'Escursione è stata inserita correttamente!", ButtonType.OK);
 				alert.setTitle("OutDoorSport1.0");
 				alert.showAndWait();
 				response.setResponse(RESP_OK);
+			}else{
+				response.setResponse(RESP_KO);
+			}
+			response.setData(null);
+		} catch (DatabaseException e) {
+			e.printStackTrace();
+		}
+		
+		return response;
+	}
+	
+	/**
+	 * Metodo che restituisce una risposta in base a una richiesta, e modifica
+	 * una escursione presente nel sistema
+	 * 
+	 * @param request
+	 * @return una risposta in base alla richiesta
+	 */
+	public Response modificaEscursione(Request request){
+		Response response = new Response();
+		escursione = (EscursioneTO) request.getData();
+		EscursioneTO temp = null;
+		int id_temp = -1;
+		
+		try {
+			temp = escursione_dao.readById(escursione.getIdEscursione().intValue());
+			if(temp.getIdEscursione() != null)
+				id_temp = temp.getIdEscursione().intValue();
+		} catch (DatabaseException e) {
+			e.printStackTrace();
+		}
+		
+		try {
+			if(!(escursione_dao.esisteEscursione(escursione) || temp == null) || (escursione_dao.esisteEscursione(escursione) && escursione.getIdEscursione() == id_temp)){
+				
+				StatoEscursione_DAO statoEscursioneDao = (StatoEscursione_DAO) statoFactory.getStatoDAO(StatoDAOEnum.Escursione);
+
+				escursione = (EscursioneTO)request.getData();
+				escursione.setStatoEscursione(statoEscursioneDao.getStatoEscursioneAperta());
+				ManagerDiEscursioneTO mde = (ManagerDiEscursioneTO) SessionCache.getCurrentData("ManagerDiEscursione");
+				escursione.setIdMde(mde.getIdManagerDiEscursione());
+				escursione.setUtente(mde);
+				escursione_dao.update(escursione);
+				Alert alert = new Alert(AlertType.INFORMATION, "L'Escursione è stata modificata correttamente!", ButtonType.OK);
+				alert.setTitle("OutDoorSport1.0");
+				alert.showAndWait();
+				response.setResponse(RESP_OK);
+				
+				//IMPLEMENTARE L'INVIO DELLA MAIL//
 			}else{
 				response.setResponse(RESP_KO);
 			}

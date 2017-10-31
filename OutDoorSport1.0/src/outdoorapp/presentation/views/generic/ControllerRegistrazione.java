@@ -96,13 +96,5 @@ public abstract class ControllerRegistrazione extends GenericController{
 	 * di inserimento dati. Il metodo verrà riscritto in base alle esigenze.
 	 * @param utente: Utente in fase di registrazione su cui applicare i controlli
 	 */
-	public void checkDatePicker(UtenteTO utente){};
-	
-	/**
-	 * Metodo dell'interfaccia DateFieldCheck che permette di controllare i datepicker delle schermate
-	 * di inserimento dati. Il metodo verrà riscritto in base alle esigenze.
-	 * @param escursione: Data escursione in fase di inserimento della stessa
-	 */
-	public void checkDatePicker(EscursioneTO escursione){};
-	
+	public void checkDatePicker(UtenteTO utente){};	
 }

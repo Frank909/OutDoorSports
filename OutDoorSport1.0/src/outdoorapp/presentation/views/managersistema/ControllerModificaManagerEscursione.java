@@ -70,7 +70,7 @@ public class ControllerModificaManagerEscursione extends ControllerRegistrazione
 			@Override
 			public void changed(ObservableValue<? extends Boolean> arg0, Boolean oldValue, Boolean newValue) {
 				if(newValue){
-					mde_model = (ManagerDiEscursioneModel) SessionCache.getCurrentData(mde_model.getClass().getName());
+					mde_model = (ManagerDiEscursioneModel) SessionCache.getCurrentData(mde_model.getClass().getSimpleName());
 					txtNome.setText(mde_model.getNome());
 					txtCognome.setText(mde_model.getCognome());
 					txtCF.setText(mde_model.getCodice_fiscale());

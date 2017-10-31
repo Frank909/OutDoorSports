@@ -43,6 +43,7 @@ class ViewCache{
 	private final String VIEW_DETTAGLI_ESCURSIONI = "../../../resources/fxml/manager_sistema/dettagliEscursione";
 	private final String VIEW_DETTAGLI_PARTECIPANTE = "../../../resources/fxml/manager_sistema/dettagliPartecipante";
 	private final String VIEW_DETTAGLI_ESCURSIONI_FROM_MDE = "../../../resources/fxml/manager_escursione/dettagliEscursione";
+	private final String VIEW_MODIFICA_ESCURSIONE = "../../../resources/fxml/manager_escursione/modificaEscursione";
 	
 	private static ViewCache viewCache = new ViewCache();
 
@@ -84,6 +85,7 @@ class ViewCache{
 		loadForm("VIEW_DETTAGLI_ESCURSIONI", VIEW_DETTAGLI_ESCURSIONI, false);
 		loadForm("VIEW_DETTAGLI_PARTECIPANTE", VIEW_DETTAGLI_PARTECIPANTE, false);
 		loadForm("VIEW_DETTAGLI_ESCURSIONI_FROM_MDE", VIEW_DETTAGLI_ESCURSIONI_FROM_MDE, false);
+		loadForm("VIEW_MODIFICA_ESCURSIONE", VIEW_MODIFICA_ESCURSIONE, false);
 	}
 	
 	/**
@@ -93,8 +95,14 @@ class ViewCache{
 	void setView(Request key){	
 		if(!SessionCache.stageQueue.isEmpty())
 			SessionCache.stageQueue.poll().close();
-		if(key.getData() != null)
-			SessionCache.currentData.put(key.getData().getClass().getSimpleName(), key.getData());
+		if(key.getData() != null){
+			if(SessionCache.currentData.containsKey(key.getData().getClass().getSimpleName())){
+				SessionCache.currentData.remove(key.getData().getClass().getSimpleName());
+				SessionCache.currentData.put(key.getData().getClass().getSimpleName(), key.getData());
+			}
+			else
+				SessionCache.currentData.put(key.getData().getClass().getSimpleName(), key.getData());
+		}
 		Stage newStage = new Stage();
 		newStage.setTitle("OutDoorSports 1.0");
 		newStage.setResizable(false);
@@ -111,8 +119,14 @@ class ViewCache{
 	 */
 	void setNestedView(Request key, AnchorPane parent){
 		StackPane panel = (StackPane)SessionCache.mapViews.get(key.toString());
-		if(key.getData() != null)
-			SessionCache.currentData.put(key.getData().getClass().getSimpleName(), key.getData());
+		if(key.getData() != null){
+			if(SessionCache.currentData.containsKey(key.getData().getClass().getSimpleName())){
+				SessionCache.currentData.remove(key.getData().getClass().getSimpleName());
+				SessionCache.currentData.put(key.getData().getClass().getSimpleName(), key.getData());
+			}
+			else
+				SessionCache.currentData.put(key.getData().getClass().getSimpleName(), key.getData());
+		}
 		setNestedAnchorPane(parent);
 		AnchorPane.setLeftAnchor(panel, 0.0);
 		AnchorPane.setRightAnchor(panel, 0.0);

@@ -40,46 +40,34 @@ public abstract class ControllerEscursione extends GenericController{
 		checkDatePicker(escursione);
 
 		int i = 0;
-
-		for (Field f : escursione.getClass().getSuperclass().getDeclaredFields()) {
-			f.setAccessible(true);
-			try {
-				if ((f.get(escursione) == null || f.get(escursione).equals(""))) {
-					if(!(f.getName().equals("ruolo") || f.getName().equals("statoUtente"))){
-						if(!f.getName().equals("email")){
-							result += f.getName() + ", ";
-							i++;
-							if(i == 2){
-								result += "\n";
-								i = 0;
-							}
-						}
-					}
-				}
-			} catch (IllegalArgumentException | IllegalAccessException e) {
-				e.printStackTrace();
-			}
-		}
 		
 		for (Field f : escursione.getClass().getDeclaredFields()) {
 			f.setAccessible(true);
 			try {
 				if (f.get(escursione) == null || f.get(escursione).equals("")) {
+					if(!(f.getName().equals("idEscursione") || 
+						 f.getName().equals("optionals") ||
+						 f.getName().equals("utente") ||
+						 f.getName().equals("statoEscursione"))){
 					result += f.getName() + ", ";
 					i++;
 					if(i == 2){
 						result += "\n";
 						i = 0;
 					}
+						}
 				}
 			} catch (IllegalArgumentException | IllegalAccessException e) {
 				e.printStackTrace();
 			}
 		}
-
+		
 		if(!result.equals(""))
-			result += " non corretti!";
+			result += " non corretti!" + "\n";
 
+		if(escursione.getNumberMax() < escursione.getNumberMin())
+			result += "Il numero massimo dei partecipanti non può essere minore del numero minimo" + "\n";
+			
 		return result;
 	}
 	

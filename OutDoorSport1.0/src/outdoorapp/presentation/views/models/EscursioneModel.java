@@ -12,6 +12,8 @@ import javafx.beans.property.SimpleStringProperty;
 import outdoorapp.to.interfaces.EscursioneTO;
 import outdoorapp.to.interfaces.ManagerDiEscursioneTO;
 import outdoorapp.to.interfaces.OptionalTO;
+import outdoorapp.to.interfaces.StatoEscursioneTO;
+import outdoorapp.to.interfaces.TipoEscursioneTO;
 import outdoorapp.to.interfaces.UtenteTO;
 
 /**
@@ -26,8 +28,8 @@ import outdoorapp.to.interfaces.UtenteTO;
 public class EscursioneModel {
 
 	private SimpleIntegerProperty idEscursione;
-	private SimpleStringProperty statoEscursione;
-	private SimpleStringProperty tipoEscursione;
+	private SimpleObjectProperty<StatoEscursioneTO> statoEscursione;
+	private SimpleObjectProperty<TipoEscursioneTO> tipoEscursione;
 	private SimpleStringProperty nome;
 	private SimpleStringProperty data;
 	private SimpleIntegerProperty numberMin;
@@ -36,13 +38,15 @@ public class EscursioneModel {
 	private SimpleStringProperty descrizione;
 	private SimpleObjectProperty<UtenteTO> utente;
 	private SimpleSetProperty<OptionalTO> optionals;
+	private SimpleStringProperty nomeStatoEscursione;
+	private SimpleStringProperty nomeTipoEscursione;
 	
 	public EscursioneModel(){}
 	
 	public EscursioneModel(EscursioneTO e) {
-		this.idEscursione = new SimpleIntegerProperty(e.getIdEscursione());
-		this.statoEscursione = new SimpleStringProperty(e.getStatoEscursione().getNome());
-		this.tipoEscursione = new SimpleStringProperty(e.getTipoEscursione().getNome());
+		this.idEscursione = new SimpleIntegerProperty(e.getIdEscursione().intValue());
+		this.statoEscursione = new SimpleObjectProperty<StatoEscursioneTO>(e.getStatoEscursione());
+		this.tipoEscursione = new SimpleObjectProperty<TipoEscursioneTO>(e.getTipoEscursione());
 		this.nome = new SimpleStringProperty(e.getNome());
 		this.data = new SimpleStringProperty(e.getData());
 		this.numberMin = new SimpleIntegerProperty(e.getNumberMin());
@@ -51,6 +55,22 @@ public class EscursioneModel {
 		this.descrizione = new SimpleStringProperty(e.getDescrizione());
 		//this.optionals.addAll(e.getOptionals());
 		this.utente = new SimpleObjectProperty<>(e.getUtente());
+		this.nomeTipoEscursione = new SimpleStringProperty(e.getTipoEscursione().getNome());
+		this.nomeStatoEscursione = new SimpleStringProperty(e.getStatoEscursione().getNome());
+	}
+
+	/**
+	 * @return il nome dello stato dell'escursione
+	 */
+	public String getNomeStatoEscursione() {
+		return nomeStatoEscursione.get();
+	}
+
+	/**
+	 * @return il nome del tipo dell'escursione
+	 */
+	public String getNomeTipoEscursione() {
+		return nomeTipoEscursione.get();
 	}
 
 	/**
@@ -70,14 +90,14 @@ public class EscursioneModel {
 	/**
 	 * @return lo stato dell'escursione
 	 */
-	public String getStatoEscursione() {
+	public StatoEscursioneTO getStatoEscursione() {
 		return statoEscursione.get();
 	}
 	
 	/**
 	 * @return il tipo dell'escursione
 	 */
-	public String getTipoEscursione() {
+	public TipoEscursioneTO getTipoEscursione() {
 		return tipoEscursione.get();
 	}
 

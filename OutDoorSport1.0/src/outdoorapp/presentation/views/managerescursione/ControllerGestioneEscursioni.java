@@ -70,7 +70,7 @@ public class ControllerGestioneEscursioni extends ControllerTableView{
 
 			@Override
 			public void changed(ObservableValue<? extends Boolean> arg0, Boolean oldValue, Boolean newValue) {
-				if(newValue);
+				if(newValue)
 					allEscursioniFromMDE();
 			}
 		};
@@ -89,12 +89,12 @@ public class ControllerGestioneEscursioni extends ControllerTableView{
 		ObservableList<EscursioneModel> data = FXCollections.observableArrayList(getListTabellaEscursioni(list_escursioni));
 
 		this.initColumn(mColumnNome, "nome");
-		this.initColumn(mColumnTipoEscursione, "tipoEscursione");
+		this.initColumn(mColumnTipoEscursione, "nomeTipoEscursione");
 		this.initColumn(mColumnDataEscursione, "data");
 		this.initColumn(mColumnMin, "numberMin");
 		this.initColumn(mColumnMax, "numberMax");
 		this.initColumn(mColumnCosto, "costo");
-		this.initColumn(mColumnStato, "statoEscursione");
+		this.initColumn(mColumnStato, "nomeStatoEscursione");
 
 		mTableEscursioni.setItems(data);
 		

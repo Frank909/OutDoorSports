@@ -33,19 +33,19 @@ class StatoEscursioneDAO extends GenericDAO<StatoEscursioneTO> implements StatoE
 	@Override
 	public StatoEscursioneTO getStatoEscursioneAnnullata() throws DatabaseException {
 		List<StatoEscursioneTO> statoEscursione = super.executeQuery("getStatoEscursioneAnnullata");
-		return statoEscursione.get(3);
+		return statoEscursione.get(0);
 	}
 	
 	
 	@Override
 	public StatoEscursioneTO getStatoEscursioneAperta() throws DatabaseException {
 		List<StatoEscursioneTO> statoEscursione = super.executeQuery("getStatoEscursioneAperta");
-		return statoEscursione.get(1);
+		return statoEscursione.get(0);
 	}
 
 	@Override
 	public StatoEscursioneTO getStatoEscursioneChiusa() throws DatabaseException {
 		List<StatoEscursioneTO> statoEscursione = super.executeQuery("getStatoEscursioneChiusa");
-		return statoEscursione.get(2);
+		return statoEscursione.get(0);
 	}
 }

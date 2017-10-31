@@ -86,7 +86,7 @@ class EscursioneDAO extends GenericDAO<EscursioneTO> implements Escursione_DAO{
 	 * @return vero se è una escursione è nulla, falso altrimenti
 	 */
 	private boolean isNullEscursione(EscursioneTO escursione){
-		return escursione.getIdEscursione() == null;
+		return escursione == null;
 	}
 
 	/**
