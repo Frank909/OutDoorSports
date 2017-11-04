@@ -8,6 +8,7 @@
 			<column name="id_ruolo" />
 			<generator class="increment" />
 		</id>
+		
 		<property name="nome" type="string">
 			<column name="nome" not-null="true" />
 		</property>

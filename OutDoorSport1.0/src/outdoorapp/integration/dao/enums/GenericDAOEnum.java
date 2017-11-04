@@ -11,5 +11,6 @@ package outdoorapp.integration.dao.enums;
 public enum GenericDAOEnum {
 	Escursione,
 	Iscrizione,
-	Optional
+	Optional,
+	OptionalEscursione
 }

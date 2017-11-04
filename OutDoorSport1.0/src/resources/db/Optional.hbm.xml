@@ -19,10 +19,6 @@
 		<many-to-one name="tipoOptional" class="outdoorapp.to.TipoOptional" cascade="persist,merge,refresh" lazy="false">
 			<column name="id_tipo_optional" not-null="true" />
 		</many-to-one>
-		
-		<many-to-one name="statoOptional" class="outdoorapp.to.StatoOptional" cascade="persist,merge,refresh" lazy="false">
-			<column name="id_stato_optional" not-null="true" />
-		</many-to-one>
 	</class>
 	
 	<!-- <query name="getAllOptional">

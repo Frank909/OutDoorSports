@@ -24,5 +24,6 @@
   <mapping resource="resources/db/Optional.hbm.xml"/>
   <mapping resource="resources/db/StatoOptional.hbm.xml"/>
   <mapping resource="resources/db/TipoOptional.hbm.xml"/>
+  <mapping resource="resources/db/OptionalEscursione.hbm.xml"/>
  </session-factory>
 </hibernate-configuration>

@@ -24,18 +24,6 @@ public interface OptionalTO extends OutDoorSports{
 	public Integer getIdOptional();
 	
 	/**
-	 * @return lo stato dell'optional
-	 */
-	public StatoOptionalTO getStatoOptional();
-	
-	/**
-	 * Metodo che setta lo stato dell'optional
-	 * 
-	 * @param tblStatoOptional
-	 */
-	public void setStatoOptional(StatoOptionalTO statoOptional);
-	
-	/**
 	 * @return il tipo dell'optional
 	 */
 	public TipoOptionalTO getTipoOptional();

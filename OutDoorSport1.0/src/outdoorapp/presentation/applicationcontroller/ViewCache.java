@@ -96,10 +96,8 @@ class ViewCache{
 		if(!SessionCache.stageQueue.isEmpty())
 			SessionCache.stageQueue.poll().close();
 		if(key.getData() != null){
-			if(SessionCache.currentData.containsKey(key.getData().getClass().getSimpleName())){
-				SessionCache.currentData.remove(key.getData().getClass().getSimpleName());
-				SessionCache.currentData.put(key.getData().getClass().getSimpleName(), key.getData());
-			}
+			if(SessionCache.currentData.containsKey(key.getData().getClass().getSimpleName()))
+				SessionCache.currentData.replace(key.getData().getClass().getSimpleName(), key.getData());
 			else
 				SessionCache.currentData.put(key.getData().getClass().getSimpleName(), key.getData());
 		}
@@ -120,10 +118,8 @@ class ViewCache{
 	void setNestedView(Request key, AnchorPane parent){
 		StackPane panel = (StackPane)SessionCache.mapViews.get(key.toString());
 		if(key.getData() != null){
-			if(SessionCache.currentData.containsKey(key.getData().getClass().getSimpleName())){
-				SessionCache.currentData.remove(key.getData().getClass().getSimpleName());
-				SessionCache.currentData.put(key.getData().getClass().getSimpleName(), key.getData());
-			}
+			if(SessionCache.currentData.containsKey(key.getData().getClass().getSimpleName()))
+				SessionCache.currentData.replace(key.getData().getClass().getSimpleName(), key.getData());
 			else
 				SessionCache.currentData.put(key.getData().getClass().getSimpleName(), key.getData());
 		}

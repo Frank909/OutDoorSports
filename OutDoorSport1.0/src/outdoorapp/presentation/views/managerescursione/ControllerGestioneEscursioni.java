@@ -1,5 +1,6 @@
 package outdoorapp.presentation.views.managerescursione;
 
+import java.security.Provider.Service;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,6 +19,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
+import outdoorapp.business.ServiceBusinessDelegate;
 import outdoorapp.presentation.reqresp.Request;
 import outdoorapp.presentation.reqresp.Response;
 import outdoorapp.presentation.views.generic.ControllerTableView;
@@ -148,7 +150,7 @@ public class ControllerGestioneEscursioni extends ControllerTableView{
 			escursione_model = new EscursioneModel(escursione);
 			res.add(escursione_model);
 		}
-
+		
 		return res;
 	}
 	

@@ -19,6 +19,7 @@ import outdoorapp.to.interfaces.OptionalEscursioneTO;
 import outdoorapp.to.interfaces.OptionalIscrizioneTO;
 import outdoorapp.to.interfaces.OptionalTO;
 import outdoorapp.to.interfaces.OutDoorSports;
+import outdoorapp.to.interfaces.StatoOptionalTO;
 
 /**
  * Classe che implementa lo stato di OptionalEscursione.
@@ -31,23 +32,16 @@ class OptionalEscursione implements OptionalEscursioneTO{
 
 	private static final long serialVersionUID = -2717683768500440335L;
 	private Integer id;
-	private EscursioneTO tblEscursione;
-	private OptionalTO tblOptional;
-	private Set<OptionalIscrizioneTO> tblOptionalIscriziones = new HashSet<OptionalIscrizioneTO>(0);
+	private EscursioneTO escursione;
+	private OptionalTO optional;
+	private StatoOptionalTO statoOptional;
 
 	OptionalEscursione() {
 	}
 
-	OptionalEscursione(EscursioneTO tblEscursione, OptionalTO tblOptional) {
-		this.tblEscursione = tblEscursione;
-		this.tblOptional = tblOptional;
-	}
-
-	OptionalEscursione(EscursioneTO tblEscursione, OptionalTO tblOptional,
-			Set<OptionalIscrizioneTO> tblOptionalIscriziones) {
-		this.tblEscursione = tblEscursione;
-		this.tblOptional = tblOptional;
-		this.tblOptionalIscriziones = tblOptionalIscriziones;
+	OptionalEscursione(EscursioneTO escursione, OptionalTO optional) {
+		this.escursione = escursione;
+		this.optional = optional;
 	}
 
 	@Override
@@ -62,32 +56,32 @@ class OptionalEscursione implements OptionalEscursioneTO{
 
 	@Override
 	public EscursioneTO getEscursione() {
-		return this.tblEscursione;
+		return this.escursione;
 	}
 
 	@Override
-	public void setEscursione(EscursioneTO tblEscursione) {
-		this.tblEscursione = tblEscursione;
+	public void setEscursione(EscursioneTO escursione) {
+		this.escursione = escursione;
 	}
 
 	@Override
 	public OptionalTO getOptional() {
-		return this.tblOptional;
+		return this.optional;
 	}
 
 	@Override
-	public void setOptional(OptionalTO tblOptional) {
-		this.tblOptional = tblOptional;
+	public void setOptional(OptionalTO optional) {
+		this.optional = optional;
 	}
 
 	@Override
-	public Set<OptionalIscrizioneTO> getOptionalIscrizione() {
-		return this.tblOptionalIscriziones;
+	public StatoOptionalTO getStatoOptional() {
+		return this.statoOptional;
 	}
 
 	@Override
-	public void setOptionalIscrizione(Set<OptionalIscrizioneTO> tblOptionalIscriziones) {
-		this.tblOptionalIscriziones = tblOptionalIscriziones;
+	public void setStatoOptional(StatoOptionalTO statoOptional) {
+		this.statoOptional = statoOptional;
 	}
 
 }

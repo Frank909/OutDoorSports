@@ -30,11 +30,11 @@ class StatoOptionalDAO extends GenericDAO<StatoOptionalTO> implements StatoOptio
 	
 	@Override
 	public StatoOptionalTO getStatoDisattivo() throws DatabaseException {
-		return this.findOne(0);
+		return this.findOne(1);
 	}
 	
 	@Override
 	public StatoOptionalTO getStatoAttivo() throws DatabaseException {
-		return this.findOne(1);
+		return this.findOne(2);
 	}
 }

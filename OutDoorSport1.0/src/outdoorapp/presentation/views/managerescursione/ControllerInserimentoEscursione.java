@@ -3,22 +3,28 @@ package outdoorapp.presentation.views.managerescursione;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableArray;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
+import outdoorapp.presentation.applicationcontroller.ServiceApplicationController;
 import outdoorapp.presentation.reqresp.Request;
 import outdoorapp.presentation.reqresp.Response;
 import outdoorapp.presentation.views.generic.ControllerEscursione;
@@ -31,6 +37,7 @@ import outdoorapp.to.enums.TipoEnum;
 import outdoorapp.to.enums.UtenteEnum;
 import outdoorapp.to.interfaces.EscursioneTO;
 import outdoorapp.to.interfaces.ManagerDiEscursioneTO;
+import outdoorapp.to.interfaces.OptionalTO;
 import outdoorapp.to.interfaces.TOFactory;
 import outdoorapp.to.interfaces.TipoEscursioneTO;
 import outdoorapp.to.interfaces.UtenteTO;
@@ -65,6 +72,7 @@ public class ControllerInserimentoEscursione extends ControllerEscursione{
 	private EscursioneTO escursione = null;
 	private TipoEscursioneTO tipo_escursione = null;
 	private List<TipoEscursioneTO> list_tipo_escursione = new ArrayList<>();
+	private List<OptionalTO> list_optional = new ArrayList<>();
 	private ObservableList<String> data = null;
 	private ArrayList<String> strings = null;
 	
@@ -100,11 +108,41 @@ public class ControllerInserimentoEscursione extends ControllerEscursione{
 						data = FXCollections.observableArrayList(strings);
 						chbTipoEscursione.setItems(data);
 					}
+					if(SessionCache.getCurrentData("Optionals") != null){
+						list_optional.addAll((ArrayList<OptionalTO>) SessionCache.getCurrentData("Optionals"));
+						strings = new ArrayList<>();
+						for(OptionalTO optional: list_optional){
+							strings.add(optional.getNome());
+						}
+						data = FXCollections.observableArrayList(strings);
+						chbSelezionaOptional.setItems(data);
+					}
 				}
 			}
 		};
-
+		
 		stpInserimentoEscursione.visibleProperty().addListener(visibilityListener);
+		
+		chbSelezionaOptional.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
+			@Override
+			public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+				String choice = chbSelezionaOptional.getItems().get(newValue.intValue());
+				if(!listAreaOptionalScelti.getItems().contains(choice)){
+					listAreaOptionalScelti.getItems().add(listAreaOptionalScelti.getItems().size(), choice);
+					listAreaOptionalScelti.scrollTo(choice);
+					listAreaOptionalScelti.edit(listAreaOptionalScelti.getItems().size() - 1);
+				}
+			}
+		});
+	}
+	
+	/**
+	 * Evento associato alla rimozione di un optional dalla lista, prima
+	 * del salvataggio della escursione
+	 */
+	@FXML protected void rimuoviSelezione(){
+		String choice = listAreaOptionalScelti.getSelectionModel().getSelectedItem();
+		listAreaOptionalScelti.getItems().remove(choice);
 	}
 	
 	@Override
@@ -130,7 +168,14 @@ public class ControllerInserimentoEscursione extends ControllerEscursione{
 			}
 		}
 
-		//DA COMPLETARE CON L'INSERIMENTO DEGLI OPTIONAL
+		Set<OptionalTO> temp = new HashSet<>();
+		for(OptionalTO op : list_optional){
+			for(int i=0; i<listAreaOptionalScelti.getItems().size(); i++){
+				if(listAreaOptionalScelti.getItems().get(i).equals(op.getNome()))
+					temp.add(op);
+			}
+		}
+		escursione.setOptionals(temp);
 		
 		String result = checkErrors(escursione);
 		if(result.equals("")){

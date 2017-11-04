@@ -9,10 +9,12 @@ import outdoorapp.exceptions.DatabaseException;
 import outdoorapp.integration.dao.DAOFactory;
 import outdoorapp.integration.dao.FactoryProducerDAO;
 import outdoorapp.integration.dao.enums.DAORequest;
+import outdoorapp.integration.dao.enums.GenericDAOEnum;
 import outdoorapp.integration.dao.enums.StatoDAOEnum;
 import outdoorapp.integration.dao.enums.TipoDAOEnum;
 import outdoorapp.integration.dao.enums.UtenteDAOEnum;
 import outdoorapp.integration.dao.interfaces.MDS_DAO;
+import outdoorapp.integration.dao.interfaces.Optional_DAO;
 import outdoorapp.integration.dao.interfaces.Ruoli_DAO;
 import outdoorapp.integration.dao.interfaces.StatoUtente_DAO;
 import outdoorapp.integration.dao.interfaces.TipoEscursione_DAO;
@@ -21,6 +23,7 @@ import outdoorapp.presentation.reqresp.Response;
 import outdoorapp.to.FactoryProducerTO;
 import outdoorapp.to.enums.FactoryEnum;
 import outdoorapp.to.interfaces.ManagerDiSistemaTO;
+import outdoorapp.to.interfaces.OptionalTO;
 import outdoorapp.to.interfaces.TipoEscursioneTO;
 import outdoorapp.to.interfaces.UtenteTO;
 import outdoorapp.utils.Actions;
@@ -42,13 +45,15 @@ import outdoorapp.utils.Views;
 class ApplicationServiceManagerDiSistema implements Actions, Views{
 
 	private DAOFactory userFactory = null, 
-			statoFactory = null, tipoFactory = null;
+			statoFactory = null, tipoFactory = null, optionalFactory = null;
 
 	private MDS_DAO mds_dao = null;
 	private TipoEscursione_DAO tipo_escursione_dao = null;
+	private Optional_DAO optional_dao = null;
 	
 	private ManagerDiSistemaTO mds = null;
 	private List<TipoEscursioneTO> list_tipi_escursione = null;
+	private List<OptionalTO> list_optional = null;
 	
 	/**
 	 * Costruttore che inizializza il DAO del Manager di Sistema
@@ -57,8 +62,10 @@ class ApplicationServiceManagerDiSistema implements Actions, Views{
 		userFactory = FactoryProducerDAO.getFactory(DAORequest.Users);
 		statoFactory = FactoryProducerDAO.getFactory(DAORequest.State);
 		tipoFactory = FactoryProducerDAO.getFactory(DAORequest.Type);
+		optionalFactory = FactoryProducerDAO.getFactory(DAORequest.Generic);
 		mds_dao =  (MDS_DAO) userFactory.getUtenteDAO(UtenteDAOEnum.ManagerDiSistema);
 		tipo_escursione_dao = (TipoEscursione_DAO) tipoFactory.getTipoDAO(TipoDAOEnum.Escursione);
+		optional_dao = (Optional_DAO) optionalFactory.getGenericDAO(GenericDAOEnum.Optional);
 	}
 	
 	/**
@@ -77,8 +84,10 @@ class ApplicationServiceManagerDiSistema implements Actions, Views{
 		}
 		
 		try {
-			list_tipi_escursione = tipo_escursione_dao.getAllTipiEscursione();
+			list_tipi_escursione = tipo_escursione_dao.getAll();
 			SessionCache.currentData.put("TipiEscursione", list_tipi_escursione);
+			list_optional = optional_dao.getAll();
+			SessionCache.currentData.put("Optionals", list_optional);
 		} catch (DatabaseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

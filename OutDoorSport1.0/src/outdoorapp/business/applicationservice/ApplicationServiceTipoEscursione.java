@@ -29,26 +29,4 @@ class ApplicationServiceTipoEscursione implements Actions{
 		tipoFactory = FactoryProducerDAO.getFactory(DAORequest.Type);
 		tipo_escursione_dao =  (TipoEscursione_DAO) tipoFactory.getTipoDAO(TipoDAOEnum.Escursione);
 	}
-	
-	/**
-	 * Metodo che restituisce tutti i tipi
-	 * di escursione presenti nel sistema
-	 * 
-	 * @param request: Richiesta in ingresso
-	 * @return response: Risposta rispetto alla richiesta
-	 */
-	public Response getAllTipiEscursione(Request request){
-		Response response = new Response();
-		
-		try {
-			List<TipoEscursioneTO> list_tipo_escursioni = tipo_escursione_dao.getAllTipiEscursione();
-			response.setData(list_tipo_escursioni);
-			response.setResponse(RESP_OK);
-		} catch (DatabaseException e) {
-			e.printStackTrace();
-			response.setResponse(RESP_KO);
-		}
-		return response;
-	}
-
 }

@@ -32,17 +32,17 @@ class RuoliDAO extends GenericDAO<RuoliTO> implements Ruoli_DAO{
 	
 	@Override
 	public RuoliTO getRuoloManagerDiSistema() throws DatabaseException {
-		return this.findOne(0);
-	}
-	
-	@Override
-	public RuoliTO getRuoloManagerDiEscursione() throws DatabaseException {
 		return this.findOne(1);
 	}
 	
 	@Override
-	public RuoliTO getRuoloPartecipante() throws DatabaseException {
+	public RuoliTO getRuoloManagerDiEscursione() throws DatabaseException {
 		return this.findOne(2);
+	}
+	
+	@Override
+	public RuoliTO getRuoloPartecipante() throws DatabaseException {
+		return this.findOne(3);
 	}
 
 

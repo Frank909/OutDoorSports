@@ -16,6 +16,7 @@ import java.util.List;
 import outdoorapp.exceptions.DatabaseException;
 import outdoorapp.to.interfaces.EscursioneTO;
 import outdoorapp.to.interfaces.ManagerDiEscursioneTO;
+import outdoorapp.to.interfaces.OptionalEscursioneTO;
 
 public interface Escursione_DAO extends GEN_DAO<EscursioneTO>{
 	

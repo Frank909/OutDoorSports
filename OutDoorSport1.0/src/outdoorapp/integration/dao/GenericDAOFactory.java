@@ -23,6 +23,8 @@ class GenericDAOFactory implements DAOFactory{
 			return new EscursioneDAO();
 		case Iscrizione:
 			return new IscrizioneDAO();
+		case OptionalEscursione:
+			return new OptionalEscursioneDAO();
 		default:
 			return new OptionalDAO();
 		}

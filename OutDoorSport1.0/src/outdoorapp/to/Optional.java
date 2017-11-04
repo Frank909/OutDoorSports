@@ -17,7 +17,6 @@ class Optional implements OptionalTO{
 
 	private static final long serialVersionUID = -7068153413865370972L;
 	private Integer idOptional;
-	private StatoOptionalTO statoOptional;
 	private TipoOptionalTO tipoOptional;
 	private String nome;
 	private String descrizione;
@@ -33,16 +32,6 @@ class Optional implements OptionalTO{
 	@Override
 	public void setIdOptional(Integer idOptional) {
 		this.idOptional = idOptional;
-	}
-
-	@Override
-	public StatoOptionalTO getStatoOptional() {
-		return this.statoOptional;
-	}
-
-	@Override
-	public void setStatoOptional(StatoOptionalTO statoOptional) {
-		this.statoOptional = statoOptional;
 	}
 
 	@Override

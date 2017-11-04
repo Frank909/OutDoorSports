@@ -50,14 +50,15 @@ public interface OptionalEscursioneTO extends OutDoorSports{
 	public void setOptional(OptionalTO tblOptional);
 	
 	/**
-	 * @return gli optional dell'iscrizione
+	 * @return lo stato dell'optional
 	 */
-	public Set<OptionalIscrizioneTO> getOptionalIscrizione();
+	public StatoOptionalTO getStatoOptional();
 	
 	/**
-	 * Metodo che setta gli optional relativi all'iscrizione
+	 * Metodo che setta lo stato dell'optional
 	 * 
-	 * @param tblOptionalIscriziones
+	 * @param tblStatoOptional
 	 */
-	public void setOptionalIscrizione(Set<OptionalIscrizioneTO> tblOptionalIscriziones);
+	public void setStatoOptional(StatoOptionalTO statoOptional);
+	
 }

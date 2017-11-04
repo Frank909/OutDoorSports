@@ -9,10 +9,14 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleSetProperty;
 import javafx.beans.property.SimpleStringProperty;
+import outdoorapp.to.FactoryProducerTO;
+import outdoorapp.to.enums.FactoryEnum;
+import outdoorapp.to.enums.GenericEnum;
 import outdoorapp.to.interfaces.EscursioneTO;
 import outdoorapp.to.interfaces.ManagerDiEscursioneTO;
 import outdoorapp.to.interfaces.OptionalTO;
 import outdoorapp.to.interfaces.StatoEscursioneTO;
+import outdoorapp.to.interfaces.TOFactory;
 import outdoorapp.to.interfaces.TipoEscursioneTO;
 import outdoorapp.to.interfaces.UtenteTO;
 
@@ -57,6 +61,32 @@ public class EscursioneModel {
 		this.utente = new SimpleObjectProperty<>(e.getUtente());
 		this.nomeTipoEscursione = new SimpleStringProperty(e.getTipoEscursione().getNome());
 		this.nomeStatoEscursione = new SimpleStringProperty(e.getStatoEscursione().getNome());
+	}
+	
+	/**
+	 * Metodo che restituisce una istanza di tipo EscursioneTO in
+	 * base al modello che viene passato
+	 * 
+	 * @param model
+	 * @return istanza di EscursioneTO
+	 */
+	public EscursioneTO getEscursione(){
+		TOFactory TOFact = FactoryProducerTO.getFactory(FactoryEnum.GenericTOFactory);
+		EscursioneTO escursione = (EscursioneTO) TOFact.getGenericTO(GenericEnum.Escursione);
+		
+		escursione.setIdEscursione(this.getIdEscursione());
+		escursione.setStatoEscursione(this.getStatoEscursione());
+		escursione.setTipoEscursione(this.getTipoEscursione());
+		escursione.setUtente(this.getUtente());
+		escursione.setNome(this.getNome());
+		escursione.setData(this.getData());
+		escursione.setNumberMin(this.getNumberMin());
+		escursione.setNumberMax(this.getNumberMax());
+		escursione.setCosto(this.getCosto());
+		escursione.setDescrizione(this.getDescrizione());
+		//escursione.setOptionals(this.getOptionals());
+		return escursione;
+		
 	}
 
 	/**

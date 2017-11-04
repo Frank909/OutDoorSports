@@ -13,14 +13,17 @@
 		</property>
 	</class>
 	
+	<query name="getStatoEscursioneChiusa">
+		<![CDATA[ from outdoorapp.to.StatoEscursione o where o.idStatoEscursione = 1]]></query>
+	
+	<query name="getStatoEscursioneAperta">
+		<![CDATA[ from outdoorapp.to.StatoEscursione o where o.idStatoEscursione = 2]]></query>
+	
 	<query name="getStatoEscursioneAnnullata">
 		<![CDATA[ from outdoorapp.to.StatoEscursione o where o.idStatoEscursione = 3]]></query>
 		
-	<query name="getStatoEscursioneAperta">
-		<![CDATA[ from outdoorapp.to.StatoEscursione o where o.idStatoEscursione = 1]]></query>
-		
-	<query name="getStatoEscursioneChiusa">
-		<![CDATA[ from outdoorapp.to.StatoEscursione o where o.idStatoEscursione = 2]]></query>
+	<query name="getStatoEscursioneInCorso">
+		<![CDATA[ from outdoorapp.to.StatoEscursione o where o.idStatoEscursione = 4]]></query>
 	
 	<!-- <query name="getAllStatoCompetizione">
         <![CDATA[ from agroludos.to.StatoCompetizione o ]]></query>

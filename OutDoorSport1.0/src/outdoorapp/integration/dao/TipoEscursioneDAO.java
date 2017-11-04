@@ -37,11 +37,4 @@ class TipoEscursioneDAO extends GenericDAO<TipoEscursioneTO> implements TipoEscu
 		
 		this.setCurrentClass(TOFactory.getTipoTO(TipoEnum.TipoEscursione));
 	}
-
-	@Override
-	public List<TipoEscursioneTO> getAllTipiEscursione() throws DatabaseException {
-		List<TipoEscursioneTO> list_tipi_escursione = super.executeQuery("getAllTipiEscursione");
-		return list_tipi_escursione;
-	}
-
 }
