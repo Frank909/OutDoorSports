@@ -99,7 +99,7 @@ public class ControllerDettagliEscursione extends GenericController{
 	 * Evento associato alla view. Visualizza gli iscritti dell'escursione
 	 */
 	@FXML protected void visualizzaIscritti(){
-		this.sendRequest(new Request(escursione.getEscursione(), SessionCache.getNestedAnchorPane(), VIEW_ISCRITTI_ESCURSIONE));
+		this.sendRequest(new Request(escursione.getEscursione(), ViewCache.getNestedAnchorPane(), VIEW_ISCRITTI_ESCURSIONE));
 	}
 	
 	/**

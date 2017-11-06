@@ -50,6 +50,7 @@ public class ViewCache extends SessionCache{
 	private final String VIEW_MODIFICA_ESCURSIONE = "../../../resources/fxml/manager_escursione/modificaEscursione";
 	private final String VIEW_AGGIORNA_SRC_PARTECIPANTE = "../../../resources/fxml/partecipante/aggiornaCertificatoSRC";
 	private final String VIEW_MODIFICA_DATI_PARTECIPANTE = "../../../resources/fxml/partecipante/modificaDatiAnagraficiPartecipante";
+	private final String VIEW_ISCRITTI_ESCURSIONE = "../../../resources/fxml/manager_escursione/visualizzaPartecipantiIscrittiEscursione";
 	
 	private static ViewCache viewCache = new ViewCache();
 
