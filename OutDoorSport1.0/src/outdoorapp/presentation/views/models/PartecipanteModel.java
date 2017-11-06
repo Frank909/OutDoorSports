@@ -1,9 +1,7 @@
 package outdoorapp.presentation.views.models;
 
-import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
-import outdoorapp.to.interfaces.ManagerDiEscursioneTO;
 import outdoorapp.to.interfaces.PartecipanteTO;
 
 /**
@@ -63,5 +61,9 @@ public class PartecipanteModel extends UtenteModel{
 	 */
 	public String getDataCertificatoSRC() {
 		return dataCertificatoSRC.get();
+	}
+	
+	public PartecipanteTO getPartecipante() {
+		return this.partecipante;
 	}
 }

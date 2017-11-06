@@ -20,6 +20,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.StackPane;
+import outdoorapp.presentation.applicationcontroller.ViewCache;
 import outdoorapp.presentation.frontcontroller.FrontController;
 import outdoorapp.presentation.reqresp.Request;
 import outdoorapp.presentation.reqresp.Response;
@@ -96,7 +97,7 @@ public class ControllerGestioneManagerEscursione extends ControllerTableView{
 	@FXML protected void modificaManagerDiEscursione(){
 		mde_model = mTableManagerEscursione.getSelectionModel().getSelectedItem();
 		if(mde_model != null)
-			sendRequest(new Request(mde_model, SessionCache.getNestedAnchorPane(), VIEW_MODIFICA_MANAGER_DI_ESCURSIONE));
+			sendRequest(new Request(mde_model, ViewCache.getNestedAnchorPane(), VIEW_MODIFICA_MANAGER_DI_ESCURSIONE));
 		else{
 			Alert alert = new Alert(AlertType.ERROR, "Nessun Manager di Escursione Selezionato", ButtonType.OK);
 			alert.setTitle("OutDoorSport1.0");
@@ -132,7 +133,7 @@ public class ControllerGestioneManagerEscursione extends ControllerTableView{
 	private void dettagliManagerDiEscursione(){
 		mde_model = mTableManagerEscursione.getSelectionModel().getSelectedItem();
 		if(mde_model != null)
-			sendRequest(new Request(mde_model, SessionCache.getNestedAnchorPane(), VIEW_DETTAGLI_MANAGER_DI_ESCURSIONE));
+			sendRequest(new Request(mde_model, ViewCache.getNestedAnchorPane(), VIEW_DETTAGLI_MANAGER_DI_ESCURSIONE));
 		else{
 			Alert alert = new Alert(AlertType.ERROR, "Nessun Manager di Escursione Selezionato", ButtonType.OK);
 			alert.setTitle("OutDoorSport1.0");
@@ -164,7 +165,7 @@ public class ControllerGestioneManagerEscursione extends ControllerTableView{
 				mde_model = table.getSelectionModel().getSelectedItem();
 				if(mde_model != null){
 					if(event.getClickCount() == 2){
-		                sendRequest(new Request(mde_model, SessionCache.getNestedAnchorPane(), VIEW_DETTAGLI_MANAGER_DI_ESCURSIONE));
+		                sendRequest(new Request(mde_model, ViewCache.getNestedAnchorPane(), VIEW_DETTAGLI_MANAGER_DI_ESCURSIONE));
 		            }
 				}
 			}

@@ -76,5 +76,5 @@ public abstract class ControllerEscursione extends GenericController{
 	 * di inserimento dati. Il metodo verrà riscritto in base alle esigenze.
 	 * @param escursione: Data escursione in fase di inserimento della stessa
 	 */
-	public void checkDatePicker(EscursioneTO escursione){};
+	protected abstract void checkDatePicker(EscursioneTO escursione);
 }

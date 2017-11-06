@@ -112,7 +112,7 @@ public class ControllerConfig extends ControllerRegistrazione{
 	 * @param utente
 	 */
 	@Override
-	public void checkDatePicker(UtenteTO utente) {
+	protected void checkDatePicker(UtenteTO utente) {
 		if(dateDataNasc.getValue() == null)
 			utente.setDataNascita("");
 		else{

@@ -44,4 +44,8 @@ public class ManagerDiEscursioneModel extends UtenteModel{
 	public Double getStipendio() {
 		return stipendio.get();
 	}
+	
+	public ManagerDiEscursioneTO geManagerDiEscursione(){
+		return this.mde;
+	}
 }

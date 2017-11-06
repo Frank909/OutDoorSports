@@ -15,6 +15,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.StackPane;
 import java.time.temporal.ChronoUnit;
+
+import outdoorapp.presentation.applicationcontroller.ViewCache;
 import outdoorapp.presentation.reqresp.Request;
 import outdoorapp.presentation.reqresp.Response;
 import outdoorapp.presentation.views.generic.GenericController;
@@ -90,7 +92,7 @@ public class ControllerDettagliEscursione extends GenericController{
 	 * Evento associato alla view. Torna alla schermata precedente
 	 */
 	@FXML protected void visualizzaEscursioniSistema(){
-		this.sendRequest(new Request(SessionCache.getNestedAnchorPane(), VIEW_GESTIONE_ESCURSIONI));
+		this.sendRequest(new Request(ViewCache.getNestedAnchorPane(), VIEW_GESTIONE_ESCURSIONI));
 	}
 	
 	/**
@@ -105,7 +107,7 @@ public class ControllerDettagliEscursione extends GenericController{
 	 */
 	@FXML protected void modificaEscursione(){
 		if(escursione.getStatoEscursione().getNome().equals("APERTA"))
-			this.sendRequest(new Request(SessionCache.getNestedAnchorPane(), VIEW_MODIFICA_ESCURSIONE));
+			this.sendRequest(new Request(ViewCache.getNestedAnchorPane(), VIEW_MODIFICA_ESCURSIONE));
 		else if(escursione.getStatoEscursione().getNome().equals("IN CORSO")){
 			Alert alert = new Alert(AlertType.ERROR, "Non è possibile modificare una escursione in corso!", ButtonType.OK);
 			alert.setTitle("OutDoorSport1.0");
@@ -137,7 +139,7 @@ public class ControllerDettagliEscursione extends GenericController{
 				Alert alert1 = new Alert(AlertType.INFORMATION, "Escursione annullata con successo!", ButtonType.OK);
 				alert1.setTitle("OutDoorSport1.0");
 				alert1.showAndWait();
-				this.sendRequest(new Request(SessionCache.getNestedAnchorPane(), VIEW_GESTIONE_ESCURSIONI));
+				this.sendRequest(new Request(ViewCache.getNestedAnchorPane(), VIEW_GESTIONE_ESCURSIONI));
 			} else
 				alert.close();
 		}else if(!escursione.getStatoEscursione().getNome().equals("APERTA")){

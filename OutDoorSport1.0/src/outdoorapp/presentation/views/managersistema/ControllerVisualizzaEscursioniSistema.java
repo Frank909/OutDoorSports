@@ -18,6 +18,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
+import outdoorapp.presentation.applicationcontroller.ViewCache;
 import outdoorapp.presentation.reqresp.Request;
 import outdoorapp.presentation.reqresp.Response;
 import outdoorapp.presentation.views.generic.ControllerTableView;
@@ -115,7 +116,7 @@ public class ControllerVisualizzaEscursioniSistema extends ControllerTableView{
 	@FXML protected void dettagliEscursione(){
 		escursione_model = mTableEscursioni.getSelectionModel().getSelectedItem();
 		if(escursione_model != null)
-			sendRequest(new Request(escursione_model, SessionCache.getNestedAnchorPane(), VIEW_DETTAGLI_ESCURSIONI));
+			sendRequest(new Request(escursione_model, ViewCache.getNestedAnchorPane(), VIEW_DETTAGLI_ESCURSIONI));
 		else{
 			Alert alert = new Alert(AlertType.ERROR, "Nessuna Escursione Selezionata", ButtonType.OK);
 			alert.setTitle("OutDoorSport1.0");
@@ -150,7 +151,7 @@ public class ControllerVisualizzaEscursioniSistema extends ControllerTableView{
 				escursione_model = table_escursioni.getSelectionModel().getSelectedItem();
 				if(escursione_model != null){
 					if(event.getClickCount() == 2){
-		                sendRequest(new Request(escursione_model, SessionCache.getNestedAnchorPane(), VIEW_DETTAGLI_ESCURSIONI));
+		                sendRequest(new Request(escursione_model, ViewCache.getNestedAnchorPane(), VIEW_DETTAGLI_ESCURSIONI));
 		            }
 				}
 			}

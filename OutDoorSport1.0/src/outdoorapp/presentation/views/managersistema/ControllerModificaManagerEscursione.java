@@ -18,6 +18,7 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.StackPane;
 import javafx.util.converter.LocalDateStringConverter;
+import outdoorapp.presentation.applicationcontroller.ViewCache;
 import outdoorapp.presentation.reqresp.Request;
 import outdoorapp.presentation.reqresp.Response;
 import outdoorapp.presentation.views.generic.ControllerRegistrazione;
@@ -137,7 +138,7 @@ public class ControllerModificaManagerEscursione extends ControllerRegistrazione
 			if(result.equals("")){
 				Response response = this.sendRequest(new Request(mde, OUTDOORSPORT_MODIFY_MDE));
 				if(response.toString().equals(RESP_OK))
-					this.sendRequest(new Request(SessionCache.getNestedAnchorPane(), VIEW_GESTIONE_MANAGER_ESCURSIONE));
+					this.sendRequest(new Request(ViewCache.getNestedAnchorPane(), VIEW_GESTIONE_MANAGER_ESCURSIONE));
 				else
 					lblErrore.setText("Errore! Email o Username già presenti!");
 			}else

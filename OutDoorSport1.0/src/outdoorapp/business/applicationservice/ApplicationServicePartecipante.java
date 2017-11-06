@@ -17,6 +17,7 @@ import outdoorapp.integration.dao.enums.UtenteDAOEnum;
 import outdoorapp.integration.dao.interfaces.Partecipante_DAO;
 import outdoorapp.integration.dao.interfaces.Ruoli_DAO;
 import outdoorapp.integration.dao.interfaces.StatoUtente_DAO;
+import outdoorapp.presentation.applicationcontroller.ViewCache;
 import outdoorapp.presentation.reqresp.Request;
 import outdoorapp.presentation.reqresp.Response;
 
@@ -71,7 +72,7 @@ class ApplicationServicePartecipante implements Views, Actions{
 		fileChooser.setTitle("Carica Certificato SRC");
 		fileChooser.getExtensionFilters().addAll(
 				new FileChooser.ExtensionFilter("TXT", "*.txt"));
-		File fileCertificatoSRC = fileChooser.showOpenDialog(SessionCache.getCurrentView());
+		File fileCertificatoSRC = fileChooser.showOpenDialog(ViewCache.getCurrentView());
 		if(fileCertificatoSRC != null){
 			partecipante.setCertificatoSrc(fileCertificatoSRC.getPath());
 			response.setResponse(RESP_OK);

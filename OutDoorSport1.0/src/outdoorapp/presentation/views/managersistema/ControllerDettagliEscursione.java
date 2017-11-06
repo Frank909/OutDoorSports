@@ -6,6 +6,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
+import outdoorapp.presentation.applicationcontroller.ViewCache;
 import outdoorapp.presentation.reqresp.Request;
 import outdoorapp.presentation.views.generic.GenericController;
 import outdoorapp.presentation.views.models.EscursioneModel;
@@ -75,7 +76,7 @@ public class ControllerDettagliEscursione extends GenericController{
 	 * Evento associato alla view. Torna alla schermata precedente
 	 */
 	@FXML protected void visualizzaEscursioniSistema(){
-		this.sendRequest(new Request(SessionCache.getNestedAnchorPane(), VIEW_VISUALIZZA_ESCURSIONI_SISTEMA));
+		this.sendRequest(new Request(ViewCache.getNestedAnchorPane(), VIEW_VISUALIZZA_ESCURSIONI_SISTEMA));
 	}
 	
 	/**

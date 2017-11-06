@@ -96,5 +96,5 @@ public abstract class ControllerRegistrazione extends GenericController{
 	 * di inserimento dati. Il metodo verrà riscritto in base alle esigenze.
 	 * @param utente: Utente in fase di registrazione su cui applicare i controlli
 	 */
-	public void checkDatePicker(UtenteTO utente){};	
+	protected abstract void checkDatePicker(UtenteTO utente);	
 }

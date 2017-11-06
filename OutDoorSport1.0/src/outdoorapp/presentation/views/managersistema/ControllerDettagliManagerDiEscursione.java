@@ -6,6 +6,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
+import outdoorapp.presentation.applicationcontroller.ViewCache;
 import outdoorapp.presentation.reqresp.Request;
 import outdoorapp.presentation.views.generic.GenericController;
 import outdoorapp.presentation.views.models.ManagerDiEscursioneModel;
@@ -62,6 +63,6 @@ public class ControllerDettagliManagerDiEscursione extends GenericController{
 	public ControllerDettagliManagerDiEscursione() {}
 	
 	@FXML protected void gestioneManagerDiEscursione(){
-		this.sendRequest(new Request(SessionCache.getNestedAnchorPane(), VIEW_GESTIONE_MANAGER_ESCURSIONE));
+		this.sendRequest(new Request(ViewCache.getNestedAnchorPane(), VIEW_GESTIONE_MANAGER_ESCURSIONE));
 	}
 }

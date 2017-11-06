@@ -55,6 +55,8 @@ class ApplicationServiceManagerDiSistema implements Actions, Views{
 	private List<TipoEscursioneTO> list_tipi_escursione = null;
 	private List<OptionalTO> list_optional = null;
 	
+	
+	
 	/**
 	 * Costruttore che inizializza il DAO del Manager di Sistema
 	 */
@@ -82,16 +84,17 @@ class ApplicationServiceManagerDiSistema implements Actions, Views{
 		} catch (DatabaseException e) {
 			e.printStackTrace();
 		}
-		
+		/*
 		try {
+			
 			list_tipi_escursione = tipo_escursione_dao.getAll();
-			SessionCache.currentData.put("TipiEscursione", list_tipi_escursione);
+			currentData.put("TipiEscursione", list_tipi_escursione);
 			list_optional = optional_dao.getAll();
-			SessionCache.currentData.put("Optionals", list_optional);
+			currentData.put("Optionals", list_optional);
 		} catch (DatabaseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		}*/
 		
 		response.setData(null);
 		if(result){

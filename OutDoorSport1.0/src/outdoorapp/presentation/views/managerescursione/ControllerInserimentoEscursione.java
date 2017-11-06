@@ -2,7 +2,6 @@ package outdoorapp.presentation.views.managerescursione;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -10,9 +9,7 @@ import java.util.Set;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableArray;
 import javafx.collections.ObservableList;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -21,29 +18,22 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
-import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
-import outdoorapp.presentation.applicationcontroller.ServiceApplicationController;
+import outdoorapp.presentation.applicationcontroller.ViewCache;
 import outdoorapp.presentation.reqresp.Request;
 import outdoorapp.presentation.reqresp.Response;
 import outdoorapp.presentation.views.generic.ControllerEscursione;
-import outdoorapp.presentation.views.generic.ControllerRegistrazione;
-import outdoorapp.presentation.views.models.EscursioneModel;
 import outdoorapp.to.FactoryProducerTO;
 import outdoorapp.to.enums.FactoryEnum;
 import outdoorapp.to.enums.GenericEnum;
 import outdoorapp.to.enums.TipoEnum;
-import outdoorapp.to.enums.UtenteEnum;
 import outdoorapp.to.interfaces.EscursioneTO;
-import outdoorapp.to.interfaces.ManagerDiEscursioneTO;
 import outdoorapp.to.interfaces.OptionalTO;
 import outdoorapp.to.interfaces.TOFactory;
 import outdoorapp.to.interfaces.TipoEscursioneTO;
-import outdoorapp.to.interfaces.UtenteTO;
 import outdoorapp.utils.SessionCache;
 
 /**
@@ -190,7 +180,7 @@ public class ControllerInserimentoEscursione extends ControllerEscursione{
 		if(result.equals("")){
 			Response response = this.sendRequest(new Request(escursione, OUTDOORSPORT_SAVE_ESCURSIONE));
 			if(response.toString().equals(RESP_OK))
-				this.sendRequest(new Request(SessionCache.getNestedAnchorPane(), VIEW_GESTIONE_ESCURSIONI));
+				this.sendRequest(new Request(ViewCache.getNestedAnchorPane(), VIEW_GESTIONE_ESCURSIONI));
 			else
 				lblErrore.setText("Errore! L'Escursione è già presente nel Sistema!");
 		}else
@@ -198,7 +188,7 @@ public class ControllerInserimentoEscursione extends ControllerEscursione{
 	}
 	
 	@Override
-	public void checkDatePicker(EscursioneTO escursione) {
+	protected void checkDatePicker(EscursioneTO escursione) {
 		if(dataEscursione.getValue() == null)
 			escursione.setData("");
 		else{

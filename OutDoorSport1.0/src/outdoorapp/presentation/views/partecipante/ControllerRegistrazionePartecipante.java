@@ -89,7 +89,6 @@ public class ControllerRegistrazionePartecipante extends ControllerRegistrazione
 	 * caricamento del certificato e viene mandata ai livelli successivi
 	 */
 	private void execCaricaCertificatoSRC() {
-
 		Response response = this.sendRequest(new Request(partecipante, OUTDOORSPORT_SAVE_SRC_CERTIFICATE));
 
 		if(response.toString().equals(RESP_OK))
@@ -148,7 +147,7 @@ public class ControllerRegistrazionePartecipante extends ControllerRegistrazione
 		if(dataCertificatoSRC.getValue() == null)
 			((PartecipanteTO)utente).setDataCertificatoSrc("");
 		else{
-			if(!(dataCertificatoSRC.getValue().getYear() >= LocalDate.now().getYear()))
+			if((dataCertificatoSRC.getValue().getYear() >= LocalDate.now().getYear() - 1))
 				((PartecipanteTO)utente).setDataCertificatoSrc(dataCertificatoSRC.getValue().toString());
 		}
 	}

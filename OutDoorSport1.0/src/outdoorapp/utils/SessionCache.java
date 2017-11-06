@@ -1,34 +1,23 @@
 package outdoorapp.utils;
 
-import java.util.ArrayDeque;
 import java.util.HashMap;
-import java.util.Queue;
 
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Pane;
-import javafx.stage.Stage;
+import outdoorapp.presentation.reqresp.Request;
 
-public abstract class SessionCache {
-	public static HashMap<String, Pane> mapViews = new HashMap<>();
-	public static Queue<Stage> stageQueue = new ArrayDeque<>();
-	public static AnchorPane nestedAnchorPane;
-	public static HashMap<String, Object> currentData = new HashMap<>(); 
-	
-	/**
-	 * 
-	 * @return stageQueue.peak(): Restituisce lo stage della schermata corrente
-	 */
-	public static Stage getCurrentView(){
-		return stageQueue.peek();
+public abstract class SessionCache{
+
+	private static HashMap<String, Object> currentData = new HashMap<>();
+
+	protected void setCurrentData(Request key){
+		if(key.getData() != null){
+			if(currentData.containsKey(key.getData().getClass().getSimpleName()))
+				currentData.replace(key.getData().getClass().getSimpleName(), key.getData());
+			else
+				currentData.put(key.getData().getClass().getSimpleName(), key.getData());
+		}
 	}
-	
-	/**
-	 * @return la view innestata corrente
-	 */
-	public static AnchorPane getNestedAnchorPane(){
-		return nestedAnchorPane;
-	}
-	
+
+
 	/**
 	 * Restituisce il dato della sessione corrente in base 
 	 * alla chiave 

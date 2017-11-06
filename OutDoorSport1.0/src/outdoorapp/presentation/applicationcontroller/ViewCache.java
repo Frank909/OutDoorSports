@@ -1,9 +1,9 @@
 package outdoorapp.presentation.applicationcontroller;
 
+
 import java.util.ArrayDeque;
 import java.util.HashMap;
 import java.util.Queue;
-
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -21,7 +21,11 @@ import outdoorapp.utils.SessionCache;
  * @author Francesco Ventura
  *
  */
-class ViewCache{
+public class ViewCache extends SessionCache{
+	
+	private static HashMap<String, Pane> mapViews = new HashMap<>();
+	private static Queue<Stage> stageQueue = new ArrayDeque<>();
+	private static AnchorPane nestedAnchorPane;
 
 	private final String VIEW_LOGIN = "../../../resources/fxml/application/login";
 	private final String VIEW_MANAGER_DI_SISTEMA_CONFIG = "../../../resources/fxml/manager_sistema/managerDiSistemaConfig";
@@ -44,6 +48,8 @@ class ViewCache{
 	private final String VIEW_DETTAGLI_PARTECIPANTE = "../../../resources/fxml/manager_sistema/dettagliPartecipante";
 	private final String VIEW_DETTAGLI_ESCURSIONI_FROM_MDE = "../../../resources/fxml/manager_escursione/dettagliEscursione";
 	private final String VIEW_MODIFICA_ESCURSIONE = "../../../resources/fxml/manager_escursione/modificaEscursione";
+	private final String VIEW_AGGIORNA_SRC_PARTECIPANTE = "../../../resources/fxml/partecipante/aggiornaCertificatoSRC";
+	private final String VIEW_MODIFICA_DATI_PARTECIPANTE = "../../../resources/fxml/partecipante/modificaDatiAnagraficiPartecipante";
 	
 	private static ViewCache viewCache = new ViewCache();
 
@@ -64,7 +70,7 @@ class ViewCache{
 	 * Metodo di creazione cache in memoria di tutte le schermate 
 	 * @throws Exception
 	 */
-	public void initialize() throws Exception{
+	void initialize() throws Exception{
 		loadForm("VIEW_LOGIN", VIEW_LOGIN, true);
 		loadForm("VIEW_MANAGER_DI_SISTEMA_CONFIG",VIEW_MANAGER_DI_SISTEMA_CONFIG, true);
 		loadForm("VIEW_DASHBOARD_MANAGER_DI_SISTEMA",VIEW_DASHBOARD_MANAGER_DI_SISTEMA, true);
@@ -86,6 +92,8 @@ class ViewCache{
 		loadForm("VIEW_DETTAGLI_PARTECIPANTE", VIEW_DETTAGLI_PARTECIPANTE, false);
 		loadForm("VIEW_DETTAGLI_ESCURSIONI_FROM_MDE", VIEW_DETTAGLI_ESCURSIONI_FROM_MDE, false);
 		loadForm("VIEW_MODIFICA_ESCURSIONE", VIEW_MODIFICA_ESCURSIONE, false);
+		loadForm("VIEW_AGGIORNA_SRC_PARTECIPANTE", VIEW_AGGIORNA_SRC_PARTECIPANTE, false);
+		loadForm("VIEW_MODIFICA_DATI_PARTECIPANTE", VIEW_MODIFICA_DATI_PARTECIPANTE, false);
 	}
 	
 	/**
@@ -93,21 +101,18 @@ class ViewCache{
 	 * @param key: chiave della schermata
 	 */
 	void setView(Request key){	
-		if(!SessionCache.stageQueue.isEmpty())
-			SessionCache.stageQueue.poll().close();
-		if(key.getData() != null){
-			if(SessionCache.currentData.containsKey(key.getData().getClass().getSimpleName()))
-				SessionCache.currentData.replace(key.getData().getClass().getSimpleName(), key.getData());
-			else
-				SessionCache.currentData.put(key.getData().getClass().getSimpleName(), key.getData());
-		}
+		if(!stageQueue.isEmpty())
+			stageQueue.poll().close();
+
+		this.setCurrentData(key);
+		
 		Stage newStage = new Stage();
 		newStage.setTitle("OutDoorSports 1.0");
 		newStage.setResizable(false);
-		Scene myScene = new Scene(SessionCache.mapViews.get(key.toString()));
+		Scene myScene = new Scene(mapViews.get(key.toString()));
 		newStage.setScene(myScene);
 		newStage.show();
-		SessionCache.stageQueue.add(newStage);
+		stageQueue.add(newStage);
 	}
 
 	/**
@@ -116,13 +121,9 @@ class ViewCache{
 	 * @param parent: finestra genitore
 	 */
 	void setNestedView(Request key, AnchorPane parent){
-		StackPane panel = (StackPane)SessionCache.mapViews.get(key.toString());
-		if(key.getData() != null){
-			if(SessionCache.currentData.containsKey(key.getData().getClass().getSimpleName()))
-				SessionCache.currentData.replace(key.getData().getClass().getSimpleName(), key.getData());
-			else
-				SessionCache.currentData.put(key.getData().getClass().getSimpleName(), key.getData());
-		}
+		StackPane panel = (StackPane)mapViews.get(key.toString());
+		this.setCurrentData(key);
+		
 		setNestedAnchorPane(parent);
 		AnchorPane.setLeftAnchor(panel, 0.0);
 		AnchorPane.setRightAnchor(panel, 0.0);
@@ -146,7 +147,7 @@ class ViewCache{
 		try {
 			Pane newPane = FXMLLoader.load(getClass().getResource(resource + ".fxml"));
 			newPane.setVisible(visibility);
-			SessionCache.mapViews.put(key, newPane);
+			mapViews.put(key, newPane);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -158,6 +159,21 @@ class ViewCache{
 	 * @param anchorPane: la view genitore che deve contenere la nuova view
 	 */
 	private void setNestedAnchorPane(AnchorPane anchorPane){
-		SessionCache.nestedAnchorPane = anchorPane;
+		nestedAnchorPane = anchorPane;
+	}
+	
+	/**
+	 * 
+	 * @return stageQueue.peak(): Restituisce lo stage della schermata corrente
+	 */
+	public static Stage getCurrentView(){
+		return stageQueue.peek();
+	}
+	
+	/**
+	 * @return la view innestata corrente
+	 */
+	public static AnchorPane getNestedAnchorPane(){
+		return nestedAnchorPane;
 	}
 }

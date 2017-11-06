@@ -25,6 +25,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.StackPane;
+import outdoorapp.presentation.applicationcontroller.ViewCache;
 import outdoorapp.presentation.reqresp.Request;
 import outdoorapp.presentation.reqresp.Response;
 import outdoorapp.presentation.views.generic.ControllerEscursione;
@@ -190,7 +191,7 @@ public class ControllerModificaEscursione extends ControllerEscursione{
 		
 		Optional<ButtonType> result = alert.showAndWait();
 		if (result.get() == ButtonType.OK){
-		    sendRequest(new Request(escursioneModel, SessionCache.getNestedAnchorPane(), VIEW_DETTAGLI_ESCURSIONI_FROM_MDE));
+		    sendRequest(new Request(escursioneModel, ViewCache.getNestedAnchorPane(), VIEW_DETTAGLI_ESCURSIONI_FROM_MDE));
 		} else {
 		    alert.close();
 		}
@@ -286,7 +287,7 @@ public class ControllerModificaEscursione extends ControllerEscursione{
 		if(result.equals("")){
 			Response response = this.sendRequest(new Request(escursione, OUTDOORSPORT_UPDATE_ESCURSIONE));
 			if(response.toString().equals(RESP_OK))
-				this.sendRequest(new Request(SessionCache.getNestedAnchorPane(), VIEW_GESTIONE_ESCURSIONI));
+				this.sendRequest(new Request(ViewCache.getNestedAnchorPane(), VIEW_GESTIONE_ESCURSIONI));
 			else
 				lblErrore.setText("Errore! L'Escursione è già presente nel Sistema!");
 		}else
@@ -294,7 +295,7 @@ public class ControllerModificaEscursione extends ControllerEscursione{
 	}
 	
 	@Override
-	public void checkDatePicker(EscursioneTO escursione) {
+	protected void checkDatePicker(EscursioneTO escursione) {
 		if(dataEscursione.getValue() == null)
 			escursione.setData("");
 		else{

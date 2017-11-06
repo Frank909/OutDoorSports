@@ -18,6 +18,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
+import outdoorapp.presentation.applicationcontroller.ViewCache;
 import outdoorapp.presentation.reqresp.Request;
 import outdoorapp.presentation.reqresp.Response;
 import outdoorapp.presentation.views.generic.ControllerTableView;
@@ -113,7 +114,7 @@ public class ControllerVisualizzaPartecipantiIscritti extends ControllerTableVie
 	private void dettagliPartecipante(){
 		partecipante_model = mTablePartecipanti.getSelectionModel().getSelectedItem();
 		if(partecipante_model != null)
-			sendRequest(new Request(partecipante_model, SessionCache.getNestedAnchorPane(), VIEW_DETTAGLI_PARTECIPANTE));
+			sendRequest(new Request(partecipante_model, ViewCache.getNestedAnchorPane(), VIEW_DETTAGLI_PARTECIPANTE));
 		else{
 			Alert alert = new Alert(AlertType.ERROR, "Nessun Partecipante Selezionato", ButtonType.OK);
 			alert.setTitle("OutDoorSport1.0");
