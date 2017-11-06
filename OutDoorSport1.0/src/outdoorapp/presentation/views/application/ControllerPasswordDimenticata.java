@@ -75,7 +75,7 @@ public class ControllerPasswordDimenticata extends GenericController{
 			alert.showAndWait();
 			
 			if(alert.getResult() == ButtonType.OK){
-				//Forms.closeForm(VIEW_PASSWORD_DIMENTICATA); modificare
+				this.sendRequest(new Request(VIEW_LOGIN));
 			}
 				
 		}else{

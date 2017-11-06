@@ -34,4 +34,5 @@ public interface Actions {
 	public static final String OUTDOORSPORT_GET_OPTIONAL_FROM_ESCURSIONE = "getAllOptionalsFromEscursione";
 	public static final String OUTDOORSPORT_GET_ALL_STATI_OPTIONAL = "getAllStatoOptional";
 	public static final String OUTDOORSPORTS_ANNULLA_ESCURSIONE = "annullaEscursione";
+	public static final String OUTDOORSPORT_GET_ALL_ISCRITTI_FROM_ESCURSIONE = "getAllIscrittiFromEscursione";
 }

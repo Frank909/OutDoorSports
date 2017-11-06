@@ -3,6 +3,7 @@ package outdoorapp.integration.dao.interfaces;
 import java.util.List;
 
 import outdoorapp.exceptions.DatabaseException;
+import outdoorapp.to.interfaces.EscursioneTO;
 import outdoorapp.to.interfaces.PartecipanteTO;
 
 /** 

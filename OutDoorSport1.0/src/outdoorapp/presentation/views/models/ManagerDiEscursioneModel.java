@@ -45,7 +45,10 @@ public class ManagerDiEscursioneModel extends UtenteModel{
 		return stipendio.get();
 	}
 	
-	public ManagerDiEscursioneTO geManagerDiEscursione(){
+	/**
+	 * @return il manager di escursione corrente
+	 */
+	public ManagerDiEscursioneTO getManagerDiEscursione(){
 		return this.mde;
 	}
 }

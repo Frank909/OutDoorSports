@@ -63,7 +63,10 @@ public class PartecipanteModel extends UtenteModel{
 		return dataCertificatoSRC.get();
 	}
 	
-	public PartecipanteTO getPartecipante() {
+	/**
+	 * @return il partecipante corrente
+	 */
+	public PartecipanteTO getPartecipante(){
 		return this.partecipante;
 	}
 }
