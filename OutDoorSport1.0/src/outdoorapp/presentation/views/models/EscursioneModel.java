@@ -41,9 +41,9 @@ public class EscursioneModel {
 	private SimpleDoubleProperty costo;
 	private SimpleStringProperty descrizione;
 	private SimpleObjectProperty<UtenteTO> utente;
-	private SimpleSetProperty<OptionalTO> optionals;
 	private SimpleStringProperty nomeStatoEscursione;
 	private SimpleStringProperty nomeTipoEscursione;
+	private EscursioneTO escursione;
 	
 	public EscursioneModel(){}
 	
@@ -57,10 +57,10 @@ public class EscursioneModel {
 		this.numberMax = new SimpleIntegerProperty(e.getNumberMax());
 		this.costo = new SimpleDoubleProperty(e.getCosto());
 		this.descrizione = new SimpleStringProperty(e.getDescrizione());
-		//this.optionals.addAll(e.getOptionals());
 		this.utente = new SimpleObjectProperty<>(e.getUtente());
 		this.nomeTipoEscursione = new SimpleStringProperty(e.getTipoEscursione().getNome());
 		this.nomeStatoEscursione = new SimpleStringProperty(e.getStatoEscursione().getNome());
+		this.escursione = e;
 	}
 	
 	/**
@@ -71,22 +71,7 @@ public class EscursioneModel {
 	 * @return istanza di EscursioneTO
 	 */
 	public EscursioneTO getEscursione(){
-		TOFactory TOFact = FactoryProducerTO.getFactory(FactoryEnum.GenericTOFactory);
-		EscursioneTO escursione = (EscursioneTO) TOFact.getGenericTO(GenericEnum.Escursione);
-		
-		escursione.setIdEscursione(this.getIdEscursione());
-		escursione.setStatoEscursione(this.getStatoEscursione());
-		escursione.setTipoEscursione(this.getTipoEscursione());
-		escursione.setUtente(this.getUtente());
-		escursione.setNome(this.getNome());
-		escursione.setData(this.getData());
-		escursione.setNumberMin(this.getNumberMin());
-		escursione.setNumberMax(this.getNumberMax());
-		escursione.setCosto(this.getCosto());
-		escursione.setDescrizione(this.getDescrizione());
-		//escursione.setOptionals(this.getOptionals());
-		return escursione;
-		
+		return this.escursione;
 	}
 
 	/**
@@ -171,12 +156,5 @@ public class EscursioneModel {
 	 */ 
 	public String getDescrizione() {
 		return descrizione.get();
-	}
-
-	/**
-	 * @return gli optional per l'escursione
-	 */
-	public Set<OptionalTO> getOptionals() {
-		return optionals.get();
 	}
 }

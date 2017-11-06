@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 import com.mysql.jdbc.interceptors.SessionAssociationInterceptor;
@@ -13,13 +14,16 @@ import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.StackPane;
 import outdoorapp.presentation.reqresp.Request;
 import outdoorapp.presentation.reqresp.Response;
@@ -180,6 +184,19 @@ public class ControllerModificaEscursione extends ControllerEscursione{
 		execModificaEscursione();
 	}
 	
+	@FXML protected void indietro(){
+		Alert alert = new Alert(AlertType.CONFIRMATION, "Attenzione! Perderai tutte le modifiche effettuate! Sei Sicuro?");
+		alert.setTitle("OutDoorSport1.0");
+		
+		Optional<ButtonType> result = alert.showAndWait();
+		if (result.get() == ButtonType.OK){
+		    sendRequest(new Request(escursioneModel, SessionCache.getNestedAnchorPane(), VIEW_DETTAGLI_ESCURSIONI_FROM_MDE));
+		} else {
+		    alert.close();
+		}
+	}
+	
+	
 	/**
 	 * Evento associato alla disabilitazione di un optional dalla lista,
 	 * prima della modifica dell'escursione
@@ -190,7 +207,7 @@ public class ControllerModificaEscursione extends ControllerEscursione{
 			list_stati_optional = (List<StatoOptionalTO>) response.getData();
 		}
 		String choice = listOptionalPresenti.getSelectionModel().getSelectedItem();
-		int index = listOptionalPresenti.getSelectionModel().getSelectedIndex();
+		if(choice != null){
 		if(choice.contains(list_stati_optional.get(0).getNome())){
 			String newChoice = choice.replace(list_stati_optional.get(0).getNome(), list_stati_optional.get(1).getNome());
 			listOptionalPresenti.getItems().add(listOptionalPresenti.getItems().size(), newChoice);
@@ -203,6 +220,11 @@ public class ControllerModificaEscursione extends ControllerEscursione{
 			listOptionalPresenti.scrollTo(choice);
 			listOptionalPresenti.edit(listOptionalPresenti.getItems().size() - 1);
 			listOptionalPresenti.getItems().remove(choice);
+		}
+		}else{
+			Alert alert = new Alert(AlertType.ERROR, "Attenzione! Nessun Optional Selezionato", ButtonType.OK);
+			alert.setTitle("OutDoorSport1.0");
+			alert.showAndWait();
 		}
 	}
 	

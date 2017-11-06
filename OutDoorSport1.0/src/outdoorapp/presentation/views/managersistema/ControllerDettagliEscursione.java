@@ -10,6 +10,7 @@ import outdoorapp.presentation.reqresp.Request;
 import outdoorapp.presentation.views.generic.GenericController;
 import outdoorapp.presentation.views.models.EscursioneModel;
 import outdoorapp.presentation.views.models.ManagerDiEscursioneModel;
+import outdoorapp.to.interfaces.OptionalTO;
 import outdoorapp.utils.SessionCache;
 
 /**
@@ -57,7 +58,10 @@ public class ControllerDettagliEscursione extends GenericController{
 					lblNumMin.setText("Minimo " + escursione.getNumberMin() + " Partecipanti");
 					lblNumMax.setText("Massimo " + escursione.getNumberMax() + " Partecipanti");
 					lblCostoEscursione.setText("Costo: " + escursione.getCosto());
-					//lblOptionalEscursione.setText("Optional: " + escursione.getOptionals().toString());
+					String optionals = "";
+					for(OptionalTO op : escursione.getEscursione().getOptionals()){
+						optionals += optionals + op.getNome() + "\n";
+					}
 					lblDescrizioneEscursione.setText("Descrizione: " + escursione.getDescrizione());
 					lblMDE.setText("Manager: " + escursione.getUtente().getNome() + " " + escursione.getUtente().getCognome());
 				}

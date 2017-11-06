@@ -67,6 +67,7 @@ class ApplicationServiceEscursione implements Actions {
 	private EscursioneTO escursione = null;
 	private TOFactory OptionalFact = null;
 	private OptionalEscursioneTO optional_escursione = null;
+	StatoEscursione_DAO statoEscursioneDao = null;
 	
 	public ApplicationServiceEscursione() {
 		genericFactory = FactoryProducerDAO.getFactory(DAORequest.Generic);
@@ -74,6 +75,7 @@ class ApplicationServiceEscursione implements Actions {
 		escursione_dao =  (Escursione_DAO) genericFactory.getGenericDAO(GenericDAOEnum.Escursione);
 		optional_escursione_dao = (OptionalEscursione_DAO) genericFactory.getGenericDAO(GenericDAOEnum.OptionalEscursione);
 		stato_optional_dao = (StatoOptional_DAO) statoFactory.getStatoDAO(StatoDAOEnum.Optional);
+		statoEscursioneDao = (StatoEscursione_DAO) statoFactory.getStatoDAO(StatoDAOEnum.Escursione);
 		OptionalFact = FactoryProducerTO.getFactory(FactoryEnum.OptionalTOFactory);
 	}
 	
@@ -108,7 +110,6 @@ class ApplicationServiceEscursione implements Actions {
 	public Response getAllEscursioniFromMDE(Request request){
 		Response response = new Response();
 		
-		;
 		try {
 			List<EscursioneTO> list_escursioni = escursione_dao.readEscursioniByManagerDiEscursione((ManagerDiEscursioneTO)SessionCache.getCurrentData("ManagerDiEscursione"));
 			response.setData(list_escursioni);
@@ -132,7 +133,7 @@ class ApplicationServiceEscursione implements Actions {
 		
 		try {
 			if(!escursione_dao.esisteEscursione((EscursioneTO)request.getData())){
-				StatoEscursione_DAO statoEscursioneDao = (StatoEscursione_DAO) statoFactory.getStatoDAO(StatoDAOEnum.Escursione);
+				
 				escursione = (EscursioneTO)request.getData();
 				escursione.setStatoEscursione(statoEscursioneDao.getStatoEscursioneAperta());
 				ManagerDiEscursioneTO mde = (ManagerDiEscursioneTO) SessionCache.getCurrentData("ManagerDiEscursione");
@@ -219,6 +220,28 @@ class ApplicationServiceEscursione implements Actions {
 			response.setData(null);
 		} catch (DatabaseException e) {
 			e.printStackTrace();
+		}
+		
+		return response;
+	}
+	
+	/**
+	 * Metodo che restituisce una risposta in base alla richiesta, e
+	 * annulla una escursione
+	 * 
+	 * @param request
+	 * @return
+	 */
+	public Response annullaEscursione(Request request){
+		Response response = new Response();
+		EscursioneTO escursione = (EscursioneTO) request.getData();
+		try {
+			escursione.setStatoEscursione(statoEscursioneDao.getStatoEscursioneAnnullata());
+			escursione_dao.update(escursione);
+			response.setData(escursione);
+			response.setResponse(RESP_OK);
+		} catch (DatabaseException e) {
+			response.setResponse(RESP_KO);
 		}
 		
 		return response;

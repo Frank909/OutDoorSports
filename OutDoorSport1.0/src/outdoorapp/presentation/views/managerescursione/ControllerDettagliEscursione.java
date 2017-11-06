@@ -1,5 +1,10 @@
 package outdoorapp.presentation.views.managerescursione;
 
+import java.time.LocalDate;
+import java.util.Optional;
+
+import org.omg.DynamicAny.DynAnySeqHelper;
+
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
@@ -9,13 +14,16 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.StackPane;
+import java.time.temporal.ChronoUnit;
 import outdoorapp.presentation.reqresp.Request;
+import outdoorapp.presentation.reqresp.Response;
 import outdoorapp.presentation.views.generic.GenericController;
 import outdoorapp.presentation.views.models.EscursioneModel;
 import outdoorapp.to.FactoryProducerTO;
 import outdoorapp.to.enums.FactoryEnum;
 import outdoorapp.to.enums.GenericEnum;
 import outdoorapp.to.interfaces.EscursioneTO;
+import outdoorapp.to.interfaces.OptionalTO;
 import outdoorapp.to.interfaces.TOFactory;
 import outdoorapp.utils.SessionCache;
 
@@ -48,7 +56,6 @@ public class ControllerDettagliEscursione extends GenericController{
 	private EscursioneModel escursione = new EscursioneModel();
 	
 	public ControllerDettagliEscursione() {
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
@@ -66,7 +73,11 @@ public class ControllerDettagliEscursione extends GenericController{
 					lblNumMin.setText("Minimo " + escursione.getNumberMin() + " Partecipanti");
 					lblNumMax.setText("Massimo " + escursione.getNumberMax() + " Partecipanti");
 					lblCostoEscursione.setText("Costo: " + escursione.getCosto());
-					//lblOptionalEscursione.setText("Optional: " + escursione.getOptionals().toString());
+					String optionals = "";
+					for(OptionalTO op : escursione.getEscursione().getOptionals()){
+						optionals += optionals + op.getNome() + "\n";
+					}
+					lblOptionalEscursione.setText("Optional: " + optionals);
 					lblDescrizioneEscursione.setText("Descrizione: " + escursione.getDescrizione());
 				}
 			}
@@ -114,6 +125,29 @@ public class ControllerDettagliEscursione extends GenericController{
 	 * Evento associato all'annullamento di una escursione
 	 */
 	@FXML protected void annullaEscursione(){
-		
-	}
+		LocalDate escursione_date = LocalDate.parse(escursione.getData());
+		LocalDate date_now = LocalDate.now();
+		if(escursione.getStatoEscursione().getNome().equals("APERTA") && (ChronoUnit.DAYS.between(date_now, escursione_date) > 2)){
+			Alert alert = new Alert(AlertType.CONFIRMATION, "Sei Sicuro di voler annullare questa escursione?");
+			alert.setTitle("OutDoorSport1.0");
+
+			Optional<ButtonType> result = alert.showAndWait();
+			if (result.get() == ButtonType.OK){
+				Response response = sendRequest(new Request(escursione.getEscursione(), OUTDOORSPORTS_ANNULLA_ESCURSIONE));
+				Alert alert1 = new Alert(AlertType.INFORMATION, "Escursione annullata con successo!", ButtonType.OK);
+				alert1.setTitle("OutDoorSport1.0");
+				alert1.showAndWait();
+				this.sendRequest(new Request(SessionCache.getNestedAnchorPane(), VIEW_GESTIONE_ESCURSIONI));
+			} else
+				alert.close();
+		}else if(!escursione.getStatoEscursione().getNome().equals("APERTA")){
+			Alert alert = new Alert(AlertType.ERROR, "Non è possibile annullare l'escursione", ButtonType.OK);
+			alert.setTitle("OutDoorSport1.0");
+			alert.showAndWait();
+		}else{
+			Alert alert = new Alert(AlertType.ERROR, "Non è possibile annullare una escursione a meno di due giorni prima del suo inizio!", ButtonType.OK);
+			alert.setTitle("OutDoorSport1.0");
+			alert.showAndWait();
+		}
+	}	
 }
