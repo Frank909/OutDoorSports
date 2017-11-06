@@ -83,7 +83,7 @@ class ApplicationServiceManagerDiSistema implements Actions, Views{
 			e.printStackTrace();
 		}
 		
-		try {
+		/*try {
 			list_tipi_escursione = tipo_escursione_dao.getAll();
 			SessionCache.currentData.put("TipiEscursione", list_tipi_escursione);
 			list_optional = optional_dao.getAll();
@@ -91,7 +91,7 @@ class ApplicationServiceManagerDiSistema implements Actions, Views{
 		} catch (DatabaseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		}*/
 		
 		response.setData(null);
 		if(result){

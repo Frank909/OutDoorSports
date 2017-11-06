@@ -52,8 +52,8 @@ public class ControllerDettagliEscursione extends GenericController{
 				if(newValue){
 					escursione = (EscursioneModel) SessionCache.getCurrentData(escursione.getClass().getSimpleName());
 					lblNomeEscursione.setText(escursione.getNome());
-					lblStatoEscursione.setText("Stato: " + escursione.getStatoEscursione());
-					lblTipoEscursione.setText("Tipo: " + escursione.getTipoEscursione());
+					lblStatoEscursione.setText("Stato: " + escursione.getStatoEscursione().getNome());
+					lblTipoEscursione.setText("Tipo: " + escursione.getTipoEscursione().getNome());
 					lblDataEscursione.setText("Data: " + escursione.getData());
 					lblNumMin.setText("Minimo " + escursione.getNumberMin() + " Partecipanti");
 					lblNumMax.setText("Massimo " + escursione.getNumberMax() + " Partecipanti");

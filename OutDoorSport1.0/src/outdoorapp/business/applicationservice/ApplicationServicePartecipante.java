@@ -2,6 +2,7 @@ package outdoorapp.business.applicationservice;
 
 import java.io.File;
 import java.nio.file.Files;
+import java.util.List;
 
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
@@ -19,7 +20,8 @@ import outdoorapp.integration.dao.interfaces.Ruoli_DAO;
 import outdoorapp.integration.dao.interfaces.StatoUtente_DAO;
 import outdoorapp.presentation.reqresp.Request;
 import outdoorapp.presentation.reqresp.Response;
-
+import outdoorapp.to.interfaces.EscursioneTO;
+import outdoorapp.to.interfaces.ManagerDiEscursioneTO;
 import outdoorapp.to.interfaces.PartecipanteTO;
 import outdoorapp.to.interfaces.UtenteTO;
 import outdoorapp.utils.Actions;
@@ -164,6 +166,5 @@ class ApplicationServicePartecipante implements Views, Actions{
 	 */
 	public Response getAllPartecipanti(Request request){
 		return null;
-		
 	}
 }

@@ -148,7 +148,7 @@ public class ControllerRegistrazionePartecipante extends ControllerRegistrazione
 		if(dataCertificatoSRC.getValue() == null)
 			((PartecipanteTO)utente).setDataCertificatoSrc("");
 		else{
-			if(!(dataCertificatoSRC.getValue().getYear() >= LocalDate.now().getYear()))
+			if(dataCertificatoSRC.getValue().getYear() >= LocalDate.now().getYear())
 				((PartecipanteTO)utente).setDataCertificatoSrc(dataCertificatoSRC.getValue().toString());
 		}
 	}

@@ -44,6 +44,7 @@ class ViewCache{
 	private final String VIEW_DETTAGLI_PARTECIPANTE = "../../../resources/fxml/manager_sistema/dettagliPartecipante";
 	private final String VIEW_DETTAGLI_ESCURSIONI_FROM_MDE = "../../../resources/fxml/manager_escursione/dettagliEscursione";
 	private final String VIEW_MODIFICA_ESCURSIONE = "../../../resources/fxml/manager_escursione/modificaEscursione";
+	private final String VIEW_ISCRITTI_ESCURSIONE = "../../../resources/fxml/manager_escursione/visualizzaPartecipantiIscrittiEscursione";
 	
 	private static ViewCache viewCache = new ViewCache();
 
@@ -86,6 +87,7 @@ class ViewCache{
 		loadForm("VIEW_DETTAGLI_PARTECIPANTE", VIEW_DETTAGLI_PARTECIPANTE, false);
 		loadForm("VIEW_DETTAGLI_ESCURSIONI_FROM_MDE", VIEW_DETTAGLI_ESCURSIONI_FROM_MDE, false);
 		loadForm("VIEW_MODIFICA_ESCURSIONE", VIEW_MODIFICA_ESCURSIONE, false);
+		loadForm("VIEW_ISCRITTI_ESCURSIONE", VIEW_ISCRITTI_ESCURSIONE, false);
 	}
 	
 	/**
