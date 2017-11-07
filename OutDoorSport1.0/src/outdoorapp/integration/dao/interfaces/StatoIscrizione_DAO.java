@@ -26,11 +26,4 @@ public interface StatoIscrizione_DAO extends GEN_DAO<StatoIscrizioneTO> {
 	 * @throws DatabaseException
 	 */
 	StatoIscrizioneTO getStatoDisattivo() throws DatabaseException;
-	
-	/**
-	 * @return lo stato terminato di una iscrizione
-	 * @throws DatabaseException
-	 */
-	StatoIscrizioneTO getStatoIscrizioneTerminato() throws DatabaseException;
-
 }

@@ -9,7 +9,11 @@ import javafx.scene.control.Label;
 import outdoorapp.presentation.reqresp.Request;
 import outdoorapp.presentation.reqresp.Response;
 import outdoorapp.presentation.views.generic.GenericController;
+import outdoorapp.to.FactoryProducerTO;
+import outdoorapp.to.enums.FactoryEnum;
+import outdoorapp.to.enums.UtenteEnum;
 import outdoorapp.to.interfaces.PartecipanteTO;
+import outdoorapp.to.interfaces.TOFactory;
 import outdoorapp.utils.SessionCache;
 
 public class ControllerAggiornamentoSRC extends GenericController{
@@ -19,10 +23,14 @@ public class ControllerAggiornamentoSRC extends GenericController{
 	@FXML private Label lblSrcError, lblSrc;
 	@FXML private DatePicker dateSRC;
 	
+	private TOFactory toFactory = null;
 	private PartecipanteTO partecipante = null;
 	
 	public ControllerAggiornamentoSRC() {
-		partecipante = (PartecipanteTO) SessionCache.getCurrentData(partecipante.getClass().getSimpleName());
+		if(partecipante == null){
+			toFactory = FactoryProducerTO.getFactory(FactoryEnum.UtenteTOFactory);
+			partecipante = (PartecipanteTO) toFactory.getUtenteTO(UtenteEnum.Partecipante);
+		}
 	}
 	
 	@FXML 
@@ -34,7 +42,9 @@ public class ControllerAggiornamentoSRC extends GenericController{
 
 	@Override
 	protected void initialize() {
-		lblSrcError.setText("");		
+		lblSrcError.setText("");
+		if(SessionCache.existsData(partecipante.getClass().getSimpleName()))
+			partecipante = (PartecipanteTO) SessionCache.getCurrentData(partecipante.getClass().getSimpleName());
 	}
 
 	@FXML

@@ -28,5 +28,19 @@ public abstract class SessionCache{
 	public static Object getCurrentData(String key){
 		return currentData.get(key);
 	}
+	
 
+	/**
+	 * Verifica se seiste o meno un dato con una 
+	 * determinata chiave
+	 * 
+	 * @param key: chiave dell'hashmap
+	 * @return vero se esiste, falso altrimenti
+	 */
+	public static boolean existsData(String key){
+		if(currentData.containsKey(key))
+			return true;
+		else
+			return false;
+	}
 }

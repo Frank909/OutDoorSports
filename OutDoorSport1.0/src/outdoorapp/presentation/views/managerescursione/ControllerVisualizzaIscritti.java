@@ -10,11 +10,14 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 import outdoorapp.presentation.reqresp.Request;
@@ -25,10 +28,13 @@ import outdoorapp.presentation.views.models.PartecipanteModel;
 import outdoorapp.to.FactoryProducerTO;
 import outdoorapp.to.enums.FactoryEnum;
 import outdoorapp.to.enums.GenericEnum;
+import outdoorapp.to.enums.StatoEnum;
 import outdoorapp.to.enums.UtenteEnum;
 import outdoorapp.to.interfaces.EscursioneTO;
 import outdoorapp.to.interfaces.IscrizioneTO;
 import outdoorapp.to.interfaces.PartecipanteTO;
+import outdoorapp.to.interfaces.StatoEscursioneTO;
+import outdoorapp.to.interfaces.StatoIscrizioneTO;
 import outdoorapp.to.interfaces.TOFactory;
 import outdoorapp.utils.SessionCache;
 /**
@@ -64,7 +70,6 @@ public class ControllerVisualizzaIscritti extends ControllerTableView{
 	private IscrizioneTO iscrizione = null;
 	private PartecipanteModel partecipante_model = null;
 	private EscursioneModel escursione = new EscursioneModel();
-	private TableView<PartecipanteModel> table_iscritti = null;
 	
 	public ControllerVisualizzaIscritti() {
 		if(partecipante == null){
@@ -126,8 +131,8 @@ public class ControllerVisualizzaIscritti extends ControllerTableView{
 		mTablePartecipanti.addEventFilter(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>(){
 			@Override
 			public void handle(MouseEvent event) {
-				table_iscritti = (TableView<PartecipanteModel>) event.getSource();
-				partecipante_model = table_iscritti.getSelectionModel().getSelectedItem();
+				mTablePartecipanti = (TableView<PartecipanteModel>) event.getSource();
+				partecipante_model = mTablePartecipanti.getSelectionModel().getSelectedItem();
 				if(partecipante_model != null){
 					if(event.getClickCount() == 2){
 		                //sendRequest(new Request(partecipante_model, SessionCache.getNestedAnchorPane(), VIEW_DETTAGLI_ESCURSIONI_FROM_MDE));
@@ -184,7 +189,34 @@ public class ControllerVisualizzaIscritti extends ControllerTableView{
 	 * e gli viene inviata una mail di conferma.
 	 */
 	private void deleteIscrizione(){
-		partecipante_model = table_iscritti.getSelectionModel().getSelectedItem();
+		partecipante_model = mTablePartecipanti.getSelectionModel().getSelectedItem();
+		for(IscrizioneTO iscrizione : list_iscrizioni){
+			if(iscrizione.getUtente().equals(partecipante_model.getPartecipante())){
+				this.iscrizione = iscrizione;
+			}
+		}
+		
+		if(!(partecipante_model == null)){
+			Response response = this.sendRequest(new Request(this.iscrizione, OUTDOORSPORT_ANNULLA_ISCRIZIONE));
+			if(response.getData() != null){
+				Alert alert = new Alert(AlertType.INFORMATION, "Iscrizione annullata con successo!", ButtonType.OK);
+				alert.setTitle("OutDoorSport1.0");
+				alert.showAndWait();
+			}else{
+				Alert alert = new Alert(AlertType.INFORMATION, "Non è stata apportata nessuna modifica all'iscrizione.", ButtonType.OK);
+				alert.setTitle("OutDoorSport1.0");
+				alert.showAndWait();
+			}
+
+		}else{
+			Alert alert = new Alert(AlertType.ERROR, "Nessun Partecipante Selezionato", ButtonType.OK);
+			alert.setTitle("OutDoorSport1.0");
+			alert.showAndWait();
+		}
+	}
+	
+	@FXML protected void eliminaIscrizione(){
+		deleteIscrizione();
 	}
 
 }

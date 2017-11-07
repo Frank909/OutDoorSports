@@ -28,6 +28,7 @@ public interface Actions {
 	public static final String OUTDOORSPORT_GET_ALL_PARTECIPANTI = "getAllPartecipanti";
 	public static final String OUTDOORSPORT_GET_ALL_PARTECIPANTI_FOR_MDE = "getPartecipantiForMde";
 	public static final String OUTDOORSPORT_GET_ALL_ESCURSIONI_FROM_MDE = "getAllEscursioniFromMDE";
+	public static final String OUTDOORSPORT_GET_ALL_STATO_ESCURSIONE = "getAllStatoEscursione";
 	public static final String OUTDOORSPORT_SAVE_ESCURSIONE = "nuovaEscursione";
 	public static final String OUTDOORSPORT_UPDATE_ESCURSIONE = "modificaEscursione";
 	public static final String OUTDOORSPORT_GET_ALL_TIPI_ESCURSIONE = "getAllTipiEscursione";
@@ -35,4 +36,6 @@ public interface Actions {
 	public static final String OUTDOORSPORT_GET_ALL_STATI_OPTIONAL = "getAllStatoOptional";
 	public static final String OUTDOORSPORTS_ANNULLA_ESCURSIONE = "annullaEscursione";
 	public static final String OUTDOORSPORT_GET_ALL_ISCRITTI_FROM_ESCURSIONE = "getAllIscrittiFromEscursione";
+	public static final String OUTDOORSPORT_ANNULLA_ISCRIZIONE = "annullaIscrizione";
+	public static final String OUTDOORSPORT_GET_ALL_STATO_ISCRIZIONE = "gellAllStatoIscrizione";
 }

@@ -1,6 +1,8 @@
 package outdoorapp.presentation.views.managerescursione;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import org.omg.DynamicAny.DynAnySeqHelper;
@@ -24,8 +26,10 @@ import outdoorapp.presentation.views.models.EscursioneModel;
 import outdoorapp.to.FactoryProducerTO;
 import outdoorapp.to.enums.FactoryEnum;
 import outdoorapp.to.enums.GenericEnum;
+import outdoorapp.to.enums.StatoEnum;
 import outdoorapp.to.interfaces.EscursioneTO;
 import outdoorapp.to.interfaces.OptionalTO;
+import outdoorapp.to.interfaces.StatoEscursioneTO;
 import outdoorapp.to.interfaces.TOFactory;
 import outdoorapp.utils.SessionCache;
 
@@ -56,8 +60,15 @@ public class ControllerDettagliEscursione extends GenericController{
 	@FXML private Button btnVisualizzaIscritti;
 	@FXML private Button btnIndietro;
 	private EscursioneModel escursione = new EscursioneModel();
+	private List<StatoEscursioneTO> list_stato_escursione = new ArrayList<>();
+	private StatoEscursioneTO stato_escursione = null;
+	private TOFactory toFactory = null;
 	
 	public ControllerDettagliEscursione() {
+		if(stato_escursione == null){
+			toFactory = FactoryProducerTO.getFactory(FactoryEnum.StatoTOFactory);
+			stato_escursione = (StatoEscursioneTO) toFactory.getStatoTO(StatoEnum.StatoEscursione);
+		}
 	}
 
 	@Override
@@ -81,6 +92,10 @@ public class ControllerDettagliEscursione extends GenericController{
 					}
 					lblOptionalEscursione.setText("Optional: " + optionals);
 					lblDescrizioneEscursione.setText("Descrizione: " + escursione.getDescrizione());
+					if(list_stato_escursione.isEmpty()){
+						Response response = sendRequest(new Request(stato_escursione, OUTDOORSPORT_GET_ALL_STATO_ESCURSIONE));
+						list_stato_escursione = (List<StatoEscursioneTO>) response.getData();
+					}
 				}
 			}
 		};
@@ -106,17 +121,17 @@ public class ControllerDettagliEscursione extends GenericController{
 	 * Evento associato alla modifica di una escursione
 	 */
 	@FXML protected void modificaEscursione(){
-		if(escursione.getStatoEscursione().getNome().equals("APERTA"))
+		if(escursione.getStatoEscursione().getNome().equals(list_stato_escursione.get(1).getNome()))
 			this.sendRequest(new Request(ViewCache.getNestedAnchorPane(), VIEW_MODIFICA_ESCURSIONE));
-		else if(escursione.getStatoEscursione().getNome().equals("IN CORSO")){
+		else if(escursione.getStatoEscursione().getNome().equals(list_stato_escursione.get(3).getNome())){
 			Alert alert = new Alert(AlertType.ERROR, "Non è possibile modificare una escursione in corso!", ButtonType.OK);
 			alert.setTitle("OutDoorSport1.0");
 			alert.showAndWait();
-		}else if(escursione.getStatoEscursione().getNome().equals("CHIUSA")){
+		}else if(escursione.getStatoEscursione().getNome().equals(list_stato_escursione.get(0).getNome())){
 			Alert alert = new Alert(AlertType.ERROR, "Non è possibile modificare una escursione chiusa!", ButtonType.OK);
 			alert.setTitle("OutDoorSport1.0");
 			alert.showAndWait();
-		}else if(escursione.getStatoEscursione().getNome().equals("ANNULLATA")){
+		}else if(escursione.getStatoEscursione().getNome().equals(list_stato_escursione.get(2).getNome())){
 			Alert alert = new Alert(AlertType.ERROR, "Non è possibile modificare una escursione annullata!", ButtonType.OK);
 			alert.setTitle("OutDoorSport1.0");
 			alert.showAndWait();
@@ -129,7 +144,7 @@ public class ControllerDettagliEscursione extends GenericController{
 	@FXML protected void annullaEscursione(){
 		LocalDate escursione_date = LocalDate.parse(escursione.getData());
 		LocalDate date_now = LocalDate.now();
-		if(escursione.getStatoEscursione().getNome().equals("APERTA") && (ChronoUnit.DAYS.between(date_now, escursione_date) > 2)){
+		if(escursione.getStatoEscursione().getNome().equals(list_stato_escursione.get(1).getNome()) && (ChronoUnit.DAYS.between(date_now, escursione_date) > 2)){
 			Alert alert = new Alert(AlertType.CONFIRMATION, "Sei Sicuro di voler annullare questa escursione?");
 			alert.setTitle("OutDoorSport1.0");
 
@@ -142,7 +157,7 @@ public class ControllerDettagliEscursione extends GenericController{
 				this.sendRequest(new Request(ViewCache.getNestedAnchorPane(), VIEW_GESTIONE_ESCURSIONI));
 			} else
 				alert.close();
-		}else if(!escursione.getStatoEscursione().getNome().equals("APERTA")){
+		}else if(!escursione.getStatoEscursione().getNome().equals(list_stato_escursione.get(1).getNome())){
 			Alert alert = new Alert(AlertType.ERROR, "Non è possibile annullare l'escursione", ButtonType.OK);
 			alert.setTitle("OutDoorSport1.0");
 			alert.showAndWait();

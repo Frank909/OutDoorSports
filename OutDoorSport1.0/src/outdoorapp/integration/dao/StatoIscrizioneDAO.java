@@ -30,17 +30,11 @@ class StatoIscrizioneDAO extends GenericDAO<StatoIscrizioneTO> implements StatoI
 	
 	@Override
 	public StatoIscrizioneTO getStatoAttivo() throws DatabaseException {
-		return this.findOne(1);
+		return this.findOne(2);
 	}
 
 	@Override
 	public StatoIscrizioneTO getStatoDisattivo() throws DatabaseException {
-		return this.findOne(0);
+		return this.findOne(1);
 	}
-
-	@Override
-	public StatoIscrizioneTO getStatoIscrizioneTerminato() throws DatabaseException {
-		return this.findOne(2);
-	}
-
 }
