@@ -84,6 +84,50 @@ class ApplicationServicePartecipante implements Views, Actions{
 
 		return response;
 	}
+	
+	
+	/**
+	 * Metodo che restituisce la risposta rispetto alla richiesta di modificare un partecipante
+	 * esistente.
+	 * @param request: Richiesta in ingresso
+	 * @return response: Risposta rispetto alla richiesta
+	 */
+	public Response modificaPartecipante(Request request){
+		Response response = new Response();
+		
+		partecipante = (PartecipanteTO)request.getData();
+		UtenteTO temp = null;
+		int id_temp = -1;
+		
+		try {
+			temp = partecipante_dao.getByEmail(partecipante.getEmail());
+			if(temp.getIdUtente() != null)
+				id_temp = temp.getIdUtente();
+		} catch (DatabaseException e) {
+			e.printStackTrace();
+		}
+		
+		
+		try {
+			if(!(partecipante_dao.esisteEmail(partecipante) || temp == null) || (partecipante_dao.esisteEmail(partecipante) 
+					&& partecipante.getIdUtente() == id_temp)){
+				Ruoli_DAO ruoliDao = (Ruoli_DAO) tipoFactory.getTipoDAO(TipoDAOEnum.Ruolo);
+				StatoUtente_DAO statoUtenteDao = (StatoUtente_DAO) statoFactory.getStatoDAO(StatoDAOEnum.User);
+				partecipante.setRuolo(ruoliDao.getRuoloManagerDiEscursione());
+				partecipante.setStatoUtente(statoUtenteDao.getStatoAttivo());
+				uploadCertificatoSRC(partecipante);
+				partecipante_dao.update(partecipante);
+				response.setResponse(RESP_OK);
+			}else{
+				response.setResponse(RESP_KO);
+			}
+			response.setData(null);
+		} catch (DatabaseException e) {
+			e.printStackTrace();
+		}
+		
+		return response;
+	}
 
 
 	/**
@@ -145,7 +189,12 @@ class ApplicationServicePartecipante implements Views, Actions{
 			}catch(SecurityException se){
 				se.printStackTrace();
 			}        
-		}
+		}else
+			for(File file: userCertificateDir.listFiles()) 
+				if(!file.isDirectory()) 
+					if(!file.getPath().equals(partecipante.getCertificatoSrc())) 
+						file.delete();
+				
 
 		try{
 			File source = new File(partecipante.getCertificatoSrc());
@@ -166,6 +215,16 @@ class ApplicationServicePartecipante implements Views, Actions{
 	 * @return response: Risposta rispetto alla richiesta
 	 */
 	public Response getAllPartecipanti(Request request){
-		return null;
+		Response response = new Response();
+		try {
+			List<PartecipanteTO> list_partecipante = partecipante_dao.getAll();
+			response.setData(list_partecipante);
+			response.setResponse(RESP_OK);
+		} catch (DatabaseException e) {
+			e.printStackTrace();
+			response.setResponse(RESP_KO);
+		}
+		return response;
 	}
+	
 }

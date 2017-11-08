@@ -1,6 +1,7 @@
 package outdoorapp.presentation.views.partecipante;
 
 import java.time.LocalDate;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
@@ -8,6 +9,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleGroup;
 import outdoorapp.presentation.reqresp.Request;
 import outdoorapp.presentation.reqresp.Response;
 import outdoorapp.presentation.views.generic.ControllerRegistrazione;
@@ -66,6 +68,12 @@ public class ControllerRegistrazionePartecipante extends ControllerRegistrazione
 	@Override
 	protected void initialize() {
 		lblErrore.setText("");
+
+		final ToggleGroup group = new ToggleGroup();
+		radioM.setToggleGroup(group);
+		radioF.setToggleGroup(group);
+		
+		group.selectToggle(radioM);
 	}
 
 	/**

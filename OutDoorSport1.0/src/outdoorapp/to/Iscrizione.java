@@ -1,26 +1,10 @@
 package outdoorapp.to;
 // Generated 14-set-2017 13.06.34 by Hibernate Tools 5.2.3.Final
 
-import java.util.Date;
-import java.util.HashSet;
 import java.util.Set;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import static javax.persistence.GenerationType.IDENTITY;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-
 import outdoorapp.to.interfaces.EscursioneTO;
 import outdoorapp.to.interfaces.IscrizioneTO;
 import outdoorapp.to.interfaces.OptionalTO;
-import outdoorapp.to.interfaces.OutDoorSports;
 import outdoorapp.to.interfaces.StatoIscrizioneTO;
 import outdoorapp.to.interfaces.UtenteTO;
 
@@ -34,7 +18,6 @@ import outdoorapp.to.interfaces.UtenteTO;
 
 class Iscrizione implements IscrizioneTO{
 
-	private static final long serialVersionUID = 5440407744318413216L;
 	private Integer idIscrizione;
 	private EscursioneTO escursione;
 	private StatoIscrizioneTO statoIscrizione;

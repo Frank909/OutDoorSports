@@ -9,7 +9,6 @@ import javafx.scene.layout.StackPane;
 import outdoorapp.presentation.applicationcontroller.ViewCache;
 import outdoorapp.presentation.reqresp.Request;
 import outdoorapp.presentation.views.generic.GenericController;
-import outdoorapp.presentation.views.models.PartecipanteModel;
 import outdoorapp.to.FactoryProducerTO;
 import outdoorapp.to.enums.FactoryEnum;
 import outdoorapp.to.enums.UtenteEnum;
@@ -17,6 +16,14 @@ import outdoorapp.to.interfaces.PartecipanteTO;
 import outdoorapp.to.interfaces.TOFactory;
 import outdoorapp.utils.SessionCache;
 
+/**
+ * Classe controller che gestisce il profilo del partecipante.
+ * 
+ * 
+ * @author Andrea Zito
+ * @author Francesco Ventura
+ *
+ */
 public class ControllerIlMioProfilo extends GenericController{
 
 	@FXML private StackPane ilMioProfiloPartecipante;
@@ -30,14 +37,15 @@ public class ControllerIlMioProfilo extends GenericController{
 	@FXML private Label mEmailProfilo;
 	@FXML private Label mDataSRCProfilo;
 	@FXML private Label mTessSanProfilo;
+	@FXML private Label mUsernameProfilo;
 	
 	private PartecipanteTO partecipante = null;
-	private TOFactory TOFact = null;
-	
-	
+	/**
+	 * Costruttore che avvalora il partecipante in memoria
+	 */
 	public ControllerIlMioProfilo() {
 		if(partecipante == null){
-			TOFact = FactoryProducerTO.getFactory(FactoryEnum.UtenteTOFactory);
+			TOFactory TOFact = FactoryProducerTO.getFactory(FactoryEnum.UtenteTOFactory);
 			partecipante = (PartecipanteTO) TOFact.getUtenteTO(UtenteEnum.Partecipante);
 		}
 	}
@@ -50,6 +58,7 @@ public class ControllerIlMioProfilo extends GenericController{
 			public void changed(ObservableValue<? extends Boolean> arg0, Boolean oldValue, Boolean newValue) {
 				if(newValue){
 					partecipante = (PartecipanteTO) SessionCache.getCurrentData(partecipante.getClass().getSimpleName());
+					mUsernameProfilo.setText(partecipante.getUsername());
 					mNomeCognomeProfilo.setText(partecipante.getNome() + " " + partecipante.getCognome());
 					mCittaProfilo.setText("Residente a " + partecipante.getCitta());
 					mIndirizzoProfilo.setText("in " + partecipante.getIndirizzo());
@@ -66,14 +75,22 @@ public class ControllerIlMioProfilo extends GenericController{
 		
 	}
 	
+	/**
+	 * Metodo associato all'evento della visualizzazione della schermata dell'aggiornamento
+	 * del certificato SRC
+	 */
 	@FXML
 	protected void aggiornaSRC(){
-		this.sendRequest(new Request(VIEW_AGGIORNA_SRC_PARTECIPANTE));
+		this.sendRequest(new Request(ViewCache.getNestedAnchorPane() ,VIEW_AGGIORNA_SRC_PARTECIPANTE));
 	}
 	
+	/**
+	 * Metodo associato all'evento della visualizzazione della schermata della modifica delle informazioni
+	 * anagrafiche del partecipante
+	 */
 	@FXML
 	protected void modificaDatiAnagrafici(){
-		this.sendRequest(new Request(VIEW_MODIFICA_DATI_PARTECIPANTE));
+		this.sendRequest(new Request(ViewCache.getNestedAnchorPane() ,VIEW_MODIFICA_DATI_PARTECIPANTE));
 	}
 
 }

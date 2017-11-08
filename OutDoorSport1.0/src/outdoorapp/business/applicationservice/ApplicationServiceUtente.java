@@ -118,8 +118,9 @@ class ApplicationServiceUtente implements Views, Actions{
 				String newPassword = randomString.nextString();
 
 				utente.setPassword(newPassword);
-				utente_dao.create(utente);
+				utente_dao.update(utente);
 				
+				TOFact = FactoryProducerTO.getFactory(FactoryEnum.GenericTOFactory);
 				EmailTO email = (EmailTO) TOFact.getGenericTO(GenericEnum.Email);
 
 				String mailOggetto = "OutDoorSports | Recupero Password";
@@ -140,10 +141,9 @@ class ApplicationServiceUtente implements Views, Actions{
 				emailConfig.sendEmail(email);
 
 				response.setResponse(RESP_OK);
-			}
-			else{
+			}else
 				response.setResponse(RESP_KO);
-			}
+			
 		} catch (DatabaseException e) {
 			e.printStackTrace();
 		}

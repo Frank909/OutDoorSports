@@ -38,4 +38,6 @@ public interface Actions {
 	public static final String OUTDOORSPORT_GET_ALL_ISCRITTI_FROM_ESCURSIONE = "getAllIscrittiFromEscursione";
 	public static final String OUTDOORSPORT_ANNULLA_ISCRIZIONE = "annullaIscrizione";
 	public static final String OUTDOORSPORT_GET_ALL_STATO_ISCRIZIONE = "gellAllStatoIscrizione";
+	public static final String OUTDOORSPORT_MODIFY_PARTECIPANTE = "modificaPartecipante";
+	public static final String OUTDOORSPORT_GET_ALL_ESCURSIONI_APERTE = "getAllEscursioniAperte";
 }

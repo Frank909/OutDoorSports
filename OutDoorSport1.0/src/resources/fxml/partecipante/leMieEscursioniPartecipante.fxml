@@ -39,12 +39,12 @@
             </GridPane>
             <TableView fx:id="mTableEscursioni" prefHeight="461.0" prefWidth="800.0" GridPane.rowIndex="1">
               <columns>
-                  <TableColumn prefWidth="184.0" text="Nome" />
-                <TableColumn fx:id="mColNameEscursioni" prefWidth="104.0" text="Tipo Escursione" />
-                <TableColumn fx:id="mColDataEscursioni" minWidth="0.0" prefWidth="76.0" text="Data" />
-                  <TableColumn fx:id="mColNMinEscursioni" minWidth="0.0" prefWidth="60.0" text="Min/Max" />
-                  <TableColumn fx:id="mColCostoEscursioni" minWidth="0.0" prefWidth="63.0" text="Costo" />
-                  <TableColumn prefWidth="64.0" text="Stato" />
+                  <TableColumn fx:id="mColumnNameEscursione" prefWidth="143.0" text="Nome" />
+                <TableColumn fx:id="mColumnTipoEscursione" prefWidth="218.0" text="Tipo Escursione" />
+                <TableColumn fx:id="mColumnDataEscursione" minWidth="0.0" prefWidth="98.0" text="Data" />
+                  <TableColumn fx:id="mColumnNMinEscursione" minWidth="0.0" prefWidth="58.0" text="Min" />
+                  <TableColumn fx:id="mColumnNMaxEscursione" minWidth="0.0" prefWidth="78.0" text="Max" />
+                  <TableColumn fx:id="mColumnCostoEscursione" minWidth="0.0" prefWidth="106.0" text="Costo" />
               </columns>
                <GridPane.margin>
                   <Insets left="10.0" right="10.0" />
@@ -59,11 +59,11 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Button mnemonicParsing="false" text="Cancellati dall'escursione" GridPane.columnIndex="1" GridPane.halignment="RIGHT">
+                  <Button fx:id="btnCancelEscursione" mnemonicParsing="false" onMouseClicked="#cancellatiEscursione" text="Cancellati dall'escursione" GridPane.columnIndex="1" GridPane.halignment="RIGHT">
                      <GridPane.margin>
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                      </GridPane.margin></Button>
-                  <Button mnemonicParsing="false" text="Modifica Iscrizione" GridPane.halignment="RIGHT">
+                  <Button fx:id="btnModificaIscrizione" mnemonicParsing="false" onMouseClicked="#modificaIscrizione" text="Modifica Iscrizione" GridPane.halignment="RIGHT">
                      <GridPane.margin>
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                      </GridPane.margin>

@@ -17,6 +17,7 @@ import outdoorapp.exceptions.DatabaseException;
 import outdoorapp.to.interfaces.EscursioneTO;
 import outdoorapp.to.interfaces.ManagerDiEscursioneTO;
 import outdoorapp.to.interfaces.OptionalEscursioneTO;
+import outdoorapp.to.interfaces.PartecipanteTO;
 
 public interface Escursione_DAO extends GEN_DAO<EscursioneTO>{
 	
@@ -37,7 +38,7 @@ public interface Escursione_DAO extends GEN_DAO<EscursioneTO>{
 	 * @return le Escursioni aperte alle iscrizioni
 	 * @throws DatabaseException
 	 */
-	List<EscursioneTO> readEscursioniAperte() throws DatabaseException;
+	List<EscursioneTO> readEscursioniAperte(PartecipanteTO partecipante) throws DatabaseException;
 	
 	/**
 	 * 

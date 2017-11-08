@@ -5,12 +5,18 @@ import java.util.ArrayDeque;
 import java.util.HashMap;
 import java.util.Queue;
 
+import javafx.application.Platform;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import outdoorapp.presentation.reqresp.Request;
 import outdoorapp.utils.SessionCache;
 
@@ -51,6 +57,7 @@ public class ViewCache extends SessionCache{
 	private final String VIEW_AGGIORNA_SRC_PARTECIPANTE = "../../../resources/fxml/partecipante/aggiornaCertificatoSRC";
 	private final String VIEW_MODIFICA_DATI_PARTECIPANTE = "../../../resources/fxml/partecipante/modificaDatiAnagraficiPartecipante";
 	private final String VIEW_ISCRITTI_ESCURSIONE = "../../../resources/fxml/manager_escursione/visualizzaPartecipantiIscrittiEscursione";
+	private final String VIEW_ISCRIZIONE_ESCURSIONE = "../../../resources/fxml/partecipante/iscrizioneEscursione";
 	
 	private static ViewCache viewCache = new ViewCache();
 
@@ -79,6 +86,10 @@ public class ViewCache extends SessionCache{
 		loadForm("VIEW_DASHBOARD_PARTECIPANTE",VIEW_DASHBOARD_PARTECIPANTE, true);
 		loadForm("VIEW_PASSWORD_DIMENTICATA",VIEW_PASSWORD_DIMENTICATA, true);
 		loadForm("VIEW_REGISTRAZIONE_PARTECIPANTE",VIEW_REGISTRAZIONE_PARTECIPANTE, true);
+		
+		loadForm("VIEW_ISCRIZIONE_ESCURSIONE", VIEW_ISCRIZIONE_ESCURSIONE, false);
+		loadForm("VIEW_MODIFICA_DATI_PARTECIPANTE", VIEW_MODIFICA_DATI_PARTECIPANTE, false);
+		loadForm("VIEW_AGGIORNA_SRC_PARTECIPANTE", VIEW_AGGIORNA_SRC_PARTECIPANTE, false);
 		loadForm("VIEW_GESTIONE_MANAGER_ESCURSIONE",VIEW_GESTIONE_MANAGER_ESCURSIONE, false);
 		loadForm("VIEW_VISUALIZZA_ESCURSIONI_SISTEMA",VIEW_VISUALIZZA_ESCURSIONI_SISTEMA, false);
 		loadForm("VIEW_REGISTRAZIONE_MANAGER_ESCURSIONE",VIEW_REGISTRAZIONE_MANAGER_ESCURSIONE, false);
@@ -93,8 +104,6 @@ public class ViewCache extends SessionCache{
 		loadForm("VIEW_DETTAGLI_PARTECIPANTE", VIEW_DETTAGLI_PARTECIPANTE, false);
 		loadForm("VIEW_DETTAGLI_ESCURSIONI_FROM_MDE", VIEW_DETTAGLI_ESCURSIONI_FROM_MDE, false);
 		loadForm("VIEW_MODIFICA_ESCURSIONE", VIEW_MODIFICA_ESCURSIONE, false);
-		loadForm("VIEW_AGGIORNA_SRC_PARTECIPANTE", VIEW_AGGIORNA_SRC_PARTECIPANTE, false);
-		loadForm("VIEW_MODIFICA_DATI_PARTECIPANTE", VIEW_MODIFICA_DATI_PARTECIPANTE, false);
 		loadForm("VIEW_ISCRITTI_ESCURSIONE", VIEW_ISCRITTI_ESCURSIONE, false);
 	}
 	
@@ -102,19 +111,41 @@ public class ViewCache extends SessionCache{
 	 * Setta la vista richiesta dall'utente e chiude quella precedente
 	 * @param key: chiave della schermata
 	 */
-	void setView(Request key){	
-		if(!stageQueue.isEmpty())
-			stageQueue.poll().close();
-
-		this.setCurrentData(key);
+	void setView(Request key){
+		Stage currentStage = null;
+		Parent root = mapViews.get(key.toString());
+		Scene myScene = null;
 		
-		Stage newStage = new Stage();
-		newStage.setTitle("OutDoorSports 1.0");
-		newStage.setResizable(false);
-		Scene myScene = new Scene(mapViews.get(key.toString()));
-		newStage.setScene(myScene);
-		newStage.show();
-		stageQueue.add(newStage);
+		if(!stageQueue.isEmpty()){
+			currentStage = stageQueue.poll();
+			myScene = currentStage.getScene();
+			currentStage.close();			
+		}else
+			currentStage = new Stage();
+		
+		this.setCurrentData(key);
+	
+		currentStage.setTitle("OutDoorSports 1.0");
+		currentStage.setResizable(false);
+		
+		if(myScene == null){
+			myScene = new Scene(root);
+			currentStage.setScene(myScene);
+		}else
+			currentStage.getScene().setRoot(root);
+		
+		currentStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+			
+			@Override
+			public void handle(WindowEvent event) {
+				Platform.exit();
+				System.exit(0);				
+			}
+		});
+		
+		currentStage.show();
+		
+		stageQueue.add(currentStage);
 	}
 
 	/**

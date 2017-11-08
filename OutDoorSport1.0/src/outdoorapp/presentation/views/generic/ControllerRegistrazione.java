@@ -24,6 +24,9 @@ public abstract class ControllerRegistrazione extends GenericController{
 		// TODO Auto-generated constructor stub
 	}
 	
+	/**
+	 * Metodo astratto associato a tutti i bottoni dei controller che implementeranno una funzione di invio dati.
+	 */
 	@FXML 
 	protected abstract void registra();
 
@@ -92,9 +95,9 @@ public abstract class ControllerRegistrazione extends GenericController{
 	}
 	
 	/**
-	 * Metodo dell'interfaccia DateFieldCheck che permette di controllare i datepicker delle schermate
+	 * Metodo che permette di controllare i datepicker delle schermate
 	 * di inserimento dati. Il metodo verrà riscritto in base alle esigenze.
 	 * @param utente: Utente in fase di registrazione su cui applicare i controlli
 	 */
-	protected abstract void checkDatePicker(UtenteTO utente);	
+	protected void checkDatePicker(UtenteTO utente){};	
 }

@@ -11,7 +11,6 @@ import outdoorapp.presentation.views.generic.GenericController;
 import outdoorapp.to.FactoryProducerTO;
 import outdoorapp.to.enums.FactoryEnum;
 import outdoorapp.to.enums.UtenteEnum;
-import outdoorapp.to.interfaces.ManagerDiEscursioneTO;
 import outdoorapp.to.interfaces.TOFactory;
 import outdoorapp.to.interfaces.UtenteTO;
 
@@ -72,9 +71,8 @@ public class ControllerLogin extends GenericController{
 		Request req = new Request(utente, OUTDOORSPORT_EXECUTE_LOGIN);
 		Response response = this.sendRequest(req);
 		
-		if(response.toString().equals(RESP_OK)){
+		if(response.toString().equals(RESP_OK))
 			this.sendRequest(new Request(response.getData(), response.getView()));
-		}
 		else
 			lblErrore.setText("Dati non riconosciuti");
 	}

@@ -1,11 +1,8 @@
 package outdoorapp.business.applicationservice;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-
-import javax.swing.Action;
 
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
@@ -16,31 +13,22 @@ import outdoorapp.integration.dao.FactoryProducerDAO;
 import outdoorapp.integration.dao.enums.DAORequest;
 import outdoorapp.integration.dao.enums.GenericDAOEnum;
 import outdoorapp.integration.dao.enums.StatoDAOEnum;
-import outdoorapp.integration.dao.enums.TipoDAOEnum;
-import outdoorapp.integration.dao.enums.UtenteDAOEnum;
 import outdoorapp.integration.dao.interfaces.Escursione_DAO;
-import outdoorapp.integration.dao.interfaces.MDE_DAO;
 import outdoorapp.integration.dao.interfaces.OptionalEscursione_DAO;
-import outdoorapp.integration.dao.interfaces.Ruoli_DAO;
 import outdoorapp.integration.dao.interfaces.StatoEscursione_DAO;
 import outdoorapp.integration.dao.interfaces.StatoOptional_DAO;
-import outdoorapp.integration.dao.interfaces.StatoUtente_DAO;
-import outdoorapp.integration.dao.interfaces.TipoEscursione_DAO;
 import outdoorapp.presentation.reqresp.Request;
 import outdoorapp.presentation.reqresp.Response;
-import outdoorapp.presentation.views.models.EscursioneModel;
 import outdoorapp.to.FactoryProducerTO;
 import outdoorapp.to.enums.FactoryEnum;
-import outdoorapp.to.enums.GenericEnum;
 import outdoorapp.to.enums.OptionalEnum;
-import outdoorapp.to.enums.StatoEnum;
 import outdoorapp.to.interfaces.EscursioneTO;
 import outdoorapp.to.interfaces.ManagerDiEscursioneTO;
 import outdoorapp.to.interfaces.OptionalEscursioneTO;
 import outdoorapp.to.interfaces.OptionalTO;
+import outdoorapp.to.interfaces.PartecipanteTO;
 import outdoorapp.to.interfaces.StatoOptionalTO;
 import outdoorapp.to.interfaces.TOFactory;
-import outdoorapp.to.interfaces.UtenteTO;
 import outdoorapp.utils.Actions;
 import outdoorapp.utils.SessionCache;
 
@@ -230,7 +218,7 @@ class ApplicationServiceEscursione implements Actions {
 	 * annulla una escursione
 	 * 
 	 * @param request
-	 * @return
+	 * @return response
 	 */
 	public Response annullaEscursione(Request request){
 		Response response = new Response();
@@ -244,6 +232,25 @@ class ApplicationServiceEscursione implements Actions {
 			response.setResponse(RESP_KO);
 		}
 		
+		return response;
+	}
+	
+	/**
+	 * Metodo che restituisce tutte le escursione aperte a cui il partecipante non è iscritto
+	 * @param request
+	 * @return response
+	 */
+	public Response getAllEscursioniAperte(Request request){
+		Response response = new Response();
+		try {
+			PartecipanteTO partecipante = (PartecipanteTO)SessionCache.getCurrentData("Partecipante");
+			List<EscursioneTO> list_escursioni = escursione_dao.readEscursioniAperte(partecipante);
+			response.setData(list_escursioni);
+			response.setResponse(RESP_OK);
+		} catch (DatabaseException e) {
+			e.printStackTrace();
+			response.setResponse(RESP_KO);
+		}
 		return response;
 	}
 }

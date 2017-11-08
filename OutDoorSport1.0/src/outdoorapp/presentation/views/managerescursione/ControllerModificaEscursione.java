@@ -182,7 +182,13 @@ public class ControllerModificaEscursione extends ControllerEscursione{
 	
 	@Override
 	protected void registra() {
-		execModificaEscursione();
+		Alert alert = new Alert(AlertType.CONFIRMATION, "Confermare le modifiche?");
+		alert.setTitle("OutDoorSport1.0");
+		
+		Optional<ButtonType> result = alert.showAndWait();
+		
+		if (result.get() == ButtonType.OK)
+			execModificaEscursione();
 	}
 	
 	@FXML protected void indietro(){

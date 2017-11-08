@@ -7,6 +7,7 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleGroup;
 import outdoorapp.presentation.reqresp.Request;
 import outdoorapp.presentation.reqresp.Response;
 import outdoorapp.presentation.views.generic.ControllerRegistrazione;
@@ -63,6 +64,12 @@ public class ControllerConfig extends ControllerRegistrazione{
 	@Override
 	protected void initialize() {
 		lblErrore.setText("");
+		
+		final ToggleGroup group = new ToggleGroup();
+		radioM.setToggleGroup(group);
+		radioF.setToggleGroup(group);
+		
+		group.selectToggle(radioM);
 	}
 
 	/**
@@ -78,8 +85,6 @@ public class ControllerConfig extends ControllerRegistrazione{
 	 * correttamente
 	 */
 	private void execRegistraManagerDiSistema(){
-
-
 		mds.setNome(txtNome.getText());
 		mds.setCognome(txtCognome.getText());
 		mds.setCodiceFiscale(txtCF.getText());

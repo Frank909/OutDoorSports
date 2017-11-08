@@ -21,7 +21,6 @@ public class ControllerManagerDiEscursione extends GenericController{
 	@FXML private Label lblGestisciEscursione;
 	@FXML private Label lblInserisciEscursione;
 	@FXML private AnchorPane anchorContent;
-	@FXML private AnchorPane anchorManagerEscursione;
 	
 	/**
 	 * Costruttore della classe ControllerManagerDiEscursione
@@ -34,13 +33,18 @@ public class ControllerManagerDiEscursione extends GenericController{
 	 */
 	@Override
 	protected void initialize() {
-        ///DA COMPLETARE CON TUTTI I CAMPI///
     }
 	
+	/**
+	 * Metodo associato all'evento del controllo della view per la gestione delle escursioni
+	 */
 	@FXML protected void viewGestioneEscursioni(){
 		this.sendRequest(new Request(anchorContent, VIEW_GESTIONE_ESCURSIONI));
 	}
 	
+	/**
+	 * Metodo associato all'evento del controllo della view per l'inserimento di una escursione
+	 */
 	@FXML protected void viewInserisciEscursione(){
 		this.sendRequest(new Request(anchorContent, VIEW_INSERISCI_ESCURSIONE));
 	}

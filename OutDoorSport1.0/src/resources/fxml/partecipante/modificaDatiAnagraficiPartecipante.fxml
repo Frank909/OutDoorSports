@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="574.0" prefWidth="959.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="outdoorapp.presentation.views.partecipante.ControllerRegistrazionePartecipante">
+<StackPane fx:id="stpModificaDati" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="558.0" prefWidth="722.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="outdoorapp.presentation.views.partecipante.ControllerModificaPartecipante">
   <children>
     <BorderPane prefHeight="700.0" prefWidth="800.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
       <center>
@@ -76,10 +76,11 @@
                         </GridPane>
                         <GridPane GridPane.columnIndex="1" GridPane.rowIndex="5">
                           <children>
-                            <Label fx:id="lblSrcError" focusTraversable="false" styleClass="lblError" text="Label" visible="false" GridPane.columnIndex="0" GridPane.rowIndex="1" GridPane.valignment="TOP" />
+                            <Label fx:id="lblSrcError" focusTraversable="false" styleClass="lblError" text="Label" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="1" GridPane.valignment="TOP" />
                           </children>
                           <columnConstraints>
-                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                            <ColumnConstraints />
+                                          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                           </columnConstraints>
                           <rowConstraints>
                             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -184,7 +185,7 @@
                                        </GridPane.margin></Label>
                         <GridPane GridPane.columnIndex="1" GridPane.rowIndex="0">
                           <children>
-                            <TextField fx:id="txtUsername" prefWidth="200.0" GridPane.valignment="TOP">
+                            <TextField fx:id="txtNome" prefWidth="200.0" GridPane.valignment="TOP">
                               <GridPane.margin>
                                 <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" fx:id="x5" />
                               </GridPane.margin>
@@ -233,7 +234,7 @@
                             <RowConstraints maxHeight="36.0" minHeight="10.0" prefHeight="35.0" vgrow="SOMETIMES" />
                           </rowConstraints>
                         </GridPane>
-                        <Label font="$x1" text="Username" wrapText="true" GridPane.valignment="TOP">
+                        <Label font="$x1" text="Nome" wrapText="true" GridPane.valignment="TOP">
                                        <GridPane.margin>
                                           <Insets left="10.0" top="10.0" />
                                        </GridPane.margin></Label>
@@ -257,19 +258,24 @@
                             <RowConstraints maxHeight="35.0" minHeight="10.0" prefHeight="35.0" vgrow="SOMETIMES" />
                           </rowConstraints>
                         </GridPane>
-                        <GridPane GridPane.columnIndex="1" GridPane.rowIndex="3">
+                        <GridPane prefHeight="26.0" prefWidth="312.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
                           <children>
-                            <Label fx:id="lblTesSanError" styleClass="lblError" text="Label" visible="false" GridPane.columnIndex="0" GridPane.rowIndex="1" GridPane.valignment="TOP">
+                            <Label fx:id="lblTesSanError" styleClass="lblError" text="Label" visible="false" GridPane.columnIndex="0" GridPane.valignment="TOP">
                                              <GridPane.margin>
                                                 <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                                              </GridPane.margin></Label>
+                                          <TextField fx:id="txtCognome" prefWidth="200.0">
+                                             <GridPane.margin>
+                                                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                             </GridPane.margin>
+                                          </TextField>
                           </children>
                           <columnConstraints>
                             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                           </columnConstraints>
                           <rowConstraints>
-                            <RowConstraints maxHeight="25.0" minHeight="10.0" prefHeight="25.0" vgrow="SOMETIMES" />
-                            <RowConstraints maxHeight="34.0" minHeight="10.0" prefHeight="34.0" vgrow="SOMETIMES" />
+                            <RowConstraints maxHeight="60.0" minHeight="10.0" prefHeight="60.0" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="34.0" minHeight="0.0" prefHeight="0.0" vgrow="SOMETIMES" />
                           </rowConstraints>
                         </GridPane>
                         <Label font="$x1" text="Num. Tess. Sanitaria" wrapText="true" GridPane.rowIndex="2" GridPane.valignment="TOP">
@@ -277,6 +283,11 @@
                             <Insets left="10.0" top="10.0" fx:id="x3" />
                           </GridPane.margin>
                         </Label>
+                                    <Label font="$x1" text="Cognome" wrapText="true" GridPane.rowIndex="3">
+                                       <GridPane.margin>
+                                          <Insets left="10.0" />
+                                       </GridPane.margin>
+                                    </Label>
                       </children>
                       <columnConstraints>
                         <ColumnConstraints hgrow="SOMETIMES" maxWidth="239.0" minWidth="10.0" prefWidth="140.0" />
@@ -310,7 +321,7 @@
             </GridPane>
             <GridPane>
               <children>
-                <Label text="MODIFICHE DATI ANAGRAFICI PARTECIPANTE">
+                <Label text="MODIFICHE DATI ANAGRAFICI -">
                   <font>
                     <Font name="System Bold" size="24.0" />
                   </font>
@@ -318,6 +329,14 @@
                     <Insets left="10.0" />
                   </GridPane.margin>
                 </Label>
+                        <Label fx:id="lblUsername" text="Username" GridPane.halignment="CENTER">
+                           <font>
+                              <Font name="System Bold" size="24.0" />
+                           </font>
+                           <GridPane.margin>
+                              <Insets left="200.0" />
+                           </GridPane.margin>
+                        </Label>
               </children>
               <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -326,15 +345,20 @@
                 <RowConstraints maxHeight="69.0" minHeight="10.0" prefHeight="69.0" vgrow="SOMETIMES" />
               </rowConstraints>
             </GridPane>
-            <Button fx:id="btnRegistrati" mnemonicParsing="false" onMouseClicked="#registra" prefHeight="41.0" prefWidth="222.0" text="Invia le Modifiche" GridPane.halignment="CENTER" GridPane.rowIndex="2">
+            <Button fx:id="btnModifica" mnemonicParsing="false" onMouseClicked="#registra" prefHeight="41.0" prefWidth="118.0" text="Invia le Modifiche" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
               <GridPane.margin>
-                <Insets bottom="20.0" />
+                <Insets bottom="20.0" right="10.0" />
               </GridPane.margin>
             </Button>
                   <Label fx:id="lblErrore" text="[ERRORE]" textFill="RED" GridPane.rowIndex="2">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font></Label>
+                  <Button fx:id="btnBack" mnemonicParsing="false" onMouseClicked="#btnBackClicked" prefHeight="41.0" prefWidth="96.0" text="Indietro" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
+                     <GridPane.margin>
+                        <Insets bottom="20.0" right="150.0" />
+                     </GridPane.margin>
+                  </Button>
           </children>
           <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -356,4 +380,4 @@
       </top>
     </BorderPane>
   </children>
-</AnchorPane>
+</StackPane>

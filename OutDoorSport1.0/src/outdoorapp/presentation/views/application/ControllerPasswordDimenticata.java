@@ -1,5 +1,6 @@
 package outdoorapp.presentation.views.application;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
@@ -7,13 +8,14 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import outdoorapp.presentation.frontcontroller.FrontController;
 import outdoorapp.presentation.reqresp.Request;
 import outdoorapp.presentation.reqresp.Response;
 import outdoorapp.presentation.views.generic.GenericController;
 import outdoorapp.to.FactoryProducerTO;
 import outdoorapp.to.enums.FactoryEnum;
 import outdoorapp.to.enums.UtenteEnum;
-import outdoorapp.to.interfaces.ManagerDiEscursioneTO;
+import outdoorapp.to.interfaces.ManagerDiSistemaTO;
 import outdoorapp.to.interfaces.TOFactory;
 import outdoorapp.to.interfaces.UtenteTO;
 
@@ -74,9 +76,9 @@ public class ControllerPasswordDimenticata extends GenericController{
 			alert.setTitle("OutDoorSport1.0");
 			alert.showAndWait();
 			
-			if(alert.getResult() == ButtonType.OK){
+			if(alert.getResult() == ButtonType.OK)
 				this.sendRequest(new Request(VIEW_LOGIN));
-			}
+			
 				
 		}else{
 			lblErrore.setText("L'email inserita non esiste!");

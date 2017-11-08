@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="525.0" prefWidth="837.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="agroludos.presentation.views.partecipante.ControllerPartIscrizione">
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="558" prefWidth="722" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="outdoorapp.presentation.views.partecipante.ControllerIscrizioneEscursione">
   <children>
     <BorderPane prefHeight="700.0" prefWidth="800.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
       <bottom>
@@ -15,7 +15,7 @@
       <center>
         <GridPane BorderPane.alignment="CENTER">
           <children>
-            <Label fx:id="lblNomeCompetizione" text="Questo è il nome della escursione" wrapText="true">
+            <Label fx:id="lblNomeEscursione" text="Questo è il nome della escursione" wrapText="true">
               <font>
                 <Font size="20.0" />
               </font>
@@ -73,7 +73,7 @@
                     </GridPane>
                     <GridPane prefHeight="62.0" prefWidth="827.0" GridPane.rowIndex="1">
                       <children>
-                        <Label font="$x2" prefHeight="41.0" prefWidth="829.0" text="Nessun Optinal Scelto">
+                        <Label font="$x2" prefHeight="41.0" prefWidth="829.0" text="Nessun Optional Scelto">
                           <GridPane.margin>
                             <Insets left="10.0" right="10.0" />
                           </GridPane.margin>
@@ -91,7 +91,7 @@
                             <Insets left="10.0" />
                           </GridPane.margin>
                         </Label>
-                        <Label fx:id="lblCostoTotate" font="$x4" text="€ 0" textFill="#18ad18" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
+                        <Label fx:id="lblCostoTotale" font="$x4" text="€ 0" textFill="#18ad18" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
                           <GridPane.margin>
                             <Insets right="10.0" />
                           </GridPane.margin>
@@ -117,7 +117,12 @@
                 </GridPane>
                 <GridPane GridPane.columnIndex="0" GridPane.rowIndex="1">
                   <children>
-                    <Button id="btnIscriviti" mnemonicParsing="false" onMouseClicked="#btnIscrivitiClicked" prefHeight="26.0" prefWidth="166.0" text="Conferma Iscrizione" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="0" />
+                    <Button id="btnIscriviti" fx:id="btnConfermaIscrizione" mnemonicParsing="false" onMouseClicked="#btnIscrivitiClicked" prefHeight="26.0" prefWidth="166.0" text="Conferma Iscrizione" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="0" />
+                              <Button id="btnIscriviti" fx:id="btnBack" mnemonicParsing="false" onMouseClicked="#btnBackClicked" prefHeight="26.0" prefWidth="70.0" text="Indietro" GridPane.columnIndex="1" GridPane.halignment="RIGHT">
+                                 <GridPane.margin>
+                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                 </GridPane.margin>
+                              </Button>
                   </children>
                   <columnConstraints>
                     <ColumnConstraints hgrow="SOMETIMES" maxWidth="383.0" minWidth="10.0" prefWidth="372.0" />
@@ -139,7 +144,7 @@
             </GridPane>
             <GridPane GridPane.rowIndex="1">
               <children>
-                <Label fx:id="lblTipoCompetizione" font="$x1" text="Questo è il tipo della escursione" textFill="#8a8a8a">
+                <Label fx:id="lblTipoEscursione" font="$x1" text="Questo è il tipo della escursione" textFill="#8a8a8a">
                   <GridPane.margin>
                     <Insets left="10.0" />
                   </GridPane.margin>
@@ -167,17 +172,6 @@
       <right>
         <Pane prefHeight="561.0" prefWidth="10.0" BorderPane.alignment="CENTER" />
       </right>
-      <top>
-        <MenuBar BorderPane.alignment="CENTER">
-          <menus>
-            <Menu mnemonicParsing="false" text="OutDoorSports">
-              <items>
-                <MenuItem mnemonicParsing="false" text="Esci da Agroludos" />
-              </items>
-            </Menu>
-          </menus>
-        </MenuBar>
-      </top>
     </BorderPane>
   </children>
-</AnchorPane>
+</StackPane>

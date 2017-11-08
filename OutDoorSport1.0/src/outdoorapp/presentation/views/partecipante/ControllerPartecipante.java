@@ -33,17 +33,26 @@ public class ControllerPartecipante extends GenericController{
 	 */
 	@Override
 	protected void initialize() {
-        ///DA COMPLETARE CON TUTTI I CAMPI///
     }
 	
+	/**
+	 * Metodo associato all'evento del controllo della view per la visualizzazione del profilo del partecipante
+	 */
 	@FXML protected void viewIlMioProfilo(){
 		this.sendRequest(new Request(anchorContent, VIEW_IL_MIO_PROFILO));
 	}
 	
+	/**
+	 * Metodo associato all'evento del controllo della view per la visualizzazione delle escursione aperte
+	 */
 	@FXML protected void viewVisualizzaEscursioniAperte(){
 		this.sendRequest(new Request(anchorContent, VIEW_VISUALIZZA_ESCURSIONI_APERTE));
 	}
 	
+	/**
+	 * Metodo associato all'evento del controllo della view per la visualizzazione delle escursione a cui
+	 * il partecipante è iscritto
+	 */
 	@FXML protected void viewLeMieEscursioni(){
 		this.sendRequest(new Request(anchorContent, VIEW_LE_MIE_ESCURSIONI));
 	}

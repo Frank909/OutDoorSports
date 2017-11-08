@@ -8,6 +8,7 @@ import outdoorapp.to.enums.GenericEnum;
 import outdoorapp.to.interfaces.EscursioneTO;
 import outdoorapp.to.interfaces.ManagerDiEscursioneTO;
 import outdoorapp.to.interfaces.OptionalEscursioneTO;
+import outdoorapp.to.interfaces.PartecipanteTO;
 import outdoorapp.to.interfaces.TOFactory;
 import outdoorapp.to.interfaces.UtenteTO;
 
@@ -42,12 +43,14 @@ class EscursioneDAO extends GenericDAO<EscursioneTO> implements Escursione_DAO{
 	
 	@Override
 	public List<EscursioneTO> readEscursioniAttive() throws DatabaseException { 
-		return super.executeQuery("BOOOOOHHHH");
+		return super.executeQuery("boh");
 	}
 	
 	@Override
-	public List<EscursioneTO> readEscursioniAperte() throws DatabaseException{
-		return super.executeQuery("BOOOOOHHHH");
+	public List<EscursioneTO> readEscursioniAperte(PartecipanteTO partecipante) throws DatabaseException{
+		List<Integer> param = new ArrayList<Integer>();
+		param.add(partecipante.getIdPartecipante());
+		return super.executeParamQuery("readEscursioniAperte", param);
 	}
 	
 	@Override

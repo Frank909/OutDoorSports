@@ -19,7 +19,6 @@ import outdoorapp.to.interfaces.UtenteTO;
 
 class Escursione implements EscursioneTO{
 
-	private static final long serialVersionUID = -8060673121786005549L;
 	private Integer idEscursione;
 	private StatoEscursioneTO statoEscursione;
 	private TipoEscursioneTO tipoEscursione;

@@ -4,10 +4,26 @@ import java.util.HashMap;
 
 import outdoorapp.presentation.reqresp.Request;
 
+
+/**
+ * Classe astratta che rappresenta il contenitore per i dati di sessione riguardanti l'utente,
+ * tenendo traccia delle sue informazioni.
+ * 
+ * @author Andrea Zito
+ * @author Francesco Ventura
+ *
+ */
 public abstract class SessionCache{
 
+	/**
+	 * Istanza hashmap che tiene traccia dei dati attuali.
+	 */
 	private static HashMap<String, Object> currentData = new HashMap<>();
 
+	/**
+	 * Metodo che serve per settare i dati di sessione in base alla chiave in ingresso
+	 * @param key: chiave in ingresso.
+	 */
 	protected void setCurrentData(Request key){
 		if(key.getData() != null){
 			if(currentData.containsKey(key.getData().getClass().getSimpleName()))
@@ -38,9 +54,6 @@ public abstract class SessionCache{
 	 * @return vero se esiste, falso altrimenti
 	 */
 	public static boolean existsData(String key){
-		if(currentData.containsKey(key))
-			return true;
-		else
-			return false;
+		return currentData.containsKey(key);
 	}
 }

@@ -1,6 +1,5 @@
 package outdoorapp.presentation.views.managerescursione;
 
-import java.security.Provider.Service;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,7 +18,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
-import outdoorapp.business.ServiceBusinessDelegate;
 import outdoorapp.presentation.applicationcontroller.ViewCache;
 import outdoorapp.presentation.reqresp.Request;
 import outdoorapp.presentation.reqresp.Response;
@@ -30,7 +28,6 @@ import outdoorapp.to.enums.FactoryEnum;
 import outdoorapp.to.enums.GenericEnum;
 import outdoorapp.to.interfaces.EscursioneTO;
 import outdoorapp.to.interfaces.TOFactory;
-import outdoorapp.utils.SessionCache;
 
 /**
  * Gestisce la visualizzazione di tutte le escursioni del Manager di Escursione.
@@ -56,15 +53,16 @@ public class ControllerGestioneEscursioni extends ControllerTableView{
 	@FXML private TableColumn<EscursioneModel, String> mColumnCosto;
 	@FXML private TableColumn<EscursioneModel, String> mColumnStato;
 	@FXML private StackPane stpGestioneEscursioniMDE;
-	private TOFactory TOFact = null;
 	private EscursioneTO escursione = null;
 	private List<EscursioneTO> list_escursioni = null;
 	private EscursioneModel escursione_model = null;
-	
-	
+
+
 	public ControllerGestioneEscursioni() {
-		TOFact = FactoryProducerTO.getFactory(FactoryEnum.GenericTOFactory);
-		escursione = (EscursioneTO) TOFact.getGenericTO(GenericEnum.Escursione);
+		if(escursione == null){
+			TOFactory TOFact = FactoryProducerTO.getFactory(FactoryEnum.GenericTOFactory);
+			escursione = (EscursioneTO) TOFact.getGenericTO(GenericEnum.Escursione);
+		}
 	}
 
 	@Override
@@ -80,7 +78,7 @@ public class ControllerGestioneEscursioni extends ControllerTableView{
 
 		stpGestioneEscursioniMDE.visibleProperty().addListener(visibilityListener);
 	}
-	
+
 	/**
 	 * Metodo che carica tutte le escursioni presenti nel sistema di un determinato Manager di Escursione
 	 */
@@ -100,7 +98,7 @@ public class ControllerGestioneEscursioni extends ControllerTableView{
 		this.initColumn(mColumnStato, "nomeStatoEscursione");
 
 		mTableEscursioni.setItems(data);
-		
+
 		mTableEscursioni.addEventFilter(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>(){
 			@Override
 			public void handle(MouseEvent event) {
@@ -108,13 +106,13 @@ public class ControllerGestioneEscursioni extends ControllerTableView{
 				escursione_model = table_escursioni.getSelectionModel().getSelectedItem();
 				if(escursione_model != null){
 					if(event.getClickCount() == 2){
-		                sendRequest(new Request(escursione_model, ViewCache.getNestedAnchorPane(), VIEW_DETTAGLI_ESCURSIONI_FROM_MDE));
-		            }
+						sendRequest(new Request(escursione_model, ViewCache.getNestedAnchorPane(), VIEW_DETTAGLI_ESCURSIONI_FROM_MDE));
+					}
 				}
 			}
 		});
 	}
-	
+
 	/**
 	 * Evento associato al Button per la ricerca di una Escursione. La tabella presente nella View
 	 * verrà ricaricata in base ai parametri inseriti nella casella di testo.
@@ -122,22 +120,22 @@ public class ControllerGestioneEscursioni extends ControllerTableView{
 	@FXML protected void cercaEscursione(){
 		String param = txtSearchEscursione.getText();
 		List<EscursioneTO> list_escursione = new ArrayList<>();
-		
+
 		for(EscursioneTO escursione : this.list_escursioni){
 			if(escursione.getNome().contains(param) ||
-			   escursione.getTipoEscursione().getNome().contains(param) ||
-			   escursione.getData().contains(param) ||
-			   escursione.getCosto() == Double.parseDouble(param) ||
-			   escursione.getStatoEscursione().getNome().equals(param)){
+					escursione.getTipoEscursione().getNome().contains(param) ||
+					escursione.getData().contains(param) ||
+					escursione.getCosto() == Double.parseDouble(param) ||
+					escursione.getStatoEscursione().getNome().equals(param)){
 				list_escursione.add(escursione);
 			}
 		}
-		
+
 		ObservableList<EscursioneModel> data = FXCollections.observableArrayList(getListTabellaEscursioni(list_escursione));
 
 		mTableEscursioni.setItems(data);
 	}
-	
+
 	/**
 	 * Metodo che inizializza il modello che servirà per visualizzare i dati nella tabella
 	 * 
@@ -151,11 +149,11 @@ public class ControllerGestioneEscursioni extends ControllerTableView{
 			escursione_model = new EscursioneModel(escursione);
 			res.add(escursione_model);
 		}
-		
+
 		return res;
 	}
-	
-	
+
+
 	/**
 	 * Evento associato alla visualizzazione dei dettagli di una escursione. Una volta selezionata
 	 * l'escursione desiderata, il Manager di Escursione, premendo il tasto, potrà visualizzare i 
