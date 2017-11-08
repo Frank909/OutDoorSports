@@ -171,5 +171,7 @@ public class ControllerGestioneEscursioni extends ControllerTableView{
 			alert.showAndWait();
 		}
 	}
+	
+	
 
 }

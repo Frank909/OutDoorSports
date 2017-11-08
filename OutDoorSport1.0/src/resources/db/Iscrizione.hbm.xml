@@ -30,12 +30,12 @@
 		<set name="optionals" cascade="persist,merge,refresh" table="tbl_optional_iscrizione"
 			lazy="false">
 			<key column="id_iscrizione" />
-			<many-to-many column="id_optional" class="outdoorapp.to.Optional" />
+			<many-to-many column="id_optional" class="outdoorapp.to.OptionalEscursione" />
 		</set>
 	</class>
 	
 	<query name="getAllIscrittiFromEscursione">
-		<![CDATA[ from outdoorapp.to.Iscrizione m where m.escursione.idEscursione = ? ]]></query>
+		<![CDATA[ from outdoorapp.to.Iscrizione m where m.escursione.idEscursione = ? and m.statoIscrizione.idStatoIscrizione = 2]]></query>
 		
 	<!-- <query name="getAllIscrizioni">
         <![CDATA[ from agroludos.to.Iscrizione i where i.statoIscrizione = 1 ]]></query>

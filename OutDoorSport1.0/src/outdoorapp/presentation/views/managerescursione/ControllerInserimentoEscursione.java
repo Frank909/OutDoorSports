@@ -29,6 +29,7 @@ import outdoorapp.presentation.views.generic.ControllerEscursione;
 import outdoorapp.to.FactoryProducerTO;
 import outdoorapp.to.enums.FactoryEnum;
 import outdoorapp.to.enums.GenericEnum;
+import outdoorapp.to.enums.OptionalEnum;
 import outdoorapp.to.enums.TipoEnum;
 import outdoorapp.to.interfaces.EscursioneTO;
 import outdoorapp.to.interfaces.OptionalTO;
@@ -65,6 +66,7 @@ public class ControllerInserimentoEscursione extends ControllerEscursione{
 	private EscursioneTO escursione = null;
 	private TipoEscursioneTO tipo_escursione = null;
 	private List<TipoEscursioneTO> list_tipo_escursione = new ArrayList<>();
+	private OptionalTO optional = null;
 	private List<OptionalTO> list_optional = new ArrayList<>();
 	private ObservableList<String> data = null;
 	private ArrayList<String> strings = null;
@@ -81,6 +83,10 @@ public class ControllerInserimentoEscursione extends ControllerEscursione{
 			TOFactory TOFact = FactoryProducerTO.getFactory(FactoryEnum.TipoTOFactory);
 			tipo_escursione = (TipoEscursioneTO) TOFact.getTipoTO(TipoEnum.TipoEscursione);
 		}
+		if(optional == null){
+			TOFactory TOfact = FactoryProducerTO.getFactory(FactoryEnum.OptionalTOFactory);
+			optional = (OptionalTO) TOfact.getOptionalTO(OptionalEnum.Optional); 
+		}
 	}
 
 	@Override
@@ -92,8 +98,9 @@ public class ControllerInserimentoEscursione extends ControllerEscursione{
 			@Override
 			public void changed(ObservableValue<? extends Boolean> arg0, Boolean oldValue, Boolean newValue) {
 				if(newValue){
-					if(SessionCache.getCurrentData("TipiEscursione") != null){
-						list_tipo_escursione.addAll((ArrayList<TipoEscursioneTO>) SessionCache.getCurrentData("TipiEscursione"));
+					if(list_tipo_escursione.isEmpty()){
+						Response response = sendRequest(new Request(tipo_escursione, OUTDOORSPORT_GET_ALL_TIPI_ESCURSIONE));
+						list_tipo_escursione = (List<TipoEscursioneTO>) response.getData();
 						strings = new ArrayList<>();
 						for(TipoEscursioneTO tipoescursione: list_tipo_escursione){
 							strings.add(tipoescursione.getNome());
@@ -101,8 +108,9 @@ public class ControllerInserimentoEscursione extends ControllerEscursione{
 						data = FXCollections.observableArrayList(strings);
 						chbTipoEscursione.setItems(data);
 					}
-					if(SessionCache.getCurrentData("Optionals") != null){
-						list_optional.addAll((ArrayList<OptionalTO>) SessionCache.getCurrentData("Optionals"));
+					if(list_optional.isEmpty()){
+						Response response = sendRequest(new Request(optional, OUTDOORSPORT_GET_ALL_OPTIONALS));
+						list_optional = (List<OptionalTO>) response.getData();
 						strings = new ArrayList<>();
 						for(OptionalTO optional: list_optional){
 							strings.add(optional.getNome());

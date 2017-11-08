@@ -76,11 +76,12 @@ public class ControllerModificaEscursione extends ControllerEscursione{
 	private EscursioneTO escursione = null;
 	private EscursioneModel escursioneModel = new EscursioneModel();
 	private TipoEscursioneTO tipo_escursione = null;
+	private OptionalTO optional = null;
 	private List<TipoEscursioneTO> list_tipo_escursione = new ArrayList<>();
+	private List<OptionalTO> list_optional = new ArrayList<>();
 	private ObservableList<String> data = null;
 	private ArrayList<String> strings = null;
 	private OptionalEscursioneTO optional_escursione = null;
-	private List<OptionalTO> list_optional = new ArrayList<>();
 	private List<StatoOptionalTO> list_stati_optional = null;
 	private StatoOptionalTO stato_optional = null;
 	
@@ -104,6 +105,10 @@ public class ControllerModificaEscursione extends ControllerEscursione{
 			TOFactory TOFact = FactoryProducerTO.getFactory(FactoryEnum.StatoTOFactory);
 			stato_optional = (StatoOptionalTO) TOFact.getStatoTO(StatoEnum.StatoOptional);
 		}
+		if(optional == null){
+			TOFactory TOfact = FactoryProducerTO.getFactory(FactoryEnum.OptionalTOFactory);
+			optional = (OptionalTO) TOfact.getOptionalTO(OptionalEnum.Optional); 
+		}
 	}
 
 	@Override
@@ -124,8 +129,9 @@ public class ControllerModificaEscursione extends ControllerEscursione{
 					txtCostoBase.setText(Double.toString(escursioneModel.getCosto()));
 					dataEscursione.setValue(LocalDate.parse(escursioneModel.getData()));
 					txtDescrizione.setText(escursioneModel.getDescrizione());
-					if(SessionCache.getCurrentData("TipiEscursione") != null){
-						list_tipo_escursione.addAll((ArrayList<TipoEscursioneTO>) SessionCache.getCurrentData("TipiEscursione"));
+					if(list_tipo_escursione.isEmpty()){
+						Response response = sendRequest(new Request(tipo_escursione, OUTDOORSPORT_GET_ALL_TIPI_ESCURSIONE));
+						list_tipo_escursione = (List<TipoEscursioneTO>) response.getData();
 						strings = new ArrayList<>();
 						for(TipoEscursioneTO tipoescursione: list_tipo_escursione){
 							strings.add(tipoescursione.getNome());
@@ -134,9 +140,9 @@ public class ControllerModificaEscursione extends ControllerEscursione{
 						chbTipoEscursione.setItems(data);
 						chbTipoEscursione.getSelectionModel().select(escursioneModel.getTipoEscursione().getNome());
 					}
-					if(SessionCache.getCurrentData("Optionals") != null){
-						list_optional.clear();
-						list_optional.addAll((ArrayList<OptionalTO>) SessionCache.getCurrentData("Optionals"));
+					if(list_optional.isEmpty()){
+						Response response = sendRequest(new Request(optional, OUTDOORSPORT_GET_ALL_OPTIONALS));
+						list_optional = (List<OptionalTO>) response.getData();
 						strings = new ArrayList<>();
 						for(OptionalTO optional: list_optional){
 							strings.add(optional.getNome());
