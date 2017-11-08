@@ -58,6 +58,8 @@ public class ViewCache extends SessionCache{
 	private final String VIEW_MODIFICA_DATI_PARTECIPANTE = "../../../resources/fxml/partecipante/modificaDatiAnagraficiPartecipante";
 	private final String VIEW_ISCRITTI_ESCURSIONE = "../../../resources/fxml/manager_escursione/visualizzaPartecipantiIscrittiEscursione";
 	private final String VIEW_ISCRIZIONE_ESCURSIONE = "../../../resources/fxml/partecipante/iscrizioneEscursione";
+	private final String VIEW_MODIFICA_ISCRIZIONE_ESCURSIONE = "../../../resources/fxml/manager_escursione/modificaIscrizioneEscursione";
+	private final String VIEW_SELEZIONA_OPTIONAL_ISCRIZIONE = "../../../resources/fxml/manager_escursione/selezionaOptional";
 	
 	private static ViewCache viewCache = new ViewCache();
 
@@ -87,6 +89,8 @@ public class ViewCache extends SessionCache{
 		loadForm("VIEW_PASSWORD_DIMENTICATA",VIEW_PASSWORD_DIMENTICATA, true);
 		loadForm("VIEW_REGISTRAZIONE_PARTECIPANTE",VIEW_REGISTRAZIONE_PARTECIPANTE, true);
 		
+		loadForm("VIEW_MODIFICA_ISCRIZIONE_ESCURSIONE", VIEW_MODIFICA_ISCRIZIONE_ESCURSIONE, false);
+		loadForm("VIEW_SELEZIONA_OPTIONAL_ISCRIZIONE", VIEW_SELEZIONA_OPTIONAL_ISCRIZIONE, false);
 		loadForm("VIEW_ISCRIZIONE_ESCURSIONE", VIEW_ISCRIZIONE_ESCURSIONE, false);
 		loadForm("VIEW_MODIFICA_DATI_PARTECIPANTE", VIEW_MODIFICA_DATI_PARTECIPANTE, false);
 		loadForm("VIEW_AGGIORNA_SRC_PARTECIPANTE", VIEW_AGGIORNA_SRC_PARTECIPANTE, false);

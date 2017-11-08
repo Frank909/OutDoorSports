@@ -4,6 +4,7 @@ package outdoorapp.to;
 import java.util.Set;
 import outdoorapp.to.interfaces.EscursioneTO;
 import outdoorapp.to.interfaces.IscrizioneTO;
+import outdoorapp.to.interfaces.OptionalEscursioneTO;
 import outdoorapp.to.interfaces.OptionalTO;
 import outdoorapp.to.interfaces.StatoIscrizioneTO;
 import outdoorapp.to.interfaces.UtenteTO;
@@ -23,7 +24,7 @@ class Iscrizione implements IscrizioneTO{
 	private StatoIscrizioneTO statoIscrizione;
 	private UtenteTO utente;
 	private String data;
-	private Set<OptionalTO> optionals;
+	private Set<OptionalEscursioneTO> optionals;
 
 	public Iscrizione() {
 	}
@@ -79,12 +80,12 @@ class Iscrizione implements IscrizioneTO{
 	}
 	
 	@Override
-	public Set<OptionalTO> getOptionals() {
+	public Set<OptionalEscursioneTO> getOptionals() {
 		return optionals;
 	}
 
 	@Override
-	public void setOptionals(Set<OptionalTO> optionals) {
+	public void setOptionals(Set<OptionalEscursioneTO> optionals) {
 		this.optionals = optionals;
 	}
 }

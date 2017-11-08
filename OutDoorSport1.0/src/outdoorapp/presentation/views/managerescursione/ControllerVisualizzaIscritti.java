@@ -20,6 +20,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
+import outdoorapp.presentation.applicationcontroller.ViewCache;
 import outdoorapp.presentation.reqresp.Request;
 import outdoorapp.presentation.reqresp.Response;
 import outdoorapp.presentation.views.generic.ControllerTableView;
@@ -60,6 +61,7 @@ public class ControllerVisualizzaIscritti extends ControllerTableView{
 	@FXML private TableColumn<PartecipanteModel, String> mColumnDataCertificatoPartecipante;
 	@FXML private TableColumn<PartecipanteModel, String> mColumnUsernamePartecipante;
 	@FXML private Label lblNomeEscursione;
+	@FXML private Button btnIndietro;
 	@FXML private Button btnModificaDatiEscursione;
 	@FXML private Button btnEliminaIscrizione;
 	@FXML private StackPane stpVisualizzaPartecipantiIscrittiEscursione;
@@ -113,6 +115,7 @@ public class ControllerVisualizzaIscritti extends ControllerTableView{
 		Response response = this.sendRequest(new Request(iscrizione, OUTDOORSPORT_GET_ALL_ISCRITTI_FROM_ESCURSIONE));
 		list_iscrizioni = (ArrayList<IscrizioneTO>) response.getData();
 		
+		list_partecipanti.clear();
 		for(IscrizioneTO i : list_iscrizioni){
 			list_partecipanti.add((PartecipanteTO) i.getUtente());
 		}
@@ -135,7 +138,7 @@ public class ControllerVisualizzaIscritti extends ControllerTableView{
 				partecipante_model = mTablePartecipanti.getSelectionModel().getSelectedItem();
 				if(partecipante_model != null){
 					if(event.getClickCount() == 2){
-		                //sendRequest(new Request(partecipante_model, SessionCache.getNestedAnchorPane(), VIEW_DETTAGLI_ESCURSIONI_FROM_MDE));
+		                updateDatiIscrizione();
 		            }
 				}
 			}
@@ -198,6 +201,7 @@ public class ControllerVisualizzaIscritti extends ControllerTableView{
 		
 		if(!(partecipante_model == null)){
 			Response response = this.sendRequest(new Request(this.iscrizione, OUTDOORSPORT_ANNULLA_ISCRIZIONE));
+			allPartecipantiIscritti();
 			if(response.getData() != null){
 				Alert alert = new Alert(AlertType.INFORMATION, "Iscrizione annullata con successo!", ButtonType.OK);
 				alert.setTitle("OutDoorSport1.0");
@@ -215,8 +219,54 @@ public class ControllerVisualizzaIscritti extends ControllerTableView{
 		}
 	}
 	
+	/**
+	 * Evento associato all'eliminazione di una iscrizione in una escursione
+	 * da parte del Manager di Escursione
+	 */
 	@FXML protected void eliminaIscrizione(){
 		deleteIscrizione();
+	}
+	
+	/**
+	 * Ritorna alla schermata precedente
+	 */
+	@FXML protected void indietro(){
+		sendRequest(new Request(ViewCache.getNestedAnchorPane(), VIEW_DETTAGLI_ESCURSIONI_FROM_MDE));
+	}
+	
+	/**
+	 * Visualizza i dettagli dell'iscrizione per un determinato iscritto
+	 * e può modificare gli optional e di conseguenza, il costo risultante
+	 */
+	@FXML protected void modificaDatiIscrizione(){
+		partecipante_model = mTablePartecipanti.getSelectionModel().getSelectedItem();
+		if(partecipante_model != null){
+			for(IscrizioneTO iscrizione : list_iscrizioni){
+				if(iscrizione.getUtente().equals(partecipante_model.getPartecipante())){
+					this.iscrizione = iscrizione;
+				}
+			}
+			sendRequest(new Request(iscrizione, ViewCache.getNestedAnchorPane(), VIEW_MODIFICA_ISCRIZIONE_ESCURSIONE));
+		}else{
+			Alert alert = new Alert(AlertType.ERROR, "Nessun Partecipante Selezionato", ButtonType.OK);
+			alert.setTitle("OutDoorSport1.0");
+			alert.showAndWait();
+		}
+	}
+	
+	/**
+	 * Visualizza i dettagli dell'iscrizione di un iscritto cliccando
+	 * direttamente sulla tabella. Può modificare gli optional
+	 * e, di conseguenza, il costo risultante.
+	 */
+	private void updateDatiIscrizione(){
+		partecipante_model = mTablePartecipanti.getSelectionModel().getSelectedItem();
+		for(IscrizioneTO iscrizione : list_iscrizioni){
+			if(iscrizione.getUtente().equals(partecipante_model.getPartecipante())){
+				this.iscrizione = iscrizione;
+			}
+		}
+		sendRequest(new Request(iscrizione, ViewCache.getNestedAnchorPane(), VIEW_MODIFICA_ISCRIZIONE_ESCURSIONE));
 	}
 
 }

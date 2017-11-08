@@ -78,12 +78,12 @@ public interface IscrizioneTO extends OutDoorSports{
 	/**
 	 * @return un set di optional
 	 */
-	public Set<OptionalTO> getOptionals();
+	public Set<OptionalEscursioneTO> getOptionals();
 	
 	/**
 	 * Metodo che setta gli optional per una determinata iscrizione
 	 * 
 	 * @param optionals
 	 */
-	public void setOptionals(Set<OptionalTO> optionals);
+	public void setOptionals(Set<OptionalEscursioneTO> optionals);
 }
