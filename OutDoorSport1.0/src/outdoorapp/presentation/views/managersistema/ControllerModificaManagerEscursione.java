@@ -59,10 +59,16 @@ public class ControllerModificaManagerEscursione extends ControllerRegistrazione
 	@FXML private DatePicker dataNasc;
 	@FXML private Button btnModificaMDE;
 	@FXML private Label lblErrore;
+	@FXML private Button btnIndietro;
 
-	private ManagerDiEscursioneModel mde_model = null;
+	private ManagerDiEscursioneTO mde = null;
 
-	public ControllerModificaManagerEscursione() {}
+	public ControllerModificaManagerEscursione() {
+		if(mde == null){
+			TOFactory TOFact = FactoryProducerTO.getFactory(FactoryEnum.UtenteTOFactory);
+			mde = (ManagerDiEscursioneTO) TOFact.getUtenteTO(UtenteEnum.ManagerDiEscursione);
+		}
+	}
 
 	@Override
 	protected void initialize() {
@@ -71,30 +77,50 @@ public class ControllerModificaManagerEscursione extends ControllerRegistrazione
 			@Override
 			public void changed(ObservableValue<? extends Boolean> arg0, Boolean oldValue, Boolean newValue) {
 				if(newValue){
-					mde_model = (ManagerDiEscursioneModel) SessionCache.getCurrentData(mde_model.getClass().getSimpleName());
-					txtNome.setText(mde_model.getNome());
-					txtCognome.setText(mde_model.getCognome());
-					txtCF.setText(mde_model.getCodice_fiscale());
-					txtUsername.setText(mde_model.getUsername());
-					txtPassword.setText(mde_model.getPassword());
-					txtStipendio.setText(Double.toString(mde_model.getStipendio()));
-					txtEmail.setText(mde_model.getEmail());
-					if(mde_model.getSesso().equals("M")){
+					mde = (ManagerDiEscursioneTO) SessionCache.getCurrentData(mde.getClass().getSimpleName());
+					txtNome.setText(mde.getNome());
+					txtCognome.setText(mde.getCognome());
+					txtCF.setText(mde.getCodiceFiscale());
+					txtUsername.setText(mde.getUsername());
+					txtPassword.setText(mde.getPassword());
+					txtStipendio.setText(Double.toString(mde.getStipendio()));
+					txtEmail.setText(mde.getEmail());
+					if(mde.getSesso().equals("M")){
 						radioM.setSelected(true);
 						radioF.setSelected(false);
 					}else{
 						radioM.setSelected(false);
 						radioF.setSelected(true);
 					}
-					txtIndirizzo.setText(mde_model.getIndirizzo());
-					txtCitta.setText(mde_model.getCitta());
-					dataNasc.setValue(LocalDate.parse(mde_model.getData_nascita()));
+					txtIndirizzo.setText(mde.getIndirizzo());
+					txtCitta.setText(mde.getCitta());
+					dataNasc.setValue(LocalDate.parse(mde.getDataNascita()));
 				}
 			}
 		};
 
 		stpModificaManagerEscursione.visibleProperty().addListener(visibilityListener);
 		lblErrore.setText("");
+		
+		txtStipendio.textProperty().addListener(new ChangeListener<String>() {
+		    @Override
+		    public void changed(ObservableValue<? extends String> observable, String oldValue, 
+		        String newValue) {
+		        if (!newValue.matches("\\d*")) {
+		            txtStipendio.setText(newValue.replaceAll("[^\\d]", ""));
+		        }
+		    }
+		});
+		
+		txtCF.textProperty().addListener(new ChangeListener<String>() {
+	        @Override
+	        public void changed(final ObservableValue<? extends String> ov, final String oldValue, final String newValue) {
+	            if (txtCF.getText().length() > 16) {
+	                String s = txtCF.getText().substring(0, 16);
+	                txtCF.setText(s);
+	            }
+	        }
+	    });
 	}
 
 	/**
@@ -118,8 +144,7 @@ public class ControllerModificaManagerEscursione extends ControllerRegistrazione
 
 			lblErrore.setText("");
 
-			mde.setIdManagerDiEscursione(mde_model.getId());
-			mde.setIdUtente(mde_model.getId());
+			mde.setIdUtente(this.mde.getIdUtente());
 			mde.setNome(txtNome.getText());
 			mde.setCognome(txtCognome.getText());
 			mde.setCodiceFiscale(txtCF.getText());
@@ -159,6 +184,13 @@ public class ControllerModificaManagerEscursione extends ControllerRegistrazione
 			if(!(dataNasc.getValue().getYear() >= LocalDate.now().getYear() - 15))
 				utente.setDataNascita(dataNasc.getValue().toString());
 		}
+	}
+	
+	/**
+	 * Metodo associato all'evento che ritorna alla view precedente
+	 */
+	@FXML protected void indietro(){
+		this.sendRequest(new Request(ViewCache.getNestedAnchorPane(), VIEW_GESTIONE_MANAGER_ESCURSIONE));
 	}
 
 }

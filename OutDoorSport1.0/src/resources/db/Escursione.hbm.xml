@@ -14,6 +14,9 @@
 		<property name="data" type="string">
 			<column name="data" not-null="true" />
 		</property>
+		<property name="iscritti" type="integer">
+			<column name="iscritti" not-null="true" default="0"/>
+		</property>
 		<property name="numberMin" type="integer">
 			<column name="number_min" not-null="true" default="1" />
 		</property>

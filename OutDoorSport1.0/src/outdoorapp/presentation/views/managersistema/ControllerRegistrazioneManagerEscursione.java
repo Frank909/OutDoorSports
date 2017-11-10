@@ -2,6 +2,8 @@ package outdoorapp.presentation.views.managersistema;
 
 import java.time.LocalDate;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
@@ -69,6 +71,26 @@ public class ControllerRegistrazioneManagerEscursione extends ControllerRegistra
 		final ToggleGroup group = new ToggleGroup();
 		radioM.setToggleGroup(group);
 		radioF.setToggleGroup(group);
+		
+		txtStipendio.textProperty().addListener(new ChangeListener<String>() {
+		    @Override
+		    public void changed(ObservableValue<? extends String> observable, String oldValue, 
+		        String newValue) {
+		        if (!newValue.matches("\\d*")) {
+		            txtStipendio.setText(newValue.replaceAll("[^\\d]", ""));
+		        }
+		    }
+		});
+		
+		txtCF.textProperty().addListener(new ChangeListener<String>() {
+	        @Override
+	        public void changed(final ObservableValue<? extends String> ov, final String oldValue, final String newValue) {
+	            if (txtCF.getText().length() > 16) {
+	                String s = txtCF.getText().substring(0, 16);
+	                txtCF.setText(s);
+	            }
+	        }
+	    });
 		
 		group.selectToggle(radioM);
     }

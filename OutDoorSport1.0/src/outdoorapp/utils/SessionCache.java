@@ -56,4 +56,11 @@ public abstract class SessionCache{
 	public static boolean existsData(String key){
 		return currentData.containsKey(key);
 	}
+	
+	/**
+	 * Metodo che resetta la sessione
+	 */
+	protected void resetData(){
+		currentData.clear();
+	}
 }

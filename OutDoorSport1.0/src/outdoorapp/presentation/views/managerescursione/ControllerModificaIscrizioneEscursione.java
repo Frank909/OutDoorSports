@@ -3,6 +3,7 @@ package outdoorapp.presentation.views.managerescursione;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 import javafx.beans.value.ChangeListener;
@@ -50,7 +51,7 @@ public class ControllerModificaIscrizioneEscursione extends GenericController{
 	@FXML private Label lblNMinEscursione;
 	@FXML private Label lblCostoEscursione;
 	@FXML private Button btnSelezionaOptional;
-	@FXML private Label lblCostoTotate;
+	@FXML private Label lblCostoTotale;
 	@FXML private Button btnConfermaModifiche;
 	@FXML private Button btnIndietro;
 	@FXML private Label lblOptionalScelti;
@@ -87,14 +88,16 @@ public class ControllerModificaIscrizioneEscursione extends GenericController{
 					double costoTotale = iscrizione.getEscursione().getCosto();
 					Set<OptionalEscursioneTO> optionals = new HashSet();
 					optionals = (Set<OptionalEscursioneTO>) iscrizione.getOptionals();
-					if(optionals.isEmpty())
+					if(optionals.isEmpty() || optionals == null)
 						string = "Nessun Optional Scelto";
-					for(OptionalEscursioneTO optional : optionals){
-						string += optional.getOptional().getNome() + " | ";
-						costoTotale += optional.getOptional().getTipoOptional().getCosto();
+					else{
+						for(OptionalEscursioneTO optional : optionals){
+							string += optional.getOptional().getNome() + " | ";
+							costoTotale += optional.getOptional().getTipoOptional().getCosto();
+						}
 					}
 					lblOptionalScelti.setText(string);
-					lblCostoTotate.setText(Double.toString(costoTotale) + " €");
+					lblCostoTotale.setText(costoTotale + " €");
 					if(stato_escursione != null){
 						Response response = sendRequest(new Request(stato_escursione, OUTDOORSPORT_GET_ALL_STATO_ESCURSIONE));
 						if(response.getData() != null){
@@ -122,7 +125,30 @@ public class ControllerModificaIscrizioneEscursione extends GenericController{
 		}
 	}
 	
+	/**
+	 * Torna alla schermata della visualizzazione degli iscritti all'escursione
+	 */
 	@FXML protected void indietro(){
-		this.sendRequest(new Request(iscrizione.getEscursione(), ViewCache.getNestedAnchorPane(), VIEW_ISCRITTI_ESCURSIONE));
+		Alert alertConfirm = new Alert(AlertType.CONFIRMATION, "Attenzione! Perderai tutte le modifiche non confermate");
+		Optional<ButtonType> result = alertConfirm.showAndWait();
+		if (result.get() == ButtonType.OK){
+			this.sendRequest(new Request(iscrizione.getEscursione(), ViewCache.getNestedAnchorPane(), VIEW_ISCRITTI_ESCURSIONE));
+		} else {
+			alertConfirm.close();
+		}	
+	}
+	
+	/**
+	 * Conferma le modifiche degli optional scelti, e invia una mail 
+	 * all'iscritto interessato
+	 */
+	@FXML protected void confermaModifiche(){
+		Alert alertConfirm = new Alert(AlertType.CONFIRMATION, "Vuoi confermare le modifiche per questa iscrizione?");
+		Optional<ButtonType> result = alertConfirm.showAndWait();
+		if (result.get() == ButtonType.OK){
+		    this.sendRequest(new Request(iscrizione, OUTDOORSPORT_UPDATE_OPTIONAL_FROM_ISCRIZIONE));
+		} else {
+			alertConfirm.close();
+		}
 	}
 }

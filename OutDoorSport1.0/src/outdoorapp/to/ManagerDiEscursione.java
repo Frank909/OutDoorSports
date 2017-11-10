@@ -25,22 +25,7 @@ import outdoorapp.to.interfaces.ManagerDiEscursioneTO;
 class ManagerDiEscursione extends Utente implements ManagerDiEscursioneTO{
 
 	private static final long serialVersionUID = -4507785182150099517L;
-	private int idMde;
 	private double stipendio;
-
-	ManagerDiEscursione() {
-		super.setIdUtente(this.getIdManagerDiEscursione());
-	}
-
-	@Override
-	public int getIdManagerDiEscursione() {
-		return this.idMde;
-	}
-
-	@Override
-	public void setIdManagerDiEscursione(int idMde) {
-		this.idMde = idMde;
-	}
 
 	@Override
 	public double getStipendio() {

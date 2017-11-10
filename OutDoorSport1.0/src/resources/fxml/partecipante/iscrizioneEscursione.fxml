@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="558" prefWidth="722" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="outdoorapp.presentation.views.partecipante.ControllerIscrizioneEscursione">
+<StackPane fx:id="stpIscrizioneEscursione" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="558" prefWidth="722" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="outdoorapp.presentation.views.partecipante.ControllerIscrizioneEscursione">
   <children>
     <BorderPane prefHeight="700.0" prefWidth="800.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
       <bottom>
@@ -73,7 +73,7 @@
                     </GridPane>
                     <GridPane prefHeight="62.0" prefWidth="827.0" GridPane.rowIndex="1">
                       <children>
-                        <Label font="$x2" prefHeight="41.0" prefWidth="829.0" text="Nessun Optional Scelto">
+                        <Label fx:id="lblOptionalScelti" font="$x2" prefHeight="41.0" prefWidth="829.0" text="Nessun Optional Scelto">
                           <GridPane.margin>
                             <Insets left="10.0" right="10.0" />
                           </GridPane.margin>

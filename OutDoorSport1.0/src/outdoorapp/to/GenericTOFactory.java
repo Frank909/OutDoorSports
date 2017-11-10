@@ -33,6 +33,8 @@ class GenericTOFactory implements TOFactory{
 			return new Iscrizione();
 		case Email:
 			return new Email();
+		case EncryptPassword:
+			return new EncryptPassword();
 		default:
 			return null;
 		}

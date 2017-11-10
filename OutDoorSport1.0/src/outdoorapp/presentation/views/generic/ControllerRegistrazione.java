@@ -48,7 +48,7 @@ public abstract class ControllerRegistrazione extends GenericController{
 			f.setAccessible(true);
 			try {
 				if ((f.get(utente) == null || f.get(utente).equals(""))) {
-					if(!(f.getName().equals("ruolo") || f.getName().equals("statoUtente"))){
+					if(!(f.getName().equals("ruolo") || f.getName().equals("statoUtente") || f.getName().equals("idUtente"))){
 						if(!f.getName().equals("email")){
 							result += f.getName() + ", ";
 							i++;
@@ -59,6 +59,7 @@ public abstract class ControllerRegistrazione extends GenericController{
 						}
 					}
 				}
+
 			} catch (IllegalArgumentException | IllegalAccessException e) {
 				e.printStackTrace();
 			}

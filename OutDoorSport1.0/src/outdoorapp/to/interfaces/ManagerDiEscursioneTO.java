@@ -12,18 +12,6 @@ package outdoorapp.to.interfaces;
 public interface ManagerDiEscursioneTO extends UtenteTO{
 	
 	/**
-	 * Metodo che setta l'id del manager di escursione
-	 * 
-	 * @param idMde
-	 */
-	public void setIdManagerDiEscursione(int idMde);
-	
-	/**
-	 * @return l'id del manager di escursione
-	 */ 
-	public int getIdManagerDiEscursione();
-	
-	/**
 	 * @return lo stipendio del manager di escursione
 	 */
 	public double getStipendio();

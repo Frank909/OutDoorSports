@@ -76,6 +76,18 @@ public interface IscrizioneTO extends OutDoorSports{
 	public void setData(String data);
 	
 	/**
+	 * @return il momento esatto dell'iscrizione
+	 */
+	public String getOra();
+	
+	/**
+	 * Metodo che setta il momento esatto dell'iscrizione
+	 * 
+	 * @param ora
+	 */
+	public void setOra(String ora);
+	
+	/**
 	 * @return un set di optional
 	 */
 	public Set<OptionalEscursioneTO> getOptionals();

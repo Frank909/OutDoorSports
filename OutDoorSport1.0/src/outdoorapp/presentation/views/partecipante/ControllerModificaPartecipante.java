@@ -18,7 +18,9 @@ import outdoorapp.presentation.reqresp.Response;
 import outdoorapp.presentation.views.generic.ControllerRegistrazione;
 import outdoorapp.to.FactoryProducerTO;
 import outdoorapp.to.enums.FactoryEnum;
+import outdoorapp.to.enums.GenericEnum;
 import outdoorapp.to.enums.UtenteEnum;
+import outdoorapp.to.interfaces.EncryptPasswordTO;
 import outdoorapp.to.interfaces.PartecipanteTO;
 import outdoorapp.to.interfaces.TOFactory;
 import outdoorapp.utils.SessionCache;
@@ -45,6 +47,7 @@ public class ControllerModificaPartecipante extends ControllerRegistrazione{
 	@FXML private StackPane stpModificaDati;
 
 	private PartecipanteTO partecipante = null;
+	private EncryptPasswordTO encryptPassword = null;
 
 	/**
 	 * Costruttore del controller che avvalora il transfer object del partecipante
@@ -53,6 +56,10 @@ public class ControllerModificaPartecipante extends ControllerRegistrazione{
 		if(partecipante == null){
 			TOFactory TOFact = FactoryProducerTO.getFactory(FactoryEnum.UtenteTOFactory);
 			partecipante = (PartecipanteTO) TOFact.getUtenteTO(UtenteEnum.Partecipante);
+		}
+		if(encryptPassword == null){
+			TOFactory TOFact = FactoryProducerTO.getFactory(FactoryEnum.GenericTOFactory);
+			encryptPassword = (EncryptPasswordTO) TOFact.getGenericTO(GenericEnum.EncryptPassword);
 		}
 	}
 

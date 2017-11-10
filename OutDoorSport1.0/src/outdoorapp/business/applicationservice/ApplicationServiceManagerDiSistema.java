@@ -22,8 +22,11 @@ import outdoorapp.presentation.reqresp.Request;
 import outdoorapp.presentation.reqresp.Response;
 import outdoorapp.to.FactoryProducerTO;
 import outdoorapp.to.enums.FactoryEnum;
+import outdoorapp.to.enums.GenericEnum;
+import outdoorapp.to.interfaces.EncryptPasswordTO;
 import outdoorapp.to.interfaces.ManagerDiSistemaTO;
 import outdoorapp.to.interfaces.OptionalTO;
+import outdoorapp.to.interfaces.TOFactory;
 import outdoorapp.to.interfaces.TipoEscursioneTO;
 import outdoorapp.to.interfaces.UtenteTO;
 import outdoorapp.utils.Actions;
@@ -45,17 +48,12 @@ import outdoorapp.utils.Views;
 class ApplicationServiceManagerDiSistema implements Actions, Views{
 
 	private DAOFactory userFactory = null, 
-			statoFactory = null, tipoFactory = null, optionalFactory = null;
+			statoFactory = null, tipoFactory = null;
 
 	private MDS_DAO mds_dao = null;
-	private TipoEscursione_DAO tipo_escursione_dao = null;
-	private Optional_DAO optional_dao = null;
 	
 	private ManagerDiSistemaTO mds = null;
-	private List<TipoEscursioneTO> list_tipi_escursione = null;
-	private List<OptionalTO> list_optional = null;
-	
-	
+	private EncryptPasswordTO passwordEncryptor = null;
 	
 	/**
 	 * Costruttore che inizializza il DAO del Manager di Sistema
@@ -64,10 +62,11 @@ class ApplicationServiceManagerDiSistema implements Actions, Views{
 		userFactory = FactoryProducerDAO.getFactory(DAORequest.Users);
 		statoFactory = FactoryProducerDAO.getFactory(DAORequest.State);
 		tipoFactory = FactoryProducerDAO.getFactory(DAORequest.Type);
-		optionalFactory = FactoryProducerDAO.getFactory(DAORequest.Generic);
 		mds_dao =  (MDS_DAO) userFactory.getUtenteDAO(UtenteDAOEnum.ManagerDiSistema);
-		tipo_escursione_dao = (TipoEscursione_DAO) tipoFactory.getTipoDAO(TipoDAOEnum.Escursione);
-		optional_dao = (Optional_DAO) optionalFactory.getGenericDAO(GenericDAOEnum.Optional);
+		if(passwordEncryptor == null){
+			TOFactory TOFact = FactoryProducerTO.getFactory(FactoryEnum.GenericTOFactory);
+			passwordEncryptor = (EncryptPasswordTO) TOFact.getGenericTO(GenericEnum.EncryptPassword);
+		}
 	}
 	
 	/**
@@ -84,17 +83,6 @@ class ApplicationServiceManagerDiSistema implements Actions, Views{
 		} catch (DatabaseException e) {
 			e.printStackTrace();
 		}
-		/*
-		try {
-			
-			list_tipi_escursione = tipo_escursione_dao.getAll();
-			currentData.put("TipiEscursione", list_tipi_escursione);
-			list_optional = optional_dao.getAll();
-			currentData.put("Optionals", list_optional);
-		} catch (DatabaseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}*/
 		
 		response.setData(null);
 		if(result){
@@ -123,6 +111,10 @@ class ApplicationServiceManagerDiSistema implements Actions, Views{
 				mds = (ManagerDiSistemaTO)request.getData();
 				mds.setRuolo(ruoliDao.getRuoloManagerDiSistema());
 				mds.setStatoUtente(statoUtenteDao.getStatoAttivo());
+				
+				String password = mds.getPassword();
+				mds.setPassword(passwordEncryptor.encryptPassword(password));
+				
 				mds_dao.create(mds);
 				Alert alert = new Alert(AlertType.INFORMATION, "Il Manager di Sistema è stato inserito correttamente!", ButtonType.OK);
 				alert.setTitle("OutDoorSport1.0");

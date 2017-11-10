@@ -26,7 +26,6 @@ public interface Actions {
 	public static final String ROOT_CERTIFICATE = "certificatiSRC";
 	public static final String OUTDOORSPORT_GET_ALL_ESCURSIONI = "getAllEscursioni";
 	public static final String OUTDOORSPORT_GET_ALL_PARTECIPANTI = "getAllPartecipanti";
-	public static final String OUTDOORSPORT_GET_ALL_PARTECIPANTI_FOR_MDE = "getPartecipantiForMde";
 	public static final String OUTDOORSPORT_GET_ALL_ESCURSIONI_FROM_MDE = "getAllEscursioniFromMDE";
 	public static final String OUTDOORSPORT_GET_ALL_STATO_ESCURSIONE = "getAllStatoEscursione";
 	public static final String OUTDOORSPORT_SAVE_ESCURSIONE = "nuovaEscursione";
@@ -41,4 +40,6 @@ public interface Actions {
 	public static final String OUTDOORSPORT_GET_ALL_STATO_ISCRIZIONE = "gellAllStatoIscrizione";
 	public static final String OUTDOORSPORT_MODIFY_PARTECIPANTE = "modificaPartecipante";
 	public static final String OUTDOORSPORT_GET_ALL_ESCURSIONI_APERTE = "getAllEscursioniAperte";
+	public static final String OUTDOORSPORT_UPDATE_OPTIONAL_FROM_ISCRIZIONE = "updateOptionalFromIscrizione";
+	public static final String OUTDOORSPORT_CREATE_OPTIONAL_FROM_ISCRIZIONE = "createOptionalFromIscrizione";
 }

@@ -32,6 +32,7 @@ public class ControllerPasswordDimenticata extends GenericController{
 	@FXML private Button btnRichiediNuovaPassword;
 	@FXML private TextField txtEmail;
 	@FXML private Label lblErrore;
+	@FXML private Button btnIndietro;
 	
 	private UtenteTO utente = null;
 	private TOFactory TOFact = null;
@@ -82,8 +83,10 @@ public class ControllerPasswordDimenticata extends GenericController{
 				
 		}else{
 			lblErrore.setText("L'email inserita non esiste!");
-		}
-			
+		}		
 	}
-
+	
+	@FXML protected void btnIndietro(){
+		sendRequest(new Request(VIEW_LOGIN));
+	}
 }

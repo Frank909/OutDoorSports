@@ -59,7 +59,7 @@ public class ControllerDettagliEscursione extends GenericController{
 	@FXML private Button btnAnnullaEscursione;
 	@FXML private Button btnVisualizzaIscritti;
 	@FXML private Button btnIndietro;
-	private EscursioneModel escursione = new EscursioneModel();
+	private EscursioneTO escursione = null;
 	private List<StatoEscursioneTO> list_stato_escursione = new ArrayList<>();
 	private StatoEscursioneTO stato_escursione = null;
 	private TOFactory toFactory = null;
@@ -68,6 +68,10 @@ public class ControllerDettagliEscursione extends GenericController{
 		if(stato_escursione == null){
 			toFactory = FactoryProducerTO.getFactory(FactoryEnum.StatoTOFactory);
 			stato_escursione = (StatoEscursioneTO) toFactory.getStatoTO(StatoEnum.StatoEscursione);
+		}
+		if(escursione == null){
+			toFactory = FactoryProducerTO.getFactory(FactoryEnum.GenericTOFactory);
+			escursione = (EscursioneTO) toFactory.getGenericTO(GenericEnum.Escursione);
 		}
 	}
 
@@ -78,7 +82,7 @@ public class ControllerDettagliEscursione extends GenericController{
 			@Override
 			public void changed(ObservableValue<? extends Boolean> arg0, Boolean oldValue, Boolean newValue) {
 				if(newValue){
-					escursione = (EscursioneModel) SessionCache.getCurrentData(escursione.getClass().getSimpleName());
+					escursione = (EscursioneTO) SessionCache.getCurrentData(escursione.getClass().getSimpleName());
 					lblNomeEscursione.setText(escursione.getNome());
 					lblStatoEscursione.setText("Stato: " + escursione.getStatoEscursione().getNome());
 					lblTipoEscursione.setText("Tipo: " + escursione.getTipoEscursione().getNome());
@@ -87,10 +91,16 @@ public class ControllerDettagliEscursione extends GenericController{
 					lblNumMax.setText("Massimo " + escursione.getNumberMax() + " Partecipanti");
 					lblCostoEscursione.setText("Costo: " + escursione.getCosto());
 					String optionals = "";
-					for(OptionalTO op : escursione.getEscursione().getOptionals()){
-						optionals += optionals + op.getNome() + "\n";
+					for(OptionalTO op : escursione.getOptionals()){
+						optionals += op.getNome() + "\n";
 					}
-					lblOptionalEscursione.setText("Optional: " + optionals);
+					if(!optionals.equals(""))
+						lblOptionalEscursione.setText("Optional: " + optionals);
+					else{
+						optionals = "Nessun optional per questa escursione";
+						lblOptionalEscursione.setText(optionals);
+					}
+						
 					lblDescrizioneEscursione.setText("Descrizione: " + escursione.getDescrizione());
 					if(list_stato_escursione.isEmpty()){
 						Response response = sendRequest(new Request(stato_escursione, OUTDOORSPORT_GET_ALL_STATO_ESCURSIONE));
@@ -114,14 +124,14 @@ public class ControllerDettagliEscursione extends GenericController{
 	 * Evento associato alla view. Visualizza gli iscritti dell'escursione
 	 */
 	@FXML protected void visualizzaIscritti(){
-		this.sendRequest(new Request(escursione.getEscursione(), ViewCache.getNestedAnchorPane(), VIEW_ISCRITTI_ESCURSIONE));
+		this.sendRequest(new Request(escursione, ViewCache.getNestedAnchorPane(), VIEW_ISCRITTI_ESCURSIONE));
 	}
 	
 	/**
 	 * Evento associato alla modifica di una escursione
 	 */
 	@FXML protected void modificaEscursione(){
-		if(escursione.getStatoEscursione().getNome().equals(list_stato_escursione.get(1).getNome()))
+		if(escursione.getStatoEscursione().equals(list_stato_escursione.get(1).getNome()))
 			this.sendRequest(new Request(ViewCache.getNestedAnchorPane(), VIEW_MODIFICA_ESCURSIONE));
 		else if(escursione.getStatoEscursione().getNome().equals(list_stato_escursione.get(3).getNome())){
 			Alert alert = new Alert(AlertType.ERROR, "Non è possibile modificare una escursione in corso!", ButtonType.OK);
@@ -150,7 +160,7 @@ public class ControllerDettagliEscursione extends GenericController{
 
 			Optional<ButtonType> result = alert.showAndWait();
 			if (result.get() == ButtonType.OK){
-				Response response = sendRequest(new Request(escursione.getEscursione(), OUTDOORSPORTS_ANNULLA_ESCURSIONE));
+				Response response = sendRequest(new Request(escursione, OUTDOORSPORTS_ANNULLA_ESCURSIONE));
 				Alert alert1 = new Alert(AlertType.INFORMATION, "Escursione annullata con successo!", ButtonType.OK);
 				alert1.setTitle("OutDoorSport1.0");
 				alert1.showAndWait();

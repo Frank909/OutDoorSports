@@ -1,7 +1,12 @@
 package outdoorapp.presentation.views.partecipante;
 
+import java.util.Optional;
+
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.AnchorPane;
 import outdoorapp.presentation.frontcontroller.FrontController;
 import outdoorapp.presentation.reqresp.Request;
@@ -22,6 +27,7 @@ public class ControllerPartecipante extends GenericController{
 	@FXML private Label lblLeMieEscursioni;
 	@FXML private Label lblVisulizzaEscursioniAperte;
 	@FXML private Label lblIlMioProfilo;
+	@FXML private Label lblLogout;
 	
 	/**
 	 * Costruttore della classe ControllerManagerDiEscursione
@@ -55,6 +61,19 @@ public class ControllerPartecipante extends GenericController{
 	 */
 	@FXML protected void viewLeMieEscursioni(){
 		this.sendRequest(new Request(anchorContent, VIEW_LE_MIE_ESCURSIONI));
+	}
+	
+	/**
+	 * Metodo che esegue il logout
+	 */
+	@FXML protected void viewLogin(){
+		Alert alert = new Alert(AlertType.CONFIRMATION, "Sei sicuro?");
+		Optional<ButtonType> result = alert.showAndWait();
+		if (result.get() == ButtonType.OK){
+			this.sendRequest(new Request(VIEW_LOGIN));
+		} else {
+		    alert.close();
+		}
 	}
 
 }

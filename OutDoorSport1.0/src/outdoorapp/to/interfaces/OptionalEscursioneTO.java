@@ -18,12 +18,12 @@ public interface OptionalEscursioneTO extends OutDoorSports{
 	 * 
 	 * @param id
 	 */
-	public void setId(Integer id);
+	public void setIdOptionalEscursione(Integer idOptionalEscursione);
 	
 	/**
 	 * @return l'id di OptionalEscursione
 	 */
-	public Integer getId();
+	public Integer getIdOptionalEscursione();
 	
 	/**
 	 * @return l'escursione collegata all'optional

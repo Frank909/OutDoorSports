@@ -135,6 +135,36 @@ public class ControllerInserimentoEscursione extends ControllerEscursione{
 				}
 			}
 		});
+		
+		txtCostoBase.textProperty().addListener(new ChangeListener<String>() {
+		    @Override
+		    public void changed(ObservableValue<? extends String> observable, String oldValue, 
+		        String newValue) {
+		        if (!newValue.matches("\\d*")) {
+		        	txtCostoBase.setText(newValue.replaceAll("[^\\d]", ""));
+		        }
+		    }
+		});
+		
+		txtMin.textProperty().addListener(new ChangeListener<String>() {
+		    @Override
+		    public void changed(ObservableValue<? extends String> observable, String oldValue, 
+		        String newValue) {
+		        if (!newValue.matches("\\d*")) {
+		        	txtMin.setText(newValue.replaceAll("[^\\d]", ""));
+		        }
+		    }
+		});
+		
+		txtMax.textProperty().addListener(new ChangeListener<String>() {
+		    @Override
+		    public void changed(ObservableValue<? extends String> observable, String oldValue, 
+		        String newValue) {
+		        if (!newValue.matches("\\d*")) {
+		        	txtMax.setText(newValue.replaceAll("[^\\d]", ""));
+		        }
+		    }
+		});
 	}
 	
 	/**
@@ -163,6 +193,7 @@ public class ControllerInserimentoEscursione extends ControllerEscursione{
 	 * mandare i dati al database
 	 */
 	private void execInserisciEscursione() {
+		try{
 		escursione.setNome(txtNomeEscursione.getText());
 		escursione.setNumberMin(Integer.parseInt(txtMin.getText()));
 		escursione.setNumberMax(Integer.parseInt(txtMax.getText()));
@@ -193,6 +224,9 @@ public class ControllerInserimentoEscursione extends ControllerEscursione{
 				lblErrore.setText("Errore! L'Escursione è già presente nel Sistema!");
 		}else
 			lblErrore.setText(result);
+		}catch (Exception e){
+			e.printStackTrace();
+		}
 	}
 	
 	@Override

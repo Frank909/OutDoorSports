@@ -138,7 +138,7 @@ public class ControllerModificaEscursione extends ControllerEscursione{
 						}
 						data = FXCollections.observableArrayList(strings);
 						chbTipoEscursione.setItems(data);
-						chbTipoEscursione.getSelectionModel().select(escursioneModel.getTipoEscursione().getNome());
+						chbTipoEscursione.getSelectionModel().select(escursioneModel.getTipoEscursione());
 					}
 					if(list_optional.isEmpty()){
 						Response response = sendRequest(new Request(optional, OUTDOORSPORT_GET_ALL_OPTIONALS));
@@ -269,8 +269,7 @@ public class ControllerModificaEscursione extends ControllerEscursione{
 		}
 		escursione.setIdEscursione(escursioneModel.getIdEscursione());
 		escursione.setUtente(escursioneModel.getUtente());
-		escursione.setStatoEscursione(escursioneModel.getStatoEscursione());
-		escursione.setIdMde(escursioneModel.getUtente().getIdUtente());
+		escursione.setStatoEscursione(escursioneModel.getEscursione().getStatoEscursione());
 
 		Set<OptionalTO> temp = new HashSet<>();
 		for(OptionalTO op : list_optional){

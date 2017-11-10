@@ -4,10 +4,7 @@ import outdoorapp.exceptions.DatabaseException;
 import outdoorapp.integration.dao.interfaces.Utente_DAO;
 import outdoorapp.to.FactoryProducerTO;
 import outdoorapp.to.enums.FactoryEnum;
-import outdoorapp.to.enums.GenericEnum;
 import outdoorapp.to.enums.UtenteEnum;
-import outdoorapp.to.interfaces.EscursioneTO;
-import outdoorapp.to.interfaces.OutDoorSports;
 import outdoorapp.to.interfaces.TOFactory;
 import outdoorapp.to.interfaces.UtenteTO;
 
@@ -48,6 +45,7 @@ class UtenteDAO<T extends UtenteTO> extends GenericDAO<T> implements Utente_DAO<
 		List<String> param = new ArrayList<String>();
 		param.add(utente.getUsername());
 		param.add(utente.getPassword());
+		
 		List<T> list = this.executeParamQuery("getUtente", param);
 		if(list.size() == 1){
 			response = (UtenteTO) list.get(0);
@@ -93,7 +91,7 @@ class UtenteDAO<T extends UtenteTO> extends GenericDAO<T> implements Utente_DAO<
 	public T getByID(Integer id) throws DatabaseException {
 		List<Integer> param = new ArrayList<Integer>();
 		param.add(id);
-		return getUtenteByQuery("boooooooooooooooooh", param);
+		return getUtenteByQuery("getByID", param);
 	}
 	
 	/**

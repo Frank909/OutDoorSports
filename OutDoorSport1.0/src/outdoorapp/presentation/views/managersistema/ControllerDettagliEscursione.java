@@ -1,5 +1,8 @@
 package outdoorapp.presentation.views.managersistema;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
@@ -8,10 +11,18 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
 import outdoorapp.presentation.applicationcontroller.ViewCache;
 import outdoorapp.presentation.reqresp.Request;
+import outdoorapp.presentation.reqresp.Response;
 import outdoorapp.presentation.views.generic.GenericController;
 import outdoorapp.presentation.views.models.EscursioneModel;
 import outdoorapp.presentation.views.models.ManagerDiEscursioneModel;
+import outdoorapp.to.FactoryProducerTO;
+import outdoorapp.to.enums.FactoryEnum;
+import outdoorapp.to.enums.GenericEnum;
+import outdoorapp.to.enums.StatoEnum;
+import outdoorapp.to.interfaces.EscursioneTO;
 import outdoorapp.to.interfaces.OptionalTO;
+import outdoorapp.to.interfaces.StatoEscursioneTO;
+import outdoorapp.to.interfaces.TOFactory;
 import outdoorapp.utils.SessionCache;
 
 /**
@@ -38,10 +49,13 @@ public class ControllerDettagliEscursione extends GenericController{
 	@FXML private Button btnVisualizzaIscritti;
 	@FXML private Label lblMDE;
 	@FXML private StackPane stpDettagliEscursione;
-	private EscursioneModel escursione = new EscursioneModel();
+	private EscursioneTO escursione = null;
 	
 	public ControllerDettagliEscursione() {
-		// TODO Auto-generated constructor stub
+		if(escursione == null){
+			TOFactory TOFact = FactoryProducerTO.getFactory(FactoryEnum.GenericTOFactory);
+			escursione = (EscursioneTO) TOFact.getGenericTO(GenericEnum.Escursione);
+		}
 	}
 
 	@Override
@@ -51,7 +65,7 @@ public class ControllerDettagliEscursione extends GenericController{
 			@Override
 			public void changed(ObservableValue<? extends Boolean> arg0, Boolean oldValue, Boolean newValue) {
 				if(newValue){
-					escursione = (EscursioneModel) SessionCache.getCurrentData(escursione.getClass().getSimpleName());
+					escursione = (EscursioneTO) SessionCache.getCurrentData(escursione.getClass().getSimpleName());
 					lblNomeEscursione.setText(escursione.getNome());
 					lblStatoEscursione.setText("Stato: " + escursione.getStatoEscursione().getNome());
 					lblTipoEscursione.setText("Tipo: " + escursione.getTipoEscursione().getNome());
@@ -60,9 +74,10 @@ public class ControllerDettagliEscursione extends GenericController{
 					lblNumMax.setText("Massimo " + escursione.getNumberMax() + " Partecipanti");
 					lblCostoEscursione.setText("Costo: " + escursione.getCosto());
 					String optionals = "";
-					for(OptionalTO op : escursione.getEscursione().getOptionals()){
-						optionals += optionals + op.getNome() + "\n";
+					for(OptionalTO op : escursione.getOptionals()){
+						optionals += op.getNome() + "\n";
 					}
+					lblOptionalEscursione.setText("Optional: " + optionals);
 					lblDescrizioneEscursione.setText("Descrizione: " + escursione.getDescrizione());
 					lblMDE.setText("Manager: " + escursione.getUtente().getNome() + " " + escursione.getUtente().getCognome());
 				}
@@ -83,6 +98,6 @@ public class ControllerDettagliEscursione extends GenericController{
 	 * Evento associato alla view. Visualizza gli iscritti dell'escursione
 	 */
 	@FXML protected void visualizzaIscritti(){
-		
+		this.sendRequest(new Request(escursione, ViewCache.getNestedAnchorPane(), VIEW_ISCRITTI_ESCURSIONE_SISTEMA));
 	}
 }

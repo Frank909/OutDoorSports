@@ -93,14 +93,19 @@ public class ControllerVisualizzaEscursioniSistema extends ControllerTableView{
 		String param = txtSearchEscursione.getText();
 		List<EscursioneTO> list_escursione = new ArrayList<>();
 		
+		
 		for(EscursioneTO escursione : this.list_escursioni){
 			if(escursione.getNome().contains(param) ||
 			   escursione.getTipoEscursione().getNome().contains(param) ||
-			   escursione.getData().contains(param) ||
-			   escursione.getCosto() == Double.parseDouble(param) ||
-			   escursione.getStatoEscursione().getNome().equals(param)){
+			   escursione.getData().contains(param) || 
+			   escursione.getStatoEscursione().getNome().equals(param))
 				list_escursione.add(escursione);
-			}
+			else
+				try{
+					if(escursione.getCosto() == Double.parseDouble(param))
+							list_escursione.add(escursione);
+				}catch(Exception e){
+				}
 		}
 		
 		ObservableList<EscursioneModel> data = FXCollections.observableArrayList(getListTabellaEscursioni(list_escursione));
@@ -116,7 +121,7 @@ public class ControllerVisualizzaEscursioniSistema extends ControllerTableView{
 	@FXML protected void dettagliEscursione(){
 		escursione_model = mTableEscursioni.getSelectionModel().getSelectedItem();
 		if(escursione_model != null)
-			sendRequest(new Request(escursione_model, ViewCache.getNestedAnchorPane(), VIEW_DETTAGLI_ESCURSIONI));
+			sendRequest(new Request(escursione_model, ViewCache.getNestedAnchorPane(), VIEW_DETTAGLI_ESCURSIONI_SISTEMA));
 		else{
 			Alert alert = new Alert(AlertType.ERROR, "Nessuna Escursione Selezionata", ButtonType.OK);
 			alert.setTitle("OutDoorSport1.0");
@@ -151,7 +156,7 @@ public class ControllerVisualizzaEscursioniSistema extends ControllerTableView{
 				escursione_model = table_escursioni.getSelectionModel().getSelectedItem();
 				if(escursione_model != null){
 					if(event.getClickCount() == 2){
-		                sendRequest(new Request(escursione_model, ViewCache.getNestedAnchorPane(), VIEW_DETTAGLI_ESCURSIONI));
+		                sendRequest(new Request(escursione_model.getEscursione(), ViewCache.getNestedAnchorPane(), VIEW_DETTAGLI_ESCURSIONI_SISTEMA));
 		            }
 				}
 			}

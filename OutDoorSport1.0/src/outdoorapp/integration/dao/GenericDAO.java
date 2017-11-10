@@ -64,6 +64,28 @@ abstract class GenericDAO<T extends OutDoorSports> implements GEN_DAO<T>{
 		return entity;
 	}
 	
+	@Override
+	public T createOrUpdate(final T entity) throws DatabaseException{
+		Transaction transaction = null;
+		Session session = null;
+
+		try {
+			session = this.getSession();
+			transaction = session.beginTransaction();
+			session.saveOrUpdate(entity);
+			transaction.commit();
+		} catch (Exception e){
+			if (transaction != null){
+				transaction.rollback();
+			}
+			throw new DatabaseException(e.getMessage(), e);
+		}finally{
+			session.close();
+		}
+
+		return entity;
+	}
+	
 	
 	@Override
 	@SuppressWarnings("unchecked")

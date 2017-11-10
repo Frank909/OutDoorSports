@@ -32,8 +32,8 @@ import outdoorapp.to.interfaces.UtenteTO;
 public class EscursioneModel {
 
 	private SimpleIntegerProperty idEscursione;
-	private SimpleObjectProperty<StatoEscursioneTO> statoEscursione;
-	private SimpleObjectProperty<TipoEscursioneTO> tipoEscursione;
+	private SimpleStringProperty statoEscursione;
+	private SimpleStringProperty tipoEscursione;
 	private SimpleStringProperty nome;
 	private SimpleStringProperty data;
 	private SimpleIntegerProperty numberMin;
@@ -49,8 +49,8 @@ public class EscursioneModel {
 	
 	public EscursioneModel(EscursioneTO e) {
 		this.idEscursione = new SimpleIntegerProperty(e.getIdEscursione().intValue());
-		this.statoEscursione = new SimpleObjectProperty<StatoEscursioneTO>(e.getStatoEscursione());
-		this.tipoEscursione = new SimpleObjectProperty<TipoEscursioneTO>(e.getTipoEscursione());
+		this.statoEscursione = new SimpleStringProperty(e.getStatoEscursione().getNome());
+		this.tipoEscursione = new SimpleStringProperty(e.getTipoEscursione().getNome());
 		this.nome = new SimpleStringProperty(e.getNome());
 		this.data = new SimpleStringProperty(e.getData());
 		this.numberMin = new SimpleIntegerProperty(e.getNumberMin());
@@ -105,14 +105,14 @@ public class EscursioneModel {
 	/**
 	 * @return lo stato dell'escursione
 	 */
-	public StatoEscursioneTO getStatoEscursione() {
+	public String getStatoEscursione() {
 		return statoEscursione.get();
 	}
 	
 	/**
 	 * @return il tipo dell'escursione
 	 */
-	public TipoEscursioneTO getTipoEscursione() {
+	public String getTipoEscursione() {
 		return tipoEscursione.get();
 	}
 

@@ -97,7 +97,7 @@ public class ControllerGestioneManagerEscursione extends ControllerTableView{
 	@FXML protected void modificaManagerDiEscursione(){
 		mde_model = mTableManagerEscursione.getSelectionModel().getSelectedItem();
 		if(mde_model != null)
-			sendRequest(new Request(mde_model, ViewCache.getNestedAnchorPane(), VIEW_MODIFICA_MANAGER_DI_ESCURSIONE));
+			sendRequest(new Request(mde_model.getManagerDiEscursione(), ViewCache.getNestedAnchorPane(), VIEW_MODIFICA_MANAGER_DI_ESCURSIONE));
 		else{
 			Alert alert = new Alert(AlertType.ERROR, "Nessun Manager di Escursione Selezionato", ButtonType.OK);
 			alert.setTitle("OutDoorSport1.0");

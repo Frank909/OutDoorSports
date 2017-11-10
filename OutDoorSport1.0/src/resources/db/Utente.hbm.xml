@@ -92,11 +92,11 @@
 	<query name="getByUsername">
 		<![CDATA[ from outdoorapp.to.Utente m where m.statoUtente.idStatoUtente = 1 and m.username = ? ]]></query>
 		
+	<query name="getUtente">
+		<![CDATA[ from outdoorapp.to.Utente m where m.statoUtente.idStatoUtente = 1 and m.username = ? and m.password = ?]]></query>
+		
 	<query name="getByEmail">
 		<![CDATA[ from outdoorapp.to.Utente m where m.statoUtente.idStatoUtente = 1 and m.email = ? ]]></query>
-	
-	<query name="getUtente">
-        <![CDATA[ from outdoorapp.to.Utente m where m.statoUtente.idStatoUtente = 1 and m.username = ? and m.password = ?]]></query>
         
     <query name="getPartecipante">
         <![CDATA[ from outdoorapp.to.Partecipante m where m.statoUtente.idStatoUtente = 1 and m.id = ? ]]></query>
@@ -109,6 +109,9 @@
         
     <query name="getAllPartecipanti">
 		<![CDATA[ from outdoorapp.to.Partecipante m where m.statoUtente.idStatoUtente = 1 ]]></query>
+		
+	<query name="getByID">
+        <![CDATA[ from outdoorapp.to.Utente u where u.statoUtente.id = 1 and u.idUtente = ?]]></query>
 	
 	<!--<query name="checkMds">
 		<![CDATA[ from agroludos.to.Utente m where m.statoUtente.id = 1 and m.tipoUtente.id = 0 ]]></query>

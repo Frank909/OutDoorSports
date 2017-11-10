@@ -1,8 +1,11 @@
 package outdoorapp.business.applicationservice;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import org.hibernate.dialect.pagination.SQL2008StandardLimitHandler;
 
@@ -24,6 +27,7 @@ import outdoorapp.to.enums.GenericEnum;
 import outdoorapp.to.interfaces.EmailTO;
 import outdoorapp.to.interfaces.EscursioneTO;
 import outdoorapp.to.interfaces.IscrizioneTO;
+import outdoorapp.to.interfaces.OptionalEscursioneTO;
 import outdoorapp.to.interfaces.PartecipanteTO;
 import outdoorapp.to.interfaces.TOFactory;
 import outdoorapp.to.interfaces.UtenteTO;
@@ -50,7 +54,6 @@ class ApplicationServiceIscrizione implements Views, Actions{
 	private TOFactory TOFact = null;
 	
 	private Iscrizione_DAO iscrizione_dao = null;
-	private IscrizioneTO iscrizione = null;
 	private StatoIscrizione_DAO stato_iscrizione_dao = null;
 	private EmailTO email = null;
 	
@@ -148,5 +151,110 @@ class ApplicationServiceIscrizione implements Views, Actions{
 		}
 		return response;
 	}
+	
+	/**
+	 * Metodo che aggiunge al database gli optional
+	 * modificati di una determinata iscrizione a una 
+	 * escursione
+	 * 
+	 * @param richiesta: iscrizione all'escursione
+	 * @return risposta in base alla richiesta
+	 */
+	public Response updateOptionalFromIscrizione(Request request){
+		Response response = new Response();
+		IscrizioneTO iscrizione = (IscrizioneTO) request.getData();
+		PartecipanteTO partecipante = (PartecipanteTO) iscrizione.getUtente();
+		
+		try {
+			iscrizione_dao.createOrUpdate(iscrizione);
+			response.setData(iscrizione);
+			response.setResponse(RESP_OK);
+			
+			TOFact = FactoryProducerTO.getFactory(FactoryEnum.GenericTOFactory);
+			EmailTO email = (EmailTO) TOFact.getGenericTO(GenericEnum.Email);
 
+			String mailOggetto = "OutDoorSports | Modifica Optional Scelti";
+			String mailMessaggio = "Gentile ";
+			mailMessaggio += partecipante.getNome() + " " + partecipante.getCognome() + ", \n";
+			mailMessaggio += "La informiamo che, per l'escursione " + iscrizione.getEscursione().getNome() + ", ";
+			mailMessaggio += "gli optional scelti modificati dal Manager sono: ";
+			double costo = iscrizione.getEscursione().getCosto();
+			for(OptionalEscursioneTO oe : iscrizione.getOptionals()){
+				mailMessaggio += oe.getOptional().getNome() + " \n";
+				costo = costo + oe.getOptional().getTipoOptional().getCosto();
+			}
+			mailMessaggio += " \n";
+			mailMessaggio += "Pertanto il costo totale per la sua escursione, compresi gli optional, sarà di: ";
+			mailMessaggio += costo + " €";
+
+			email.setOggetto(mailOggetto);
+			email.setMessaggio(mailMessaggio);
+
+			ArrayList<UtenteTO> listaDestinatari = new ArrayList<>();
+			listaDestinatari.add(partecipante);
+			email.setListaDestinatari(listaDestinatari);
+
+			EmailConfig emailConfig = new EmailConfig();
+			emailConfig.sendEmail(email);
+		} catch (DatabaseException e) {
+			response.setResponse(RESP_KO);
+			e.printStackTrace();
+		}
+		return response;
+	}
+	
+	/**
+	 * Metodo che crea una nuova iscrizione
+	 * e inserisce gli optional scelti
+	 * 
+	 * @param richiesta: iscrizione all'escursione
+	 * @return risposta in base alla richiesta
+	 */
+	public Response createOptionalFromIscrizione(Request request){
+		Response response = new Response();
+		IscrizioneTO iscrizione = (IscrizioneTO) request.getData();
+		PartecipanteTO partecipante = (PartecipanteTO) iscrizione.getUtente();
+		
+		try {
+			iscrizione.setUtente(partecipante);
+			iscrizione.setData(LocalDate.now().toString());
+			LocalTime time = LocalTime.now();
+			iscrizione.setOra(time.getHour() + ":" + time.getMinute() + ":" + time.getSecond());
+			iscrizione.setStatoIscrizione(stato_iscrizione_dao.getStatoAttivo());
+			iscrizione = iscrizione_dao.create(iscrizione);
+			response.setData(iscrizione);
+			response.setResponse(RESP_OK);
+			
+			TOFact = FactoryProducerTO.getFactory(FactoryEnum.GenericTOFactory);
+			EmailTO email = (EmailTO) TOFact.getGenericTO(GenericEnum.Email);
+
+			String mailOggetto = "OutDoorSports | Modifica Optional Scelti";
+			String mailMessaggio = "Gentile ";
+			mailMessaggio += partecipante.getNome() + " " + partecipante.getCognome() + ", \n";
+			mailMessaggio += "La informiamo che, per l'escursione " + iscrizione.getEscursione().getNome() + ", ";
+			mailMessaggio += "gli optional scelti modificati dal Manager sono: ";
+			double costo = iscrizione.getEscursione().getCosto();
+			for(OptionalEscursioneTO oe : iscrizione.getOptionals()){
+				mailMessaggio += oe.getOptional().getNome() + " \n";
+				costo = costo + oe.getOptional().getTipoOptional().getCosto();
+			}
+			mailMessaggio += " \n";
+			mailMessaggio += "Pertanto il costo totale per la sua escursione, compresi gli optional, sarà di: ";
+			mailMessaggio += costo + " €";
+
+			email.setOggetto(mailOggetto);
+			email.setMessaggio(mailMessaggio);
+
+			ArrayList<UtenteTO> listaDestinatari = new ArrayList<>();
+			listaDestinatari.add(partecipante);
+			email.setListaDestinatari(listaDestinatari);
+
+			EmailConfig emailConfig = new EmailConfig();
+			emailConfig.sendEmail(email);
+		} catch (DatabaseException e) {
+			response.setResponse(RESP_KO);
+			e.printStackTrace();
+		}
+		return response;
+	}
 }

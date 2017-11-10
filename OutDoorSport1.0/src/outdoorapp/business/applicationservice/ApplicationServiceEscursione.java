@@ -121,11 +121,9 @@ class ApplicationServiceEscursione implements Actions {
 		
 		try {
 			if(!escursione_dao.esisteEscursione((EscursioneTO)request.getData())){
-				
 				escursione = (EscursioneTO)request.getData();
 				escursione.setStatoEscursione(statoEscursioneDao.getStatoEscursioneAperta());
 				ManagerDiEscursioneTO mde = (ManagerDiEscursioneTO) SessionCache.getCurrentData("ManagerDiEscursione");
-				escursione.setIdMde(mde.getIdManagerDiEscursione());
 				escursione.setUtente(mde);
 				escursione_dao.create(escursione);
 				Alert alert = new Alert(AlertType.INFORMATION, "L'Escursione è stata inserita correttamente!", ButtonType.OK);
@@ -137,7 +135,9 @@ class ApplicationServiceEscursione implements Actions {
 			}
 			response.setData(null);
 		} catch (DatabaseException e) {
-			e.printStackTrace();
+			Alert alert = new Alert(AlertType.ERROR, "Alcuni campi non sono corretti!", ButtonType.OK);
+			alert.setTitle("OutDoorSport1.0");
+			alert.showAndWait();
 		}
 		
 		return response;
@@ -169,7 +169,6 @@ class ApplicationServiceEscursione implements Actions {
 				StatoEscursione_DAO statoEscursioneDao = (StatoEscursione_DAO) statoFactory.getStatoDAO(StatoDAOEnum.Escursione);
 				escursione.setStatoEscursione(statoEscursioneDao.getStatoEscursioneAperta());
 				ManagerDiEscursioneTO mde = (ManagerDiEscursioneTO) SessionCache.getCurrentData("ManagerDiEscursione");
-				escursione.setIdMde(mde.getIdManagerDiEscursione());
 				escursione.setUtente(mde);
 				Set<OptionalTO> optionals = new HashSet<>();
 				optionals = escursione.getOptionals();

@@ -23,8 +23,10 @@ import outdoorapp.to.FactoryProducerTO;
 import outdoorapp.to.enums.FactoryEnum;
 import outdoorapp.to.enums.GenericEnum;
 import outdoorapp.to.interfaces.EmailTO;
+import outdoorapp.to.interfaces.EncryptPasswordTO;
 import outdoorapp.to.interfaces.ManagerDiEscursioneTO;
 import outdoorapp.to.interfaces.ManagerDiSistemaTO;
+import outdoorapp.to.interfaces.PartecipanteTO;
 import outdoorapp.to.interfaces.TOFactory;
 import outdoorapp.to.interfaces.UtenteTO;
 import outdoorapp.utils.Actions;
@@ -51,6 +53,7 @@ class ApplicationServiceManagerDiEscursione implements Actions, Views{
 	private MDE_DAO mde_dao = null;
 	private ManagerDiEscursioneTO mde = null;
 	private TOFactory TOFact = null;
+	private EncryptPasswordTO passwordEncryptor = null;
 	
 	/**
 	 * Costruttore che inizializza il DAO del Manager di Escursione
@@ -60,6 +63,10 @@ class ApplicationServiceManagerDiEscursione implements Actions, Views{
 		statoFactory = FactoryProducerDAO.getFactory(DAORequest.State);
 		tipoFactory = FactoryProducerDAO.getFactory(DAORequest.Type);
 		mde_dao =  (MDE_DAO) userFactory.getUtenteDAO(UtenteDAOEnum.ManagerDiEscursione);
+		if(passwordEncryptor == null){
+			TOFact = FactoryProducerTO.getFactory(FactoryEnum.GenericTOFactory);
+			passwordEncryptor = (EncryptPasswordTO) TOFact.getGenericTO(GenericEnum.EncryptPassword);
+		}
 	}
 	
 	/**
@@ -79,10 +86,39 @@ class ApplicationServiceManagerDiEscursione implements Actions, Views{
 				mde = (ManagerDiEscursioneTO)request.getData();
 				mde.setRuolo(ruoliDao.getRuoloManagerDiEscursione());
 				mde.setStatoUtente(statoUtenteDao.getStatoAttivo());
+				
+				String password = mde.getPassword();
+				mde.setPassword(passwordEncryptor.encryptPassword(password));
+				
 				mde_dao.create(mde);
+				
+				TOFact = FactoryProducerTO.getFactory(FactoryEnum.GenericTOFactory);
+				EmailTO email = (EmailTO) TOFact.getGenericTO(GenericEnum.Email);
+
+				String mailOggetto = "OutDoorSports | Registrazione Manager Di Escursione";
+				String mailMessaggio = "Gentile ";
+				mailMessaggio += mde.getNome() + " " + mde.getCognome() + ", \n";
+				mailMessaggio += "I dati relativi al suo account sono stati inseriti dal Manager di Sistema! \n";
+				mailMessaggio += "Username: " + mde.getUsername() + "\n";
+				mailMessaggio += "Password: " + mde.getPassword() + "\n";
+
+				email.setOggetto(mailOggetto);
+				email.setMessaggio(mailMessaggio);
+
+				ArrayList<UtenteTO> listaDestinatari = new ArrayList<>();
+				listaDestinatari.add(mde);
+				email.setListaDestinatari(listaDestinatari);
+
+				EmailConfig emailConfig = new EmailConfig();
+				
 				Alert alert = new Alert(AlertType.INFORMATION, "Il Manager di Escursione è stato inserito correttamente!", ButtonType.OK);
 				alert.setTitle("OutDoorSport1.0");
-				alert.showAndWait();
+				
+				Optional<ButtonType> res = alert.showAndWait();
+				
+				if(res.get() == ButtonType.OK)
+					emailConfig.sendEmail(email);
+					
 				response.setResponse(RESP_OK);
 			}else{
 				response.setResponse(RESP_KO);
@@ -116,14 +152,20 @@ class ApplicationServiceManagerDiEscursione implements Actions, Views{
 		}
 		
 		try {
-			if(!(mde_dao.esisteEmail(mde) || temp == null) || (mde_dao.esisteEmail(mde) && mde.getIdUtente() == id_temp)){
+			if((mde_dao.esisteEmail(mde) || temp == null) || (mde_dao.esisteEmail(mde) && mde.getIdUtente() == id_temp)){
 				Ruoli_DAO ruoliDao = (Ruoli_DAO) tipoFactory.getTipoDAO(TipoDAOEnum.Ruolo);
 				StatoUtente_DAO statoUtenteDao = (StatoUtente_DAO) statoFactory.getStatoDAO(StatoDAOEnum.User);
 						
 				mde.setRuolo(ruoliDao.getRuoloManagerDiEscursione());
 				mde.setStatoUtente(statoUtenteDao.getStatoAttivo());
-				mde_dao.update(mde);
 				
+				ManagerDiEscursioneTO mde_into_db = mde_dao.getByID(mde.getIdUtente());
+				if(!mde.getPassword().equals(mde_into_db.getPassword())){
+					String newPassword = passwordEncryptor.encryptPassword(mde.getPassword());
+					mde.setPassword(newPassword);
+				}
+				
+				mde_dao.update(mde);
 				
 				TOFact = FactoryProducerTO.getFactory(FactoryEnum.GenericTOFactory);
 				EmailTO email = (EmailTO) TOFact.getGenericTO(GenericEnum.Email);

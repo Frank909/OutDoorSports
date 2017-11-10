@@ -3,6 +3,7 @@ package outdoorapp.presentation.views.managerescursione;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -71,7 +72,7 @@ public class ControllerVisualizzaIscritti extends ControllerTableView{
 	private List<IscrizioneTO> list_iscrizioni = null;
 	private IscrizioneTO iscrizione = null;
 	private PartecipanteModel partecipante_model = null;
-	private EscursioneModel escursione = new EscursioneModel();
+	private EscursioneTO escursione = null;
 	
 	public ControllerVisualizzaIscritti() {
 		if(partecipante == null){
@@ -82,6 +83,10 @@ public class ControllerVisualizzaIscritti extends ControllerTableView{
 			TOFact = FactoryProducerTO.getFactory(FactoryEnum.GenericTOFactory);
 			iscrizione = (IscrizioneTO) TOFact.getGenericTO(GenericEnum.Iscrizione);
 		}
+		if(escursione == null){
+			TOFact = FactoryProducerTO.getFactory(FactoryEnum.GenericTOFactory);
+			escursione = (EscursioneTO) TOFact.getGenericTO(GenericEnum.Escursione);
+		}
 	}
 
 	@Override
@@ -91,11 +96,11 @@ public class ControllerVisualizzaIscritti extends ControllerTableView{
 			@Override
 			public void changed(ObservableValue<? extends Boolean> arg0, Boolean oldValue, Boolean newValue) {
 				if(newValue){
-					escursione = (EscursioneModel) SessionCache.getCurrentData(escursione.getClass().getSimpleName());
-					lblNomeEscursione.setText(escursione.getEscursione().getNome());
+					escursione = (EscursioneTO) SessionCache.getCurrentData(escursione.getClass().getSimpleName());
+					iscrizione.setEscursione(escursione);
+					lblNomeEscursione.setText(escursione.getNome());
 					allPartecipantiIscritti();
 				}
-					
 			}
 		};
 
@@ -176,8 +181,8 @@ public class ControllerVisualizzaIscritti extends ControllerTableView{
 			   partecipante.getCognome().contains(param) ||
 			   partecipante.getEmail().contains(param) ||
 			   partecipante.getCodiceFiscale().contains(param) ||
-			   partecipante.getCertificatoSrc().equals(param) ||
-			   partecipante.getUsername().equals(param)){
+			   partecipante.getCertificatoSrc().contains(param) ||
+			   partecipante.getUsername().contains(param)){
 			   list_partecipante.add(partecipante);
 			}
 		}
@@ -203,9 +208,18 @@ public class ControllerVisualizzaIscritti extends ControllerTableView{
 			Response response = this.sendRequest(new Request(this.iscrizione, OUTDOORSPORT_ANNULLA_ISCRIZIONE));
 			allPartecipantiIscritti();
 			if(response.getData() != null){
-				Alert alert = new Alert(AlertType.INFORMATION, "Iscrizione annullata con successo!", ButtonType.OK);
-				alert.setTitle("OutDoorSport1.0");
-				alert.showAndWait();
+				Alert alertConfirm = new Alert(AlertType.CONFIRMATION, "Sei sicuro di voler annullare l'iscrizione?");
+				Optional<ButtonType> result = alertConfirm.showAndWait();
+				if (result.get() == ButtonType.OK){
+				    Alert alert = new Alert(AlertType.INFORMATION, "Iscrizione annullata con successo!", ButtonType.OK);
+				    alert.setTitle("OutDoorSport1.0");
+				    alert.showAndWait();
+				} else {
+					alertConfirm.close();
+					Alert alert = new Alert(AlertType.INFORMATION, "Non è stata apportata nessuna modifica all'iscrizione.", ButtonType.OK);
+					alert.setTitle("OutDoorSport1.0");
+					alert.showAndWait();
+				}
 			}else{
 				Alert alert = new Alert(AlertType.INFORMATION, "Non è stata apportata nessuna modifica all'iscrizione.", ButtonType.OK);
 				alert.setTitle("OutDoorSport1.0");

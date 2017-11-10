@@ -21,12 +21,14 @@ import outdoorapp.integration.dao.interfaces.StatoUtente_DAO;
 import outdoorapp.presentation.applicationcontroller.ViewCache;
 import outdoorapp.presentation.reqresp.Request;
 import outdoorapp.presentation.reqresp.Response;
-import outdoorapp.to.interfaces.EscursioneTO;
-import outdoorapp.to.interfaces.ManagerDiEscursioneTO;
+import outdoorapp.to.FactoryProducerTO;
+import outdoorapp.to.enums.FactoryEnum;
+import outdoorapp.to.enums.GenericEnum;
+import outdoorapp.to.interfaces.EncryptPasswordTO;
 import outdoorapp.to.interfaces.PartecipanteTO;
+import outdoorapp.to.interfaces.TOFactory;
 import outdoorapp.to.interfaces.UtenteTO;
 import outdoorapp.utils.Actions;
-import outdoorapp.utils.SessionCache;
 import outdoorapp.utils.Views;
 
 /**
@@ -48,6 +50,7 @@ class ApplicationServicePartecipante implements Views, Actions{
 	
 	private Partecipante_DAO partecipante_dao = null;
 	private PartecipanteTO partecipante = null;
+	private EncryptPasswordTO encryptedPassword = null;
 	
 
 	/**
@@ -58,6 +61,10 @@ class ApplicationServicePartecipante implements Views, Actions{
 		statoFactory = FactoryProducerDAO.getFactory(DAORequest.State);
 		tipoFactory = FactoryProducerDAO.getFactory(DAORequest.Type);
 		partecipante_dao =  (Partecipante_DAO) userFactory.getUtenteDAO(UtenteDAOEnum.Partecipante);
+		if(encryptedPassword == null){
+			TOFactory toFactory = FactoryProducerTO.getFactory(FactoryEnum.GenericTOFactory);
+			encryptedPassword = (EncryptPasswordTO) toFactory.getGenericTO(GenericEnum.EncryptPassword);
+		}
 	}
 
 	/**
@@ -115,6 +122,13 @@ class ApplicationServicePartecipante implements Views, Actions{
 				StatoUtente_DAO statoUtenteDao = (StatoUtente_DAO) statoFactory.getStatoDAO(StatoDAOEnum.User);
 				partecipante.setRuolo(ruoliDao.getRuoloManagerDiEscursione());
 				partecipante.setStatoUtente(statoUtenteDao.getStatoAttivo());
+				
+				PartecipanteTO partecipante_into_db = partecipante_dao.getByID(partecipante.getIdUtente());
+				if(!partecipante.getPassword().equals(partecipante_into_db.getPassword())){
+					String newPassword = encryptedPassword.encryptPassword(partecipante.getPassword());
+					partecipante.setPassword(newPassword);
+				}
+				
 				uploadCertificatoSRC(partecipante);
 				partecipante_dao.update(partecipante);
 				response.setResponse(RESP_OK);
@@ -148,6 +162,10 @@ class ApplicationServicePartecipante implements Views, Actions{
 				uploadCertificatoSRC(partecipante);
 				partecipante.setRuolo(ruoliDao.getRuoloPartecipante());
 				partecipante.setStatoUtente(statoUtenteDao.getStatoAttivo());
+				
+				String password = partecipante.getPassword();
+				partecipante.setPassword(encryptedPassword.encryptPassword(password));
+				
 				partecipante_dao.create(partecipante);
 				Alert alert = new Alert(AlertType.INFORMATION, "Il Partecipante è stato inserito correttamente!", ButtonType.OK);
 				alert.setTitle("OutDoorSport1.0");

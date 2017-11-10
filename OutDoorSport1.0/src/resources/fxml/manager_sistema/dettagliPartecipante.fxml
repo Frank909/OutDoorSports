@@ -121,7 +121,7 @@
                   </GridPane>
                   <GridPane prefHeight="151.0" prefWidth="300.0" GridPane.columnIndex="1">
                      <children>
-                        <Label fx:id="mDataSRCProfilo" text="Data Certificato: 20/08/2014" GridPane.rowIndex="2">
+                        <Label fx:id="mDataSRCProfilo" text="Data Certificato: 20/08/2014" GridPane.rowIndex="1">
                            <font>
                               <Font size="18.0" />
                            </font>
@@ -129,15 +129,7 @@
                               <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
                            </GridPane.margin>
                         </Label>
-                        <Label fx:id="mCertificatoSRCProfilo" text="Certificato SRC: 45476" GridPane.rowIndex="1">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                           <GridPane.margin>
-                              <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-                           </GridPane.margin>
-                        </Label>
-                        <Label fx:id="mTessSanProfilo" text="N° Tes. San.: XXXXXXXXXXXXXXX" GridPane.rowIndex="3">
+                        <Label fx:id="mTessSanProfilo" text="N° Tes. San.: XXXXXXXXXXXXXXX" GridPane.rowIndex="2">
                            <font>
                               <Font size="18.0" />
                            </font>
@@ -167,7 +159,7 @@
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                      </rowConstraints>
                   </GridPane>
-                  <Button fx:id="mBtnAggiornaSRC" mnemonicParsing="false" prefHeight="40.0" prefWidth="150.0" text="Indietro" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+                  <Button fx:id="btnIndietro" mnemonicParsing="false" onMouseClicked="#indietro" prefHeight="40.0" prefWidth="150.0" text="Indietro" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
                </children>
             </GridPane>
          </children>

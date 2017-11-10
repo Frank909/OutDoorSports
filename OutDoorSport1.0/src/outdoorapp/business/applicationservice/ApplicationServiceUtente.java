@@ -2,6 +2,9 @@ package outdoorapp.business.applicationservice;
 import java.util.ArrayList;
 import java.util.List;
 
+
+import org.jasypt.util.password.StrongPasswordEncryptor;
+
 import outdoorapp.exceptions.DatabaseException;
 import outdoorapp.integration.dao.DAOFactory;
 import outdoorapp.integration.dao.FactoryProducerDAO;
@@ -20,6 +23,7 @@ import outdoorapp.to.enums.FactoryEnum;
 import outdoorapp.to.enums.GenericEnum;
 import outdoorapp.to.enums.UtenteEnum;
 import outdoorapp.to.interfaces.EmailTO;
+import outdoorapp.to.interfaces.EncryptPasswordTO;
 import outdoorapp.to.interfaces.ManagerDiEscursioneTO;
 import outdoorapp.to.interfaces.ManagerDiSistemaTO;
 import outdoorapp.to.interfaces.OutDoorSports;
@@ -51,7 +55,8 @@ class ApplicationServiceUtente implements Views, Actions{
 	private TOFactory TOFact = null;
 
 	private Utente_DAO<UtenteTO> utente_dao = null;
-	private UtenteTO utente = null;
+	private UtenteTO utente = null, temp = null;
+	private EncryptPasswordTO passwordEncryptor = null;
 
 	/**
 	 * Costruttore che inizializza il DAO dell'Utente
@@ -66,6 +71,14 @@ class ApplicationServiceUtente implements Views, Actions{
 			TOFact = FactoryProducerTO.getFactory(FactoryEnum.UtenteTOFactory);
 			utente = (UtenteTO) TOFact.getUtenteTO(UtenteEnum.Utente);
 		}
+		if(temp == null){
+			TOFact = FactoryProducerTO.getFactory(FactoryEnum.UtenteTOFactory);
+			temp = (UtenteTO) TOFact.getUtenteTO(UtenteEnum.Utente);
+		}
+		if(passwordEncryptor == null){
+			TOFact = FactoryProducerTO.getFactory(FactoryEnum.GenericTOFactory);
+			passwordEncryptor = (EncryptPasswordTO) TOFact.getGenericTO(GenericEnum.EncryptPassword);
+		}
 	}
 
 	/**
@@ -77,8 +90,13 @@ class ApplicationServiceUtente implements Views, Actions{
 	public Response eseguiLogin(Request request){
 		Response response = new Response();
 		try {
-			utente = (UtenteTO) utente_dao.getUtente((UtenteTO) request.getData());
-
+			temp = (UtenteTO) request.getData();
+			
+			String password = temp.getPassword();
+			temp.setPassword(passwordEncryptor.encryptPassword(password));
+			
+			utente = utente_dao.getUtente(temp);
+			
 			if(utente.getIdUtente() != null){
 				OutDoorSports newUtente = checkUserTipe(utente);	
 				response.setData(newUtente);
@@ -92,7 +110,6 @@ class ApplicationServiceUtente implements Views, Actions{
 					response.setView(VIEW_DASHBOARD_PARTECIPANTE);
 			}else{
 				response.setResponse(RESP_KO);
-				response.setView("Errore! Utente o Password non riconosciuti!");
 			}
 		} catch (DatabaseException e) {
 			e.printStackTrace();
@@ -115,9 +132,10 @@ class ApplicationServiceUtente implements Views, Actions{
 				utente = (UtenteTO) utente_dao.getByEmail(utente.getEmail());
 
 				RandomString randomString = new RandomString(8);
-				String newPassword = randomString.nextString();
+				String password = randomString.nextString();
 
-				utente.setPassword(newPassword);
+				String encrPassword = passwordEncryptor.encryptPassword(password);
+				utente.setPassword(encrPassword);
 				utente_dao.update(utente);
 				
 				TOFact = FactoryProducerTO.getFactory(FactoryEnum.GenericTOFactory);
@@ -128,7 +146,7 @@ class ApplicationServiceUtente implements Views, Actions{
 				mailMessaggio += utente.getNome() + " " + utente.getCognome() + ", \n";
 				mailMessaggio += "La sua nuova password per lo username ";
 				mailMessaggio += utente.getUsername() + " è: \n";
-				mailMessaggio += newPassword;
+				mailMessaggio += password;
 
 				email.setOggetto(mailOggetto);
 				email.setMessaggio(mailMessaggio);
@@ -173,17 +191,17 @@ class ApplicationServiceUtente implements Views, Actions{
 		try {
 			partecipante = partecipante_dao.findOne(utente.getIdUtente());
 			if(partecipante != null){
-				setData(partecipante, utente);
+				this.setData(partecipante, utente);
 				result = partecipante;
 			}
 			mds = mds_dao.findOne(utente.getIdUtente());
 			if(mds != null){
-				setData(mds, utente);
+				this.setData(mds, utente);
 				result = mds;
 			}
 			mde = mde_dao.findOne(utente.getIdUtente());
 			if(mde != null){
-				setData(mde, utente);
+				this.setData(mde, utente);
 				result = mde;
 			}
 		} catch (DatabaseException e) {

@@ -24,6 +24,7 @@ class Iscrizione implements IscrizioneTO{
 	private StatoIscrizioneTO statoIscrizione;
 	private UtenteTO utente;
 	private String data;
+	private String ora;
 	private Set<OptionalEscursioneTO> optionals;
 
 	public Iscrizione() {
@@ -87,5 +88,15 @@ class Iscrizione implements IscrizioneTO{
 	@Override
 	public void setOptionals(Set<OptionalEscursioneTO> optionals) {
 		this.optionals = optionals;
+	}
+
+	@Override
+	public String getOra() {
+		return ora;
+	}
+
+	@Override
+	public void setOra(String ora) {
+		this.ora = ora;
 	}
 }

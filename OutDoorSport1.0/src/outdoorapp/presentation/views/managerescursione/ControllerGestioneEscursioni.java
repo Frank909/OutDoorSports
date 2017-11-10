@@ -106,7 +106,7 @@ public class ControllerGestioneEscursioni extends ControllerTableView{
 				escursione_model = table_escursioni.getSelectionModel().getSelectedItem();
 				if(escursione_model != null){
 					if(event.getClickCount() == 2){
-						sendRequest(new Request(escursione_model, ViewCache.getNestedAnchorPane(), VIEW_DETTAGLI_ESCURSIONI_FROM_MDE));
+						sendRequest(new Request(escursione_model.getEscursione(), ViewCache.getNestedAnchorPane(), VIEW_DETTAGLI_ESCURSIONI_FROM_MDE));
 					}
 				}
 			}
@@ -117,20 +117,25 @@ public class ControllerGestioneEscursioni extends ControllerTableView{
 	 * Evento associato al Button per la ricerca di una Escursione. La tabella presente nella View
 	 * verrà ricaricata in base ai parametri inseriti nella casella di testo.
 	 */
-	@FXML protected void cercaEscursione(){
+	@FXML protected void cercaEscursione(){		
 		String param = txtSearchEscursione.getText();
 		List<EscursioneTO> list_escursione = new ArrayList<>();
-
+		
+		
 		for(EscursioneTO escursione : this.list_escursioni){
 			if(escursione.getNome().contains(param) ||
 					escursione.getTipoEscursione().getNome().contains(param) ||
 					escursione.getData().contains(param) ||
-					escursione.getCosto() == Double.parseDouble(param) ||
-					escursione.getStatoEscursione().getNome().equals(param)){
-				list_escursione.add(escursione);
-			}
+					escursione.getStatoEscursione().getNome().equals(param))
+			   list_escursione.add(escursione);
+			else
+				try{
+					if(escursione.getCosto() == Double.parseDouble(param))
+							list_escursione.add(escursione);
+				}catch(Exception e){
+				}
 		}
-
+		
 		ObservableList<EscursioneModel> data = FXCollections.observableArrayList(getListTabellaEscursioni(list_escursione));
 
 		mTableEscursioni.setItems(data);
@@ -162,7 +167,7 @@ public class ControllerGestioneEscursioni extends ControllerTableView{
 	@FXML protected void dettagliEscursione(){
 		escursione_model = mTableEscursioni.getSelectionModel().getSelectedItem();
 		if(escursione_model != null)
-			sendRequest(new Request(escursione_model, ViewCache.getNestedAnchorPane(), VIEW_DETTAGLI_ESCURSIONI_FROM_MDE));
+			sendRequest(new Request(escursione_model.getEscursione(), ViewCache.getNestedAnchorPane(), VIEW_DETTAGLI_ESCURSIONI_FROM_MDE));
 		else{
 			Alert alert = new Alert(AlertType.ERROR, "Nessuna Escursione Selezionata", ButtonType.OK);
 			alert.setTitle("OutDoorSport1.0");

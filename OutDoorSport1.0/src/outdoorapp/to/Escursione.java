@@ -23,11 +23,11 @@ class Escursione implements EscursioneTO{
 	private StatoEscursioneTO statoEscursione;
 	private TipoEscursioneTO tipoEscursione;
 	private UtenteTO utente;
-	private int idMDE;
 	private String nome;
 	private String data;
 	private int numberMin;
 	private int numberMax;
+	private int iscritti;
 	private double costo;
 	private String descrizione;
 	private Set<OptionalTO> optionals;
@@ -147,13 +147,13 @@ class Escursione implements EscursioneTO{
 	}
 
 	@Override
-	public void setIdMde(int id_mde) {
-		this.idMDE = id_mde;
+	public int getIscritti() {
+		return this.iscritti;
 	}
 
 	@Override
-	public int getIdMde() {
-		return this.idMDE;
+	public void setIscritti(int iscritti) {
+		this.iscritti = iscritti;
 	}
 
 }

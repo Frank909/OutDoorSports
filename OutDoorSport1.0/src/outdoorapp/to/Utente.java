@@ -55,9 +55,10 @@ class Utente implements UtenteTO{
 	Utente() {
 	}
 
-	Utente(Ruoli ruolo, StatoUtente statoUtente, String username, String password, String nome,
+	Utente(Integer idUtente, Ruoli ruolo, StatoUtente statoUtente, String username, String password, String nome,
 			String cognome, String email, String codiceFiscale, String dataNascita, String sesso, String indirizzo,
 			String citta) {
+		this.idUtente = idUtente;
 		this.ruolo = ruolo;
 		this.statoUtente = statoUtente;
 		this.username = username;

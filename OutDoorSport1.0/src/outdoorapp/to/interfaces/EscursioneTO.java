@@ -112,6 +112,18 @@ public interface EscursioneTO extends OutDoorSports{
 	public void setNumberMax(int numberMax);
 	
 	/**
+	 * @return numero degli iscritti all'escursione
+	 */
+	public int getIscritti();
+	
+	/**
+	 * Metodo che setta il numero degli iscritti all'escursione
+	 * 
+	 * @param iscritti
+	 */
+	public void setIscritti(int iscritti);
+	
+	/**
 	 * @return il costo della escursione
 	 */
 	public double getCosto();
@@ -146,16 +158,4 @@ public interface EscursioneTO extends OutDoorSports{
 	 * @param optionals
 	 */
 	public void setOptionals(Set<OptionalTO> optionals);
-	
-	/**
-	 * Metodo che setta l'id del Manager di Escursione
-	 * 
-	 * @param id_mde
-	 */
-	public void setIdMde(int id_mde);
-	
-	/**
-	 * @return l'id del manager di escursione
-	 */
-	public int getIdMde();
 }

@@ -75,7 +75,6 @@ public class ControllerVisualizzaEscursioniAperte extends ControllerTableView{
 			@Override
 			public void changed(ObservableValue<? extends Boolean> arg0, Boolean oldValue, Boolean newValue) {
 				if(newValue){
-					escursione_model = (EscursioneModel) SessionCache.getCurrentData(escursione.getClass().getSimpleName());
 					allEscursioniAperte();
 				}
 			}
@@ -110,7 +109,7 @@ public class ControllerVisualizzaEscursioniAperte extends ControllerTableView{
 				escursione_model = table_escursioni.getSelectionModel().getSelectedItem();
 				if(escursione_model != null){
 					if(event.getClickCount() == 2){
-						sendRequest(new Request(escursione_model, ViewCache.getNestedAnchorPane(), VIEW_ISCRIZIONE_ESCURSIONE));
+						sendRequest(new Request(escursione_model.getEscursione(), ViewCache.getNestedAnchorPane(), VIEW_ISCRIZIONE_ESCURSIONE));
 					}
 				}
 			}
@@ -124,7 +123,7 @@ public class ControllerVisualizzaEscursioniAperte extends ControllerTableView{
 	protected void iscrizioneEscursione(){
 		escursione_model = mTableEscursioni.getSelectionModel().getSelectedItem();
 		if(escursione_model != null)
-			this.sendRequest(new Request(escursione_model, ViewCache.getNestedAnchorPane(), VIEW_ISCRIZIONE_ESCURSIONE));
+			this.sendRequest(new Request(escursione_model.getEscursione(), ViewCache.getNestedAnchorPane(), VIEW_ISCRIZIONE_ESCURSIONE));
 		else{
 			Alert alert = new Alert(AlertType.ERROR, "Nessuna Escursione Selezionata", ButtonType.OK);
 			alert.setTitle("OutDoorSport1.0");

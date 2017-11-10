@@ -5,7 +5,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<StackPane fx:id="stpPartecipantiIscrittiEscursione" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="558.0" prefWidth="722.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ControllerLogin">
+<StackPane fx:id="stpPartecipantiIscrittiEscursione" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="558.0" prefWidth="722.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="outdoorapp.presentation.views.managersistema.ControllerVisualizzaPartecipantiIscritti">
    <children>
       <GridPane>
         <columnConstraints>
@@ -48,11 +48,21 @@
                   <Insets left="10.0" right="10.0" />
                </GridPane.margin>
             </TableView>
-            <Button fx:id="btnDatiPartecipante" mnemonicParsing="false" onMouseClicked="#getDettagliPartecipante" text="Visualizza Dati Partecipante" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
+            <Button fx:id="btnDatiPartecipante" mnemonicParsing="false" onMouseClicked="#visualizzaDatiPartecipante" text="Visualizza Dati Partecipante" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
                <GridPane.margin>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </GridPane.margin>
             </Button>
+            <Button fx:id="btnIndietro" mnemonicParsing="false" onMouseClicked="#indietro" prefHeight="25.0" prefWidth="95.0" text="Indietro" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
+               <GridPane.margin>
+                  <Insets right="190.0" />
+               </GridPane.margin>
+            </Button>
+            <Label fx:id="lblNomeEscursione" text="Label" GridPane.rowIndex="2">
+               <GridPane.margin>
+                  <Insets left="10.0" />
+               </GridPane.margin>
+            </Label>
          </children>
       </GridPane>
    </children>

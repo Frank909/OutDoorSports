@@ -21,7 +21,13 @@ class Optional implements OptionalTO{
 	private String nome;
 	private String descrizione;
 
-	Optional() {
+	Optional() {}
+	
+	Optional(Integer idOptional, TipoOptionalTO tipoOptional, String nome, String descrizione){
+		this.idOptional = idOptional;
+		this.tipoOptional = tipoOptional;
+		this.nome = nome;
+		this.descrizione = descrizione;
 	}
 
 	@Override

@@ -2,6 +2,8 @@ package outdoorapp.presentation.views.partecipante;
 
 import java.time.LocalDate;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
@@ -47,6 +49,7 @@ public class ControllerRegistrazionePartecipante extends ControllerRegistrazione
 	@FXML private DatePicker dataCertificatoSRC;
 	@FXML private Button btnRegistrati;
 	@FXML private Label lblErrore;
+	@FXML private Button btnIndietro;
 
 
 	private PartecipanteTO partecipante = null;
@@ -72,6 +75,26 @@ public class ControllerRegistrazionePartecipante extends ControllerRegistrazione
 		final ToggleGroup group = new ToggleGroup();
 		radioM.setToggleGroup(group);
 		radioF.setToggleGroup(group);
+		
+		txtCF.textProperty().addListener(new ChangeListener<String>() {
+	        @Override
+	        public void changed(final ObservableValue<? extends String> ov, final String oldValue, final String newValue) {
+	            if (txtCF.getText().length() > 16) {
+	                String s = txtCF.getText().substring(0, 16);
+	                txtCF.setText(s);
+	            }
+	        }
+	    });
+		
+		txtNTSanitaria.textProperty().addListener(new ChangeListener<String>() {
+		    @Override
+		    public void changed(ObservableValue<? extends String> observable, String oldValue, 
+		        String newValue) {
+		        if (!newValue.matches("\\d*")) {
+		        	txtNTSanitaria.setText(newValue.replaceAll("[^\\d]", ""));
+		        }
+		    }
+		});
 		
 		group.selectToggle(radioM);
 	}
@@ -158,5 +181,9 @@ public class ControllerRegistrazionePartecipante extends ControllerRegistrazione
 			if((dataCertificatoSRC.getValue().getYear() >= LocalDate.now().getYear() - 1))
 				((PartecipanteTO)utente).setDataCertificatoSrc(dataCertificatoSRC.getValue().toString());
 		}
+	}
+	
+	@FXML protected void btnIndietro(){
+		sendRequest(new Request(VIEW_LOGIN));
 	}
 }

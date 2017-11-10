@@ -30,6 +30,16 @@ public interface GEN_DAO<T extends OutDoorSports>{
 	T create(T entity) throws DatabaseException;
 	
 	/**
+	 * Inserisce l'entità di tipo T nel database o,
+	 * se esiste, la modifica
+	 * 
+	 * @param entity
+	 * @return l'entità di tipo T
+	 * @throws DatabaseException
+	 */
+	T createOrUpdate(final T entity) throws DatabaseException;
+	
+	/**
 	 * Restituisce una specifica entità di tipo T presente nel database
 	 * in base al suo id
 	 * 

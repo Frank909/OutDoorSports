@@ -1,4 +1,4 @@
-package outdoorapp.presentation.views.managerescursione;
+package outdoorapp.presentation.views.partecipante;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -26,82 +26,84 @@ import outdoorapp.presentation.applicationcontroller.ViewCache;
 import outdoorapp.presentation.reqresp.Request;
 import outdoorapp.presentation.reqresp.Response;
 import outdoorapp.presentation.views.generic.ControllerTableView;
-import outdoorapp.presentation.views.generic.GenericController;
-import outdoorapp.presentation.views.models.EscursioneModel;
 import outdoorapp.presentation.views.models.OptionalModel;
-import outdoorapp.presentation.views.models.PartecipanteModel;
 import outdoorapp.to.FactoryProducerTO;
 import outdoorapp.to.enums.FactoryEnum;
 import outdoorapp.to.enums.GenericEnum;
 import outdoorapp.to.enums.OptionalEnum;
 import outdoorapp.to.enums.StatoEnum;
+import outdoorapp.to.interfaces.EscursioneTO;
 import outdoorapp.to.interfaces.IscrizioneTO;
 import outdoorapp.to.interfaces.OptionalEscursioneTO;
 import outdoorapp.to.interfaces.OptionalTO;
-import outdoorapp.to.interfaces.PartecipanteTO;
 import outdoorapp.to.interfaces.StatoOptionalTO;
 import outdoorapp.to.interfaces.TOFactory;
 import outdoorapp.utils.SessionCache;
 
 /**
- * Gestisce l'aggiunta o la rimozione di uno o più optional
- * di una determina da una iscrizione di un partecipante.
- * Il Manager di escursione può aggiungere o rimuovere
- * optional scelti dal partecipante in fase di iscrizione.
+ * Classe Controller che gestisce la scelta degli
+ * optional da parte di una Partecipante.
+ * Il Partecipante può scegliere gli optional, e verrà
+ * calcolato il costo risultante in base agli optional scelti.
  * 
  * @author Andrea Zito
  * @author Francesco Ventura
  *
  */
 
-public class ControllerSelezionaOptionalIscrizione extends ControllerTableView{
+public class ControllerSelezionaOptionalEscursione extends ControllerTableView{
 
 	@FXML private StackPane stpSelezionaOptional;
 	@FXML private TableView<OptionalModel> tableOptionalInseriti;
-	@FXML private TableColumn<OptionalModel, String> mColumnOptionalInseriti;
-	@FXML private TableColumn<OptionalModel, String> mColumnPrezzoInseriti;
-	@FXML private TableColumn<OptionalModel, String> mColumnTipoOptionalInseriti;
+	@FXML private TableColumn<OptionalModel, String> columnOptionalInseriti;
+	@FXML private TableColumn<OptionalModel, String> columnPrezzoInseriti;
+	@FXML private TableColumn<OptionalModel, String> columnTipoOptionalInseriti;
 	@FXML private TableView<OptionalModel> tableOptionalDisponibili;
-	@FXML private TableColumn<OptionalModel, String> mColumnOptionalDisponibili;
-	@FXML private TableColumn<OptionalModel, String> mColumnPrezzoDisponibili;
-	@FXML private TableColumn<OptionalModel, String> mColumnTipoOptionalDisponibili;
+	@FXML private TableColumn<OptionalModel, String> columnOptionalDisponibili;
+	@FXML private TableColumn<OptionalModel, String> columnPrezzoDisponibili;
+	@FXML private TableColumn<OptionalModel, String> columnTipoOptionalDisponibili;
 	@FXML private Button btnInserisciOptional;
 	@FXML private Button btnRimuoviOptional;
 	@FXML private Label lblPrezzoTotaleOptional;
 	@FXML private Label lblPrezzoTotale;
 	@FXML private Button btnIndietro;
 	@FXML private Button btnConferma;
-	private TOFactory TOFact = null;
-	private IscrizioneTO iscrizione = null;
-	private IscrizioneTO iscrizioneOld = null;
 	private OptionalModel optional_disponibili_model = null;
 	private OptionalModel optional_scelti_model = null;
-	private StatoOptionalTO stato_optional = null;
-	private List<StatoOptionalTO> list_stato_optional = new ArrayList<>();
-	private OptionalEscursioneTO optional_escursione = null;
+	private OptionalEscursioneTO optional_escursione;
+	private OptionalTO optional = null;
+	private IscrizioneTO iscrizione = null;
+	private IscrizioneTO iscrizioneOld = null;
 	private Set<OptionalEscursioneTO> all_optional_scelti = null;
 	private Set<OptionalEscursioneTO> all_optional_disponibili = null;
 	private Set<OptionalEscursioneTO> all_current_optional_disponibili = null;
+	private StatoOptionalTO stato_optional = null;
+	private List<StatoOptionalTO> list_stato_optional = new ArrayList<>();
 	
-	public ControllerSelezionaOptionalIscrizione() {
+	
+	public ControllerSelezionaOptionalEscursione() {
+		if(optional == null){
+			TOFactory TOFact = FactoryProducerTO.getFactory(FactoryEnum.OptionalTOFactory);
+			optional = (OptionalTO) TOFact.getOptionalTO(OptionalEnum.Optional);
+		}
+		if(stato_optional == null){
+			TOFactory TOFact = FactoryProducerTO.getFactory(FactoryEnum.StatoTOFactory);
+			stato_optional = (StatoOptionalTO) TOFact.getStatoTO(StatoEnum.StatoOptional);
+		}
 		if(iscrizione == null){
-			TOFact = FactoryProducerTO.getFactory(FactoryEnum.GenericTOFactory);
+			TOFactory TOFact = FactoryProducerTO.getFactory(FactoryEnum.GenericTOFactory);
 			iscrizione = (IscrizioneTO) TOFact.getGenericTO(GenericEnum.Iscrizione);
 		}
 		if(iscrizioneOld == null){
-			TOFact = FactoryProducerTO.getFactory(FactoryEnum.GenericTOFactory);
+			TOFactory TOFact = FactoryProducerTO.getFactory(FactoryEnum.GenericTOFactory);
 			iscrizioneOld = (IscrizioneTO) TOFact.getGenericTO(GenericEnum.Iscrizione);
 		}
 		if(optional_escursione == null){
-			TOFact = FactoryProducerTO.getFactory(FactoryEnum.OptionalTOFactory);
+			TOFactory TOFact = FactoryProducerTO.getFactory(FactoryEnum.OptionalTOFactory);
 			optional_escursione = (OptionalEscursioneTO) TOFact.getOptionalTO(OptionalEnum.OptionalEscursione);
 		}
-		if(stato_optional == null){
-			TOFact = FactoryProducerTO.getFactory(FactoryEnum.StatoTOFactory);
-			stato_optional = (StatoOptionalTO) TOFact.getStatoTO(StatoEnum.StatoOptional);
-		}
 	}
-
+	
 	@Override
 	protected void initialize() {
 		ChangeListener<Boolean> visibilityListener = new ChangeListener<Boolean>() {
@@ -123,7 +125,8 @@ public class ControllerSelezionaOptionalIscrizione extends ControllerTableView{
 					all_optional_disponibili = new HashSet<>();
 					all_optional_disponibili.addAll(temp);
 					all_optional_scelti = new HashSet<>();
-					all_optional_scelti.addAll(iscrizione.getOptionals());
+					if(iscrizione.getOptionals() != null)
+						all_optional_scelti.addAll(iscrizione.getOptionals());
 					all_current_optional_disponibili = new HashSet<>();
 					all_current_optional_disponibili.addAll(all_optional_disponibili);
 					
@@ -152,9 +155,9 @@ public class ControllerSelezionaOptionalIscrizione extends ControllerTableView{
 		
 		ObservableList<OptionalModel> dataDisponibili = FXCollections.observableArrayList(getListTabellaOptionalDisponibili(all_current_optional_disponibili));
 
-		this.initColumn(mColumnOptionalDisponibili, "nome");
-		this.initColumn(mColumnPrezzoDisponibili, "costo");
-		this.initColumn(mColumnTipoOptionalDisponibili, "nomeTipoOptional");
+		this.initColumn(columnOptionalDisponibili, "nome");
+		this.initColumn(columnPrezzoDisponibili, "costo");
+		this.initColumn(columnTipoOptionalDisponibili, "nomeTipoOptional");
 
 		tableOptionalDisponibili.setItems(dataDisponibili);
 		
@@ -173,9 +176,9 @@ public class ControllerSelezionaOptionalIscrizione extends ControllerTableView{
 		
 		ObservableList<OptionalModel> dataScelti = FXCollections.observableArrayList(getListTabellaOptionalScelti(all_optional_scelti));
 		
-		this.initColumn(mColumnOptionalInseriti, "nome");
-		this.initColumn(mColumnPrezzoInseriti, "costo");
-		this.initColumn(mColumnTipoOptionalInseriti, "nomeTipoOptional");
+		this.initColumn(columnOptionalInseriti, "nome");
+		this.initColumn(columnPrezzoInseriti, "costo");
+		this.initColumn(columnTipoOptionalInseriti, "nomeTipoOptional");
 		
 		tableOptionalInseriti.setItems(dataScelti);
 		
@@ -247,7 +250,7 @@ public class ControllerSelezionaOptionalIscrizione extends ControllerTableView{
 		if(optional_disponibili_model != null){
 			for(OptionalEscursioneTO o : all_current_optional_disponibili){
 				if(o.getOptional().getNome().equals(optional_disponibili_model.getNome())){
-					TOFact = FactoryProducerTO.getFactory(FactoryEnum.OptionalTOFactory);
+					TOFactory TOFact = FactoryProducerTO.getFactory(FactoryEnum.OptionalTOFactory);
 					optional_escursione = (OptionalEscursioneTO) TOFact.getOptionalTO(OptionalEnum.OptionalEscursione);
 					optional_escursione = o;
 					break;
@@ -272,7 +275,7 @@ public class ControllerSelezionaOptionalIscrizione extends ControllerTableView{
 		if(optional_scelti_model != null){
 			for(OptionalEscursioneTO oe : all_optional_scelti){
 				if(oe.getOptional().getNome().equals(optional_scelti_model.getNome())){
-					TOFact = FactoryProducerTO.getFactory(FactoryEnum.OptionalTOFactory);
+					TOFactory TOFact = FactoryProducerTO.getFactory(FactoryEnum.OptionalTOFactory);
 					optional_escursione = (OptionalEscursioneTO) TOFact.getOptionalTO(OptionalEnum.OptionalEscursione);
 					optional_escursione = oe;
 					break;
@@ -289,26 +292,25 @@ public class ControllerSelezionaOptionalIscrizione extends ControllerTableView{
 	}
 	
 	/**
-	 * Torna ai dettagli delle iscrizioni e lascia invariata la
-	 * modifica degli optional scelti
+	 * Evento associato alla conferma gli optional scelti. 
+	 * Torna alla view precedente
 	 */
-	@FXML protected void indietro(){
-		Alert alert = new Alert(AlertType.CONFIRMATION, "Sei sicuro di voler annullare le modifiche?");
-		Optional<ButtonType> result = alert.showAndWait();
-		if (result.get() == ButtonType.OK){
-		    sendRequest(new Request(iscrizioneOld, ViewCache.getNestedAnchorPane(), VIEW_MODIFICA_ISCRIZIONE_ESCURSIONE));
-		} else {
-		    alert.close();
-		}
+	@FXML protected void btnConferma(){
+		iscrizione.setOptionals(all_optional_scelti);
+		sendRequest(new Request(iscrizione, ViewCache.getNestedAnchorPane(), VIEW_ISCRIZIONE_ESCURSIONE));
 	}
 	
 	/**
-	 * Conferma le modifiche della scelta degli optional, e li aggiorna
-	 * nella schermata dei dettagli dell'iscrizione. Le modifiche non vengono
-	 * ancora effettuate nel database
+	 * Evento associato all'annullamento delle
+	 * modifiche. Torna alla view precedente
 	 */
-	@FXML protected void conferma(){
-		iscrizione.setOptionals(all_optional_scelti);
-		sendRequest(new Request(iscrizione, ViewCache.getNestedAnchorPane(), VIEW_MODIFICA_ISCRIZIONE_ESCURSIONE));
+	@FXML protected void btnIndietro(){
+		Alert alert = new Alert(AlertType.CONFIRMATION, "Sei sicuro di voler annullare le modifiche?");
+		Optional<ButtonType> result = alert.showAndWait();
+		if (result.get() == ButtonType.OK){
+		    sendRequest(new Request(iscrizioneOld, ViewCache.getNestedAnchorPane(), VIEW_ISCRIZIONE_ESCURSIONE));
+		} else {
+		    alert.close();
+		}
 	}
 }

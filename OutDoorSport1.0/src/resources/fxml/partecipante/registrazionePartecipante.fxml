@@ -413,13 +413,18 @@
             </GridPane>
             <Button fx:id="btnRegistrati" mnemonicParsing="false" onMouseClicked="#registra" prefHeight="41.0" prefWidth="222.0" text="Invia Dati" GridPane.halignment="CENTER" GridPane.rowIndex="2">
               <GridPane.margin>
-                <Insets bottom="20.0" />
+                <Insets bottom="20.0" left="250.0" />
               </GridPane.margin>
             </Button>
                   <Label fx:id="lblErrore" text="[ERRORE]" textFill="RED" GridPane.rowIndex="2">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font></Label>
+                  <Button fx:id="btnIndietro" mnemonicParsing="false" onMouseClicked="#btnIndietro" prefHeight="41.0" prefWidth="222.0" text="Indietro" GridPane.halignment="CENTER" GridPane.rowIndex="2">
+                     <GridPane.margin>
+                        <Insets bottom="20.0" right="250.0" />
+                     </GridPane.margin>
+                  </Button>
           </children>
           <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />

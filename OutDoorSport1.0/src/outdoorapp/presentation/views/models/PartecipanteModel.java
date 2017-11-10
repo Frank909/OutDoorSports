@@ -38,7 +38,6 @@ public class PartecipanteModel extends UtenteModel{
 		this.nTesseraSanitaria = new SimpleStringProperty(partecipante.getTesseraSanitaria());
 		this.certificatoSRC = new SimpleStringProperty(partecipante.getCertificatoSrc());
 		this.dataCertificatoSRC = new SimpleStringProperty(partecipante.getDataCertificatoSrc());
-		
 		this.partecipante = partecipante;
 	}
 

@@ -50,7 +50,7 @@ public class ViewCache extends SessionCache{
 	private final String VIEW_IL_MIO_PROFILO = "../../../resources/fxml/partecipante/ilMioProfiloPartecipante";
 	private final String VIEW_DETTAGLI_MANAGER_DI_ESCURSIONE = "../../../resources/fxml/manager_sistema/dettagliManagerDiEscursione";
 	private final String VIEW_MODIFICA_MANAGER_DI_ESCURSIONE = "../../../resources/fxml/manager_sistema/modificaManagerEscursione";
-	private final String VIEW_DETTAGLI_ESCURSIONI = "../../../resources/fxml/manager_sistema/dettagliEscursione";
+	private final String VIEW_DETTAGLI_ESCURSIONI_SISTEMA = "../../../resources/fxml/manager_sistema/dettagliEscursione";
 	private final String VIEW_DETTAGLI_PARTECIPANTE = "../../../resources/fxml/manager_sistema/dettagliPartecipante";
 	private final String VIEW_DETTAGLI_ESCURSIONI_FROM_MDE = "../../../resources/fxml/manager_escursione/dettagliEscursione";
 	private final String VIEW_MODIFICA_ESCURSIONE = "../../../resources/fxml/manager_escursione/modificaEscursione";
@@ -60,6 +60,9 @@ public class ViewCache extends SessionCache{
 	private final String VIEW_ISCRIZIONE_ESCURSIONE = "../../../resources/fxml/partecipante/iscrizioneEscursione";
 	private final String VIEW_MODIFICA_ISCRIZIONE_ESCURSIONE = "../../../resources/fxml/manager_escursione/modificaIscrizioneEscursione";
 	private final String VIEW_SELEZIONA_OPTIONAL_ISCRIZIONE = "../../../resources/fxml/manager_escursione/selezionaOptional";
+	private final String VIEW_ISCRITTI_ESCURSIONE_SISTEMA = "../../../resources/fxml/manager_sistema/visualizzaPartecipantiIscrittiEscursione";
+	private final String VIEW_DETTAGLI_PARTECIPANTE_SISTEMA = "../../../resources/fxml/manager_sistema/dettagliPartecipante";
+	private final String VIEW_SELEZIONA_OPTIONAL_ISCRIZIONE_PARTECIPANTE = "../../../resources/fxml/partecipante/selezionaOptional";
 	
 	private static ViewCache viewCache = new ViewCache();
 
@@ -104,11 +107,14 @@ public class ViewCache extends SessionCache{
 		loadForm("VIEW_IL_MIO_PROFILO", VIEW_IL_MIO_PROFILO, false);
 		loadForm("VIEW_DETTAGLI_MANAGER_DI_ESCURSIONE", VIEW_DETTAGLI_MANAGER_DI_ESCURSIONE, false);
 		loadForm("VIEW_MODIFICA_MANAGER_DI_ESCURSIONE", VIEW_MODIFICA_MANAGER_DI_ESCURSIONE, false);
-		loadForm("VIEW_DETTAGLI_ESCURSIONI", VIEW_DETTAGLI_ESCURSIONI, false);
+		loadForm("VIEW_DETTAGLI_ESCURSIONI_SISTEMA", VIEW_DETTAGLI_ESCURSIONI_SISTEMA, false);
 		loadForm("VIEW_DETTAGLI_PARTECIPANTE", VIEW_DETTAGLI_PARTECIPANTE, false);
 		loadForm("VIEW_DETTAGLI_ESCURSIONI_FROM_MDE", VIEW_DETTAGLI_ESCURSIONI_FROM_MDE, false);
 		loadForm("VIEW_MODIFICA_ESCURSIONE", VIEW_MODIFICA_ESCURSIONE, false);
 		loadForm("VIEW_ISCRITTI_ESCURSIONE", VIEW_ISCRITTI_ESCURSIONE, false);
+		loadForm("VIEW_ISCRITTI_ESCURSIONE_SISTEMA", VIEW_ISCRITTI_ESCURSIONE_SISTEMA, false);
+		loadForm("VIEW_DETTAGLI_PARTECIPANTE_SISTEMA", VIEW_DETTAGLI_PARTECIPANTE_SISTEMA, false);
+		loadForm("VIEW_SELEZIONA_OPTIONAL_ISCRIZIONE_PARTECIPANTE", VIEW_SELEZIONA_OPTIONAL_ISCRIZIONE_PARTECIPANTE, false);
 	}
 	
 	/**
@@ -150,6 +156,10 @@ public class ViewCache extends SessionCache{
 		currentStage.show();
 		
 		stageQueue.add(currentStage);
+		
+		if(key.toString().equals(VIEW_LOGIN)){
+			this.resetData();
+		}
 	}
 
 	/**

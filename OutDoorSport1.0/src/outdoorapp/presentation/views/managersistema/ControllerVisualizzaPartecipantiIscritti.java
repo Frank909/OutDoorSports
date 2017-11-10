@@ -12,6 +12,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -22,11 +23,15 @@ import outdoorapp.presentation.applicationcontroller.ViewCache;
 import outdoorapp.presentation.reqresp.Request;
 import outdoorapp.presentation.reqresp.Response;
 import outdoorapp.presentation.views.generic.ControllerTableView;
+import outdoorapp.presentation.views.models.EscursioneModel;
 import outdoorapp.presentation.views.models.ManagerDiEscursioneModel;
 import outdoorapp.presentation.views.models.PartecipanteModel;
 import outdoorapp.to.FactoryProducerTO;
 import outdoorapp.to.enums.FactoryEnum;
+import outdoorapp.to.enums.GenericEnum;
 import outdoorapp.to.enums.UtenteEnum;
+import outdoorapp.to.interfaces.EscursioneTO;
+import outdoorapp.to.interfaces.IscrizioneTO;
 import outdoorapp.to.interfaces.ManagerDiEscursioneTO;
 import outdoorapp.to.interfaces.PartecipanteTO;
 import outdoorapp.to.interfaces.TOFactory;
@@ -34,7 +39,7 @@ import outdoorapp.utils.SessionCache;
 
 /**
  * Gestisce la visualizzazione dei Partecipanti iscritti ad una Escursione 
- * da parte del Manager di Sistema. Il Manager di Sistema può cercare un Partecipane, 
+ * da parte del Manager di Sistema. Il Manager di Sistema può cercare un Partecipante, 
  * e, una volta selezionato, consultare i suoi dettagli
  * 
  * @author Andrea Zito
@@ -47,22 +52,36 @@ public class ControllerVisualizzaPartecipantiIscritti extends ControllerTableVie
 	@FXML private TextField txtSearchPartecipante;
 	@FXML private Button btnSearchPartecipante;
 	@FXML private StackPane stpPartecipantiIscrittiEscursione;
+	@FXML private Button btnIndietro;
 	@FXML private TableView<PartecipanteModel> mTablePartecipanti;
 	@FXML private TableColumn<PartecipanteModel, String> mColumnName;
 	@FXML private TableColumn<PartecipanteModel, String> mColumnCognome;
 	@FXML private TableColumn<PartecipanteModel, String> mColumnEmail;
 	@FXML private TableColumn<PartecipanteModel, String> mColumnCF;
 	@FXML private Button btnDatiPartecipante;
+	@FXML private Label lblNomeEscursione;
 	private TOFactory TOFact = null;
 	private PartecipanteTO partecipante = null;
-	private List<PartecipanteTO> list_partecipanti = null;
+	private List<PartecipanteTO> list_partecipanti = new ArrayList<>();
 	private PartecipanteModel partecipante_model = null;
 	private ManagerDiEscursioneTO mde = null;
+	private List<IscrizioneTO> list_iscrizioni = null;
+	private IscrizioneTO iscrizione = null;
+	private EscursioneTO escursione = null;
 	
 	public ControllerVisualizzaPartecipantiIscritti() {
-		TOFact = FactoryProducerTO.getFactory(FactoryEnum.UtenteTOFactory);
-		partecipante = (PartecipanteTO) TOFact.getUtenteTO(UtenteEnum.Partecipante);
-		mde = (ManagerDiEscursioneTO) TOFact.getUtenteTO(UtenteEnum.ManagerDiEscursione);
+		if(partecipante == null){
+			TOFact = FactoryProducerTO.getFactory(FactoryEnum.UtenteTOFactory);
+			partecipante = (PartecipanteTO) TOFact.getUtenteTO(UtenteEnum.Partecipante);
+		}
+		if(iscrizione == null){
+			TOFact = FactoryProducerTO.getFactory(FactoryEnum.GenericTOFactory);
+			iscrizione = (IscrizioneTO) TOFact.getGenericTO(GenericEnum.Iscrizione);
+		}
+		if(escursione == null){
+			TOFact = FactoryProducerTO.getFactory(FactoryEnum.GenericTOFactory);
+			escursione = (EscursioneTO) TOFact.getGenericTO(GenericEnum.Escursione);
+		}
 	}
 	
 	/**
@@ -70,20 +89,43 @@ public class ControllerVisualizzaPartecipantiIscritti extends ControllerTableVie
 	 */
 	@Override
 	protected void initialize() {
-		/*ChangeListener<Boolean> visibilityListener = new ChangeListener<Boolean>() {
+		ChangeListener<Boolean> visibilityListener = new ChangeListener<Boolean>() {
 
 			@Override
 			public void changed(ObservableValue<? extends Boolean> arg0, Boolean oldValue, Boolean newValue) {
-				if(newValue)
+				if(newValue){
+					escursione = (EscursioneTO) SessionCache.getCurrentData(escursione.getClass().getSimpleName());
+					iscrizione.setEscursione(escursione);
+					lblNomeEscursione.setText(escursione.getNome());
 					allPartecipanti();
+				}
+					
 			}
 		};
 
-		stpPartecipantiIscrittiEscursione.visibleProperty().addListener(visibilityListener);*/
+		stpPartecipantiIscrittiEscursione.visibleProperty().addListener(visibilityListener);
 	}
 	
-	@FXML protected void getDettagliPartecipante(){
-		dettagliPartecipante();
+	
+	/**
+	 * Metodo associato all'evento che ritorna alla view precedente
+	 */
+	@FXML protected void indietro(){
+		sendRequest(new Request(escursione, ViewCache.getNestedAnchorPane(), VIEW_DETTAGLI_ESCURSIONI_SISTEMA));
+	}
+
+	/**
+	 * Metodo che carica la view con i dettagli del partecipante iscritto
+	 */
+	@FXML protected void visualizzaDatiPartecipante(){
+		partecipante_model = mTablePartecipanti.getSelectionModel().getSelectedItem();
+		if(partecipante_model != null)
+			sendRequest(new Request(partecipante_model.getPartecipante(), ViewCache.getNestedAnchorPane(), VIEW_DETTAGLI_PARTECIPANTE_SISTEMA));
+		else{
+			Alert alert = new Alert(AlertType.ERROR, "Nessun Partecipante Selezionato", ButtonType.OK);
+			alert.setTitle("OutDoorSport1.0");
+			alert.showAndWait();
+		}
 	}
 	
 	/**
@@ -91,7 +133,7 @@ public class ControllerVisualizzaPartecipantiIscritti extends ControllerTableVie
 	 * verrà ricaricata in base ai parametri inseriti nella casella di testo.
 	 */
 	@FXML protected void cercaPartecipante(){
-		/*String param = txtSearchPartecipante.getText();
+		String param = txtSearchPartecipante.getText();
 		List<PartecipanteTO> list_partecipanti = new ArrayList<>();
 		
 		for(PartecipanteTO partecipante : this.list_partecipanti){
@@ -103,71 +145,62 @@ public class ControllerVisualizzaPartecipantiIscritti extends ControllerTableVie
 			}
 		}
 		
-		ObservableList<PartecipanteModel> data = FXCollections.observableArrayList(getListTabellaDettagliPartecipante(list_partecipanti));
+		ObservableList<PartecipanteModel> data = FXCollections.observableArrayList(getListTabellaPartecipanti(list_partecipanti));
 
-		mTablePartecipanti.setItems(data);*/
+		mTablePartecipanti.setItems(data);
 	}
 	
 	/**
-	 * Metodo che carica la View con i dettagli di un determinato Manager di Escursione.
-	 */
-	private void dettagliPartecipante(){
-		partecipante_model = mTablePartecipanti.getSelectionModel().getSelectedItem();
-		if(partecipante_model != null)
-			sendRequest(new Request(partecipante_model, ViewCache.getNestedAnchorPane(), VIEW_DETTAGLI_PARTECIPANTE));
-		else{
-			Alert alert = new Alert(AlertType.ERROR, "Nessun Partecipante Selezionato", ButtonType.OK);
-			alert.setTitle("OutDoorSport1.0");
-			alert.showAndWait();
-		}
-	}
-	
-	/**
-	 * Metodo che carica tutti i Manager di Escursione presente nel database
+	 * Metodo che carica tutti i Partecipanti iscritti all'escursione presente nel database
 	 */
 	@SuppressWarnings("unchecked")
-	private void allManagerDiEscursione(){
-		/*Response response = this.sendRequest(new Request(partecipante, OUTDOORSPORT_GET_ALL_PARTECIPANTI_FOR_MDE));
-		list_partecipanti = (ArrayList<PartecipanteTO>) response.getData();
-
-		ObservableList<ManagerDiEscursioneModel> data = FXCollections.observableArrayList(getListTabellaManagerDiEscursione(list_mde));
-
-		this.initColumn(columnNomeManagerDiEscursione, "nome");
-		this.initColumn(columnCognomeManagerDiEscursione, "cognome");
-		this.initColumn(columnEmailManagerDiEscursione, "email");
-		this.initColumn(columnCFManagerDiEscursione, "codice_fiscale");
-
-		mTableManagerEscursione.setItems(data);
+	private void allPartecipanti(){
+		Response response = this.sendRequest(new Request(iscrizione, OUTDOORSPORT_GET_ALL_ISCRITTI_FROM_ESCURSIONE));
+		list_iscrizioni = (ArrayList<IscrizioneTO>) response.getData();
 		
-		mTableManagerEscursione.addEventFilter(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>(){
+		list_partecipanti.clear();
+		for(IscrizioneTO i : list_iscrizioni){
+			list_partecipanti.add((PartecipanteTO) i.getUtente());
+		}
+
+		ObservableList<PartecipanteModel> data = FXCollections.observableArrayList(getListTabellaPartecipanti(list_partecipanti));
+
+		this.initColumn(mColumnName, "nome");
+		this.initColumn(mColumnCognome, "cognome");
+		this.initColumn(mColumnEmail, "email");
+		this.initColumn(mColumnCF, "codice_fiscale");
+
+		mTablePartecipanti.setItems(data);
+		
+		mTablePartecipanti.addEventFilter(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>(){
 			@Override
 			public void handle(MouseEvent event) {
-				TableView<ManagerDiEscursioneModel> table = (TableView<ManagerDiEscursioneModel>) event.getSource();
-				mde_model = table.getSelectionModel().getSelectedItem();
-				if(mde_model != null){
+				mTablePartecipanti = (TableView<PartecipanteModel>) event.getSource();
+				partecipante_model = mTablePartecipanti.getSelectionModel().getSelectedItem();
+				if(partecipante_model != null){
 					if(event.getClickCount() == 2){
-		                sendRequest(new Request(mde_model, ViewCache.getNestedAnchorPane(), VIEW_DETTAGLI_MANAGER_DI_ESCURSIONE));
+		                visualizzaDatiPartecipante();
 		            }
 				}
 			}
-		});*/
+		});
 	}
 	
 	/**
 	 * Metodo che inizializza il modello che servirà per visualizzare i dati nella tabella
 	 * 
-	 * @param lista di Manager di Escursione
+	 * @param lista di Partecipanti
 	 * @return res: il modello per la tabella
 	 */
-	/*private ObservableList<ManagerDiEscursioneModel> getListTabellaManagerDiEscursione(List<ManagerDiEscursioneTO> list_mde){
-		ObservableList<ManagerDiEscursioneModel> res = FXCollections.observableArrayList();
-
-		for(ManagerDiEscursioneTO mde : list_mde){
-			mde_model = new ManagerDiEscursioneModel(mde);
-			res.add(mde_model);
+	private ObservableList<PartecipanteModel> getListTabellaPartecipanti(List<PartecipanteTO> param){
+		ObservableList<PartecipanteModel> res = FXCollections.observableArrayList();
+		PartecipanteModel partecipante_model = null;
+		
+		for(PartecipanteTO partecipante : param){
+			partecipante_model = new PartecipanteModel(partecipante);
+			res.add(partecipante_model);
 		}
 
 		return res;
-	}*/
-
+	}
 }

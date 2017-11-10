@@ -44,14 +44,23 @@
                         <Insets left="10.0" />
                      </padding>
                   </Label>
+                  <Label fx:id="lblLogout" onMouseClicked="#viewLogin" prefHeight="101.0" prefWidth="235.0" styleClass="text_menu" text="Logout" textFill="WHITE" GridPane.rowIndex="3">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                     <padding>
+                        <Insets left="10.0" />
+                     </padding>
+                  </Label>
                </children>
                <columnConstraints>
                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                </columnConstraints>
                <rowConstraints>
-                  <RowConstraints maxHeight="187.0" minHeight="4.0" prefHeight="80.0" vgrow="SOMETIMES" />
-                  <RowConstraints maxHeight="460.0" minHeight="4.0" prefHeight="88.0" vgrow="SOMETIMES" />
-                  <RowConstraints maxHeight="526.0" minHeight="10.0" prefHeight="91.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="187.0" minHeight="4.0" prefHeight="64.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="460.0" minHeight="4.0" prefHeight="64.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="526.0" minHeight="10.0" prefHeight="64.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="526.0" minHeight="10.0" prefHeight="64.0" vgrow="SOMETIMES" />
                   <RowConstraints maxHeight="526.0" minHeight="10.0" prefHeight="315.0" vgrow="SOMETIMES" />
                </rowConstraints>
             </GridPane>
