@@ -27,10 +27,14 @@ import outdoorapp.presentation.views.models.EscursioneModel;
 import outdoorapp.to.FactoryProducerTO;
 import outdoorapp.to.enums.FactoryEnum;
 import outdoorapp.to.enums.GenericEnum;
+import outdoorapp.to.interfaces.EmailTO;
 import outdoorapp.to.interfaces.EscursioneTO;
 import outdoorapp.to.interfaces.IscrizioneTO;
+import outdoorapp.to.interfaces.ManagerDiEscursioneTO;
 import outdoorapp.to.interfaces.PartecipanteTO;
 import outdoorapp.to.interfaces.TOFactory;
+import outdoorapp.to.interfaces.UtenteTO;
+import outdoorapp.utils.EmailConfig;
 import outdoorapp.utils.SessionCache;
 
 /**
@@ -60,16 +64,17 @@ public class ControllerLeMieEscursioni extends ControllerTableView{
 	private EscursioneModel escursione_model = null;
 	private EscursioneTO escursione = null;
 	private IscrizioneTO iscrizione = null;
+	private TOFactory TOFact = null;
 	
 	public ControllerLeMieEscursioni() {
-		if(escursione == null){
-			TOFactory TOFact = FactoryProducerTO.getFactory(FactoryEnum.GenericTOFactory);
+		TOFact = FactoryProducerTO.getFactory(FactoryEnum.GenericTOFactory);
+		
+		if(escursione == null)			
 			escursione = (EscursioneTO) TOFact.getGenericTO(GenericEnum.Escursione);
-		}
-		if(iscrizione == null){
-			TOFactory TOFact = FactoryProducerTO.getFactory(FactoryEnum.GenericTOFactory);
+		
+		if(iscrizione == null)
 			iscrizione = (IscrizioneTO) TOFact.getGenericTO(GenericEnum.Iscrizione);
-		}
+		
 	}
 
 	/**
@@ -171,29 +176,44 @@ public class ControllerLeMieEscursioni extends ControllerTableView{
 	
 	@FXML
 	protected void cancellatiEscursione(){
-		Alert alert = new Alert(AlertType.CONFIRMATION, "Sei sicuro di voler cancellare l'iscrizione?");
-		alert.setTitle("OutDoorSport1.0");
 		
-		Optional<ButtonType> res = alert.showAndWait();
-		
-		if(res.get() == ButtonType.OK){
-			escursione_model = mTableEscursioni.getSelectionModel().getSelectedItem();
-			if(escursione_model != null){
+		escursione_model = mTableEscursioni.getSelectionModel().getSelectedItem();
+		if(escursione_model != null){
+			Alert alert = new Alert(AlertType.CONFIRMATION, "Sei sicuro di voler cancellare l'iscrizione selezionata?");
+			alert.setTitle("OutDoorSport1.0");
+			Optional<ButtonType> res = alert.showAndWait();
+	
+			if(res.get() == ButtonType.OK){
 				PartecipanteTO partecipante = (PartecipanteTO) SessionCache.getCurrentData("Partecipante");
 				iscrizione.setUtente(partecipante);
 				iscrizione.setEscursione(escursione_model.getEscursione());
-				this.sendRequest(new Request(iscrizione, OUTDOORSPORT_DELETE_ISCRIZIONE_FROM_ESCURSIONE_PARTECIPANTE));
-
-			}
-			else{
-				Alert alert = new Alert(AlertType.ERROR, "Nessuna Escursione Selezionata", ButtonType.OK);
-				alert.setTitle("OutDoorSport1.0");
-				alert.showAndWait();
-			}	
-		}
-			emailConfig.sendEmail(email);
+				Response resp = this.sendRequest(new Request(iscrizione, OUTDOORSPORT_DELETE_ISCRIZIONE_FROM_ESCURSIONE_PARTECIPANTE));
+				if(resp.toString().equals(RESP_OK)){
+					EmailConfig emailConfig = new EmailConfig();
+					EmailTO email = (EmailTO) TOFact.getGenericTO(GenericEnum.Email);
+					ArrayList<UtenteTO> dest = new ArrayList<>();
+					ManagerDiEscursioneTO mde = (ManagerDiEscursioneTO)iscrizione.getEscursione().getUtente();
+					dest.add(mde);
+					String mailOggetto = "OutDoorSports | Disiscrizione Partecipante";
+					String mailMessaggio = "Gentile ";
+					mailMessaggio += mde.getNome() + " " + mde.getCognome() + ", \n";
+					mailMessaggio += "Il partecipante " + partecipante.getNome() + " " + partecipante.getCognome();
+					mailMessaggio += "con codice fiscale " + partecipante.getCodiceFiscale();
+					mailMessaggio += "ha scelto di disiscriversi dall'escursione " + iscrizione.getEscursione().getNome();
 			
-		alert.showAndWait()
+					email.setOggetto(mailOggetto);
+					email.setMessaggio(mailMessaggio);
+					
+					email.setListaDestinatari(dest);
+					emailConfig.sendEmail(email);
+				}
+					
+			}
+		}else{
+			Alert alert1 = new Alert(AlertType.ERROR, "Nessuna Escursione Selezionata", ButtonType.OK);
+			alert1.setTitle("OutDoorSport1.0");
+			alert1.showAndWait();
+		}		
 		
 	}
 	
