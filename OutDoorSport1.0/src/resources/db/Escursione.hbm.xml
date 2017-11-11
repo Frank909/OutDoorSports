@@ -58,8 +58,12 @@
 		<![CDATA[ from outdoorapp.to.Escursione c where c.nome = ?]]></query>
 	
 	<query name="readEscursioniAperte">
-		<![CDATA[ from outdoorapp.to.Escursione c where c.statoEscursione.idStatoEscursione = 2 and
-		c.statoEscursione.idStatoEscursione not in (from outdoorapp.to.Iscrizione i where i.utente.idUtente = ?) ]]></query>
+		<![CDATA[from outdoorapp.to.Escursione c where c.statoEscursione.idStatoEscursione = 2 and c.idEscursione not in
+		(from outdoorapp.to.Iscrizione i where i.statoIscrizione.idStatoIscrizione = 2)]]></query>
+		
+	<query name="readEscursioniIscritte">
+		<![CDATA[from outdoorapp.to.Escursione c where c.statoEscursione.idStatoEscursione = 2 and c.idEscursione not in
+		(from outdoorapp.to.Iscrizione i where i.utente.idUtente = ? and i.statoIscrizione.idStatoIscrizione = 1)]]></query>
 
 <!--  
 	<query name="getAllCompetizione">

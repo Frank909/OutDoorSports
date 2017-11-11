@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<StackPane fx:id="stpSelezionaOptional" prefHeight="558.0" prefWidth="722.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="outdoorapp.presentation.views.partecipante.ControllerSelezionaOptionalIscrizione">
+<StackPane fx:id="stpSelezionaModificaOptional" prefHeight="558.0" prefWidth="722.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="outdoorapp.presentation.views.partecipante.ControllerSelezionaModificaOptionalIscrizione">
    <children>
       <BorderPane prefHeight="700.0" prefWidth="800.0">
          <center>

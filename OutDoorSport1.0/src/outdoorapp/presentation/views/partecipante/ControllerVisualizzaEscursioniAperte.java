@@ -62,7 +62,6 @@ public class ControllerVisualizzaEscursioniAperte extends ControllerTableView{
 			TOFactory TOFact = FactoryProducerTO.getFactory(FactoryEnum.GenericTOFactory);
 			escursione = (EscursioneTO) TOFact.getGenericTO(GenericEnum.Escursione);
 		}
-		
 	}
 
 	/**
@@ -128,8 +127,7 @@ public class ControllerVisualizzaEscursioniAperte extends ControllerTableView{
 			Alert alert = new Alert(AlertType.ERROR, "Nessuna Escursione Selezionata", ButtonType.OK);
 			alert.setTitle("OutDoorSport1.0");
 			alert.showAndWait();
-		}
-			
+		}	
 	}
 	
 	/**

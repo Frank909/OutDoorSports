@@ -4,7 +4,7 @@
 
 <hibernate-mapping>
 	<class name="outdoorapp.to.OptionalEscursione" table="tbl_optional_escursione" catalog="outdoorsports">
-		<id name="idOptionalEscursione" type="java.lang.Integer">
+		<id name="id" type="java.lang.Integer">
 			<column name="id" />
 			<generator class="increment" />
 		</id>

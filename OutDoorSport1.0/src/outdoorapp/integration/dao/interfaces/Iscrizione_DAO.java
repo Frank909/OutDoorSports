@@ -69,4 +69,17 @@ public interface Iscrizione_DAO extends GEN_DAO<IscrizioneTO> {
 	 * @throws DatabaseException
 	 */
 	List<IscrizioneTO> getAllIscrittiFromEscursione(EscursioneTO escursione) throws DatabaseException;
+	
+	/**
+	 * @return l'iscrizione del partecipante a una determinata escursione
+	 * @throws DatabaseException
+	 */
+	IscrizioneTO getIscrizioneFromEscursione(EscursioneTO escursione, PartecipanteTO partecipante) throws DatabaseException;
+	
+	/**
+	 * Metodo che cancella l'iscrizione all'escursione di un determinato partecipante
+	 * @param escursione: 
+	 * @throws DatabaseException
+	 */
+	void deleteIscrizioneFromEscursione(EscursioneTO escursione, PartecipanteTO partecipante) throws DatabaseException;
 }

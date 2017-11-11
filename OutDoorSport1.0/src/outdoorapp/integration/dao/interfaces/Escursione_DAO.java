@@ -69,4 +69,10 @@ public interface Escursione_DAO extends GEN_DAO<EscursioneTO>{
 	 * @throws DatabaseException 
 	 */
 	boolean esisteEscursione(EscursioneTO escursione)  throws DatabaseException;
+	
+	/**
+	 * @return le escursioni a cui è iscritto il partecipante
+	 * @throws DatabaseException 
+	 */
+	public List<EscursioneTO> readEscursioniIscritte(PartecipanteTO partecipante) throws DatabaseException;
 }

@@ -13,17 +13,10 @@ import java.util.Set;
 
 public interface OptionalEscursioneTO extends OutDoorSports{
 	
-	/**
-	 * Metodo che setta l'id di OptionalEscursione
-	 * 
-	 * @param id
-	 */
-	public void setIdOptionalEscursione(Integer idOptionalEscursione);
-	
-	/**
-	 * @return l'id di OptionalEscursione
-	 */
-	public Integer getIdOptionalEscursione();
+
+	public Integer getId();
+
+	public void setId(Integer id);
 	
 	/**
 	 * @return l'escursione collegata all'optional

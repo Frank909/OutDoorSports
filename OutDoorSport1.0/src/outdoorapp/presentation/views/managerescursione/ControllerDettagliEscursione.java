@@ -131,7 +131,7 @@ public class ControllerDettagliEscursione extends GenericController{
 	 * Evento associato alla modifica di una escursione
 	 */
 	@FXML protected void modificaEscursione(){
-		if(escursione.getStatoEscursione().equals(list_stato_escursione.get(1).getNome()))
+		if(escursione.getStatoEscursione().getNome().equals(list_stato_escursione.get(1).getNome()))
 			this.sendRequest(new Request(ViewCache.getNestedAnchorPane(), VIEW_MODIFICA_ESCURSIONE));
 		else if(escursione.getStatoEscursione().getNome().equals(list_stato_escursione.get(3).getNome())){
 			Alert alert = new Alert(AlertType.ERROR, "Non è possibile modificare una escursione in corso!", ButtonType.OK);

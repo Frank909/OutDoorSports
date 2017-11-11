@@ -27,6 +27,7 @@ import outdoorapp.to.enums.GenericEnum;
 import outdoorapp.to.interfaces.EmailTO;
 import outdoorapp.to.interfaces.EscursioneTO;
 import outdoorapp.to.interfaces.IscrizioneTO;
+import outdoorapp.to.interfaces.ManagerDiEscursioneTO;
 import outdoorapp.to.interfaces.OptionalEscursioneTO;
 import outdoorapp.to.interfaces.PartecipanteTO;
 import outdoorapp.to.interfaces.TOFactory;
@@ -214,6 +215,7 @@ class ApplicationServiceIscrizione implements Views, Actions{
 		Response response = new Response();
 		IscrizioneTO iscrizione = (IscrizioneTO) request.getData();
 		PartecipanteTO partecipante = (PartecipanteTO) iscrizione.getUtente();
+		ManagerDiEscursioneTO mde = (ManagerDiEscursioneTO) iscrizione.getEscursione().getUtente();
 		
 		try {
 			iscrizione.setUtente(partecipante);
@@ -221,6 +223,9 @@ class ApplicationServiceIscrizione implements Views, Actions{
 			LocalTime time = LocalTime.now();
 			iscrizione.setOra(time.getHour() + ":" + time.getMinute() + ":" + time.getSecond());
 			iscrizione.setStatoIscrizione(stato_iscrizione_dao.getStatoAttivo());
+			int iscritti = iscrizione.getEscursione().getIscritti();
+			iscritti++;
+			iscrizione.getEscursione().setIscritti(iscritti);
 			iscrizione = iscrizione_dao.create(iscrizione);
 			response.setData(iscrizione);
 			response.setResponse(RESP_OK);
@@ -228,25 +233,17 @@ class ApplicationServiceIscrizione implements Views, Actions{
 			TOFact = FactoryProducerTO.getFactory(FactoryEnum.GenericTOFactory);
 			EmailTO email = (EmailTO) TOFact.getGenericTO(GenericEnum.Email);
 
-			String mailOggetto = "OutDoorSports | Modifica Optional Scelti";
+			String mailOggetto = "OutDoorSports | Il partecipante " + partecipante.getUsername() + "si è iscritto ad una Escursione";
 			String mailMessaggio = "Gentile ";
-			mailMessaggio += partecipante.getNome() + " " + partecipante.getCognome() + ", \n";
-			mailMessaggio += "La informiamo che, per l'escursione " + iscrizione.getEscursione().getNome() + ", ";
-			mailMessaggio += "gli optional scelti modificati dal Manager sono: ";
-			double costo = iscrizione.getEscursione().getCosto();
-			for(OptionalEscursioneTO oe : iscrizione.getOptionals()){
-				mailMessaggio += oe.getOptional().getNome() + " \n";
-				costo = costo + oe.getOptional().getTipoOptional().getCosto();
-			}
-			mailMessaggio += " \n";
-			mailMessaggio += "Pertanto il costo totale per la sua escursione, compresi gli optional, sarà di: ";
-			mailMessaggio += costo + " €";
+			mailMessaggio += mde.getNome() + " " + mde.getCognome() + ", \n";
+			mailMessaggio += "La informiamo Il partecipante " + partecipante.getUsername() + "si è iscritto all'Escursione: \n";
+			mailMessaggio += iscrizione.getEscursione().getNome();
 
 			email.setOggetto(mailOggetto);
 			email.setMessaggio(mailMessaggio);
 
 			ArrayList<UtenteTO> listaDestinatari = new ArrayList<>();
-			listaDestinatari.add(partecipante);
+			listaDestinatari.add(mde);
 			email.setListaDestinatari(listaDestinatari);
 
 			EmailConfig emailConfig = new EmailConfig();
@@ -255,6 +252,48 @@ class ApplicationServiceIscrizione implements Views, Actions{
 			response.setResponse(RESP_KO);
 			e.printStackTrace();
 		}
+		return response;
+	}
+	
+	/**
+	 * Metodo che restituisce l'iscrizione ad una escursione
+	 * per un determinato partecipante
+	 * 
+	 * @param request
+	 * @return response: risposta in base alla richiesta
+	 */
+	public Response getIscrizioneFromEscursione(Request request){
+		Response response = new Response();
+		IscrizioneTO iscrizione = (IscrizioneTO) request.getData();
+		PartecipanteTO partecipante = (PartecipanteTO) iscrizione.getUtente();
+		EscursioneTO escursione = (EscursioneTO) iscrizione.getEscursione();
+		
+		IscrizioneTO newIscrizione = null;
+		try {
+			newIscrizione = iscrizione_dao.getIscrizioneFromEscursione(escursione, partecipante);
+			response.setData(newIscrizione);
+			response.setResponse(RESP_OK);
+		} catch (DatabaseException e) {
+			response.setResponse(RESP_KO);
+			e.printStackTrace();
+		}
+		return response;
+	}
+	
+	public Response deleteIscrizioneFromEscursione(Request request){
+		Response response = new Response();
+		IscrizioneTO iscrizione = (IscrizioneTO) request.getData();
+
+		try {
+			iscrizione_dao.deleteIscrizioneFromEscursione(iscrizione.getEscursione(), (PartecipanteTO) iscrizione.getUtente());
+			response.setResponse(RESP_OK);
+		} catch (DatabaseException e) {
+			response.setResponse(RESP_KO);
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
 		return response;
 	}
 }

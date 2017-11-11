@@ -63,6 +63,8 @@ public class ViewCache extends SessionCache{
 	private final String VIEW_ISCRITTI_ESCURSIONE_SISTEMA = "../../../resources/fxml/manager_sistema/visualizzaPartecipantiIscrittiEscursione";
 	private final String VIEW_DETTAGLI_PARTECIPANTE_SISTEMA = "../../../resources/fxml/manager_sistema/dettagliPartecipante";
 	private final String VIEW_SELEZIONA_OPTIONAL_ISCRIZIONE_PARTECIPANTE = "../../../resources/fxml/partecipante/selezionaOptional";
+	private final String VIEW_MODIFICA_ISCRIZIONE_ESCURSIONE_PARTECIPANTE = "../../../resources/fxml/partecipante/modificaIscrizioneEscursione";
+	private final String VIEW_SELEZIONA_MODIFICA_OPTIONAL_ISCRIZIONE_PARTECIPANTE = "../../../resources/fxml/partecipante/selezionaModificaOptional";
 	
 	private static ViewCache viewCache = new ViewCache();
 
@@ -115,6 +117,8 @@ public class ViewCache extends SessionCache{
 		loadForm("VIEW_ISCRITTI_ESCURSIONE_SISTEMA", VIEW_ISCRITTI_ESCURSIONE_SISTEMA, false);
 		loadForm("VIEW_DETTAGLI_PARTECIPANTE_SISTEMA", VIEW_DETTAGLI_PARTECIPANTE_SISTEMA, false);
 		loadForm("VIEW_SELEZIONA_OPTIONAL_ISCRIZIONE_PARTECIPANTE", VIEW_SELEZIONA_OPTIONAL_ISCRIZIONE_PARTECIPANTE, false);
+		loadForm("VIEW_MODIFICA_ISCRIZIONE_ESCURSIONE_PARTECIPANTE", VIEW_MODIFICA_ISCRIZIONE_ESCURSIONE_PARTECIPANTE, false);
+		loadForm("VIEW_SELEZIONA_MODIFICA_OPTIONAL_ISCRIZIONE_PARTECIPANTE", VIEW_SELEZIONA_MODIFICA_OPTIONAL_ISCRIZIONE_PARTECIPANTE, false);
 	}
 	
 	/**

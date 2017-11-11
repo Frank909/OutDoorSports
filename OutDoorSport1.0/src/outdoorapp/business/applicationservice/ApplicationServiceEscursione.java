@@ -169,7 +169,9 @@ class ApplicationServiceEscursione implements Actions {
 				StatoEscursione_DAO statoEscursioneDao = (StatoEscursione_DAO) statoFactory.getStatoDAO(StatoDAOEnum.Escursione);
 				escursione.setStatoEscursione(statoEscursioneDao.getStatoEscursioneAperta());
 				ManagerDiEscursioneTO mde = (ManagerDiEscursioneTO) SessionCache.getCurrentData("ManagerDiEscursione");
-				escursione.setUtente(mde);
+				if(mde != null){
+					escursione.setUtente(mde);
+				}
 				Set<OptionalTO> optionals = new HashSet<>();
 				optionals = escursione.getOptionals();
 				escursione.setOptionals(null);
@@ -237,13 +239,32 @@ class ApplicationServiceEscursione implements Actions {
 	/**
 	 * Metodo che restituisce tutte le escursione aperte a cui il partecipante non è iscritto
 	 * @param request
-	 * @return response
+	 * @return response: risposta in base alla richiesta
 	 */
 	public Response getAllEscursioniAperte(Request request){
 		Response response = new Response();
 		try {
 			PartecipanteTO partecipante = (PartecipanteTO)SessionCache.getCurrentData("Partecipante");
 			List<EscursioneTO> list_escursioni = escursione_dao.readEscursioniAperte(partecipante);
+			response.setData(list_escursioni);
+			response.setResponse(RESP_OK);
+		} catch (DatabaseException e) {
+			e.printStackTrace();
+			response.setResponse(RESP_KO);
+		}
+		return response;
+	}
+	
+	/**
+	 * Metodo che restituisce tutte le escursione a cui il partecipante è iscritto
+	 * @param request
+	 * @return response: risposta in base alla richiesta
+	 */
+	public Response getAllEscursioniIscritte(Request request){
+		Response response = new Response();
+		try {
+			PartecipanteTO partecipante = (PartecipanteTO)SessionCache.getCurrentData("Partecipante");
+			List<EscursioneTO> list_escursioni = escursione_dao.readEscursioniIscritte(partecipante);
 			response.setData(list_escursioni);
 			response.setResponse(RESP_OK);
 		} catch (DatabaseException e) {

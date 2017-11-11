@@ -122,13 +122,13 @@ public class ControllerModificaEscursione extends ControllerEscursione{
 					listOptionalPresenti.getItems().clear();
 					listOptionalScelti.getItems().clear();
 					
-					escursioneModel = (EscursioneModel) SessionCache.getCurrentData(escursioneModel.getClass().getSimpleName());
-					txtNomeEscursione.setText(escursioneModel.getNome());
-					txtMin.setText(Integer.toString(escursioneModel.getNumberMin()));
-					txtMax.setText(Integer.toString(escursioneModel.getNumberMax()));
-					txtCostoBase.setText(Double.toString(escursioneModel.getCosto()));
-					dataEscursione.setValue(LocalDate.parse(escursioneModel.getData()));
-					txtDescrizione.setText(escursioneModel.getDescrizione());
+					escursione = (EscursioneTO) SessionCache.getCurrentData(escursione.getClass().getSimpleName());
+					txtNomeEscursione.setText(escursione.getNome());
+					txtMin.setText(Integer.toString(escursione.getNumberMin()));
+					txtMax.setText(Integer.toString(escursione.getNumberMax()));
+					txtCostoBase.setText(Double.toString(escursione.getCosto()));
+					dataEscursione.setValue(LocalDate.parse(escursione.getData()));
+					txtDescrizione.setText(escursione.getDescrizione());
 					if(list_tipo_escursione.isEmpty()){
 						Response response = sendRequest(new Request(tipo_escursione, OUTDOORSPORT_GET_ALL_TIPI_ESCURSIONE));
 						list_tipo_escursione = (List<TipoEscursioneTO>) response.getData();
@@ -138,7 +138,7 @@ public class ControllerModificaEscursione extends ControllerEscursione{
 						}
 						data = FXCollections.observableArrayList(strings);
 						chbTipoEscursione.setItems(data);
-						chbTipoEscursione.getSelectionModel().select(escursioneModel.getTipoEscursione());
+						chbTipoEscursione.getSelectionModel().select(escursione.getTipoEscursione().getNome());
 					}
 					if(list_optional.isEmpty()){
 						Response response = sendRequest(new Request(optional, OUTDOORSPORT_GET_ALL_OPTIONALS));
@@ -151,7 +151,7 @@ public class ControllerModificaEscursione extends ControllerEscursione{
 						chbSelezionaOptional.setItems(data);
 					}
 					
-					optional_escursione.setEscursione(escursioneModel.getEscursione());
+					optional_escursione.setEscursione(escursione);
 					Response response = sendRequest(new Request(optional_escursione, OUTDOORSPORT_GET_OPTIONAL_FROM_ESCURSIONE));
 					List<OptionalEscursioneTO> list_optional_escursione = (List<OptionalEscursioneTO>) response.getData();
 					List<String> strings = new ArrayList<>();
@@ -267,9 +267,6 @@ public class ControllerModificaEscursione extends ControllerEscursione{
 				break;
 			}
 		}
-		escursione.setIdEscursione(escursioneModel.getIdEscursione());
-		escursione.setUtente(escursioneModel.getUtente());
-		escursione.setStatoEscursione(escursioneModel.getEscursione().getStatoEscursione());
 
 		Set<OptionalTO> temp = new HashSet<>();
 		for(OptionalTO op : list_optional){

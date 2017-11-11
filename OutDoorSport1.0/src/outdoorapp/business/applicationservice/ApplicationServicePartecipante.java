@@ -2,7 +2,9 @@ package outdoorapp.business.applicationservice;
 
 import java.io.File;
 import java.nio.file.Files;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
@@ -24,11 +26,13 @@ import outdoorapp.presentation.reqresp.Response;
 import outdoorapp.to.FactoryProducerTO;
 import outdoorapp.to.enums.FactoryEnum;
 import outdoorapp.to.enums.GenericEnum;
+import outdoorapp.to.interfaces.EmailTO;
 import outdoorapp.to.interfaces.EncryptPasswordTO;
 import outdoorapp.to.interfaces.PartecipanteTO;
 import outdoorapp.to.interfaces.TOFactory;
 import outdoorapp.to.interfaces.UtenteTO;
 import outdoorapp.utils.Actions;
+import outdoorapp.utils.EmailConfig;
 import outdoorapp.utils.Views;
 
 /**
@@ -167,9 +171,34 @@ class ApplicationServicePartecipante implements Views, Actions{
 				partecipante.setPassword(encryptedPassword.encryptPassword(password));
 				
 				partecipante_dao.create(partecipante);
+				
+				TOFactory TOFact = FactoryProducerTO.getFactory(FactoryEnum.GenericTOFactory);
+				EmailTO email = (EmailTO) TOFact.getGenericTO(GenericEnum.Email);
+
+				String mailOggetto = "OutDoorSports | Registrazione Partecipante";
+				String mailMessaggio = "Gentile ";
+				mailMessaggio += partecipante.getNome() + " " + partecipante.getCognome() + ", \n";
+				mailMessaggio += "I dati relativi al suo account sono stati inseriti dal Manager di Sistema! \n";
+				mailMessaggio += "Username: " + partecipante.getUsername() + "\n";
+				mailMessaggio += "Password: " + password + "\n";
+
+				email.setOggetto(mailOggetto);
+				email.setMessaggio(mailMessaggio);
+
+				ArrayList<UtenteTO> listaDestinatari = new ArrayList<>();
+				listaDestinatari.add(partecipante);
+				email.setListaDestinatari(listaDestinatari);
+
+				EmailConfig emailConfig = new EmailConfig();
+				
 				Alert alert = new Alert(AlertType.INFORMATION, "Il Partecipante è stato inserito correttamente!", ButtonType.OK);
 				alert.setTitle("OutDoorSport1.0");
-				alert.showAndWait();
+				
+				Optional<ButtonType> res = alert.showAndWait();
+				
+				if(res.get() == ButtonType.OK)
+					emailConfig.sendEmail(email);
+					
 				response.setResponse(RESP_OK);
 			}else{
 				response.setResponse(RESP_KO);

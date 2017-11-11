@@ -100,7 +100,7 @@ class ApplicationServiceManagerDiEscursione implements Actions, Views{
 				mailMessaggio += mde.getNome() + " " + mde.getCognome() + ", \n";
 				mailMessaggio += "I dati relativi al suo account sono stati inseriti dal Manager di Sistema! \n";
 				mailMessaggio += "Username: " + mde.getUsername() + "\n";
-				mailMessaggio += "Password: " + mde.getPassword() + "\n";
+				mailMessaggio += "Password: " + password + "\n";
 
 				email.setOggetto(mailOggetto);
 				email.setMessaggio(mailMessaggio);

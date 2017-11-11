@@ -42,4 +42,7 @@ public interface Actions {
 	public static final String OUTDOORSPORT_GET_ALL_ESCURSIONI_APERTE = "getAllEscursioniAperte";
 	public static final String OUTDOORSPORT_UPDATE_OPTIONAL_FROM_ISCRIZIONE = "updateOptionalFromIscrizione";
 	public static final String OUTDOORSPORT_CREATE_OPTIONAL_FROM_ISCRIZIONE = "createOptionalFromIscrizione";
+	public static final String OUTDOORSPORT_GET_ALL_ESCURSIONI_ISCRITTE = "getAllEscursioniIscritte";
+	public static final String OUTDOORSPORT_GET_ISCRIZIONE_FROM_ESCURSIONE ="getIscrizioneFromEscursione";
+	public static final String OUTDOORSPORT_DELETE_ISCRIZIONE_FROM_ESCURSIONE_PARTECIPANTE = "deleteIscrizioneFromEscursione";
 }

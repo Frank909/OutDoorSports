@@ -51,7 +51,7 @@ import outdoorapp.utils.SessionCache;
  *
  */
 
-public class ControllerSelezionaOptionalEscursione extends ControllerTableView{
+public class ControllerSelezionaOptionalIscrizione extends ControllerTableView{
 
 	@FXML private StackPane stpSelezionaOptional;
 	@FXML private TableView<OptionalModel> tableOptionalInseriti;
@@ -81,7 +81,7 @@ public class ControllerSelezionaOptionalEscursione extends ControllerTableView{
 	private List<StatoOptionalTO> list_stato_optional = new ArrayList<>();
 	
 	
-	public ControllerSelezionaOptionalEscursione() {
+	public ControllerSelezionaOptionalIscrizione() {
 		if(optional == null){
 			TOFactory TOFact = FactoryProducerTO.getFactory(FactoryEnum.OptionalTOFactory);
 			optional = (OptionalTO) TOFact.getOptionalTO(OptionalEnum.Optional);

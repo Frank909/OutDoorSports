@@ -31,30 +31,30 @@ import outdoorapp.to.interfaces.StatoOptionalTO;
 class OptionalEscursione implements OptionalEscursioneTO{
 
 	private static final long serialVersionUID = -2717683768500440335L;
-	private Integer idOptionalEscursione;
+	private Integer id;
 	private EscursioneTO escursione;
 	private OptionalTO optional;
 	private StatoOptionalTO statoOptional;
 	
 	OptionalEscursione() {}
 	
-	OptionalEscursione(Integer idOptionalEscursione, EscursioneTO escursione, OptionalTO optional, StatoOptionalTO statoOptional) {
-		this.idOptionalEscursione = idOptionalEscursione;
+	OptionalEscursione(Integer id, EscursioneTO escursione, OptionalTO optional, StatoOptionalTO statoOptional) {
+		this.id = id;
 		this.escursione = escursione;
 		this.optional = optional;
 		this.statoOptional = statoOptional;
 	}
+
+	@Override
+	public Integer getId() {
+		return this.id;
+	}
+
+	@Override
+	public void setId(Integer id) {
+		this.id = id;
+	}
 	
-	@Override
-	public Integer getIdOptionalEscursione() {
-		return this.idOptionalEscursione;
-	}
-
-	@Override
-	public void setIdOptionalEscursione(Integer idOptionalEscursione) {
-		this.idOptionalEscursione = idOptionalEscursione;
-	}
-
 	@Override
 	public EscursioneTO getEscursione() {
 		return this.escursione;
