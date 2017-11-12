@@ -105,7 +105,8 @@ public class ControllerGestioneEscursioni extends ControllerTableView{
 				TableView<EscursioneModel> table_escursioni = (TableView<EscursioneModel>) event.getSource();
 				escursione_model = table_escursioni.getSelectionModel().getSelectedItem();
 				if(escursione_model != null){
-					if(event.getClickCount() == 2){
+					if(event.getClickCount() == 2  && !event.isConsumed()){
+						event.consume();
 						sendRequest(new Request(escursione_model.getEscursione(), ViewCache.getNestedAnchorPane(), VIEW_DETTAGLI_ESCURSIONI_FROM_MDE));
 					}
 				}

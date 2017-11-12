@@ -55,7 +55,7 @@ class ApplicationServiceEscursione implements Actions {
 
 	private DAOFactory genericFactory = null, 
 			statoFactory = null, tipoFactory = null;
-	
+
 	private Escursione_DAO escursione_dao = null;
 	private OptionalEscursione_DAO optional_escursione_dao = null;
 	private StatoOptional_DAO stato_optional_dao = null;
@@ -64,7 +64,7 @@ class ApplicationServiceEscursione implements Actions {
 	private TOFactory OptionalFact = null;
 	private OptionalEscursioneTO optional_escursione = null;
 	private StatoEscursione_DAO statoEscursioneDao = null;
-	
+
 	public ApplicationServiceEscursione() {
 		genericFactory = FactoryProducerDAO.getFactory(DAORequest.Generic);
 		statoFactory = FactoryProducerDAO.getFactory(DAORequest.State);
@@ -75,7 +75,7 @@ class ApplicationServiceEscursione implements Actions {
 		OptionalFact = FactoryProducerTO.getFactory(FactoryEnum.OptionalTOFactory);
 		iscrizione_dao = (Iscrizione_DAO) genericFactory.getGenericDAO(GenericDAOEnum.Iscrizione);
 	}
-	
+
 	/**
 	 * Metodo che restituisce tutte le Escursioni 
 	 * presenti nel sistema
@@ -85,7 +85,7 @@ class ApplicationServiceEscursione implements Actions {
 	 */
 	public Response getAllEscursioni(Request request){
 		Response response = new Response();
-		
+
 		try {
 			List<EscursioneTO> list_escursioni = escursione_dao.getAll();
 			response.setData(list_escursioni);
@@ -96,7 +96,7 @@ class ApplicationServiceEscursione implements Actions {
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Metodo che restituisce tutte le escursione aperte a cui il partecipante non è iscritto
 	 * @param request
@@ -116,7 +116,7 @@ class ApplicationServiceEscursione implements Actions {
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Metodo che restituisce tutte le escursioni di un determinato 
 	 * Manager di Escursione
@@ -126,7 +126,7 @@ class ApplicationServiceEscursione implements Actions {
 	 */
 	public Response getAllEscursioniFromMDE(Request request){
 		Response response = new Response();
-		
+
 		try {
 			List<EscursioneTO> list_escursioni = escursione_dao.readEscursioniByManagerDiEscursione((ManagerDiEscursioneTO)SessionCache.getCurrentData("ManagerDiEscursione"));
 			response.setData(list_escursioni);
@@ -137,7 +137,7 @@ class ApplicationServiceEscursione implements Actions {
 		}
 		return response;
 	}
-	
+
 	/**
 	 * Metodo che restituisce una risposta in base a una richiesta, e inserisce 
 	 * una nuova Escursione nel sistema
@@ -147,7 +147,7 @@ class ApplicationServiceEscursione implements Actions {
 	 */
 	public Response nuovaEscursione(Request request){
 		Response response = new Response();
-		
+
 		try {
 			if(!escursione_dao.esisteEscursione((EscursioneTO)request.getData())){
 				escursione = (EscursioneTO)request.getData();
@@ -168,10 +168,10 @@ class ApplicationServiceEscursione implements Actions {
 			alert.setTitle("OutDoorSport1.0");
 			alert.showAndWait();
 		}
-		
+
 		return response;
 	}
-	
+
 	/**
 	 * Metodo che restituisce una risposta in base a una richiesta, e modifica
 	 * una escursione presente nel sistema
@@ -184,7 +184,7 @@ class ApplicationServiceEscursione implements Actions {
 		escursione = (EscursioneTO) request.getData();
 		EscursioneTO temp = null;
 		int id_temp = -1;
-		
+
 		try {
 			temp = escursione_dao.readById(escursione.getIdEscursione().intValue());
 			if(temp.getIdEscursione() != null)
@@ -192,15 +192,16 @@ class ApplicationServiceEscursione implements Actions {
 		} catch (DatabaseException e) {
 			e.printStackTrace();
 		}
-		
+
 		try {
 			if(!(escursione_dao.esisteEscursione(escursione) || temp == null) || (escursione_dao.esisteEscursione(escursione) && escursione.getIdEscursione() == id_temp)){
 				StatoEscursione_DAO statoEscursioneDao = (StatoEscursione_DAO) statoFactory.getStatoDAO(StatoDAOEnum.Escursione);
 				escursione.setStatoEscursione(statoEscursioneDao.getStatoEscursioneAperta());
 				ManagerDiEscursioneTO mde = (ManagerDiEscursioneTO) SessionCache.getCurrentData("ManagerDiEscursione");
-				if(mde != null){
+				
+				if(mde != null)
 					escursione.setUtente(mde);
-				}
+				
 				Set<OptionalTO> optionals = new HashSet<>();
 				optionals = escursione.getOptionals();
 				escursione.setOptionals(null);
@@ -208,29 +209,40 @@ class ApplicationServiceEscursione implements Actions {
 				StatoOptionalTO stato_attivo = stato_optional_dao.getStatoAttivo();
 				StatoOptionalTO stato_disattivo = stato_optional_dao.getStatoDisattivo();
 				OptionalEscursioneTO optional_escursione = (OptionalEscursioneTO) OptionalFact.getOptionalTO(OptionalEnum.OptionalEscursione);
+				List<OptionalEscursioneTO> list_opt_e = new ArrayList<>();
+				
 				for(OptionalTO op : optionals){
-					optional_escursione.setEscursione(escursione);
-					if(!op.getNome().contains(stato_attivo.getNome()) && !op.getNome().contains(stato_disattivo.getNome())){
+					if(!op.getNome().contains(" " + stato_attivo.getNome()) && !op.getNome().contains(stato_disattivo.getNome())){
 						newOptionals.add(op);
 					}else{
-						if(op.getNome().contains(stato_attivo.getNome())){
-							List<OptionalEscursioneTO> list = optional_escursione_dao.getAssociationID(escursione, op);
-							op.setNome(op.getNome().substring(0, op.getNome().indexOf(" | ")));
+						List<OptionalEscursioneTO> list = optional_escursione_dao.getAssociationID(escursione, op);
+						optional_escursione = list.get(0);
+						op.setNome(op.getNome().substring(0, op.getNome().indexOf(" | ")));
+						if(op.getNome().contains(" " + stato_attivo.getNome())){
+							optional_escursione.setStatoOptional(stato_attivo);
 						}else{
-							List<OptionalEscursioneTO> list = optional_escursione_dao.getAssociationID(escursione, op);
-							op.setNome(op.getNome().substring(0, op.getNome().indexOf(" | ")));
+							optional_escursione.setStatoOptional(stato_disattivo);
+							
 						}
+						
+						//list_opt_e.add(optional_escursione);
+						//optional_escursione_dao.update(optional_escursione);
 						newOptionals.add(op);
 					}
 				}
+			
 				escursione.setOptionals(newOptionals);
 				escursione_dao.update(escursione);
 				
+				/*for(OptionalEscursioneTO oe: list_opt_e)
+					optional_escursione_dao.update(oe);*/
+				
+
 				Alert alert = new Alert(AlertType.INFORMATION, "L'Escursione è stata modificata correttamente!", ButtonType.OK);
 				alert.setTitle("OutDoorSport1.0");
 				alert.showAndWait();
 				response.setResponse(RESP_OK);
-				
+
 				TOFactory TOFact = FactoryProducerTO.getFactory(FactoryEnum.GenericTOFactory);
 				EmailTO email = (EmailTO) TOFact.getGenericTO(GenericEnum.Email);
 
@@ -244,24 +256,29 @@ class ApplicationServiceEscursione implements Actions {
 				mailMessaggio += "Data: " + escursione.getData() + "\n";
 				mailMessaggio += "Descrizione " + escursione.getDescrizione() + "\n";
 				mailMessaggio += "Tipo Escursione " + escursione.getTipoEscursione().getNome() + "\n";
+				
 				Set<OptionalEscursioneTO> set_oe = new HashSet<>();
 				set_oe.addAll(optional_escursione_dao.getOptionalsFromEscursione(escursione.getIdEscursione()));
 				String string = "";
-				for(OptionalEscursioneTO e : set_oe){
-					if(e.getStatoOptional() == stato_attivo){
-						string += e.getOptional().getNome() + " | ";
+				if(set_oe.isEmpty())
+					string = "Nessuno";
+				else
+					for(OptionalEscursioneTO e : set_oe){
+						if(e.getStatoOptional().getIdStatoOptional() == stato_attivo.getIdStatoOptional()){
+							string += e.getOptional().getNome() + " | ";
+						}
 					}
-				}
+				
 				mailMessaggio += "Optional Disponibili: " + string + "\n";
-				
+
 				ArrayList<UtenteTO> listaDestinatari = new ArrayList<>();
-				
+
 				List<IscrizioneTO> list_iscrizioni = iscrizione_dao.getAllIscrittiFromEscursione(escursione);
 				for(IscrizioneTO i : list_iscrizioni){
 					i.setOptionals(set_oe);
 					listaDestinatari.add(i.getUtente());
 				}
-				
+
 				email.setOggetto(mailOggetto);
 				email.setMessaggio(mailMessaggio);
 
@@ -269,7 +286,7 @@ class ApplicationServiceEscursione implements Actions {
 
 				EmailConfig emailConfig = new EmailConfig();
 				emailConfig.sendEmail(email);
-				
+
 				response.setResponse(RESP_OK);
 			}else{
 				response.setResponse(RESP_KO);
@@ -278,10 +295,10 @@ class ApplicationServiceEscursione implements Actions {
 		} catch (DatabaseException e) {
 			e.printStackTrace();
 		}
-		
+
 		return response;
 	}
-	
+
 	/**
 	 * Metodo che restituisce una risposta in base alla richiesta, e
 	 * annulla una escursione
@@ -300,8 +317,8 @@ class ApplicationServiceEscursione implements Actions {
 		} catch (DatabaseException e) {
 			response.setResponse(RESP_KO);
 		}
-		
+
 		return response;
 	}
-	
+
 }

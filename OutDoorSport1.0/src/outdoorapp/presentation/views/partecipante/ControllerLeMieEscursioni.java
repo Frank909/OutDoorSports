@@ -132,7 +132,8 @@ public class ControllerLeMieEscursioni extends ControllerTableView{
 				TableView<EscursioneModel> table_escursioni = (TableView<EscursioneModel>) event.getSource();
 				escursione_model = table_escursioni.getSelectionModel().getSelectedItem();
 				if(escursione_model != null){
-					if(event.getClickCount() == 2){
+					if(event.getClickCount() == 2  && !event.isConsumed()){
+						event.consume();
 						TOFact = FactoryProducerTO.getFactory(FactoryEnum.GenericTOFactory);
 						iscrizione = (IscrizioneTO) TOFact.getGenericTO(GenericEnum.Iscrizione);
 						iscrizione.setEscursione(escursione_model.getEscursione());

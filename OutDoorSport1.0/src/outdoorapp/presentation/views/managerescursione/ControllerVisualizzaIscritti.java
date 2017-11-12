@@ -142,7 +142,8 @@ public class ControllerVisualizzaIscritti extends ControllerTableView{
 				mTablePartecipanti = (TableView<PartecipanteModel>) event.getSource();
 				partecipante_model = mTablePartecipanti.getSelectionModel().getSelectedItem();
 				if(partecipante_model != null){
-					if(event.getClickCount() == 2){
+					if(event.getClickCount() == 2  && !event.isConsumed()){
+						event.consume();
 		                updateDatiIscrizione();
 		            }
 				}

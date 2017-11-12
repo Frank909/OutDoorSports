@@ -162,7 +162,8 @@ public class ControllerGestioneManagerEscursione extends ControllerTableView{
 				TableView<ManagerDiEscursioneModel> table = (TableView<ManagerDiEscursioneModel>) event.getSource();
 				mde_model = table.getSelectionModel().getSelectedItem();
 				if(mde_model != null){
-					if(event.getClickCount() == 2){
+					if(event.getClickCount() == 2  && !event.isConsumed()){
+						event.consume();
 		                sendRequest(new Request(mde_model, ViewCache.getNestedAnchorPane(), VIEW_DETTAGLI_MANAGER_DI_ESCURSIONE));
 		            }
 				}

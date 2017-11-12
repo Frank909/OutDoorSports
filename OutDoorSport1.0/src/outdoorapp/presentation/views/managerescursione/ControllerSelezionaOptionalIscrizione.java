@@ -82,7 +82,7 @@ public class ControllerSelezionaOptionalIscrizione extends ControllerTableView{
 	private Set<OptionalEscursioneTO> all_optional_scelti = null;
 	private Set<OptionalEscursioneTO> all_optional_disponibili = null;
 	private Set<OptionalEscursioneTO> all_current_optional_disponibili = null;
-	
+
 	public ControllerSelezionaOptionalIscrizione() {
 		if(iscrizione == null){
 			TOFact = FactoryProducerTO.getFactory(FactoryEnum.GenericTOFactory);
@@ -115,7 +115,7 @@ public class ControllerSelezionaOptionalIscrizione extends ControllerTableView{
 					list_stato_optional = (List<StatoOptionalTO>) response.getData();
 					lblPrezzoTotale.setText("0 €");
 					lblPrezzoTotaleOptional.setText("0 €");
-					
+
 					optional_escursione.setEscursione(iscrizione.getEscursione());
 					Response resp = sendRequest(new Request(optional_escursione, OUTDOORSPORT_GET_OPTIONAL_FROM_ESCURSIONE));
 					Set<OptionalEscursioneTO> temp = new HashSet<>();
@@ -126,7 +126,7 @@ public class ControllerSelezionaOptionalIscrizione extends ControllerTableView{
 					all_optional_scelti.addAll(iscrizione.getOptionals());
 					all_current_optional_disponibili = new HashSet<>();
 					all_current_optional_disponibili.addAll(all_optional_disponibili);
-					
+
 					for(OptionalEscursioneTO optional : all_optional_disponibili){
 						for(OptionalEscursioneTO oe : all_optional_scelti){
 							if(optional.getOptional().getNome().equals(oe.getOptional().getNome())){
@@ -141,7 +141,7 @@ public class ControllerSelezionaOptionalIscrizione extends ControllerTableView{
 
 		stpSelezionaOptional.visibleProperty().addListener(visibilityListener);
 	}
-	
+
 	/**
 	 * Metodo che carica gli optional disponibili per quella escursione nella tabella in alto, 
 	 * mentre carica gli optional scelti nella tabella in basso, in base agli optional
@@ -149,7 +149,7 @@ public class ControllerSelezionaOptionalIscrizione extends ControllerTableView{
 	 */
 	@SuppressWarnings("unchecked")
 	private void setTables(){
-		
+
 		ObservableList<OptionalModel> dataDisponibili = FXCollections.observableArrayList(getListTabellaOptionalDisponibili(all_current_optional_disponibili));
 
 		this.initColumn(mColumnOptionalDisponibili, "nome");
@@ -157,28 +157,29 @@ public class ControllerSelezionaOptionalIscrizione extends ControllerTableView{
 		this.initColumn(mColumnTipoOptionalDisponibili, "nomeTipoOptional");
 
 		tableOptionalDisponibili.setItems(dataDisponibili);
-		
+
 		tableOptionalDisponibili.addEventFilter(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>(){
 			@Override
 			public void handle(MouseEvent event) {
 				tableOptionalDisponibili = (TableView<OptionalModel>) event.getSource();
 				optional_disponibili_model = tableOptionalDisponibili.getSelectionModel().getSelectedItem();
 				if(optional_disponibili_model != null){
-					if(event.getClickCount() == 2){
-		               inserisciOptional();
-		            }
+					if(event.getClickCount() == 2  && !event.isConsumed()){
+						event.consume();
+						inserisciOptional();
+					}
 				}
 			}
 		});
-		
+
 		ObservableList<OptionalModel> dataScelti = FXCollections.observableArrayList(getListTabellaOptionalScelti(all_optional_scelti));
-		
+
 		this.initColumn(mColumnOptionalInseriti, "nome");
 		this.initColumn(mColumnPrezzoInseriti, "costo");
 		this.initColumn(mColumnTipoOptionalInseriti, "nomeTipoOptional");
-		
+
 		tableOptionalInseriti.setItems(dataScelti);
-		
+
 		tableOptionalInseriti.addEventFilter(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>(){
 			@Override
 			public void handle(MouseEvent event) {
@@ -186,12 +187,12 @@ public class ControllerSelezionaOptionalIscrizione extends ControllerTableView{
 				optional_scelti_model = tableOptionalInseriti.getSelectionModel().getSelectedItem();
 				if(optional_scelti_model != null){
 					if(event.getClickCount() == 2){
-		                rimuoviOptional();
-		            }
+						rimuoviOptional();
+					}
 				}
 			}
 		});
-		
+
 		double prezzoTotale = iscrizione.getEscursione().getCosto();
 		double prezzoTotaleOptional = 0;
 		for(OptionalEscursioneTO oe : all_optional_scelti){
@@ -201,7 +202,7 @@ public class ControllerSelezionaOptionalIscrizione extends ControllerTableView{
 		lblPrezzoTotale.setText(Double.toString(prezzoTotale) + " €");
 		lblPrezzoTotaleOptional.setText(Double.toString(prezzoTotaleOptional) + " €");
 	}
-	
+
 	/**
 	 * Metodo che inizializza il modello che servirà per visualizzare i dati
 	 * nella tabella degli optional disponibili
@@ -216,10 +217,10 @@ public class ControllerSelezionaOptionalIscrizione extends ControllerTableView{
 			optional_scelti_model = new OptionalModel(optional.getOptional());
 			res.add(optional_scelti_model);
 		}
-		
+
 		return res;
 	}
-	
+
 	/**
 	 * Metodo che inizializza il modello che servirà per visualizzare i dati
 	 * nella tabella degli optional scelti dal partecipante iscritto
@@ -234,10 +235,10 @@ public class ControllerSelezionaOptionalIscrizione extends ControllerTableView{
 			optional_scelti_model = new OptionalModel(optional.getOptional());
 			res.add(optional_scelti_model);
 		}
-		
+
 		return res;
 	}
-	
+
 	/**
 	 * Evento associato all'inserimento di un optional nella lista degli optional
 	 * scelti tra quelli disponibili per quella escursione
@@ -262,7 +263,7 @@ public class ControllerSelezionaOptionalIscrizione extends ControllerTableView{
 			alert.showAndWait();
 		}
 	}
-	
+
 	/**
 	 * Evento associato alla rimozione di un optional dalla lista degli optional
 	 * scelti tra quelli disponibili per quella escursione
@@ -287,7 +288,7 @@ public class ControllerSelezionaOptionalIscrizione extends ControllerTableView{
 			alert.showAndWait();
 		}
 	}
-	
+
 	/**
 	 * Torna ai dettagli delle iscrizioni e lascia invariata la
 	 * modifica degli optional scelti
@@ -296,12 +297,12 @@ public class ControllerSelezionaOptionalIscrizione extends ControllerTableView{
 		Alert alert = new Alert(AlertType.CONFIRMATION, "Sei sicuro di voler annullare le modifiche?");
 		Optional<ButtonType> result = alert.showAndWait();
 		if (result.get() == ButtonType.OK){
-		    sendRequest(new Request(iscrizioneOld, ViewCache.getNestedAnchorPane(), VIEW_MODIFICA_ISCRIZIONE_ESCURSIONE));
+			sendRequest(new Request(iscrizioneOld, ViewCache.getNestedAnchorPane(), VIEW_MODIFICA_ISCRIZIONE_ESCURSIONE));
 		} else {
-		    alert.close();
+			alert.close();
 		}
 	}
-	
+
 	/**
 	 * Conferma le modifiche della scelta degli optional, e li aggiorna
 	 * nella schermata dei dettagli dell'iscrizione. Le modifiche non vengono
