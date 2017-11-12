@@ -27,11 +27,13 @@ import outdoorapp.presentation.views.models.EscursioneModel;
 import outdoorapp.to.FactoryProducerTO;
 import outdoorapp.to.enums.FactoryEnum;
 import outdoorapp.to.enums.GenericEnum;
+import outdoorapp.to.enums.StatoEnum;
 import outdoorapp.to.interfaces.EmailTO;
 import outdoorapp.to.interfaces.EscursioneTO;
 import outdoorapp.to.interfaces.IscrizioneTO;
 import outdoorapp.to.interfaces.ManagerDiEscursioneTO;
 import outdoorapp.to.interfaces.PartecipanteTO;
+import outdoorapp.to.interfaces.StatoIscrizioneTO;
 import outdoorapp.to.interfaces.TOFactory;
 import outdoorapp.to.interfaces.UtenteTO;
 import outdoorapp.utils.EmailConfig;
@@ -59,22 +61,22 @@ public class ControllerLeMieEscursioni extends ControllerTableView{
 	@FXML private TableColumn<EscursioneModel, String> mColumnNMaxEscursione;
 	@FXML private TableColumn<EscursioneModel, String> mColumnCostoEscursione;
 	@FXML private Button btnCancelEscursione, btnModificaIscrizione;
-	
+
 	private List<EscursioneTO> list_escursioni = new ArrayList<>();
 	private EscursioneModel escursione_model = null;
 	private EscursioneTO escursione = null;
 	private IscrizioneTO iscrizione = null;
 	private TOFactory TOFact = null;
-	
+
 	public ControllerLeMieEscursioni() {
 		TOFact = FactoryProducerTO.getFactory(FactoryEnum.GenericTOFactory);
-		
+
 		if(escursione == null)			
 			escursione = (EscursioneTO) TOFact.getGenericTO(GenericEnum.Escursione);
-		
+
 		if(iscrizione == null)
 			iscrizione = (IscrizioneTO) TOFact.getGenericTO(GenericEnum.Iscrizione);
-		
+
 	}
 
 	/**
@@ -94,7 +96,7 @@ public class ControllerLeMieEscursioni extends ControllerTableView{
 
 		stpLeMieEscursioniPartecipante.visibleProperty().addListener(visibilityListener);
 	}
-	
+
 	/**
 	 * Metodo di supporto che fornisce tutte le escursioni a cui l'utente è iscritto
 	 */
@@ -127,7 +129,7 @@ public class ControllerLeMieEscursioni extends ControllerTableView{
 			}
 		});
 	}
-	
+
 	/**
 	 * Metodo che inizializza il modello che servirà per visualizzare i dati nella tabella
 	 * 
@@ -141,82 +143,90 @@ public class ControllerLeMieEscursioni extends ControllerTableView{
 			escursione_model = new EscursioneModel(escursione);
 			res.add(escursione_model);
 		}
-		
+
 		return res;
 	}
-	
+
 	/**
 	 * Metodo associato all'evento del click del bottone Cerca Escursioni.
 	 */
 	@FXML protected void cercaEscursione(){
 		String param = txtSearchEscursione.getText();
 		List<EscursioneTO> list_escursione = new ArrayList<>();
-		
-		
+
+
 		for(EscursioneTO escursione : this.list_escursioni){
 			if(escursione.getNome().contains(param) ||
-			   escursione.getData().contains(param) ||
-			   escursione.getDescrizione().contains(param) ||
-			   escursione.getTipoEscursione().getNome().contains(param.toUpperCase()))
-			   list_escursione.add(escursione);
+					escursione.getData().contains(param) ||
+					escursione.getDescrizione().contains(param) ||
+					escursione.getTipoEscursione().getNome().contains(param.toUpperCase()))
+				list_escursione.add(escursione);
 			else
 				try{
 					if(escursione.getNumberMax() == Integer.parseInt(param) || 
-						escursione.getNumberMin() == Integer.parseInt(param) ||
-						escursione.getCosto() == Double.parseDouble(param))
-							list_escursione.add(escursione);
+							escursione.getNumberMin() == Integer.parseInt(param) ||
+							escursione.getCosto() == Double.parseDouble(param))
+						list_escursione.add(escursione);
 				}catch(Exception e){
 				}
 		}
-		
+
 		ObservableList<EscursioneModel> data = FXCollections.observableArrayList(getListTabellaEscursioni(list_escursione));
 
 		mTableEscursioni.setItems(data);
 	}
-	
+
 	@FXML
 	protected void cancellatiEscursione(){
-		
+
 		escursione_model = mTableEscursioni.getSelectionModel().getSelectedItem();
 		if(escursione_model != null){
 			Alert alert = new Alert(AlertType.CONFIRMATION, "Sei sicuro di voler cancellare l'iscrizione selezionata?");
 			alert.setTitle("OutDoorSport1.0");
 			Optional<ButtonType> res = alert.showAndWait();
-	
+
 			if(res.get() == ButtonType.OK){
 				PartecipanteTO partecipante = (PartecipanteTO) SessionCache.getCurrentData("Partecipante");
 				iscrizione.setUtente(partecipante);
 				iscrizione.setEscursione(escursione_model.getEscursione());
-				Response resp = this.sendRequest(new Request(iscrizione, OUTDOORSPORT_DELETE_ISCRIZIONE_FROM_ESCURSIONE_PARTECIPANTE));
-				if(resp.toString().equals(RESP_OK)){
-					EmailConfig emailConfig = new EmailConfig();
-					EmailTO email = (EmailTO) TOFact.getGenericTO(GenericEnum.Email);
-					ArrayList<UtenteTO> dest = new ArrayList<>();
-					ManagerDiEscursioneTO mde = (ManagerDiEscursioneTO)iscrizione.getEscursione().getUtente();
-					dest.add(mde);
-					String mailOggetto = "OutDoorSports | Disiscrizione Partecipante";
-					String mailMessaggio = "Gentile ";
-					mailMessaggio += mde.getNome() + " " + mde.getCognome() + ", \n";
-					mailMessaggio += "Il partecipante " + partecipante.getNome() + " " + partecipante.getCognome();
-					mailMessaggio += "con codice fiscale " + partecipante.getCodiceFiscale();
-					mailMessaggio += "ha scelto di disiscriversi dall'escursione " + iscrizione.getEscursione().getNome();
-			
-					email.setOggetto(mailOggetto);
-					email.setMessaggio(mailMessaggio);
-					
-					email.setListaDestinatari(dest);
-					emailConfig.sendEmail(email);
+				Response response = sendRequest(new Request(iscrizione, OUTDOORSPORT_GET_ISCRIZIONE_FROM_ESCURSIONE));
+				if(response.toString().equals(RESP_OK)){
+					iscrizione = (IscrizioneTO) response.getData();
+					StatoIscrizioneTO statoIscr = iscrizione.getStatoIscrizione();
+					statoIscr.setIdStatoIscrizione(1);
+					statoIscr.setNome("NON ISCRITTO");
+					iscrizione.setStatoIscrizione(statoIscr);
+					Response resp = this.sendRequest(new Request(iscrizione, OUTDOORSPORT_DELETE_ISCRIZIONE_FROM_ESCURSIONE_PARTECIPANTE));
+					if(resp.toString().equals(RESP_OK)){
+						EmailConfig emailConfig = new EmailConfig();
+						EmailTO email = (EmailTO) TOFact.getGenericTO(GenericEnum.Email);
+						ArrayList<UtenteTO> dest = new ArrayList<>();
+						ManagerDiEscursioneTO mde = (ManagerDiEscursioneTO)iscrizione.getEscursione().getUtente();
+						dest.add(mde);
+						String mailOggetto = "OutDoorSports | Disiscrizione Partecipante";
+						String mailMessaggio = "Gentile ";
+						mailMessaggio += mde.getNome() + " " + mde.getCognome() + ", \n";
+						mailMessaggio += "Il partecipante " + partecipante.getNome() + " " + partecipante.getCognome();
+						mailMessaggio += "con codice fiscale " + partecipante.getCodiceFiscale();
+						mailMessaggio += "ha scelto di disiscriversi dall'escursione " + iscrizione.getEscursione().getNome();
+
+						email.setOggetto(mailOggetto);
+						email.setMessaggio(mailMessaggio);
+
+						email.setListaDestinatari(dest);
+						emailConfig.sendEmail(email);
+					}
 				}
-					
+
 			}
 		}else{
 			Alert alert1 = new Alert(AlertType.ERROR, "Nessuna Escursione Selezionata", ButtonType.OK);
 			alert1.setTitle("OutDoorSport1.0");
 			alert1.showAndWait();
 		}		
-		
+
 	}
-	
+
 	@FXML
 	protected void modificaIscrizione(){
 		escursione_model = mTableEscursioni.getSelectionModel().getSelectedItem();
@@ -228,6 +238,6 @@ public class ControllerLeMieEscursioni extends ControllerTableView{
 			alert.showAndWait();
 		}	
 	}
-	
+
 
 }

@@ -96,14 +96,17 @@ public class ControllerVisualizzaEscursioniSistema extends ControllerTableView{
 		
 		for(EscursioneTO escursione : this.list_escursioni){
 			if(escursione.getNome().contains(param) ||
-			   escursione.getTipoEscursione().getNome().contains(param) ||
-			   escursione.getData().contains(param) || 
-			   escursione.getStatoEscursione().getNome().equals(param))
+					escursione.getData().contains(param) ||
+					escursione.getDescrizione().contains(param) ||
+					escursione.getTipoEscursione().getNome().contains(param.toUpperCase())||
+					escursione.getStatoEscursione().getNome().contains(param.toUpperCase()))
 				list_escursione.add(escursione);
 			else
 				try{
-					if(escursione.getCosto() == Double.parseDouble(param))
-							list_escursione.add(escursione);
+					if(escursione.getNumberMax() == Integer.parseInt(param) || 
+							escursione.getNumberMin() == Integer.parseInt(param) ||
+							escursione.getCosto() == Double.parseDouble(param))
+						list_escursione.add(escursione);
 				}catch(Exception e){
 				}
 		}

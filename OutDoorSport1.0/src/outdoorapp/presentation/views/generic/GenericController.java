@@ -33,4 +33,12 @@ public abstract class GenericController implements Actions, Views{
 	protected Response sendRequest(Request request){
 		return FrontController.getInstance().sendRequest(request);
 	}
+	
+	/** 
+	 * @param str: stringa in ingresso
+	 * @return stringa con la prima lettera maiuscola
+	 */
+	public String capitalizeWord(String str){
+		return str.substring(0, 1).toUpperCase() + str.substring(1);
+	}
 }

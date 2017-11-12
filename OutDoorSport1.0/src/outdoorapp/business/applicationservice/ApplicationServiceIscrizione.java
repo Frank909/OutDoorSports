@@ -5,10 +5,6 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
-
-import org.hibernate.dialect.pagination.SQL2008StandardLimitHandler;
-
 import javafx.scene.control.TextInputDialog;
 import outdoorapp.exceptions.DatabaseException;
 import outdoorapp.integration.dao.DAOFactory;
@@ -17,7 +13,6 @@ import outdoorapp.integration.dao.enums.DAORequest;
 import outdoorapp.integration.dao.enums.GenericDAOEnum;
 import outdoorapp.integration.dao.enums.StatoDAOEnum;
 import outdoorapp.integration.dao.interfaces.Iscrizione_DAO;
-import outdoorapp.integration.dao.interfaces.Partecipante_DAO;
 import outdoorapp.integration.dao.interfaces.StatoIscrizione_DAO;
 import outdoorapp.presentation.reqresp.Request;
 import outdoorapp.presentation.reqresp.Response;
@@ -83,7 +78,6 @@ class ApplicationServiceIscrizione implements Views, Actions{
 	 */
 	public Response getAllIscrittiFromEscursione(Request request){
 		Response response = new Response();
-		EscursioneTO escursione = (EscursioneTO)SessionCache.getCurrentData("Escursione");
 		
 		try {
 			List<IscrizioneTO> list_iscrizioni = iscrizione_dao.getAllIscrittiFromEscursione((EscursioneTO)SessionCache.getCurrentData("Escursione"));
@@ -226,7 +220,7 @@ class ApplicationServiceIscrizione implements Views, Actions{
 			int iscritti = iscrizione.getEscursione().getIscritti();
 			iscritti++;
 			iscrizione.getEscursione().setIscritti(iscritti);
-			iscrizione = iscrizione_dao.create(iscrizione);
+			iscrizione = iscrizione_dao.createOrUpdate(iscrizione);
 			response.setData(iscrizione);
 			response.setResponse(RESP_OK);
 			
@@ -285,14 +279,13 @@ class ApplicationServiceIscrizione implements Views, Actions{
 		IscrizioneTO iscrizione = (IscrizioneTO) request.getData();
 
 		try {
-			iscrizione_dao.deleteIscrizioneFromEscursione(iscrizione.getEscursione(), (PartecipanteTO) iscrizione.getUtente());
+			iscrizione_dao.annullaIscrizione(iscrizione);
 			response.setResponse(RESP_OK);
 		} catch (DatabaseException e) {
 			response.setResponse(RESP_KO);
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
 		
 		return response;
 	}

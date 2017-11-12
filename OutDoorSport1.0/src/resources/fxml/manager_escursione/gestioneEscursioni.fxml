@@ -39,13 +39,12 @@
             </GridPane>
             <TableView fx:id="mTableEscursioni" prefHeight="461.0" prefWidth="800.0" GridPane.rowIndex="1">
               <columns>
-                  <TableColumn fx:id="mColumnNome" prefWidth="221.0" text="Nome" />
-                <TableColumn fx:id="mColumnTipoEscursione" prefWidth="143.0" text="Tipo Escursione" />
+                  <TableColumn fx:id="mColumnNome" prefWidth="176.0" text="Nome" />
+                <TableColumn fx:id="mColumnTipoEscursione" prefWidth="188.0" text="Tipo Escursione" />
                 <TableColumn fx:id="mColumnDataEscursione" minWidth="0.0" prefWidth="88.0" text="Data" />
-                  <TableColumn fx:id="mColumnMin" minWidth="0.0" prefWidth="49.0" text="Min" />
-                  <TableColumn fx:id="mColumnMax" minWidth="0.0" prefWidth="45.0" text="Max" />
-                  <TableColumn fx:id="mColumnCosto" minWidth="0.0" prefWidth="68.0" text="Costo" />
-                  <TableColumn fx:id="mColumnStato" prefWidth="87.0" text="Stato" />
+                  <TableColumn fx:id="mColumnMin" minWidth="0.0" prefWidth="74.0" text="Min" />
+                  <TableColumn fx:id="mColumnMax" minWidth="0.0" prefWidth="62.0" text="Max" />
+                  <TableColumn fx:id="mColumnCosto" minWidth="0.0" prefWidth="113.0" text="Costo" />
               </columns>
                <GridPane.margin>
                   <Insets left="10.0" right="10.0" />

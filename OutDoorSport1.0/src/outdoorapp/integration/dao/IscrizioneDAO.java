@@ -121,12 +121,4 @@ class IscrizioneDAO extends GenericDAO<IscrizioneTO> implements Iscrizione_DAO{
 		List<IscrizioneTO> res = super.executeParamQuery("getIscrizioneFromEscursione", param);
 		return res.get(0);
 	}
-
-	@Override
-	public void deleteIscrizioneFromEscursione(EscursioneTO escursione, PartecipanteTO partecipante) throws DatabaseException{
-		List<Integer> param = new ArrayList<>();
-		param.add(escursione.getIdEscursione());
-		param.add(partecipante.getIdUtente());
-		super.executeParamQuery("deleteIscrizioneFromEscursione", param);
-	}
 }

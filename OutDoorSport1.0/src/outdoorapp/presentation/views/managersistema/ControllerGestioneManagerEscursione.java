@@ -4,7 +4,6 @@ import javafx.scene.input.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
 
-import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -18,21 +17,17 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.StackPane;
 import outdoorapp.presentation.applicationcontroller.ViewCache;
-import outdoorapp.presentation.frontcontroller.FrontController;
 import outdoorapp.presentation.reqresp.Request;
 import outdoorapp.presentation.reqresp.Response;
 import outdoorapp.presentation.views.generic.ControllerTableView;
-import outdoorapp.presentation.views.generic.GenericController;
 import outdoorapp.presentation.views.models.ManagerDiEscursioneModel;
 import outdoorapp.to.FactoryProducerTO;
 import outdoorapp.to.enums.FactoryEnum;
 import outdoorapp.to.enums.UtenteEnum;
 import outdoorapp.to.interfaces.ManagerDiEscursioneTO;
 import outdoorapp.to.interfaces.TOFactory;
-import outdoorapp.utils.SessionCache;
 
 /**
  * Gestisce i manager di escursione da parte del Manager di Sistema. Il Manager
@@ -45,7 +40,7 @@ import outdoorapp.utils.SessionCache;
  */
 
 public class ControllerGestioneManagerEscursione extends ControllerTableView{
-
+	
 	@FXML private TextField txtSearchManagerEscursione;
 	@FXML private Button btnSearchManagerEscursione;
 	@FXML private StackPane stpGestioneManagerEscursione;
@@ -112,10 +107,13 @@ public class ControllerGestioneManagerEscursione extends ControllerTableView{
 	@FXML protected void cercaManagerDiEscursione(){
 		String param = txtSearchManagerEscursione.getText();
 		List<ManagerDiEscursioneTO> list_mde = new ArrayList<>();
+		String upperCaseParam = capitalizeWord(param);
 		
 		for(ManagerDiEscursioneTO mde : this.list_mde){
-			if(mde.getCognome().contains(param) ||
-			   mde.getNome().contains(param) ||
+			if(mde.getCognome().contains(param) || mde.getCognome().contains(upperCaseParam) ||
+			   mde.getNome().contains(param) || mde.getNome().contains(upperCaseParam) ||
+			   param.contains(mde.getCognome()) || param.contains(mde.getNome()) ||
+			   upperCaseParam.contains(mde.getCognome()) || upperCaseParam.contains(mde.getNome()) ||
 			   mde.getEmail().contains(param) ||
 			   mde.getCodiceFiscale().contains(param)){
 				list_mde.add(mde);

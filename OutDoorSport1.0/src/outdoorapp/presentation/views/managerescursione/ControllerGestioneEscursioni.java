@@ -51,7 +51,7 @@ public class ControllerGestioneEscursioni extends ControllerTableView{
 	@FXML private TableColumn<EscursioneModel, String> mColumnMin;
 	@FXML private TableColumn<EscursioneModel, String> mColumnMax;
 	@FXML private TableColumn<EscursioneModel, String> mColumnCosto;
-	@FXML private TableColumn<EscursioneModel, String> mColumnStato;
+	//@FXML private TableColumn<EscursioneModel, String> mColumnStato;
 	@FXML private StackPane stpGestioneEscursioniMDE;
 	private EscursioneTO escursione = null;
 	private List<EscursioneTO> list_escursioni = null;
@@ -95,7 +95,7 @@ public class ControllerGestioneEscursioni extends ControllerTableView{
 		this.initColumn(mColumnMin, "numberMin");
 		this.initColumn(mColumnMax, "numberMax");
 		this.initColumn(mColumnCosto, "costo");
-		this.initColumn(mColumnStato, "nomeStatoEscursione");
+		//this.initColumn(mColumnStato, "nomeStatoEscursione");
 
 		mTableEscursioni.setItems(data);
 
@@ -124,14 +124,16 @@ public class ControllerGestioneEscursioni extends ControllerTableView{
 		
 		for(EscursioneTO escursione : this.list_escursioni){
 			if(escursione.getNome().contains(param) ||
-					escursione.getTipoEscursione().getNome().contains(param) ||
 					escursione.getData().contains(param) ||
-					escursione.getStatoEscursione().getNome().equals(param))
-			   list_escursione.add(escursione);
+					escursione.getDescrizione().contains(param) ||
+					escursione.getTipoEscursione().getNome().contains(param.toUpperCase()))
+				list_escursione.add(escursione);
 			else
 				try{
-					if(escursione.getCosto() == Double.parseDouble(param))
-							list_escursione.add(escursione);
+					if(escursione.getNumberMax() == Integer.parseInt(param) || 
+							escursione.getNumberMin() == Integer.parseInt(param) ||
+							escursione.getCosto() == Double.parseDouble(param))
+						list_escursione.add(escursione);
 				}catch(Exception e){
 				}
 		}
