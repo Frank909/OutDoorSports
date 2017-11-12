@@ -14,9 +14,11 @@ import outdoorapp.exceptions.DatabaseException;
 import outdoorapp.integration.dao.DAOFactory;
 import outdoorapp.integration.dao.FactoryProducerDAO;
 import outdoorapp.integration.dao.enums.DAORequest;
+import outdoorapp.integration.dao.enums.GenericDAOEnum;
 import outdoorapp.integration.dao.enums.StatoDAOEnum;
 import outdoorapp.integration.dao.enums.TipoDAOEnum;
 import outdoorapp.integration.dao.enums.UtenteDAOEnum;
+import outdoorapp.integration.dao.interfaces.Escursione_DAO;
 import outdoorapp.integration.dao.interfaces.Partecipante_DAO;
 import outdoorapp.integration.dao.interfaces.Ruoli_DAO;
 import outdoorapp.integration.dao.interfaces.StatoUtente_DAO;
@@ -28,11 +30,13 @@ import outdoorapp.to.enums.FactoryEnum;
 import outdoorapp.to.enums.GenericEnum;
 import outdoorapp.to.interfaces.EmailTO;
 import outdoorapp.to.interfaces.EncryptPasswordTO;
+import outdoorapp.to.interfaces.EscursioneTO;
 import outdoorapp.to.interfaces.PartecipanteTO;
 import outdoorapp.to.interfaces.TOFactory;
 import outdoorapp.to.interfaces.UtenteTO;
 import outdoorapp.utils.Actions;
 import outdoorapp.utils.EmailConfig;
+import outdoorapp.utils.SessionCache;
 import outdoorapp.utils.Views;
 
 /**
@@ -96,6 +100,47 @@ class ApplicationServicePartecipante implements Views, Actions{
 		return response;
 	}
 	
+	/**
+	 * Metodo che restituisce tutte le escursione aperte a cui il partecipante non è iscritto
+	 * @param request
+	 * @return response: risposta in base alla richiesta
+	 */
+	public Response getAllEscursioniAperte(Request request){
+		Response response = new Response();
+		try {
+			PartecipanteTO partecipante = (PartecipanteTO) request.getData();
+			DAOFactory daofact = (DAOFactory) FactoryProducerDAO.getFactory(DAORequest.Generic);
+			Escursione_DAO escursione_dao = (Escursione_DAO) daofact.getGenericDAO(GenericDAOEnum.Escursione);
+			List<EscursioneTO> list_escursioni = escursione_dao.readEscursioniAperte(partecipante);
+			response.setData(list_escursioni);
+			response.setResponse(RESP_OK);
+		} catch (DatabaseException e) {
+			e.printStackTrace();
+			response.setResponse(RESP_KO);
+		}
+		return response;
+	}
+	
+	/**
+	 * Metodo che restituisce tutte le escursione a cui il partecipante è iscritto
+	 * @param request
+	 * @return response: risposta in base alla richiesta
+	 */
+	public Response getAllEscursioniIscritte(Request request){
+		Response response = new Response();
+		try {
+			PartecipanteTO partecipante = (PartecipanteTO) request.getData();
+			DAOFactory daofact = (DAOFactory) FactoryProducerDAO.getFactory(DAORequest.Generic);
+			Escursione_DAO escursione_dao = (Escursione_DAO) daofact.getGenericDAO(GenericDAOEnum.Escursione);
+			List<EscursioneTO> list_escursioni = escursione_dao.readEscursioniIscritte(partecipante);
+			response.setData(list_escursioni);
+			response.setResponse(RESP_OK);
+		} catch (DatabaseException e) {
+			e.printStackTrace();
+			response.setResponse(RESP_KO);
+		}
+		return response;
+	}
 	
 	/**
 	 * Metodo che restituisce la risposta rispetto alla richiesta di modificare un partecipante

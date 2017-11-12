@@ -94,7 +94,8 @@ public class ControllerVisualizzaEscursioniAperte extends ControllerTableView{
 	 */
 	@SuppressWarnings("unchecked")
 	private void allEscursioniAperte(){
-		Response response = this.sendRequest(new Request(escursione, OUTDOORSPORT_GET_ALL_ESCURSIONI_APERTE));
+		PartecipanteTO partecipante = (PartecipanteTO) SessionCache.getCurrentData("Partecipante");
+		Response response = this.sendRequest(new Request(partecipante, OUTDOORSPORT_GET_ALL_ESCURSIONI_APERTE));
 		list_escursioni = (ArrayList<EscursioneTO>) response.getData();
 
 		ObservableList<EscursioneModel> data = FXCollections.observableArrayList(getListTabellaEscursioni(list_escursioni));

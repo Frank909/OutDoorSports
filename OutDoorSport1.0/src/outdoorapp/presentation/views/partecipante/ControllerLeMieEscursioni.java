@@ -109,7 +109,8 @@ public class ControllerLeMieEscursioni extends ControllerTableView{
 	 */
 	@SuppressWarnings("unchecked")
 	private void allEscursioniIscritte(){
-		Response response = this.sendRequest(new Request(escursione, OUTDOORSPORT_GET_ALL_ESCURSIONI_ISCRITTE));
+		PartecipanteTO partecipante = (PartecipanteTO) SessionCache.getCurrentData("Partecipante");
+		Response response = this.sendRequest(new Request(partecipante, OUTDOORSPORT_GET_ALL_ESCURSIONI_ISCRITTE));
 		list_escursioni = (ArrayList<EscursioneTO>) response.getData();
 
 		ObservableList<EscursioneModel> data = FXCollections.observableArrayList(getListTabellaEscursioni(list_escursioni));

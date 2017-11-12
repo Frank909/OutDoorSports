@@ -52,18 +52,19 @@
 	</class>
 	
 	<query name="readEscursioniByManagerDiEscursione">
-		<![CDATA[ from outdoorapp.to.Escursione c where c.utente.idUtente = ?]]></query>
+		<![CDATA[from outdoorapp.to.Escursione e where e.utente.idUtente = ?]]></query>
 		
 	<query name="getEscursioneByName">
-		<![CDATA[ from outdoorapp.to.Escursione c where c.nome = ?]]></query>
+		<![CDATA[from outdoorapp.to.Escursione e where e.nome = ?]]></query>
 	
 	<query name="readEscursioniAperte">
-		<![CDATA[from outdoorapp.to.Escursione c inner join outdoorapp.to.Iscrizione i on c.idEscursione = i.escursione.idEscursione 
-		where (i.statoIscrizione.idStatoIscrizione = 1 and c.statoEscursione.idStatoEscursione = 2) or (c.statoEscursione.idStatoEscursione = 2)]]></query>
-		
+		<![CDATA[from outdoorapp.to.Escursione e where e.statoEscursione.idStatoEscursione = 2 and e.idEscursione not in 
+				(from outdoorapp.to.Iscrizione i where i.utente.idUtente = ? or i.statoIscrizione.idStatoIscrizione = 1)]]></query>
+		 
 	<query name="readEscursioniIscritte">
-		<![CDATA[from outdoorapp.to.Escursione c where c.statoEscursione.idStatoEscursione = 2 and c.idEscursione not in
-		( from outdoorapp.to.Iscrizione i where i.utente.idUtente = ? and i.statoIscrizione.idStatoIscrizione = 1)]]></query>
+		<![CDATA[from outdoorapp.to.Escursione e where e.idEscursione in (from outdoorapp.to.Iscrizione i
+		where i.utente.idUtente = ? and i.statoIscrizione.idStatoIscrizione = 2)
+		 ]]></query>
 
 <!--  
 	<query name="getAllCompetizione">
