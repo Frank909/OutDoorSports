@@ -58,15 +58,21 @@
 		<![CDATA[from outdoorapp.to.Escursione e where e.nome = ?]]></query>
 	
 	<query name="readEscursioniAperte">
-		<![CDATA[from outdoorapp.to.Escursione e where e.statoEscursione.idStatoEscursione = 2 and e.idEscursione not in 
-				(from outdoorapp.to.Iscrizione i where i.utente.idUtente = ? or i.statoIscrizione.idStatoIscrizione = 1)]]></query>
-		 
+		<![CDATA[from outdoorapp.to.Escursione e where e.statoEscursione.idStatoEscursione = 2]]></query>
+
 	<query name="readEscursioniIscritte">
-		<![CDATA[from outdoorapp.to.Escursione e where e.idEscursione in (from outdoorapp.to.Iscrizione i
-		where i.utente.idUtente = ? and i.statoIscrizione.idStatoIscrizione = 2)
+		<![CDATA[from outdoorapp.to.Escursione e inner join outdoorapp.to.Iscrizione i on 
+				e.idEscursione = i.escursione.idEscursione WHERE i.utente.idUtente = ? 
+				and i.statoIscrizione.idStatoIscrizione = 2
 		 ]]></query>
 
+
 <!--  
+<query name="readEscursioniIscritte">
+		<![CDATA[from outdoorapp.to.Escursione e where e.statoEscursione.idStatoEscursione = 2 and e.idEscursione in 
+		(from outdoorapp.to.Iscrizione i where i.utente.idUtente = ? and i.statoIscrizione.idStatoIscrizione = 2)
+		 ]]></query>
+
 	<query name="getAllCompetizione">
         <![CDATA[ from agroludos.to.Competizione c ]]></query>
 	<query name="getCompetizioniByTipo">

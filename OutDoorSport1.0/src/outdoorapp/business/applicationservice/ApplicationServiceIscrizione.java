@@ -228,10 +228,15 @@ class ApplicationServiceIscrizione implements Views, Actions{
 				iscrizione = iscrizione_dao.create(iscrizione);
 				int iscritti = iscrizione.getEscursione().getIscritti();
 				iscritti++;
-				iscrizione.getEscursione().setIscritti(iscritti);
-				escursione_dao.update(iscrizione.getEscursione());
-			}else
+				iscrizione.getEscursione().setIscritti(iscritti);				
+			}else{
+				verifyIscrizione.setStatoIscrizione(stato_iscrizione_dao.getStatoAttivo());
+				int iscritti = verifyIscrizione.getEscursione().getIscritti();
+				iscritti++;
+				verifyIscrizione.getEscursione().setIscritti(iscritti);
 				iscrizione = iscrizione_dao.update(verifyIscrizione);
+			}
+			escursione_dao.update(iscrizione.getEscursione());
 			response.setData(iscrizione);
 			response.setResponse(RESP_OK);
 			
