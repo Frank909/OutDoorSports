@@ -14,7 +14,7 @@
          <children>
             <GridPane id="right_menu">
                <children>
-                  <Label fx:id="lblVisulizzaEscursioniSistema" onMouseClicked="#viewVisualizzaEscursioniSistema" prefHeight="101.0" prefWidth="235.0" styleClass="text_menu" text="Visualizza Escursioni Sistema" textFill="WHITE" GridPane.rowIndex="1">
+                  <Label fx:id="lblVisulizzaEscursioniSistema" onMouseClicked="#viewVisualizzaEscursioniSistema" prefHeight="130.0" prefWidth="207.0" styleClass="text_menu" text="Visualizza Escursioni Sistema" textFill="WHITE" GridPane.rowIndex="1">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -25,7 +25,7 @@
                         <Insets left="10.0" />
                      </padding>
                   </Label>
-                  <Label fx:id="lblGestioneManagerEscursione" onMouseClicked="#viewGestioneManagerEscursione" prefHeight="200.0" prefWidth="341.0" styleClass="text_menu" text="Gestione Manager Escursione" textFill="WHITE">
+                  <Label fx:id="lblGestioneManagerEscursione" onMouseClicked="#viewGestioneManagerEscursione" prefHeight="88.0" prefWidth="207.0" styleClass="text_menu" text="Gestione Manager Escursione" textFill="WHITE">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -36,7 +36,7 @@
                         <Insets left="10.0" />
                      </padding>
                   </Label>
-                  <Label fx:id="lblInserisciManagerEscursione" onMouseClicked="#viewInserisciManagerEscursione" prefHeight="101.0" prefWidth="235.0" styleClass="text_menu" text="Inserisci Manager Escursione" textFill="WHITE" GridPane.rowIndex="2">
+                  <Label fx:id="lblInserisciManagerEscursione" onMouseClicked="#viewInserisciManagerEscursione" prefHeight="124.0" prefWidth="207.0" styleClass="text_menu" text="Inserisci Manager Escursione" textFill="WHITE" GridPane.rowIndex="2">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -44,7 +44,7 @@
                         <Insets left="10.0" />
                      </padding>
                   </Label>
-                  <Label fx:id="lblLogout" onMouseClicked="#viewLogin" prefHeight="101.0" prefWidth="235.0" styleClass="text_menu" text="Logout" textFill="WHITE" GridPane.rowIndex="3">
+                  <Label fx:id="lblLogout" onMouseClicked="#viewLogin" prefHeight="155.0" prefWidth="207.0" styleClass="text_menu" text="Logout" textFill="WHITE" GridPane.rowIndex="3">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -57,10 +57,10 @@
                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                </columnConstraints>
                <rowConstraints>
-                  <RowConstraints maxHeight="187.0" minHeight="4.0" prefHeight="100.0" vgrow="SOMETIMES" />
-                  <RowConstraints maxHeight="460.0" minHeight="3.0" prefHeight="100.0" vgrow="SOMETIMES" />
-                  <RowConstraints maxHeight="526.0" minHeight="10.0" prefHeight="100.0" vgrow="SOMETIMES" />
-                  <RowConstraints maxHeight="526.0" minHeight="10.0" prefHeight="100.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="187.0" minHeight="4.0" prefHeight="82.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="460.0" minHeight="3.0" prefHeight="82.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="526.0" minHeight="10.0" prefHeight="82.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="526.0" minHeight="10.0" prefHeight="82.0" vgrow="SOMETIMES" />
                   <RowConstraints maxHeight="526.0" minHeight="10.0" prefHeight="227.0" vgrow="SOMETIMES" />
                </rowConstraints>
             </GridPane>

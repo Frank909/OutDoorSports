@@ -12,6 +12,7 @@ import outdoorapp.integration.dao.FactoryProducerDAO;
 import outdoorapp.integration.dao.enums.DAORequest;
 import outdoorapp.integration.dao.enums.GenericDAOEnum;
 import outdoorapp.integration.dao.enums.StatoDAOEnum;
+import outdoorapp.integration.dao.interfaces.Escursione_DAO;
 import outdoorapp.integration.dao.interfaces.Iscrizione_DAO;
 import outdoorapp.integration.dao.interfaces.StatoIscrizione_DAO;
 import outdoorapp.presentation.reqresp.Request;
@@ -50,6 +51,7 @@ class ApplicationServiceIscrizione implements Views, Actions{
 	private TOFactory TOFact = null;
 	
 	private Iscrizione_DAO iscrizione_dao = null;
+	private Escursione_DAO escursione_dao = null;
 	private StatoIscrizione_DAO stato_iscrizione_dao = null;
 	private EmailTO email = null;
 	
@@ -58,6 +60,10 @@ class ApplicationServiceIscrizione implements Views, Actions{
 		if(iscrizione_dao == null){
 			genericFactory = FactoryProducerDAO.getFactory(DAORequest.Generic);
 			iscrizione_dao = (Iscrizione_DAO) genericFactory.getGenericDAO(GenericDAOEnum.Iscrizione);
+		}
+		if(escursione_dao == null){
+			genericFactory = FactoryProducerDAO.getFactory(DAORequest.Generic);
+			escursione_dao = (Escursione_DAO) genericFactory.getGenericDAO(GenericDAOEnum.Escursione);
 		}
 		if(stato_iscrizione_dao == null){
 			statoFactory = FactoryProducerDAO.getFactory(DAORequest.State);
@@ -217,10 +223,15 @@ class ApplicationServiceIscrizione implements Views, Actions{
 			LocalTime time = LocalTime.now();
 			iscrizione.setOra(time.getHour() + ":" + time.getMinute() + ":" + time.getSecond());
 			iscrizione.setStatoIscrizione(stato_iscrizione_dao.getStatoAttivo());
-			int iscritti = iscrizione.getEscursione().getIscritti();
-			iscritti++;
-			iscrizione.getEscursione().setIscritti(iscritti);
-			iscrizione = iscrizione_dao.createOrUpdate(iscrizione);
+			IscrizioneTO verifyIscrizione = iscrizione_dao.getIscrizioneFromEscursione(iscrizione.getEscursione(), (PartecipanteTO) iscrizione.getUtente());
+			if(verifyIscrizione == null){
+				iscrizione = iscrizione_dao.create(iscrizione);
+				int iscritti = iscrizione.getEscursione().getIscritti();
+				iscritti++;
+				iscrizione.getEscursione().setIscritti(iscritti);
+				escursione_dao.update(iscrizione.getEscursione());
+			}else
+				iscrizione = iscrizione_dao.update(verifyIscrizione);
 			response.setData(iscrizione);
 			response.setResponse(RESP_OK);
 			
@@ -279,11 +290,13 @@ class ApplicationServiceIscrizione implements Views, Actions{
 		IscrizioneTO iscrizione = (IscrizioneTO) request.getData();
 
 		try {
+			int iscritti = iscrizione.getEscursione().getIscritti();
+			iscritti--;
+			iscrizione.getEscursione().setIscritti(iscritti);
 			iscrizione_dao.annullaIscrizione(iscrizione);
 			response.setResponse(RESP_OK);
 		} catch (DatabaseException e) {
 			response.setResponse(RESP_KO);
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		

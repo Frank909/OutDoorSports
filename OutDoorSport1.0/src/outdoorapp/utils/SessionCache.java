@@ -42,7 +42,8 @@ public abstract class SessionCache{
 	 * @return il dato rispetto alla chiave
 	 */
 	public static Object getCurrentData(String key){
-		return currentData.get(key);
+		Object obj = currentData.get(key);
+		return obj;
 	}
 	
 

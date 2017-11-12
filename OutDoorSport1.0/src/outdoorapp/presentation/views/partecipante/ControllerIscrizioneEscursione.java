@@ -87,14 +87,14 @@ public class ControllerIscrizioneEscursione extends GenericController{
 			@Override
 			public void changed(ObservableValue<? extends Boolean> arg0, Boolean oldValue, Boolean newValue) {
 				if(newValue){
-					iscrizione = (IscrizioneTO) SessionCache.getCurrentData(iscrizione.getClass().getSimpleName());
 					partecipante = (PartecipanteTO) SessionCache.getCurrentData(partecipante.getClass().getSimpleName());
-					if(iscrizione == null){
+					/*if(SessionCache.getCurrentData("Iscrizione") == null){
 						escursione = (EscursioneTO) SessionCache.getCurrentData(escursione.getClass().getSimpleName());
 						TOFactory toFactory = FactoryProducerTO.getFactory(FactoryEnum.GenericTOFactory);
 						iscrizione = (IscrizioneTO) toFactory.getGenericTO(GenericEnum.Iscrizione);
 						iscrizione.setEscursione(escursione);
-					}
+					}else*/
+						iscrizione = (IscrizioneTO) SessionCache.getCurrentData("Iscrizione");
 					lblNomeEscursione.setText(iscrizione.getEscursione().getNome());
 					lblTipoEscursione.setText(iscrizione.getEscursione().getTipoEscursione().getNome());
 					lblData.setText(iscrizione.getEscursione().getData());
@@ -115,8 +115,6 @@ public class ControllerIscrizioneEscursione extends GenericController{
 					}
 					lblOptionalScelti.setText(string);
 					lblCostoTotale.setText(Double.toString(costoTotale) + " €");
-					iscrizione.setEscursione(escursione);
-					iscrizione.setUtente(partecipante);
 				}
 			}
 		};
@@ -144,8 +142,11 @@ public class ControllerIscrizioneEscursione extends GenericController{
 		    response = this.sendRequest(new Request(iscrizione, OUTDOORSPORT_CREATE_OPTIONAL_FROM_ISCRIZIONE));
 		    if(response.toString().equals(RESP_OK)){
 		    	iscrizione = (IscrizioneTO) response.getData();
-		    	this.sendRequest(new Request(iscrizione.getEscursione(), OUTDOORSPORT_UPDATE_ESCURSIONE));
-		    	this.sendRequest(new Request(ViewCache.getNestedAnchorPane(), VIEW_LE_MIE_ESCURSIONI));
+		    	response = this.sendRequest(new Request(iscrizione.getEscursione(), OUTDOORSPORT_UPDATE_ESCURSIONE));
+		    	if(response.toString().equals(RESP_OK)){
+		    		iscrizione = null;
+		    		this.sendRequest(new Request(iscrizione, ViewCache.getNestedAnchorPane(), VIEW_VISUALIZZA_ESCURSIONI_APERTE));
+		    	}
 		    }else{
 		    	Alert alert = new Alert(AlertType.ERROR, "Errore! Qualcosa è andata storta durante l'iscrizione!", ButtonType.OK);
 				alert.setTitle("OutDoorSport1.0");
@@ -164,7 +165,8 @@ public class ControllerIscrizioneEscursione extends GenericController{
 		Alert alertConfirm = new Alert(AlertType.CONFIRMATION, "Attenzione! Perderai tutte le modifiche non confermate");
 		Optional<ButtonType> result = alertConfirm.showAndWait();
 		if (result.get() == ButtonType.OK){
-			this.sendRequest(new Request(escursione, ViewCache.getNestedAnchorPane(), VIEW_VISUALIZZA_ESCURSIONI_APERTE));
+			iscrizione = null;
+			this.sendRequest(new Request(iscrizione, ViewCache.getNestedAnchorPane(), VIEW_VISUALIZZA_ESCURSIONI_APERTE));
 		} else {
 			alertConfirm.close();
 		}	

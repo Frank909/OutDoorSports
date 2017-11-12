@@ -54,7 +54,7 @@ class EscursioneDAO extends GenericDAO<EscursioneTO> implements Escursione_DAO{
 	}
 	
 	@Override
-	public List<EscursioneTO> readEscursioniAperte(PartecipanteTO partecipante) throws DatabaseException{
+	public List<EscursioneTO> readEscursioniAperte() throws DatabaseException{
 		return super.executeQuery("readEscursioniAperte");
 	}
 	

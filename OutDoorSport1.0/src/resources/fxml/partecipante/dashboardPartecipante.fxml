@@ -14,7 +14,7 @@
          <children>
             <GridPane id="right_menu">
                <children>
-                  <Label fx:id="lblVisulizzaEscursioniAperte" onMouseClicked="#viewVisualizzaEscursioniAperte" prefHeight="101.0" prefWidth="235.0" styleClass="text_menu" text="Visualizza Escursioni Aperte" textFill="WHITE" GridPane.rowIndex="1">
+                  <Label fx:id="lblVisulizzaEscursioniAperte" onMouseClicked="#viewVisualizzaEscursioniAperte" prefHeight="113.0" prefWidth="207.0" styleClass="text_menu" text="Visualizza Escursioni Aperte" textFill="WHITE" GridPane.rowIndex="1">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -25,7 +25,7 @@
                         <Insets left="10.0" />
                      </padding>
                   </Label>
-                  <Label fx:id="lblLeMieEscursioni" onMouseClicked="#viewLeMieEscursioni" prefHeight="60.0" prefWidth="207.0" styleClass="text_menu" text="Le mie Escursioni" textFill="WHITE">
+                  <Label fx:id="lblLeMieEscursioni" onMouseClicked="#viewLeMieEscursioni" prefHeight="121.0" prefWidth="207.0" styleClass="text_menu" text="Le mie Escursioni" textFill="WHITE">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -36,7 +36,7 @@
                         <Insets left="10.0" />
                      </padding>
                   </Label>
-                  <Label fx:id="lblIlMioProfilo" onMouseClicked="#viewIlMioProfilo" prefHeight="66.0" prefWidth="284.0" styleClass="text_menu" text="Il mio Profilo" textFill="WHITE" GridPane.rowIndex="2">
+                  <Label fx:id="lblIlMioProfilo" onMouseClicked="#viewIlMioProfilo" prefHeight="153.0" prefWidth="207.0" styleClass="text_menu" text="Il mio Profilo" textFill="WHITE" GridPane.rowIndex="2">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -47,7 +47,7 @@
                         <Insets left="10.0" />
                      </padding>
                   </Label>
-                  <Label fx:id="lblLogout" onMouseClicked="#viewLogin" prefHeight="66.0" prefWidth="284.0" styleClass="text_menu" text="Logout" textFill="WHITE" GridPane.rowIndex="3">
+                  <Label fx:id="lblLogout" onMouseClicked="#viewLogin" prefHeight="170.0" prefWidth="207.0" styleClass="text_menu" text="Logout" textFill="WHITE" GridPane.rowIndex="3">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -61,9 +61,9 @@
                </columnConstraints>
                <rowConstraints>
                   <RowConstraints maxHeight="187.0" minHeight="4.0" prefHeight="82.0" vgrow="SOMETIMES" />
-                  <RowConstraints maxHeight="460.0" minHeight="4.0" prefHeight="104.0" vgrow="SOMETIMES" />
-                  <RowConstraints maxHeight="526.0" minHeight="5.0" prefHeight="98.0" vgrow="SOMETIMES" />
-                  <RowConstraints maxHeight="526.0" minHeight="10.0" prefHeight="100.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="460.0" minHeight="4.0" prefHeight="82.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="526.0" minHeight="5.0" prefHeight="82.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="526.0" minHeight="10.0" prefHeight="82.0" vgrow="SOMETIMES" />
                   <RowConstraints maxHeight="526.0" minHeight="10.0" prefHeight="201.0" vgrow="SOMETIMES" />
                </rowConstraints>
             </GridPane>

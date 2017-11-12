@@ -244,8 +244,7 @@ class ApplicationServiceEscursione implements Actions {
 	public Response getAllEscursioniAperte(Request request){
 		Response response = new Response();
 		try {
-			PartecipanteTO partecipante = (PartecipanteTO)SessionCache.getCurrentData("Partecipante");
-			List<EscursioneTO> list_escursioni = escursione_dao.readEscursioniAperte(partecipante);
+			List<EscursioneTO> list_escursioni = escursione_dao.readEscursioniAperte();
 			response.setData(list_escursioni);
 			response.setResponse(RESP_OK);
 		} catch (DatabaseException e) {

@@ -119,6 +119,9 @@ class IscrizioneDAO extends GenericDAO<IscrizioneTO> implements Iscrizione_DAO{
 		param.add(escursione.getIdEscursione());
 		param.add(partecipante.getIdUtente());
 		List<IscrizioneTO> res = super.executeParamQuery("getIscrizioneFromEscursione", param);
-		return res.get(0);
+		if(!res.isEmpty())
+			return res.get(0);
+		else
+			return null;
 	}
 }

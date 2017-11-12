@@ -14,7 +14,7 @@
          <children>
             <GridPane id="right_menu">
                <children>
-                  <Label fx:id="lblInserisciEscursione" onMouseClicked="#viewInserisciEscursione" prefHeight="112.0" prefWidth="207.0" styleClass="text_menu" text="Inserisci Escursione" textFill="WHITE" GridPane.rowIndex="1">
+                  <Label fx:id="lblInserisciEscursione" onMouseClicked="#viewInserisciEscursione" prefHeight="121.0" prefWidth="207.0" styleClass="text_menu" text="Inserisci Escursione" textFill="WHITE" GridPane.rowIndex="1">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -25,7 +25,7 @@
                         <Insets left="10.0" />
                      </padding>
                   </Label>
-                  <Label fx:id="lblGestisciEscursioni" onMouseClicked="#viewGestioneEscursioni" prefHeight="106.0" prefWidth="207.0" styleClass="text_menu" text="Gestisci Escursioni" textFill="WHITE">
+                  <Label fx:id="lblGestisciEscursioni" onMouseClicked="#viewGestioneEscursioni" prefHeight="109.0" prefWidth="207.0" styleClass="text_menu" text="Gestisci Escursioni" textFill="WHITE">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -36,7 +36,7 @@
                         <Insets left="10.0" />
                      </padding>
                   </Label>
-                  <Label fx:id="lblLogout" onMouseClicked="#viewLogin" prefHeight="116.0" prefWidth="380.0" styleClass="text_menu" text="Logout" textFill="WHITE" GridPane.rowIndex="2">
+                  <Label fx:id="lblLogout" onMouseClicked="#viewLogin" prefHeight="123.0" prefWidth="207.0" styleClass="text_menu" text="Logout" textFill="WHITE" GridPane.rowIndex="2">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -49,9 +49,9 @@
                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                </columnConstraints>
                <rowConstraints>
-                  <RowConstraints maxHeight="187.0" minHeight="4.0" prefHeight="64.0" vgrow="SOMETIMES" />
-                  <RowConstraints maxHeight="460.0" minHeight="4.0" prefHeight="64.0" vgrow="SOMETIMES" />
-                  <RowConstraints maxHeight="460.0" minHeight="10.0" prefHeight="64.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="187.0" minHeight="4.0" prefHeight="82.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="460.0" minHeight="4.0" prefHeight="82.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="460.0" minHeight="10.0" prefHeight="82.0" vgrow="SOMETIMES" />
                   <RowConstraints maxHeight="526.0" minHeight="10.0" prefHeight="315.0" vgrow="SOMETIMES" />
                </rowConstraints>
             </GridPane>

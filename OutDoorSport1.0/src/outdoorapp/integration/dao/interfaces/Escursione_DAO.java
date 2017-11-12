@@ -38,7 +38,7 @@ public interface Escursione_DAO extends GEN_DAO<EscursioneTO>{
 	 * @return le Escursioni aperte alle iscrizioni
 	 * @throws DatabaseException
 	 */
-	List<EscursioneTO> readEscursioniAperte(PartecipanteTO partecipante) throws DatabaseException;
+	List<EscursioneTO> readEscursioniAperte() throws DatabaseException;
 	
 	/**
 	 * 

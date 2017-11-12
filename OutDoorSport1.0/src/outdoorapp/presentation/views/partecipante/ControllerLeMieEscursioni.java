@@ -35,6 +35,7 @@ import outdoorapp.to.interfaces.ManagerDiEscursioneTO;
 import outdoorapp.to.interfaces.PartecipanteTO;
 import outdoorapp.to.interfaces.StatoIscrizioneTO;
 import outdoorapp.to.interfaces.TOFactory;
+import outdoorapp.to.interfaces.TipoEscursioneTO;
 import outdoorapp.to.interfaces.UtenteTO;
 import outdoorapp.utils.EmailConfig;
 import outdoorapp.utils.SessionCache;
@@ -67,16 +68,22 @@ public class ControllerLeMieEscursioni extends ControllerTableView{
 	private EscursioneTO escursione = null;
 	private IscrizioneTO iscrizione = null;
 	private TOFactory TOFact = null;
+	private StatoIscrizioneTO stato_iscrizione = null;
+	private List<StatoIscrizioneTO> list_stato_iscrizione = new ArrayList<>();
 
 	public ControllerLeMieEscursioni() {
-		TOFact = FactoryProducerTO.getFactory(FactoryEnum.GenericTOFactory);
-
-		if(escursione == null)			
+		if(escursione == null){
+			TOFact = FactoryProducerTO.getFactory(FactoryEnum.GenericTOFactory);
 			escursione = (EscursioneTO) TOFact.getGenericTO(GenericEnum.Escursione);
-
-		if(iscrizione == null)
+		}
+		if(iscrizione == null){
+			TOFact = FactoryProducerTO.getFactory(FactoryEnum.GenericTOFactory);
 			iscrizione = (IscrizioneTO) TOFact.getGenericTO(GenericEnum.Iscrizione);
-
+		}
+		if(stato_iscrizione == null){
+			TOFact = FactoryProducerTO.getFactory(FactoryEnum.StatoTOFactory);
+			stato_iscrizione = (StatoIscrizioneTO) TOFact.getStatoTO(StatoEnum.StatoIscrizione);
+		}
 	}
 
 	/**
@@ -123,7 +130,15 @@ public class ControllerLeMieEscursioni extends ControllerTableView{
 				escursione_model = table_escursioni.getSelectionModel().getSelectedItem();
 				if(escursione_model != null){
 					if(event.getClickCount() == 2){
-						sendRequest(new Request(escursione_model.getEscursione(), ViewCache.getNestedAnchorPane(), VIEW_MODIFICA_ISCRIZIONE_ESCURSIONE_PARTECIPANTE));
+						TOFact = FactoryProducerTO.getFactory(FactoryEnum.GenericTOFactory);
+						iscrizione = (IscrizioneTO) TOFact.getGenericTO(GenericEnum.Iscrizione);
+						iscrizione.setEscursione(escursione_model.getEscursione());
+						iscrizione.setUtente((PartecipanteTO) SessionCache.getCurrentData("Partecipante"));
+						Response response = sendRequest(new Request(iscrizione, OUTDOORSPORT_GET_ISCRIZIONE_FROM_ESCURSIONE));
+						if(response.toString().equals(RESP_OK)){
+							iscrizione = (IscrizioneTO) response.getData();
+							sendRequest(new Request(iscrizione, ViewCache.getNestedAnchorPane(), VIEW_MODIFICA_ISCRIZIONE_ESCURSIONE_PARTECIPANTE));
+						}
 					}
 				}
 			}
@@ -192,10 +207,9 @@ public class ControllerLeMieEscursioni extends ControllerTableView{
 				Response response = sendRequest(new Request(iscrizione, OUTDOORSPORT_GET_ISCRIZIONE_FROM_ESCURSIONE));
 				if(response.toString().equals(RESP_OK)){
 					iscrizione = (IscrizioneTO) response.getData();
-					StatoIscrizioneTO statoIscr = iscrizione.getStatoIscrizione();
-					statoIscr.setIdStatoIscrizione(1);
-					statoIscr.setNome("NON ISCRITTO");
-					iscrizione.setStatoIscrizione(statoIscr);
+					response = sendRequest(new Request(stato_iscrizione, OUTDOORSPORT_GET_ALL_STATO_ISCRIZIONE));
+					list_stato_iscrizione = (List<StatoIscrizioneTO>) response.getData();
+					iscrizione.setStatoIscrizione(list_stato_iscrizione.get(0));
 					Response resp = this.sendRequest(new Request(iscrizione, OUTDOORSPORT_DELETE_ISCRIZIONE_FROM_ESCURSIONE_PARTECIPANTE));
 					if(resp.toString().equals(RESP_OK)){
 						EmailConfig emailConfig = new EmailConfig();
@@ -230,8 +244,17 @@ public class ControllerLeMieEscursioni extends ControllerTableView{
 	@FXML
 	protected void modificaIscrizione(){
 		escursione_model = mTableEscursioni.getSelectionModel().getSelectedItem();
-		if(escursione_model != null)
-			this.sendRequest(new Request(escursione_model.getEscursione(), ViewCache.getNestedAnchorPane(), VIEW_MODIFICA_ISCRIZIONE_ESCURSIONE_PARTECIPANTE));
+		if(escursione_model != null){
+			TOFact = FactoryProducerTO.getFactory(FactoryEnum.GenericTOFactory);
+			iscrizione = (IscrizioneTO) TOFact.getGenericTO(GenericEnum.Iscrizione);
+			iscrizione.setEscursione(escursione_model.getEscursione());
+			iscrizione.setUtente((PartecipanteTO) SessionCache.getCurrentData("Partecipante"));
+			Response response = sendRequest(new Request(iscrizione, OUTDOORSPORT_GET_ISCRIZIONE_FROM_ESCURSIONE));
+			if(response.toString().equals(RESP_OK)){
+				iscrizione = (IscrizioneTO) response.getData();
+				sendRequest(new Request(iscrizione, ViewCache.getNestedAnchorPane(), VIEW_MODIFICA_ISCRIZIONE_ESCURSIONE_PARTECIPANTE));
+			}
+		}
 		else{
 			Alert alert = new Alert(AlertType.ERROR, "Nessuna Escursione Selezionata", ButtonType.OK);
 			alert.setTitle("OutDoorSport1.0");

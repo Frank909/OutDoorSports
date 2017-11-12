@@ -82,8 +82,7 @@ public class ControllerModificaIscrizioneEscursione extends GenericController{
 			@Override
 			public void changed(ObservableValue<? extends Boolean> arg0, Boolean oldValue, Boolean newValue) {
 				if(newValue){
-					iscrizione = (IscrizioneTO) SessionCache.getCurrentData(iscrizione.getClass().getSimpleName());
-					if(iscrizione == null){
+					if(SessionCache.getCurrentData("Iscrizione") == null){
 						TOFactory toFactory = FactoryProducerTO.getFactory(FactoryEnum.GenericTOFactory);
 						iscrizione = (IscrizioneTO) toFactory.getGenericTO(GenericEnum.Iscrizione);
 						escursione = (EscursioneTO) SessionCache.getCurrentData(escursione.getClass().getSimpleName());
@@ -94,7 +93,8 @@ public class ControllerModificaIscrizioneEscursione extends GenericController{
 						if(response.toString().equals(RESP_OK)){
 							iscrizione = (IscrizioneTO) response.getData();
 						}
-					}
+					}else
+						iscrizione = (IscrizioneTO) SessionCache.getCurrentData("Iscrizione");
 					lblNomeEscursione.setText(iscrizione.getEscursione().getNome());
 					lblTipoEscursione.setText(iscrizione.getEscursione().getTipoEscursione().getNome());
 					lblDataEscursione.setText(iscrizione.getEscursione().getData());
@@ -143,7 +143,10 @@ public class ControllerModificaIscrizioneEscursione extends GenericController{
 		    if(response.toString().equals(RESP_OK)){
 		    	iscrizione = (IscrizioneTO) response.getData();
 		    	this.sendRequest(new Request(iscrizione.getEscursione(), OUTDOORSPORT_UPDATE_ESCURSIONE));
-		    	this.sendRequest(new Request(ViewCache.getNestedAnchorPane(), VIEW_LE_MIE_ESCURSIONI));
+		    	if(response.toString().equals(RESP_OK)){
+		    		iscrizione = null;
+		    		this.sendRequest(new Request(iscrizione, ViewCache.getNestedAnchorPane(), VIEW_LE_MIE_ESCURSIONI));
+		    	}
 		    }else{
 		    	Alert alert = new Alert(AlertType.ERROR, "Errore! Qualocosa è andato storto durante l'Iscrizione!", ButtonType.OK);
 				alert.setTitle("OutDoorSport1.0");
@@ -162,7 +165,8 @@ public class ControllerModificaIscrizioneEscursione extends GenericController{
 		Alert alertConfirm = new Alert(AlertType.CONFIRMATION, "Attenzione! Perderai tutte le modifiche non confermate");
 		Optional<ButtonType> result = alertConfirm.showAndWait();
 		if (result.get() == ButtonType.OK){
-			this.sendRequest(new Request(escursione, ViewCache.getNestedAnchorPane(), VIEW_LE_MIE_ESCURSIONI));
+			iscrizione = null;
+			this.sendRequest(new Request(iscrizione, ViewCache.getNestedAnchorPane(), VIEW_LE_MIE_ESCURSIONI));
 		} else {
 			alertConfirm.close();
 		}	

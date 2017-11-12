@@ -27,6 +27,8 @@ import outdoorapp.to.FactoryProducerTO;
 import outdoorapp.to.enums.FactoryEnum;
 import outdoorapp.to.enums.GenericEnum;
 import outdoorapp.to.interfaces.EscursioneTO;
+import outdoorapp.to.interfaces.IscrizioneTO;
+import outdoorapp.to.interfaces.PartecipanteTO;
 import outdoorapp.to.interfaces.TOFactory;
 import outdoorapp.utils.SessionCache;
 
@@ -53,6 +55,7 @@ public class ControllerVisualizzaEscursioniAperte extends ControllerTableView{
 	private List<EscursioneTO> list_escursioni = new ArrayList<>();
 	private EscursioneModel escursione_model = null;
 	private EscursioneTO escursione = null;
+	private IscrizioneTO iscrizione = null;
 	
 	/**
 	 * Costruttore
@@ -61,6 +64,10 @@ public class ControllerVisualizzaEscursioniAperte extends ControllerTableView{
 		if(escursione == null){
 			TOFactory TOFact = FactoryProducerTO.getFactory(FactoryEnum.GenericTOFactory);
 			escursione = (EscursioneTO) TOFact.getGenericTO(GenericEnum.Escursione);
+		}
+		if(iscrizione == null){
+			TOFactory TOFact = FactoryProducerTO.getFactory(FactoryEnum.GenericTOFactory);
+			iscrizione = (IscrizioneTO) TOFact.getGenericTO(GenericEnum.Iscrizione);
 		}
 	}
 
@@ -108,7 +115,11 @@ public class ControllerVisualizzaEscursioniAperte extends ControllerTableView{
 				escursione_model = table_escursioni.getSelectionModel().getSelectedItem();
 				if(escursione_model != null){
 					if(event.getClickCount() == 2){
-						sendRequest(new Request(escursione_model.getEscursione(), ViewCache.getNestedAnchorPane(), VIEW_ISCRIZIONE_ESCURSIONE));
+						TOFactory TOFact = FactoryProducerTO.getFactory(FactoryEnum.GenericTOFactory);
+						iscrizione = (IscrizioneTO) TOFact.getGenericTO(GenericEnum.Iscrizione);
+						iscrizione.setEscursione(escursione_model.getEscursione());
+						iscrizione.setUtente((PartecipanteTO) SessionCache.getCurrentData("Partecipante"));
+						sendRequest(new Request(iscrizione, ViewCache.getNestedAnchorPane(), VIEW_ISCRIZIONE_ESCURSIONE));
 					}
 				}
 			}
@@ -121,8 +132,13 @@ public class ControllerVisualizzaEscursioniAperte extends ControllerTableView{
 	@FXML
 	protected void iscrizioneEscursione(){
 		escursione_model = mTableEscursioni.getSelectionModel().getSelectedItem();
-		if(escursione_model != null)
-			this.sendRequest(new Request(escursione_model.getEscursione(), ViewCache.getNestedAnchorPane(), VIEW_ISCRIZIONE_ESCURSIONE));
+		if(escursione_model != null){
+			TOFactory TOFact = FactoryProducerTO.getFactory(FactoryEnum.GenericTOFactory);
+			iscrizione = (IscrizioneTO) TOFact.getGenericTO(GenericEnum.Iscrizione);
+			iscrizione.setEscursione(escursione_model.getEscursione());
+			iscrizione.setUtente((PartecipanteTO) SessionCache.getCurrentData("Partecipante"));
+			sendRequest(new Request(iscrizione, ViewCache.getNestedAnchorPane(), VIEW_ISCRIZIONE_ESCURSIONE));
+		}
 		else{
 			Alert alert = new Alert(AlertType.ERROR, "Nessuna Escursione Selezionata", ButtonType.OK);
 			alert.setTitle("OutDoorSport1.0");
