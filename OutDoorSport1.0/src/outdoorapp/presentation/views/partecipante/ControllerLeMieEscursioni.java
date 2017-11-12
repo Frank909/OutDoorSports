@@ -68,7 +68,6 @@ public class ControllerLeMieEscursioni extends ControllerTableView{
 	private EscursioneTO escursione = null;
 	private IscrizioneTO iscrizione = null;
 	private TOFactory TOFact = null;
-	private StatoIscrizioneTO stato_iscrizione = null;
 	private List<StatoIscrizioneTO> list_stato_iscrizione = new ArrayList<>();
 
 	public ControllerLeMieEscursioni() {
@@ -79,10 +78,6 @@ public class ControllerLeMieEscursioni extends ControllerTableView{
 		if(iscrizione == null){
 			TOFact = FactoryProducerTO.getFactory(FactoryEnum.GenericTOFactory);
 			iscrizione = (IscrizioneTO) TOFact.getGenericTO(GenericEnum.Iscrizione);
-		}
-		if(stato_iscrizione == null){
-			TOFact = FactoryProducerTO.getFactory(FactoryEnum.StatoTOFactory);
-			stato_iscrizione = (StatoIscrizioneTO) TOFact.getStatoTO(StatoEnum.StatoIscrizione);
 		}
 	}
 
@@ -215,8 +210,8 @@ public class ControllerLeMieEscursioni extends ControllerTableView{
 				Response response = sendRequest(new Request(iscrizione, OUTDOORSPORT_GET_ISCRIZIONE_FROM_ESCURSIONE));
 				if(response.toString().equals(RESP_OK)){
 					iscrizione = (IscrizioneTO) response.getData();
-					response = sendRequest(new Request(stato_iscrizione, OUTDOORSPORT_GET_ALL_STATO_ISCRIZIONE));
-					list_stato_iscrizione = (List<StatoIscrizioneTO>) response.getData();
+					Response rsp = sendRequest(new Request(iscrizione, OUTDOORSPORT_GET_ALL_STATO_ESCURSIONE));
+					list_stato_iscrizione = (List<StatoIscrizioneTO>) rsp.getData();
 					iscrizione.setStatoIscrizione(list_stato_iscrizione.get(0));
 					Response resp = this.sendRequest(new Request(iscrizione, OUTDOORSPORT_DELETE_ISCRIZIONE_FROM_ESCURSIONE_PARTECIPANTE));
 					if(resp.toString().equals(RESP_OK)){
@@ -237,6 +232,7 @@ public class ControllerLeMieEscursioni extends ControllerTableView{
 
 						email.setListaDestinatari(dest);
 						emailConfig.sendEmail(email);
+						allEscursioniIscritte();
 					}
 				}
 

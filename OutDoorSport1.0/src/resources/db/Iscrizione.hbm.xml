@@ -43,6 +43,10 @@
 	<query name="getIscrizioneFromEscursione">
 		<![CDATA[ from outdoorapp.to.Iscrizione m where m.escursione.idEscursione = ? and m.utente.idUtente = ?]]></query>
 		
+	<query name="esisteIscrizione">
+		<![CDATA[ from outdoorapp.to.Iscrizione m where m.escursione.idEscursione = ? and m.utente.idUtente = ? and m.statoIscrizione.idStatoIscrizione = 2]]></query>
+		
+		
 	<!-- <query name="deleteIscrizioneFromEscursione">
 		<![CDATA[ update outdoorapp.to.Iscrizione m set m.statoIscrizione.idStatoIscrizione = 1 where m.escursione.idEscursione = ? and m.utente.idUtente = ?]]></query>
 		

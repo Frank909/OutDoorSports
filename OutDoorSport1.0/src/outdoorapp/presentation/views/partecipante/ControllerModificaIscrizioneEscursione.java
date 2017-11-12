@@ -141,12 +141,8 @@ public class ControllerModificaIscrizioneEscursione extends GenericController{
 		if (result.get() == ButtonType.OK){
 		    response = this.sendRequest(new Request(iscrizione, OUTDOORSPORT_UPDATE_OPTIONAL_FROM_ISCRIZIONE));
 		    if(response.toString().equals(RESP_OK)){
-		    	iscrizione = (IscrizioneTO) response.getData();
-		    	this.sendRequest(new Request(iscrizione.getEscursione(), OUTDOORSPORT_UPDATE_ESCURSIONE));
-		    	if(response.toString().equals(RESP_OK)){
-		    		iscrizione = null;
-		    		this.sendRequest(new Request(iscrizione, ViewCache.getNestedAnchorPane(), VIEW_LE_MIE_ESCURSIONI));
-		    	}
+		    	iscrizione = null;
+		    	this.sendRequest(new Request(iscrizione, ViewCache.getNestedAnchorPane(), VIEW_LE_MIE_ESCURSIONI));
 		    }else{
 		    	Alert alert = new Alert(AlertType.ERROR, "Errore! Qualocosa è andato storto durante l'Iscrizione!", ButtonType.OK);
 				alert.setTitle("OutDoorSport1.0");

@@ -95,15 +95,7 @@ public class ControllerVisualizzaEscursioniAperte extends ControllerTableView{
 	@SuppressWarnings("unchecked")
 	private void allEscursioniAperte(){
 		
-		Response response = this.sendRequest(new Request(escursione, OUTDOORSPORT_GET_ALL_ESCURSIONI_APERTE));
-		/*
-		ArrayList<Object[]> objList = (ArrayList<Object[]>) response.getData();
-		list_escursioni.clear();
-		
-		for(Object obj[] : objList){
-			list_escursioni.add((EscursioneTO) obj[0]);
-		}*/
-		
+		Response response = this.sendRequest(new Request(escursione, OUTDOORSPORT_GET_ALL_ESCURSIONI_APERTE));		
 		list_escursioni = (List<EscursioneTO>) response.getData();
 
 		ObservableList<EscursioneModel> data = FXCollections.observableArrayList(getListTabellaEscursioni(list_escursioni));
@@ -128,7 +120,15 @@ public class ControllerVisualizzaEscursioniAperte extends ControllerTableView{
 						iscrizione = (IscrizioneTO) TOFact.getGenericTO(GenericEnum.Iscrizione);
 						iscrizione.setEscursione(escursione_model.getEscursione());
 						iscrizione.setUtente((PartecipanteTO) SessionCache.getCurrentData("Partecipante"));
-						sendRequest(new Request(iscrizione, ViewCache.getNestedAnchorPane(), VIEW_ISCRIZIONE_ESCURSIONE));
+						
+						Response response = sendRequest(new Request(iscrizione, OUTDOORSPORT_CHECK_ISCRIZIONE));
+						if(response.toString().equals(RESP_OK))
+							sendRequest(new Request(iscrizione, ViewCache.getNestedAnchorPane(), VIEW_ISCRIZIONE_ESCURSIONE));
+						else{
+							Alert alert1 = new Alert(AlertType.ERROR, "Sei già iscritto a questa escursione", ButtonType.OK);
+							alert1.setTitle("OutDoorSport1.0");
+							alert1.showAndWait();
+						}
 					}
 				}
 			}
@@ -146,7 +146,15 @@ public class ControllerVisualizzaEscursioniAperte extends ControllerTableView{
 			iscrizione = (IscrizioneTO) TOFact.getGenericTO(GenericEnum.Iscrizione);
 			iscrizione.setEscursione(escursione_model.getEscursione());
 			iscrizione.setUtente((PartecipanteTO) SessionCache.getCurrentData("Partecipante"));
-			sendRequest(new Request(iscrizione, ViewCache.getNestedAnchorPane(), VIEW_ISCRIZIONE_ESCURSIONE));
+			
+			Response response = sendRequest(new Request(iscrizione, OUTDOORSPORT_CHECK_ISCRIZIONE));
+			if(response.toString().equals(RESP_OK))
+				sendRequest(new Request(iscrizione, ViewCache.getNestedAnchorPane(), VIEW_ISCRIZIONE_ESCURSIONE));
+			else{
+				Alert alert = new Alert(AlertType.ERROR, "Sei già iscritto a questa escursione", ButtonType.OK);
+				alert.setTitle("OutDoorSport1.0");
+				alert.showAndWait();
+			}
 		}
 		else{
 			Alert alert = new Alert(AlertType.ERROR, "Nessuna Escursione Selezionata", ButtonType.OK);

@@ -26,6 +26,7 @@ import outdoorapp.to.interfaces.IscrizioneTO;
 import outdoorapp.to.interfaces.ManagerDiEscursioneTO;
 import outdoorapp.to.interfaces.OptionalEscursioneTO;
 import outdoorapp.to.interfaces.PartecipanteTO;
+import outdoorapp.to.interfaces.StatoIscrizioneTO;
 import outdoorapp.to.interfaces.TOFactory;
 import outdoorapp.to.interfaces.UtenteTO;
 import outdoorapp.utils.Actions;
@@ -237,8 +238,6 @@ class ApplicationServiceIscrizione implements Views, Actions{
 				iscrizione = iscrizione_dao.update(verifyIscrizione);
 			}
 			escursione_dao.update(iscrizione.getEscursione());
-			response.setData(iscrizione);
-			response.setResponse(RESP_OK);
 			
 			TOFact = FactoryProducerTO.getFactory(FactoryEnum.GenericTOFactory);
 			EmailTO email = (EmailTO) TOFact.getGenericTO(GenericEnum.Email);
@@ -258,6 +257,9 @@ class ApplicationServiceIscrizione implements Views, Actions{
 
 			EmailConfig emailConfig = new EmailConfig();
 			emailConfig.sendEmail(email);
+			
+			response.setData(iscrizione);
+			response.setResponse(RESP_OK);
 		} catch (DatabaseException e) {
 			response.setResponse(RESP_KO);
 			e.printStackTrace();
@@ -290,6 +292,12 @@ class ApplicationServiceIscrizione implements Views, Actions{
 		return response;
 	}
 	
+	/**
+	 * Metodo che cancella una iscrizione da parte di un partecipante
+	 * 
+	 * @param request
+	 * @return response: risposta in base alla richiesta
+	 */
 	public Response deleteIscrizioneFromEscursione(Request request){
 		Response response = new Response();
 		IscrizioneTO iscrizione = (IscrizioneTO) request.getData();
@@ -299,6 +307,53 @@ class ApplicationServiceIscrizione implements Views, Actions{
 			iscritti--;
 			iscrizione.getEscursione().setIscritti(iscritti);
 			iscrizione_dao.annullaIscrizione(iscrizione);
+			escursione_dao.update(iscrizione.getEscursione());
+			response.setResponse(RESP_OK);
+		} catch (DatabaseException e) {
+			response.setResponse(RESP_KO);
+			e.printStackTrace();
+		}
+		
+		return response;
+	}
+	
+	/**
+	 * Metodo che cancella una iscrizione da parte di un partecipante
+	 * 
+	 * @param request
+	 * @return response: risposta in base alla richiesta
+	 */
+	public Response esisteIscrizione(Request request){
+		Response response = new Response();
+		IscrizioneTO iscrizione = (IscrizioneTO) request.getData();
+
+		try {
+			boolean bool = iscrizione_dao.esisteIscrizione(iscrizione);
+			if(!bool)
+				response.setResponse(RESP_OK);
+			else
+				response.setResponse(RESP_KO);
+		} catch (DatabaseException e) {
+			response.setResponse(RESP_KO);
+			e.printStackTrace();
+		}
+		
+		return response;
+	}
+	
+	/**
+	 * Metodo che restituisce tutti gli stati di una iscrizione
+	 * 
+	 * @param request
+	 * @return response: risposta in base alla richiesta
+	 */
+	public Response getAllStatoEscursione(Request request){
+		Response response = new Response();
+
+		try {
+			List<StatoIscrizioneTO> list_stato_iscrizione = new ArrayList<>();
+			list_stato_iscrizione = stato_iscrizione_dao.getAll();
+			response.setData(list_stato_iscrizione);
 			response.setResponse(RESP_OK);
 		} catch (DatabaseException e) {
 			response.setResponse(RESP_KO);

@@ -57,8 +57,14 @@ class IscrizioneDAO extends GenericDAO<IscrizioneTO> implements Iscrizione_DAO{
 	
 	@Override
 	public boolean esisteIscrizione(IscrizioneTO iscrizione) throws DatabaseException {
-		IscrizioneTO newIscrizione = this.findOne(iscrizione.getIdIscrizione());
-		return newIscrizione != null;
+		List<Integer> param = new ArrayList<>();
+		param.add(iscrizione.getEscursione().getIdEscursione());
+		param.add(iscrizione.getUtente().getIdUtente());
+		List<IscrizioneTO> newIscrizione = super.executeParamQuery("esisteIscrizione", param);
+		if(newIscrizione.isEmpty())
+			return false;
+		else
+			return true;
 	}
 	
 	

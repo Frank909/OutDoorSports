@@ -88,13 +88,7 @@ public class ControllerIscrizioneEscursione extends GenericController{
 			public void changed(ObservableValue<? extends Boolean> arg0, Boolean oldValue, Boolean newValue) {
 				if(newValue){
 					partecipante = (PartecipanteTO) SessionCache.getCurrentData(partecipante.getClass().getSimpleName());
-					/*if(SessionCache.getCurrentData("Iscrizione") == null){
-						escursione = (EscursioneTO) SessionCache.getCurrentData(escursione.getClass().getSimpleName());
-						TOFactory toFactory = FactoryProducerTO.getFactory(FactoryEnum.GenericTOFactory);
-						iscrizione = (IscrizioneTO) toFactory.getGenericTO(GenericEnum.Iscrizione);
-						iscrizione.setEscursione(escursione);
-					}else*/
-						iscrizione = (IscrizioneTO) SessionCache.getCurrentData("Iscrizione");
+					iscrizione = (IscrizioneTO) SessionCache.getCurrentData("Iscrizione");
 					lblNomeEscursione.setText(iscrizione.getEscursione().getNome());
 					lblTipoEscursione.setText(iscrizione.getEscursione().getTipoEscursione().getNome());
 					lblData.setText(iscrizione.getEscursione().getData());
@@ -141,12 +135,8 @@ public class ControllerIscrizioneEscursione extends GenericController{
 		if (result.get() == ButtonType.OK){
 		    response = this.sendRequest(new Request(iscrizione, OUTDOORSPORT_CREATE_OPTIONAL_FROM_ISCRIZIONE));
 		    if(response.toString().equals(RESP_OK)){
-		    	iscrizione = (IscrizioneTO) response.getData();
-		    	response = this.sendRequest(new Request(iscrizione.getEscursione(), OUTDOORSPORT_UPDATE_ESCURSIONE));
-		    	if(response.toString().equals(RESP_OK)){
-		    		iscrizione = null;
-		    		this.sendRequest(new Request(iscrizione, ViewCache.getNestedAnchorPane(), VIEW_VISUALIZZA_ESCURSIONI_APERTE));
-		    	}
+		    	iscrizione = null;
+		    	this.sendRequest(new Request(iscrizione, ViewCache.getNestedAnchorPane(), VIEW_VISUALIZZA_ESCURSIONI_APERTE));
 		    }else{
 		    	Alert alert = new Alert(AlertType.ERROR, "Errore! Qualcosa è andata storta durante l'iscrizione!", ButtonType.OK);
 				alert.setTitle("OutDoorSport1.0");

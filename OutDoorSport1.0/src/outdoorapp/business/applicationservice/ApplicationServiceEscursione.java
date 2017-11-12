@@ -1,5 +1,6 @@
 package outdoorapp.business.applicationservice;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -14,6 +15,7 @@ import outdoorapp.integration.dao.enums.DAORequest;
 import outdoorapp.integration.dao.enums.GenericDAOEnum;
 import outdoorapp.integration.dao.enums.StatoDAOEnum;
 import outdoorapp.integration.dao.interfaces.Escursione_DAO;
+import outdoorapp.integration.dao.interfaces.Iscrizione_DAO;
 import outdoorapp.integration.dao.interfaces.OptionalEscursione_DAO;
 import outdoorapp.integration.dao.interfaces.StatoEscursione_DAO;
 import outdoorapp.integration.dao.interfaces.StatoOptional_DAO;
@@ -21,15 +23,20 @@ import outdoorapp.presentation.reqresp.Request;
 import outdoorapp.presentation.reqresp.Response;
 import outdoorapp.to.FactoryProducerTO;
 import outdoorapp.to.enums.FactoryEnum;
+import outdoorapp.to.enums.GenericEnum;
 import outdoorapp.to.enums.OptionalEnum;
+import outdoorapp.to.interfaces.EmailTO;
 import outdoorapp.to.interfaces.EscursioneTO;
+import outdoorapp.to.interfaces.IscrizioneTO;
 import outdoorapp.to.interfaces.ManagerDiEscursioneTO;
 import outdoorapp.to.interfaces.OptionalEscursioneTO;
 import outdoorapp.to.interfaces.OptionalTO;
 import outdoorapp.to.interfaces.PartecipanteTO;
 import outdoorapp.to.interfaces.StatoOptionalTO;
 import outdoorapp.to.interfaces.TOFactory;
+import outdoorapp.to.interfaces.UtenteTO;
 import outdoorapp.utils.Actions;
+import outdoorapp.utils.EmailConfig;
 import outdoorapp.utils.SessionCache;
 
 /**
@@ -52,10 +59,11 @@ class ApplicationServiceEscursione implements Actions {
 	private Escursione_DAO escursione_dao = null;
 	private OptionalEscursione_DAO optional_escursione_dao = null;
 	private StatoOptional_DAO stato_optional_dao = null;
+	private Iscrizione_DAO iscrizione_dao = null;
 	private EscursioneTO escursione = null;
 	private TOFactory OptionalFact = null;
 	private OptionalEscursioneTO optional_escursione = null;
-	StatoEscursione_DAO statoEscursioneDao = null;
+	private StatoEscursione_DAO statoEscursioneDao = null;
 	
 	public ApplicationServiceEscursione() {
 		genericFactory = FactoryProducerDAO.getFactory(DAORequest.Generic);
@@ -65,6 +73,7 @@ class ApplicationServiceEscursione implements Actions {
 		stato_optional_dao = (StatoOptional_DAO) statoFactory.getStatoDAO(StatoDAOEnum.Optional);
 		statoEscursioneDao = (StatoEscursione_DAO) statoFactory.getStatoDAO(StatoDAOEnum.Escursione);
 		OptionalFact = FactoryProducerTO.getFactory(FactoryEnum.OptionalTOFactory);
+		iscrizione_dao = (Iscrizione_DAO) genericFactory.getGenericDAO(GenericDAOEnum.Iscrizione);
 	}
 	
 	/**
@@ -96,7 +105,6 @@ class ApplicationServiceEscursione implements Actions {
 	public Response getAllEscursioniAperte(Request request){
 		Response response = new Response();
 		try {
-			//PartecipanteTO partecipante = (PartecipanteTO) request.getData();
 			DAOFactory daofact = (DAOFactory) FactoryProducerDAO.getFactory(DAORequest.Generic);
 			Escursione_DAO escursione_dao = (Escursione_DAO) daofact.getGenericDAO(GenericDAOEnum.Escursione);
 			List<EscursioneTO> list_escursioni = escursione_dao.readEscursioniAperte();
@@ -223,7 +231,46 @@ class ApplicationServiceEscursione implements Actions {
 				alert.showAndWait();
 				response.setResponse(RESP_OK);
 				
-				//IMPLEMENTARE L'INVIO DELLA MAIL//
+				TOFactory TOFact = FactoryProducerTO.getFactory(FactoryEnum.GenericTOFactory);
+				EmailTO email = (EmailTO) TOFact.getGenericTO(GenericEnum.Email);
+
+				String mailOggetto = "OutDoorSports | Modifica escursione: " + escursione.getNome();
+				String mailMessaggio = "Gentile Partecipante, \n";
+				mailMessaggio += "La informiamo che il Manager di Escursione ha apportato le seguenti modifiche:\n";
+				mailMessaggio += "Nome: " + escursione.getNome() + "\n";
+				mailMessaggio += "Numero minimo di partecipanti: " + escursione.getNumberMin() + "\n";
+				mailMessaggio += "Numero massimo di partecipanti: " + escursione.getNumberMax() + "\n";
+				mailMessaggio += "Costo Base: " + escursione.getCosto() + "\n";
+				mailMessaggio += "Data: " + escursione.getData() + "\n";
+				mailMessaggio += "Descrizione " + escursione.getDescrizione() + "\n";
+				mailMessaggio += "Tipo Escursione " + escursione.getTipoEscursione().getNome() + "\n";
+				Set<OptionalEscursioneTO> set_oe = new HashSet<>();
+				set_oe.addAll(optional_escursione_dao.getOptionalsFromEscursione(escursione.getIdEscursione()));
+				String string = "";
+				for(OptionalEscursioneTO e : set_oe){
+					if(e.getStatoOptional() == stato_attivo){
+						string += e.getOptional().getNome() + " | ";
+					}
+				}
+				mailMessaggio += "Optional Disponibili: " + string + "\n";
+				
+				ArrayList<UtenteTO> listaDestinatari = new ArrayList<>();
+				
+				List<IscrizioneTO> list_iscrizioni = iscrizione_dao.getAllIscrittiFromEscursione(escursione);
+				for(IscrizioneTO i : list_iscrizioni){
+					i.setOptionals(set_oe);
+					listaDestinatari.add(i.getUtente());
+				}
+				
+				email.setOggetto(mailOggetto);
+				email.setMessaggio(mailMessaggio);
+
+				email.setListaDestinatari(listaDestinatari);
+
+				EmailConfig emailConfig = new EmailConfig();
+				emailConfig.sendEmail(email);
+				
+				response.setResponse(RESP_OK);
 			}else{
 				response.setResponse(RESP_KO);
 			}
