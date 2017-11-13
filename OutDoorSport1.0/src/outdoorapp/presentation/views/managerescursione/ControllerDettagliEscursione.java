@@ -53,7 +53,6 @@ public class ControllerDettagliEscursione extends GenericController{
 	@FXML private Label lblNumMin;
 	@FXML private Label lblNumMax;
 	@FXML private Label lblCostoEscursione;
-	@FXML private Label lblOptionalEscursione;
 	@FXML private Label lblDescrizioneEscursione;
 	@FXML private Button btnModificaEscursione;
 	@FXML private Button btnAnnullaEscursione;
@@ -90,16 +89,6 @@ public class ControllerDettagliEscursione extends GenericController{
 					lblNumMin.setText("Minimo " + escursione.getNumberMin() + " Partecipanti");
 					lblNumMax.setText("Massimo " + escursione.getNumberMax() + " Partecipanti");
 					lblCostoEscursione.setText("Costo: " + escursione.getCosto());
-					String optionals = "";
-					for(OptionalTO op : escursione.getOptionals()){
-						optionals += op.getNome() + "\n";
-					}
-					if(!optionals.equals(""))
-						lblOptionalEscursione.setText("Optional: " + optionals);
-					else{
-						optionals = "Nessun optional per questa escursione";
-						lblOptionalEscursione.setText(optionals);
-					}
 						
 					lblDescrizioneEscursione.setText("Descrizione: " + escursione.getDescrizione());
 					if(list_stato_escursione.isEmpty()){

@@ -200,8 +200,10 @@ public class ControllerSelezionaOptionalIscrizione extends ControllerTableView{
 		double prezzoTotale = iscrizione.getEscursione().getCosto();
 		double prezzoTotaleOptional = 0;
 		for(OptionalEscursioneTO oe : all_optional_scelti){
-			prezzoTotale = prezzoTotale + oe.getOptional().getTipoOptional().getCosto();
-			prezzoTotaleOptional = prezzoTotaleOptional + oe.getOptional().getTipoOptional().getCosto();
+			if(oe.getStatoOptional().getIdStatoOptional() == 2){
+				prezzoTotale = prezzoTotale + oe.getOptional().getTipoOptional().getCosto();
+				prezzoTotaleOptional = prezzoTotaleOptional + oe.getOptional().getTipoOptional().getCosto();
+			}
 		}
 		lblPrezzoTotale.setText(Double.toString(prezzoTotale) + " €");
 		lblPrezzoTotaleOptional.setText(Double.toString(prezzoTotaleOptional) + " €");
@@ -219,7 +221,9 @@ public class ControllerSelezionaOptionalIscrizione extends ControllerTableView{
 
 		for(OptionalEscursioneTO optional : param){
 			optional_scelti_model = new OptionalModel(optional.getOptional());
-			res.add(optional_scelti_model);
+			if(optional.getStatoOptional().getIdStatoOptional() == 2)
+				res.add(optional_scelti_model);
+
 		}
 
 		return res;
@@ -237,7 +241,8 @@ public class ControllerSelezionaOptionalIscrizione extends ControllerTableView{
 
 		for(OptionalEscursioneTO optional : param){
 			optional_scelti_model = new OptionalModel(optional.getOptional());
-			res.add(optional_scelti_model);
+			if(optional.getStatoOptional().getIdStatoOptional() == 2)
+				res.add(optional_scelti_model);
 		}
 
 		return res;

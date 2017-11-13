@@ -121,7 +121,7 @@
                   </GridPane>
                   <GridPane prefHeight="385.0" prefWidth="361.0" GridPane.columnIndex="1">
                      <children>
-                        <Label fx:id="lblDescrizioneEscursione" alignment="TOP_LEFT" prefHeight="130.0" prefWidth="351.0" text="Descrizione:" GridPane.rowIndex="2">
+                        <Label fx:id="lblDescrizioneEscursione" alignment="TOP_LEFT" prefHeight="153.0" prefWidth="351.0" text="Descrizione:">
                            <font>
                               <Font size="18.0" />
                            </font>
@@ -129,30 +129,22 @@
                               <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                            </GridPane.margin>
                         </Label>
-                        <Label fx:id="lblOptionalEscursione" alignment="TOP_LEFT" prefHeight="140.0" prefWidth="351.0" text="Optional: OPTIONALS" GridPane.rowIndex="1" GridPane.valignment="TOP">
-                           <font>
-                              <Font size="18.0" />
-                           </font>
-                           <GridPane.margin>
-                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                           </GridPane.margin>
-                        </Label>
-                        <Button fx:id="btnModificaEscursione" mnemonicParsing="false" onMouseClicked="#modificaEscursione" prefHeight="40.0" prefWidth="150.0" text="Modifica Escursione" GridPane.halignment="LEFT" GridPane.rowIndex="3">
+                        <Button fx:id="btnModificaEscursione" mnemonicParsing="false" onMouseClicked="#modificaEscursione" prefHeight="40.0" prefWidth="150.0" text="Modifica Escursione" GridPane.halignment="LEFT" GridPane.rowIndex="1">
                            <GridPane.margin>
                               <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                            </GridPane.margin>
                         </Button>
-                        <Button fx:id="btnAnnullaEscursione" mnemonicParsing="false" onMouseClicked="#annullaEscursione" prefHeight="40.0" prefWidth="150.0" text="Annulla Escursione" GridPane.halignment="RIGHT" GridPane.rowIndex="3">
+                        <Button fx:id="btnAnnullaEscursione" mnemonicParsing="false" onMouseClicked="#annullaEscursione" prefHeight="40.0" prefWidth="150.0" text="Annulla Escursione" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
                            <GridPane.margin>
                               <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                            </GridPane.margin>
                         </Button>
-                        <Button fx:id="btnVisualizzaIscritti" mnemonicParsing="false" onMouseClicked="#visualizzaIscritti" prefHeight="38.0" prefWidth="150.0" text="Visualizza Iscritti" GridPane.halignment="RIGHT" GridPane.rowIndex="4">
+                        <Button fx:id="btnVisualizzaIscritti" mnemonicParsing="false" onMouseClicked="#visualizzaIscritti" prefHeight="38.0" prefWidth="150.0" text="Visualizza Iscritti" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
                            <GridPane.margin>
                               <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                            </GridPane.margin>
                         </Button>
-                        <Button fx:id="btnIndietro" mnemonicParsing="false" onMouseClicked="#visualizzaEscursioniSistema" prefHeight="38.0" prefWidth="150.0" text="Indietro" GridPane.halignment="LEFT" GridPane.rowIndex="4">
+                        <Button fx:id="btnIndietro" mnemonicParsing="false" onMouseClicked="#visualizzaEscursioniSistema" prefHeight="38.0" prefWidth="150.0" text="Indietro" GridPane.halignment="LEFT" GridPane.rowIndex="2">
                            <GridPane.margin>
                               <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                            </GridPane.margin></Button>
@@ -161,10 +153,8 @@
                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                      </columnConstraints>
                      <rowConstraints>
-                        <RowConstraints maxHeight="74.0" minHeight="10.0" prefHeight="32.0" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="163.0" minHeight="10.0" prefHeight="133.0" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="149.0" minHeight="10.0" prefHeight="121.0" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="56.0" minHeight="10.0" prefHeight="45.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="309.0" minHeight="10.0" prefHeight="268.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="98.0" minHeight="0.0" prefHeight="49.0" vgrow="SOMETIMES" />
                         <RowConstraints maxHeight="54.0" minHeight="10.0" prefHeight="46.0" vgrow="SOMETIMES" />
                      </rowConstraints>
                   </GridPane>

@@ -56,7 +56,7 @@ public class ControllerModificaIscrizioneEscursione extends GenericController{
 	private IscrizioneTO iscrizione = null;
 	private EscursioneTO escursione = null;
 	private PartecipanteTO partecipante = null;
-	
+
 	/**
 	 * Costruttore
 	 */
@@ -109,8 +109,10 @@ public class ControllerModificaIscrizioneEscursione extends GenericController{
 						string = "Nessun Optional Scelto";
 					else{
 						for(OptionalEscursioneTO optional : optionals){
-							string += optional.getOptional().getNome() + " | ";
-							costoTotale += optional.getOptional().getTipoOptional().getCosto();
+							if(optional.getStatoOptional().getIdStatoOptional() == 2){
+								string += optional.getOptional().getNome() + " | ";
+								costoTotale += optional.getOptional().getTipoOptional().getCosto();
+							}
 						}
 					}
 					lblOptionalScelti.setText(string);
@@ -121,7 +123,7 @@ public class ControllerModificaIscrizioneEscursione extends GenericController{
 
 		stpModificaIscrizioneEscursione.visibleProperty().addListener(visibilityListener);
 	}
-	
+
 	/**
 	 * Evento associato alla gestione degli optional per 
 	 * quella escursione, di un determinato partecipante
@@ -139,20 +141,20 @@ public class ControllerModificaIscrizioneEscursione extends GenericController{
 		Alert alertConfirm = new Alert(AlertType.CONFIRMATION, "Vuoi confermare le modifiche per questa iscrizione?");
 		Optional<ButtonType> result = alertConfirm.showAndWait();
 		if (result.get() == ButtonType.OK){
-		    response = this.sendRequest(new Request(iscrizione, OUTDOORSPORT_UPDATE_OPTIONAL_FROM_ISCRIZIONE));
-		    if(response.toString().equals(RESP_OK)){
-		    	iscrizione = null;
-		    	this.sendRequest(new Request(iscrizione, ViewCache.getNestedAnchorPane(), VIEW_LE_MIE_ESCURSIONI));
-		    }else{
-		    	Alert alert = new Alert(AlertType.ERROR, "Errore! Qualocosa è andato storto durante l'Iscrizione!", ButtonType.OK);
+			response = this.sendRequest(new Request(iscrizione, OUTDOORSPORT_UPDATE_OPTIONAL_FROM_ISCRIZIONE));
+			if(response.toString().equals(RESP_OK)){
+				iscrizione = null;
+				this.sendRequest(new Request(iscrizione, ViewCache.getNestedAnchorPane(), VIEW_LE_MIE_ESCURSIONI));
+			}else{
+				Alert alert = new Alert(AlertType.ERROR, "Errore! Qualocosa è andato storto durante l'Iscrizione!", ButtonType.OK);
 				alert.setTitle("OutDoorSport1.0");
 				alert.showAndWait();
-		    }
+			}
 		} else {
 			alertConfirm.close();
 		}
 	}
-	
+
 	/**
 	 * Metodo associato all'evento del click del bottone Indietro
 	 */

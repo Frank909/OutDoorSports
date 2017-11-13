@@ -108,6 +108,9 @@ class ApplicationServiceIscrizione implements Views, Actions{
 		Response response = new Response();
 		IscrizioneTO iscrizione = (IscrizioneTO) request.getData();
 		try {
+			int iscritti = iscrizione.getEscursione().getIscritti();
+			iscritti--;
+			iscrizione.getEscursione().setIscritti(iscritti);
 			iscrizione.setStatoIscrizione(stato_iscrizione_dao.getStatoDisattivo());
 		} catch (DatabaseException e1) {
 			// TODO Auto-generated catch block
@@ -123,6 +126,7 @@ class ApplicationServiceIscrizione implements Views, Actions{
 		if (result.isPresent()){
 			try {
 				iscrizione = iscrizione_dao.annullaIscrizione(iscrizione);
+				escursione_dao.update(iscrizione.getEscursione());
 				
 				EmailTO email = (EmailTO) TOFact.getGenericTO(GenericEnum.Email);
 

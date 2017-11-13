@@ -58,7 +58,7 @@ public class ControllerModificaIscrizioneEscursione extends GenericController{
 	private IscrizioneTO iscrizione = null;
 	private StatoEscursioneTO stato_escursione = null;
 	private List<StatoEscursioneTO> list_stato_escursione = new ArrayList<>();
-	
+
 	public ControllerModificaIscrizioneEscursione() {
 		if(iscrizione == null){
 			TOFactory toFactory = FactoryProducerTO.getFactory(FactoryEnum.GenericTOFactory);
@@ -92,8 +92,10 @@ public class ControllerModificaIscrizioneEscursione extends GenericController{
 						string = "Nessun Optional Scelto";
 					else{
 						for(OptionalEscursioneTO optional : optionals){
-							string += optional.getOptional().getNome() + " | ";
-							costoTotale += optional.getOptional().getTipoOptional().getCosto();
+							if(optional.getStatoOptional().getIdStatoOptional() == 2){
+								string += optional.getOptional().getNome() + " | ";
+								costoTotale += optional.getOptional().getTipoOptional().getCosto();
+							}
 						}
 					}
 					lblOptionalScelti.setText(string);
@@ -110,7 +112,7 @@ public class ControllerModificaIscrizioneEscursione extends GenericController{
 
 		stpModificaIscrizioneEscursione.visibleProperty().addListener(visibilityListener);
 	}
-	
+
 	/**
 	 * Evento associato alla gestione degli optional per 
 	 * quella escursione, di un determinato partecipante
@@ -124,7 +126,7 @@ public class ControllerModificaIscrizioneEscursione extends GenericController{
 			alert.showAndWait();
 		}
 	}
-	
+
 	/**
 	 * Torna alla schermata della visualizzazione degli iscritti all'escursione
 	 */
@@ -137,7 +139,7 @@ public class ControllerModificaIscrizioneEscursione extends GenericController{
 			alertConfirm.close();
 		}	
 	}
-	
+
 	/**
 	 * Conferma le modifiche degli optional scelti, e invia una mail 
 	 * all'iscritto interessato
@@ -146,7 +148,7 @@ public class ControllerModificaIscrizioneEscursione extends GenericController{
 		Alert alertConfirm = new Alert(AlertType.CONFIRMATION, "Vuoi confermare le modifiche per questa iscrizione?");
 		Optional<ButtonType> result = alertConfirm.showAndWait();
 		if (result.get() == ButtonType.OK){
-		    this.sendRequest(new Request(iscrizione, OUTDOORSPORT_UPDATE_OPTIONAL_FROM_ISCRIZIONE));
+			this.sendRequest(new Request(iscrizione, OUTDOORSPORT_UPDATE_OPTIONAL_FROM_ISCRIZIONE));
 		} else {
 			alertConfirm.close();
 		}
