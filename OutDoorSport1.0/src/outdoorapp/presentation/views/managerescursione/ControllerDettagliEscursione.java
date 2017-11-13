@@ -150,10 +150,12 @@ public class ControllerDettagliEscursione extends GenericController{
 			Optional<ButtonType> result = alert.showAndWait();
 			if (result.get() == ButtonType.OK){
 				Response response = sendRequest(new Request(escursione, OUTDOORSPORTS_ANNULLA_ESCURSIONE));
-				Alert alert1 = new Alert(AlertType.INFORMATION, "Escursione annullata con successo!", ButtonType.OK);
-				alert1.setTitle("OutDoorSport1.0");
-				alert1.showAndWait();
-				this.sendRequest(new Request(ViewCache.getNestedAnchorPane(), VIEW_GESTIONE_ESCURSIONI));
+				if(response.toString().equals(RESP_OK)){
+					Alert alert1 = new Alert(AlertType.INFORMATION, "Escursione annullata con successo!", ButtonType.OK);
+					alert1.setTitle("OutDoorSport1.0");
+					alert1.showAndWait();
+					this.sendRequest(new Request(ViewCache.getNestedAnchorPane(), VIEW_GESTIONE_ESCURSIONI));
+				}
 			} else
 				alert.close();
 		}else if(!escursione.getStatoEscursione().getNome().equals(list_stato_escursione.get(1).getNome())){

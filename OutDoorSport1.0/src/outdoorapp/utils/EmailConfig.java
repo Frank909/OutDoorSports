@@ -28,18 +28,10 @@ import outdoorapp.to.interfaces.UtenteTO;
  */
 
 public class EmailConfig {
-
-	private EmailTO email = null;
-
 	/**
-	 * Costruttore della classe EmailConfig che inizializza il controllo Email
+	 * Costruttore della classe EmailConfig
 	 */
-	public EmailConfig() {
-		if(email == null){
-			TOFactory TOFact = FactoryProducerTO.getFactory(FactoryEnum.GenericTOFactory);
-			email = (EmailTO) TOFact.getGenericTO(GenericEnum.Email);
-		}
-	}
+	public EmailConfig() {}
 
 	/** 
 	 * @return props: Restituisce le proprietà dell'email.
@@ -115,8 +107,5 @@ public class EmailConfig {
 				}
 				
 			}});
-		
-		
-		
 	}
 }

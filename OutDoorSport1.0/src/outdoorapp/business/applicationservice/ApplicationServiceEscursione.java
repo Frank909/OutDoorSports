@@ -1,6 +1,8 @@
 package outdoorapp.business.applicationservice;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -19,6 +21,7 @@ import outdoorapp.integration.dao.interfaces.Iscrizione_DAO;
 import outdoorapp.integration.dao.interfaces.OptionalEscursione_DAO;
 import outdoorapp.integration.dao.interfaces.OptionalIscrizione_DAO;
 import outdoorapp.integration.dao.interfaces.StatoEscursione_DAO;
+import outdoorapp.integration.dao.interfaces.StatoIscrizione_DAO;
 import outdoorapp.integration.dao.interfaces.StatoOptional_DAO;
 import outdoorapp.presentation.reqresp.Request;
 import outdoorapp.presentation.reqresp.Response;
@@ -34,6 +37,7 @@ import outdoorapp.to.interfaces.OptionalEscursioneTO;
 import outdoorapp.to.interfaces.OptionalIscrizioneTO;
 import outdoorapp.to.interfaces.OptionalTO;
 import outdoorapp.to.interfaces.PartecipanteTO;
+import outdoorapp.to.interfaces.StatoIscrizioneTO;
 import outdoorapp.to.interfaces.StatoOptionalTO;
 import outdoorapp.to.interfaces.TOFactory;
 import outdoorapp.to.interfaces.UtenteTO;
@@ -64,9 +68,13 @@ class ApplicationServiceEscursione implements Actions {
 	private Iscrizione_DAO iscrizione_dao = null;
 	private EscursioneTO escursione = null;
 	private TOFactory OptionalFact = null;
-	private OptionalEscursioneTO optional_escursione = null;
+	private StatoOptionalTO stato_disattivo = null;
 	private StatoEscursione_DAO statoEscursioneDao = null;
 	private OptionalIscrizione_DAO optionalIscrizioneDao = null;
+	private StatoOptionalTO stato_attivo = null;
+	private List<IscrizioneTO> list_iscrizioni = null;
+	private StatoIscrizione_DAO stato_iscrizione_dao = null;
+	
 
 	public ApplicationServiceEscursione() {
 		genericFactory = FactoryProducerDAO.getFactory(DAORequest.Generic);
@@ -78,6 +86,7 @@ class ApplicationServiceEscursione implements Actions {
 		OptionalFact = FactoryProducerTO.getFactory(FactoryEnum.OptionalTOFactory);
 		iscrizione_dao = (Iscrizione_DAO) genericFactory.getGenericDAO(GenericDAOEnum.Iscrizione);
 		optionalIscrizioneDao = (OptionalIscrizione_DAO) genericFactory.getGenericDAO(GenericDAOEnum.OptionalIscrizione);
+		stato_iscrizione_dao = (StatoIscrizione_DAO) statoFactory.getStatoDAO(StatoDAOEnum.Iscrizione);
 	}
 
 	/**
@@ -208,10 +217,9 @@ class ApplicationServiceEscursione implements Actions {
 				
 				Set<OptionalTO> optionals = new HashSet<>();
 				optionals.addAll(escursione.getOptionals());
-				//escursione.setOptionals(null);
 				Set<OptionalTO> newOptionals = new HashSet<>();
-				StatoOptionalTO stato_attivo = stato_optional_dao.getStatoAttivo();
-				StatoOptionalTO stato_disattivo = stato_optional_dao.getStatoDisattivo();
+				stato_attivo = stato_optional_dao.getStatoAttivo();
+				stato_disattivo = stato_optional_dao.getStatoDisattivo();
 				OptionalEscursioneTO optional_escursione = (OptionalEscursioneTO) OptionalFact.getOptionalTO(OptionalEnum.OptionalEscursione);
 				
 				List<OptionalEscursioneTO> list_opt_e = new ArrayList<>();
@@ -230,7 +238,6 @@ class ApplicationServiceEscursione implements Actions {
 						op.setNome(op.getNome().substring(0, op.getNome().indexOf(" | ")));
 						
 						list_opt_e.add(optional_escursione);
-						//optional_escursione_dao.update(optional_escursione);
 						newOptionals.add(op);
 					}
 				}
@@ -285,6 +292,29 @@ class ApplicationServiceEscursione implements Actions {
 				alert.showAndWait();
 				response.setResponse(RESP_OK);
 
+				list_iscrizioni = iscrizione_dao.getAllIscrittiFromEscursione(escursione);
+				
+				List<IscrizioneTO> list_iscrizioni_ordinata = ordinaIscritti(list_iscrizioni);
+				List<StatoIscrizioneTO> list_stato_iscrizione = new ArrayList<>();
+				List<IscrizioneTO> list_iscrizioni_da_annullare = new ArrayList<>();
+				list_stato_iscrizione.addAll(stato_iscrizione_dao.getAll());
+				
+				int numero_iscritti = escursione.getIscritti();
+				int i = 0;
+				int iscritti = numero_iscritti;
+				
+				for(IscrizioneTO iscritto : list_iscrizioni_ordinata){
+					if(i >= (numero_iscritti - 1)){
+						iscritto.setStatoIscrizione(list_stato_iscrizione.get(0));
+						iscrizione_dao.update(iscritto);
+						list_iscrizioni_da_annullare.add(iscritto);
+						iscritti--;
+					}
+					i++;
+				}
+				escursione.setIscritti(iscritti);
+				escursione_dao.update(escursione);
+				
 				TOFactory TOFact = FactoryProducerTO.getFactory(FactoryEnum.GenericTOFactory);
 				EmailTO email = (EmailTO) TOFact.getGenericTO(GenericEnum.Email);
 
@@ -298,9 +328,16 @@ class ApplicationServiceEscursione implements Actions {
 				mailMessaggio += "Data: " + escursione.getData() + "\n";
 				mailMessaggio += "Descrizione " + escursione.getDescrizione() + "\n";
 				mailMessaggio += "Tipo Escursione " + escursione.getTipoEscursione().getNome() + "\n";
-				
+
 				Set<OptionalEscursioneTO> set_oe = new HashSet<>();
-				set_oe.addAll(optional_escursione_dao.getOptionalsFromEscursione(escursione.getIdEscursione()));
+
+				try {
+					set_oe.addAll(optional_escursione_dao.getOptionalsFromEscursione(escursione.getIdEscursione()));
+				} catch (DatabaseException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+
 				String string = "";
 				if(set_oe.isEmpty())
 					string = "Nessuno";
@@ -310,15 +347,14 @@ class ApplicationServiceEscursione implements Actions {
 							string += e.getOptional().getNome() + " | ";
 						}
 					}
-				
+
 				mailMessaggio += "Optional Disponibili: " + string + "\n";
 
 				ArrayList<UtenteTO> listaDestinatari = new ArrayList<>();
 
-				List<IscrizioneTO> list_iscrizioni = iscrizione_dao.getAllIscrittiFromEscursione(escursione);
-				for(IscrizioneTO i : list_iscrizioni){
-					i.setOptionals(set_oe);
-					listaDestinatari.add(i.getUtente());
+				for(IscrizioneTO in : list_iscrizioni){
+					in.setOptionals(set_oe);
+					listaDestinatari.add(in.getUtente());
 				}
 
 				email.setOggetto(mailOggetto);
@@ -328,7 +364,36 @@ class ApplicationServiceEscursione implements Actions {
 
 				EmailConfig emailConfig = new EmailConfig();
 				emailConfig.sendEmail(email);
+				
+				/*new Thread(new Runnable() {
+					
+					@Override
+					public void run() {
+						TOFactory TOFact = FactoryProducerTO.getFactory(FactoryEnum.GenericTOFactory);
+						EmailTO email = (EmailTO) TOFact.getGenericTO(GenericEnum.Email);
 
+						String mailOggetto = "OutDoorSports | Modifica escursione: " + escursione.getNome();
+						String mailMessaggio = "Gentile Partecipante, \n";
+						mailMessaggio += "La informiamo che il Manager di Escursione ha modificato il numero degli iscritti,\n";
+						mailMessaggio += "e la sua iscrizione verrà annullata, in quanto una delle ultime. \n";
+						mailMessaggio += "Ci scusiamo per il disagio. \n";
+
+						ArrayList<UtenteTO> listaDestinatari = new ArrayList<>();
+						
+						for(IscrizioneTO in : list_iscrizioni_da_annullare){
+							listaDestinatari.add(in.getUtente());
+						}
+
+						email.setOggetto(mailOggetto);
+						email.setMessaggio(mailMessaggio);
+
+						email.setListaDestinatari(listaDestinatari);
+
+						EmailConfig emailConfig = EmailConfig.getInstance();
+						emailConfig.sendEmail(email);
+					}
+				}).start();*/
+				
 				response.setResponse(RESP_OK);
 			}else{
 				response.setResponse(RESP_KO);
@@ -361,5 +426,32 @@ class ApplicationServiceEscursione implements Actions {
 		}
 
 		return response;
+	}
+	
+	/**
+	 * Metodo che ordina gli iscritti in base alla data e all'ora
+	 * di iscrizione.
+	 * 
+	 * @param iscritti
+	 */
+	private List<IscrizioneTO> ordinaIscritti(List<IscrizioneTO> iscritti){
+		Collections.sort(iscritti, new Comparator<IscrizioneTO>() {
+
+			@Override
+			public int compare(IscrizioneTO o1, IscrizioneTO o2) {
+				IscrizioneTO iscrizione1 = (IscrizioneTO)o1;
+				IscrizioneTO iscrizione2 = (IscrizioneTO)o2;
+				int result = iscrizione1.getData().compareTo(iscrizione2.getData());
+				if (result == 0) {
+					// Strings are equal, sort by date
+					return iscrizione1.getOra().compareTo(iscrizione2.getOra());
+				}
+				else {
+					return result;
+				}
+			}
+		});
+		
+		return iscritti;
 	}
 }
