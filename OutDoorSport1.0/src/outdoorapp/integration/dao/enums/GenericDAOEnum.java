@@ -12,5 +12,6 @@ public enum GenericDAOEnum {
 	Escursione,
 	Iscrizione,
 	Optional,
-	OptionalEscursione
+	OptionalEscursione,
+	OptionalIscrizione
 }

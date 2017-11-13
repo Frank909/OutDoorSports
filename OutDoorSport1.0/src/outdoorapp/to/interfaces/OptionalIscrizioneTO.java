@@ -12,26 +12,21 @@ package outdoorapp.to.interfaces;
 public interface OptionalIscrizioneTO extends OutDoorSports{
 	
 	/**
-	 * @return l'id di optional iscrizione
-	 */
-	public Integer getId();
-	
-	/**
 	 * @return l'iscrizione relativa all'optional
 	 */
-	public IscrizioneTO getIscrizione();
+	public Integer getIdIscrizione();
 	
 	/**
 	 * Metodo che setta l'iscrizione relativa all'optional
 	 * 
 	 * @param tblIscrizione
 	 */
-	public void setIscrizione(IscrizioneTO tblIscrizione);
+	public void setIdIscrizione(Integer idIscrizione);
 	
 	/**
 	 * @return l'optional escursione relativo all'iscrizione
 	 */
-	public OptionalEscursioneTO getOptionalEscursione();
+	public Integer getIdOptionalEscursione();
 	
 
 	/**
@@ -39,13 +34,5 @@ public interface OptionalIscrizioneTO extends OutDoorSports{
 	 * 
 	 * @param tblOptionalEscursione
 	 */
-	public void setOptionalEscursione(OptionalEscursioneTO tblOptionalEscursione);
-	
-
-	/**
-	 * Metodo che setta l'id di OptionalIscrizione
-	 * 
-	 * @param id
-	 */
-	public void setId(Integer id);
+	public void setIdOptionalEscursione(Integer idOptionalEscursione);
 }

@@ -47,7 +47,7 @@ class OptionalTOFactory implements TOFactory{
 		case OptionalEscursione:
 			return new OptionalEscursione();
 		case OptionalIscrizione:
-			return new OptionalIscrizione();
+			return new OptionalIscrizione(0,0);
 		default:
 			return null;
 		}

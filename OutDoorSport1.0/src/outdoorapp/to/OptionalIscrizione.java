@@ -6,6 +6,9 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import static javax.persistence.GenerationType.IDENTITY;
+
+import java.io.Serializable;
+
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -26,46 +29,32 @@ import outdoorapp.to.interfaces.OutDoorSports;
 class OptionalIscrizione implements OptionalIscrizioneTO{
 
 	private static final long serialVersionUID = -5812339531551921552L;
-	private Integer id;
-	private IscrizioneTO tblIscrizione;
-	private OptionalEscursioneTO tblOptionalEscursione;
+	private Integer idIscrizione;
+	private Integer idOptionalEscursione;
 
-	OptionalIscrizione() {
-	}
-
-	OptionalIscrizione(IscrizioneTO tblIscrizione, OptionalEscursioneTO tblOptionalEscursione) {
-		this.tblIscrizione = tblIscrizione;
-		this.tblOptionalEscursione = tblOptionalEscursione;
+	public OptionalIscrizione(Integer idIscrizione, Integer idOptionalEscursione) {
+		this.idIscrizione = idIscrizione;
+		this.idOptionalEscursione = idOptionalEscursione;
 	}
 
 	@Override
-	public Integer getId() {
-		return this.id;
+	public Integer getIdIscrizione() {
+		return this.idIscrizione;
 	}
 
 	@Override
-	public void setId(Integer id) {
-		this.id = id;
+	public void setIdIscrizione(Integer idIscrizione) {
+		this.idIscrizione = idIscrizione;
 	}
 
 	@Override
-	public IscrizioneTO getIscrizione() {
-		return this.tblIscrizione;
+	public Integer getIdOptionalEscursione() {
+		return this.idOptionalEscursione;
 	}
 
 	@Override
-	public void setIscrizione(IscrizioneTO tblIscrizione) {
-		this.tblIscrizione = tblIscrizione;
-	}
-
-	@Override
-	public OptionalEscursioneTO getOptionalEscursione() {
-		return this.tblOptionalEscursione;
-	}
-
-	@Override
-	public void setOptionalEscursione(OptionalEscursioneTO tblOptionalEscursione) {
-		this.tblOptionalEscursione = tblOptionalEscursione;
+	public void setIdOptionalEscursione(Integer idOptionalEscursione) {
+		this.idOptionalEscursione = idOptionalEscursione;
 	}
 
 }

@@ -17,6 +17,7 @@ import outdoorapp.integration.dao.enums.StatoDAOEnum;
 import outdoorapp.integration.dao.interfaces.Escursione_DAO;
 import outdoorapp.integration.dao.interfaces.Iscrizione_DAO;
 import outdoorapp.integration.dao.interfaces.OptionalEscursione_DAO;
+import outdoorapp.integration.dao.interfaces.OptionalIscrizione_DAO;
 import outdoorapp.integration.dao.interfaces.StatoEscursione_DAO;
 import outdoorapp.integration.dao.interfaces.StatoOptional_DAO;
 import outdoorapp.presentation.reqresp.Request;
@@ -30,6 +31,7 @@ import outdoorapp.to.interfaces.EscursioneTO;
 import outdoorapp.to.interfaces.IscrizioneTO;
 import outdoorapp.to.interfaces.ManagerDiEscursioneTO;
 import outdoorapp.to.interfaces.OptionalEscursioneTO;
+import outdoorapp.to.interfaces.OptionalIscrizioneTO;
 import outdoorapp.to.interfaces.OptionalTO;
 import outdoorapp.to.interfaces.PartecipanteTO;
 import outdoorapp.to.interfaces.StatoOptionalTO;
@@ -64,6 +66,7 @@ class ApplicationServiceEscursione implements Actions {
 	private TOFactory OptionalFact = null;
 	private OptionalEscursioneTO optional_escursione = null;
 	private StatoEscursione_DAO statoEscursioneDao = null;
+	private OptionalIscrizione_DAO optionalIscrizioneDao = null;
 
 	public ApplicationServiceEscursione() {
 		genericFactory = FactoryProducerDAO.getFactory(DAORequest.Generic);
@@ -74,6 +77,7 @@ class ApplicationServiceEscursione implements Actions {
 		statoEscursioneDao = (StatoEscursione_DAO) statoFactory.getStatoDAO(StatoDAOEnum.Escursione);
 		OptionalFact = FactoryProducerTO.getFactory(FactoryEnum.OptionalTOFactory);
 		iscrizione_dao = (Iscrizione_DAO) genericFactory.getGenericDAO(GenericDAOEnum.Iscrizione);
+		optionalIscrizioneDao = (OptionalIscrizione_DAO) genericFactory.getGenericDAO(GenericDAOEnum.OptionalIscrizione);
 	}
 
 	/**
@@ -203,36 +207,77 @@ class ApplicationServiceEscursione implements Actions {
 					escursione.setUtente(mde);
 				
 				Set<OptionalTO> optionals = new HashSet<>();
-				optionals = escursione.getOptionals();
-				escursione.setOptionals(null);
+				optionals.addAll(escursione.getOptionals());
+				//escursione.setOptionals(null);
 				Set<OptionalTO> newOptionals = new HashSet<>();
 				StatoOptionalTO stato_attivo = stato_optional_dao.getStatoAttivo();
 				StatoOptionalTO stato_disattivo = stato_optional_dao.getStatoDisattivo();
 				OptionalEscursioneTO optional_escursione = (OptionalEscursioneTO) OptionalFact.getOptionalTO(OptionalEnum.OptionalEscursione);
-				List<OptionalEscursioneTO> list_opt_e = new ArrayList<>();
 				
+				List<OptionalEscursioneTO> list_opt_e = new ArrayList<>();
 				for(OptionalTO op : optionals){
 					if(!op.getNome().contains(" " + stato_attivo.getNome()) && !op.getNome().contains(stato_disattivo.getNome())){
 						newOptionals.add(op);
 					}else{
-						List<OptionalEscursioneTO> list = optional_escursione_dao.getAssociationID(escursione, op);
+						List<OptionalEscursioneTO> list = new ArrayList<>();
+						list.addAll(optional_escursione_dao.getAssociationID(escursione, op));
 						optional_escursione = list.get(0);
-						op.setNome(op.getNome().substring(0, op.getNome().indexOf(" | ")));
 						if(op.getNome().contains(" " + stato_attivo.getNome())){
 							optional_escursione.setStatoOptional(stato_attivo);
-						}else{
+						}else if(op.getNome().contains(stato_disattivo.getNome())){
 							optional_escursione.setStatoOptional(stato_disattivo);
-							
 						}
+						op.setNome(op.getNome().substring(0, op.getNome().indexOf(" | ")));
 						
-						//list_opt_e.add(optional_escursione);
+						list_opt_e.add(optional_escursione);
 						//optional_escursione_dao.update(optional_escursione);
 						newOptionals.add(op);
 					}
 				}
-			
 				escursione.setOptionals(newOptionals);
+				
+				List<IscrizioneTO> list_iscritti = new ArrayList<>();
+				list_iscritti.addAll(iscrizione_dao.getAllIscrittiFromEscursione(escursione));
+				List<IscrizioneTO> list_iscritti_temp = new ArrayList<>();
+				list_iscritti_temp.addAll(iscrizione_dao.getAllIscrittiFromEscursione(escursione));
+				
+				for(IscrizioneTO i : list_iscritti_temp){
+					i.setOptionals(null);
+					iscrizione_dao.update(i);
+				}
+				
 				escursione_dao.update(escursione);
+				
+				List<OptionalEscursioneTO> list_opt_e_2 = new ArrayList<>();
+				list_opt_e_2.addAll(optional_escursione_dao.getOptionalsFromEscursione(escursione.getIdEscursione()));
+				
+				for(OptionalEscursioneTO oe : list_opt_e){
+					for(OptionalEscursioneTO oe2 : list_opt_e_2){
+						if(oe.getOptional().getNome().equals(oe2.getOptional().getNome())){
+							oe2.setStatoOptional(oe.getStatoOptional());
+						}
+					}
+				}
+				
+				for(IscrizioneTO i : list_iscritti){
+					Set<OptionalEscursioneTO> list_oe_from_iscrizione = i.getOptionals();
+					for(OptionalEscursioneTO oe : list_oe_from_iscrizione){
+						for(OptionalEscursioneTO oe_generic : list_opt_e_2){
+							if(oe.getOptional().getNome().equals(oe_generic.getOptional().getNome())){
+								oe.setId(oe_generic.getId());
+								oe.setEscursione(oe_generic.getEscursione());
+								oe.setStatoOptional(oe_generic.getStatoOptional());
+								oe.setOptional(oe_generic.getOptional());
+							}
+						}
+						TOFactory toFact = FactoryProducerTO.getFactory(FactoryEnum.OptionalTOFactory);
+						OptionalIscrizioneTO optional_iscrizione = (OptionalIscrizioneTO) toFact.getOptionalTO(OptionalEnum.OptionalIscrizione);
+						optional_iscrizione.setIdIscrizione(i.getIdIscrizione());
+						optional_iscrizione.setIdOptionalEscursione(oe.getId());
+						optionalIscrizioneDao.create(optional_iscrizione);
+						optional_escursione_dao.update(oe);
+					}
+				}
 				
 				/*for(OptionalEscursioneTO oe: list_opt_e)
 					optional_escursione_dao.update(oe);*/
@@ -320,5 +365,4 @@ class ApplicationServiceEscursione implements Actions {
 
 		return response;
 	}
-
 }

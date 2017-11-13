@@ -11,6 +11,6 @@ import java.io.Serializable;
  *
  */
 
-public interface OutDoorSports{
+public interface OutDoorSports extends Serializable{
 	String toString();
 }

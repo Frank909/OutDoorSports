@@ -117,16 +117,22 @@ public class ControllerVisualizzaEscursioniAperte extends ControllerTableView{
 				if(escursione_model != null){
 					if(event.getClickCount() == 2  && !event.isConsumed()){
 						event.consume();
-						TOFactory TOFact = FactoryProducerTO.getFactory(FactoryEnum.GenericTOFactory);
-						iscrizione = (IscrizioneTO) TOFact.getGenericTO(GenericEnum.Iscrizione);
-						iscrizione.setEscursione(escursione_model.getEscursione());
-						iscrizione.setUtente((PartecipanteTO) SessionCache.getCurrentData("Partecipante"));
-						
-						Response response = sendRequest(new Request(iscrizione, OUTDOORSPORT_CHECK_ISCRIZIONE));
-						if(response.toString().equals(RESP_OK))
-							sendRequest(new Request(iscrizione, ViewCache.getNestedAnchorPane(), VIEW_ISCRIZIONE_ESCURSIONE));
-						else{
-							Alert alert1 = new Alert(AlertType.ERROR, "Sei già iscritto a questa escursione", ButtonType.OK);
+						if(escursione_model.getEscursione().getIscritti() < escursione_model.getEscursione().getNumberMax()){
+							TOFactory TOFact = FactoryProducerTO.getFactory(FactoryEnum.GenericTOFactory);
+							iscrizione = (IscrizioneTO) TOFact.getGenericTO(GenericEnum.Iscrizione);
+							iscrizione.setEscursione(escursione_model.getEscursione());
+							iscrizione.setUtente((PartecipanteTO) SessionCache.getCurrentData("Partecipante"));
+
+							Response response = sendRequest(new Request(iscrizione, OUTDOORSPORT_CHECK_ISCRIZIONE));
+							if(response.toString().equals(RESP_OK))
+								sendRequest(new Request(iscrizione, ViewCache.getNestedAnchorPane(), VIEW_ISCRIZIONE_ESCURSIONE));
+							else{
+								Alert alert1 = new Alert(AlertType.ERROR, "Sei già iscritto a questa escursione", ButtonType.OK);
+								alert1.setTitle("OutDoorSport1.0");
+								alert1.showAndWait();
+							}
+						}else{
+							Alert alert1 = new Alert(AlertType.ERROR, "Numero massimo di partecipanti raggiunto", ButtonType.OK);
 							alert1.setTitle("OutDoorSport1.0");
 							alert1.showAndWait();
 						}
