@@ -279,10 +279,6 @@ class ApplicationServiceEscursione implements Actions {
 					}
 				}
 				
-				/*for(OptionalEscursioneTO oe: list_opt_e)
-					optional_escursione_dao.update(oe);*/
-				
-
 				Alert alert = new Alert(AlertType.INFORMATION, "L'Escursione è stata modificata correttamente!", ButtonType.OK);
 				alert.setTitle("OutDoorSport1.0");
 				alert.showAndWait();
