@@ -1,10 +1,13 @@
 package outdoorapp.presentation.views.application;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 import outdoorapp.presentation.reqresp.Request;
 import outdoorapp.presentation.reqresp.Response;
 import outdoorapp.presentation.views.generic.GenericController;
@@ -29,7 +32,6 @@ public class ControllerLogin extends GenericController{
 	@FXML private Button btnForgotPassword;
 	@FXML private TextField txtUsername;
 	@FXML private PasswordField txtPassword;
-	@FXML private Label lblErrore;
 	/**
 	 * Costruttore della classe ControllerLogin
 	 */
@@ -48,9 +50,7 @@ public class ControllerLogin extends GenericController{
 	 * Metodo che inizializza tutti i campi della finestra
 	 */
 	@Override
-	protected void initialize() {
-		lblErrore.setText("");
-		
+	protected void initialize() {		
 	}
 	
 	/**
@@ -73,8 +73,12 @@ public class ControllerLogin extends GenericController{
 		
 		if(response.toString().equals(RESP_OK))
 			this.sendRequest(new Request(response.getData(), response.getView()));
-		else
-			lblErrore.setText("Dati non riconosciuti");
+		else{
+			Alert alert = new Alert(AlertType.ERROR, "Errore! Credenziali non Riconosciute!", ButtonType.OK);
+			alert.setTitle("OutDoorSport1.0");
+			alert.showAndWait();
+		}
+			
 	}
 	
 	/**

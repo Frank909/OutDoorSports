@@ -31,7 +31,6 @@ public class ControllerPasswordDimenticata extends GenericController{
 
 	@FXML private Button btnRichiediNuovaPassword;
 	@FXML private TextField txtEmail;
-	@FXML private Label lblErrore;
 	@FXML private Button btnIndietro;
 	
 	private UtenteTO utente = null;
@@ -52,9 +51,7 @@ public class ControllerPasswordDimenticata extends GenericController{
 	 * Metodo che inizializza tutti i campi della finestra
 	 */
 	@Override
-	protected void initialize() {
-		lblErrore.setText("");
-    }
+	protected void initialize() {}
 	
 	/**
 	 * Evento associato alla richiesta di una nuova password. Viene inviata all'utente
@@ -82,7 +79,9 @@ public class ControllerPasswordDimenticata extends GenericController{
 			
 				
 		}else{
-			lblErrore.setText("L'email inserita non esiste!");
+			Alert alert = new Alert(AlertType.ERROR, "Errore! L'email inserita non esiste!", ButtonType.OK);
+			alert.setTitle("OutDoorSport1.0");
+			alert.showAndWait();
 		}		
 	}
 	

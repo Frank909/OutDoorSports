@@ -65,6 +65,9 @@ public abstract class ControllerEscursione extends GenericController{
 		if(!result.equals(""))
 			result += " non corretti!" + "\n";
 
+		if((escursione.getNumberMin() == 0) || (escursione.getNumberMax() == 0))
+			result += "Zero non è un numero valido";
+		
 		if(escursione.getNumberMax() < escursione.getNumberMin())
 			result += "Il numero massimo dei partecipanti non può essere minore del numero minimo" + "\n";
 			

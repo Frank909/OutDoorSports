@@ -70,6 +70,7 @@ public class ControllerPartecipante extends GenericController{
 		Alert alert = new Alert(AlertType.CONFIRMATION, "Sei sicuro?");
 		Optional<ButtonType> result = alert.showAndWait();
 		if (result.get() == ButtonType.OK){
+			this.sendRequest(new Request(anchorContent, VIEW_DASHBOARD_WELCOME));
 			this.sendRequest(new Request(VIEW_LOGIN));
 		} else {
 		    alert.close();

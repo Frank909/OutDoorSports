@@ -10,6 +10,7 @@ package outdoorapp.utils;
 
 public interface Views {
 	public static final String VIEW_LOGIN = "VIEW_LOGIN";
+	public static final String VIEW_DASHBOARD_WELCOME = "VIEW_DASHBOARD_WELCOME";
 	public static final String VIEW_MANAGER_DI_SISTEMA_CONFIG = "VIEW_MANAGER_DI_SISTEMA_CONFIG";
 	public static final String VIEW_DASHBOARD_MANAGER_DI_SISTEMA = "VIEW_DASHBOARD_MANAGER_DI_SISTEMA";
 	public static final String VIEW_DASHBOARD_MANAGER_DI_ESCURSIONE = "VIEW_DASHBOARD_MANAGER_DI_ESCURSIONE";

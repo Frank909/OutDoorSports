@@ -255,6 +255,7 @@ class ApplicationServiceEscursione implements Actions {
 					for(OptionalEscursioneTO oe2 : list_opt_e_2){
 						if(oe.getOptional().getNome().equals(oe2.getOptional().getNome())){
 							oe2.setStatoOptional(oe.getStatoOptional());
+							optional_escursione_dao.update(oe2);
 						}
 					}
 				}

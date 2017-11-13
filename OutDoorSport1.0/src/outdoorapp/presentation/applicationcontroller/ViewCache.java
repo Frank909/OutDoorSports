@@ -34,6 +34,7 @@ public class ViewCache extends SessionCache{
 	private static AnchorPane nestedAnchorPane;
 
 	private final String VIEW_LOGIN = "../../../resources/fxml/application/login";
+	private final String VIEW_DASHBOARD_WELCOME = "../../../resources/fxml/application/dashboardWelcome";
 	private final String VIEW_MANAGER_DI_SISTEMA_CONFIG = "../../../resources/fxml/manager_sistema/managerDiSistemaConfig";
 	private final String VIEW_DASHBOARD_MANAGER_DI_SISTEMA = "../../../resources/fxml/manager_sistema/dashboardManagerSistema";
 	private final String VIEW_DASHBOARD_MANAGER_DI_ESCURSIONE = "../../../resources/fxml/manager_escursione/dashboardManagerEscursione";
@@ -94,6 +95,7 @@ public class ViewCache extends SessionCache{
 		loadForm("VIEW_PASSWORD_DIMENTICATA",VIEW_PASSWORD_DIMENTICATA, true);
 		loadForm("VIEW_REGISTRAZIONE_PARTECIPANTE",VIEW_REGISTRAZIONE_PARTECIPANTE, true);
 		
+		loadForm("VIEW_DASHBOARD_WELCOME", VIEW_DASHBOARD_WELCOME, true);
 		loadForm("VIEW_MODIFICA_ISCRIZIONE_ESCURSIONE", VIEW_MODIFICA_ISCRIZIONE_ESCURSIONE, false);
 		loadForm("VIEW_SELEZIONA_OPTIONAL_ISCRIZIONE", VIEW_SELEZIONA_OPTIONAL_ISCRIZIONE, false);
 		loadForm("VIEW_ISCRIZIONE_ESCURSIONE", VIEW_ISCRIZIONE_ESCURSIONE, false);
@@ -119,6 +121,7 @@ public class ViewCache extends SessionCache{
 		loadForm("VIEW_SELEZIONA_OPTIONAL_ISCRIZIONE_PARTECIPANTE", VIEW_SELEZIONA_OPTIONAL_ISCRIZIONE_PARTECIPANTE, false);
 		loadForm("VIEW_MODIFICA_ISCRIZIONE_ESCURSIONE_PARTECIPANTE", VIEW_MODIFICA_ISCRIZIONE_ESCURSIONE_PARTECIPANTE, false);
 		loadForm("VIEW_SELEZIONA_MODIFICA_OPTIONAL_ISCRIZIONE_PARTECIPANTE", VIEW_SELEZIONA_MODIFICA_OPTIONAL_ISCRIZIONE_PARTECIPANTE, false);
+		
 	}
 	
 	/**
