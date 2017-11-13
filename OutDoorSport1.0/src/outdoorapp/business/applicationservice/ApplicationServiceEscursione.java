@@ -365,7 +365,7 @@ class ApplicationServiceEscursione implements Actions {
 				EmailConfig emailConfig = new EmailConfig();
 				emailConfig.sendEmail(email);
 				
-				/*new Thread(new Runnable() {
+				new Thread(new Runnable() {
 					
 					@Override
 					public void run() {
@@ -389,10 +389,10 @@ class ApplicationServiceEscursione implements Actions {
 
 						email.setListaDestinatari(listaDestinatari);
 
-						EmailConfig emailConfig = EmailConfig.getInstance();
+						EmailConfig emailConfig = new EmailConfig();
 						emailConfig.sendEmail(email);
 					}
-				}).start();*/
+				}).start();
 				
 				response.setResponse(RESP_OK);
 			}else{
