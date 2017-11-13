@@ -6,7 +6,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
-
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -32,7 +31,6 @@ import outdoorapp.to.enums.FactoryEnum;
 import outdoorapp.to.enums.GenericEnum;
 import outdoorapp.to.enums.OptionalEnum;
 import outdoorapp.to.enums.StatoEnum;
-import outdoorapp.to.interfaces.EscursioneTO;
 import outdoorapp.to.interfaces.IscrizioneTO;
 import outdoorapp.to.interfaces.OptionalEscursioneTO;
 import outdoorapp.to.interfaces.OptionalTO;
@@ -78,6 +76,7 @@ public class ControllerSelezionaModificaOptionalIscrizione extends ControllerTab
 	private Set<OptionalEscursioneTO> all_optional_disponibili = null;
 	private Set<OptionalEscursioneTO> all_current_optional_disponibili = null;
 	private StatoOptionalTO stato_optional = null;
+	@SuppressWarnings("unused")
 	private List<StatoOptionalTO> list_stato_optional = new ArrayList<>();
 
 
@@ -108,6 +107,7 @@ public class ControllerSelezionaModificaOptionalIscrizione extends ControllerTab
 	protected void initialize() {
 		ChangeListener<Boolean> visibilityListener = new ChangeListener<Boolean>() {
 
+			@SuppressWarnings("unchecked")
 			@Override
 			public void changed(ObservableValue<? extends Boolean> arg0, Boolean oldValue, Boolean newValue) {
 				if(newValue){

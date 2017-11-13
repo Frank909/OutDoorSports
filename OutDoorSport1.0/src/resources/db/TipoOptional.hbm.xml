@@ -15,8 +15,4 @@
 			<column name="costo" not-null="true" />
 		</property>
 	</class>
-	
-	<!-- <query name="getAllTipoOptional">
-        <![CDATA[ from agroludos.to.TipoOptional o ]]></query>  -->
-        
 </hibernate-mapping>

@@ -5,8 +5,6 @@ import outdoorapp.integration.dao.interfaces.Ruoli_DAO;
 import outdoorapp.to.FactoryProducerTO;
 import outdoorapp.to.enums.FactoryEnum;
 import outdoorapp.to.enums.TipoEnum;
-import outdoorapp.to.enums.UtenteEnum;
-import outdoorapp.to.interfaces.ManagerDiEscursioneTO;
 import outdoorapp.to.interfaces.RuoliTO;
 import outdoorapp.to.interfaces.TOFactory;
 

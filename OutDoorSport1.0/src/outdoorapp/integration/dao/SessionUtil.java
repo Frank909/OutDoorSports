@@ -3,9 +3,7 @@ package outdoorapp.integration.dao;
 import outdoorapp.exceptions.DatabaseException;
 
 import org.hibernate.SessionFactory;
-import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
-import org.hibernate.service.ServiceRegistry;
 
 /**
  * Classe che prepara la configurazione e la sessione per interagire
@@ -31,8 +29,6 @@ class SessionUtil{
 		if(sessionFactory == null){
 			Configuration configuration = new Configuration();
 			configuration.configure("/resources/hibernate.cfg.xml");
-			/*ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder().applySettings(
-					configuration.getProperties()).build();*/
 			try{
 				sessionFactory = configuration.buildSessionFactory();
 				res = sessionFactory;

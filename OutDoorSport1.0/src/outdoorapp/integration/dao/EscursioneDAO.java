@@ -7,10 +7,8 @@ import outdoorapp.to.enums.FactoryEnum;
 import outdoorapp.to.enums.GenericEnum;
 import outdoorapp.to.interfaces.EscursioneTO;
 import outdoorapp.to.interfaces.ManagerDiEscursioneTO;
-import outdoorapp.to.interfaces.OptionalEscursioneTO;
 import outdoorapp.to.interfaces.PartecipanteTO;
 import outdoorapp.to.interfaces.TOFactory;
-import outdoorapp.to.interfaces.UtenteTO;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,11 +40,6 @@ class EscursioneDAO extends GenericDAO<EscursioneTO> implements Escursione_DAO{
 	}
 	
 	@Override
-	public List<EscursioneTO> readEscursioniAttive() throws DatabaseException { 
-		return super.executeQuery("boh");
-	}
-	
-	@Override
 	public List<EscursioneTO> readEscursioniIscritte(PartecipanteTO partecipante) throws DatabaseException{
 		List<Integer> param = new ArrayList<Integer>();
 		param.add(partecipante.getIdUtente());
@@ -69,14 +62,6 @@ class EscursioneDAO extends GenericDAO<EscursioneTO> implements Escursione_DAO{
 		List<Integer> param = new ArrayList<Integer>();
 		param.add(mde.getIdUtente());
 		List<EscursioneTO> response = super.executeParamQuery("readEscursioniByManagerDiEscursione", param);
-		return response;
-	}
-	
-	@Override
-	public List<EscursioneTO> readEscursioniAttiveByManagerDiEscursione(ManagerDiEscursioneTO mde) throws DatabaseException {
-		List<ManagerDiEscursioneTO> param = new ArrayList<ManagerDiEscursioneTO>();
-		param.add(mde);
-		List<EscursioneTO> response = super.executeParamQuery("BOOOOOOOHHHH", param);
 		return response;
 	}
 	
@@ -104,7 +89,7 @@ class EscursioneDAO extends GenericDAO<EscursioneTO> implements Escursione_DAO{
 	 * @return un'istanza di Escursione tramite query
 	 * @throws DatabaseException
 	 */
-	@SuppressWarnings({ "unchecked" })
+	@SuppressWarnings({ })
 	private EscursioneTO getEscursioneByQuery(String queryName, List<?> params) throws DatabaseException{
 		EscursioneTO response = null;
 		List<EscursioneTO> list = super.executeParamQuery(queryName, params);

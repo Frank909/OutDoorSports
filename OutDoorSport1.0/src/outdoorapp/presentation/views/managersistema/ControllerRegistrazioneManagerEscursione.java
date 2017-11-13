@@ -1,7 +1,6 @@
 package outdoorapp.presentation.views.managersistema;
 
 import java.time.LocalDate;
-
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
@@ -21,7 +20,6 @@ import outdoorapp.to.enums.UtenteEnum;
 import outdoorapp.to.interfaces.ManagerDiEscursioneTO;
 import outdoorapp.to.interfaces.TOFactory;
 import outdoorapp.to.interfaces.UtenteTO;
-import outdoorapp.utils.SessionCache;
 
 /**
  * Gestisce la registrazione di un nuovo Manager di Escursione da parte del Manager
@@ -91,7 +89,6 @@ public class ControllerRegistrazioneManagerEscursione extends ControllerRegistra
 	            }
 	        }
 	    });
-		
 		group.selectToggle(radioM);
     }
 	

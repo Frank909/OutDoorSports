@@ -61,7 +61,6 @@ class ApplicationController extends Service{
 
 	@Override
 	public ServiceType getType() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
@@ -72,6 +71,4 @@ class ApplicationController extends Service{
 		}else
 			return this.handle(request, service);
 	}
-	
-
 }

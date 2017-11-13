@@ -1,5 +1,13 @@
 package outdoorapp.to.interfaces;
 
+/**
+ * Interfaccia che rappresenta un oggetto EncryptPassword. 
+ * Sono quindi forniti tutti i metodi per gestire la criptazione di una password.
+ * 
+ * @author Andrea Zito
+ * @author Francesco Ventura
+ */
+
 public interface EncryptPasswordTO extends OutDoorSports{
 	
 	/**

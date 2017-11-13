@@ -10,7 +10,6 @@ import outdoorapp.integration.dao.enums.GenericDAOEnum;
 import outdoorapp.integration.dao.interfaces.OptionalEscursione_DAO;
 import outdoorapp.presentation.reqresp.Request;
 import outdoorapp.presentation.reqresp.Response;
-import outdoorapp.to.interfaces.IscrizioneTO;
 import outdoorapp.to.interfaces.OptionalEscursioneTO;
 import outdoorapp.utils.Actions;
 

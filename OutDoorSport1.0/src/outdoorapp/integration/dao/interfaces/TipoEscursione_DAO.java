@@ -1,9 +1,5 @@
 package outdoorapp.integration.dao.interfaces;
 
-import java.util.List;
-
-import outdoorapp.exceptions.DatabaseException;
-import outdoorapp.to.interfaces.StatoEscursioneTO;
 import outdoorapp.to.interfaces.TipoEscursioneTO;
 
 /** 
@@ -16,5 +12,4 @@ import outdoorapp.to.interfaces.TipoEscursioneTO;
  *
  */
 
-public interface TipoEscursione_DAO extends GEN_DAO<TipoEscursioneTO> {
-}
+public interface TipoEscursione_DAO extends GEN_DAO<TipoEscursioneTO> {}

@@ -3,7 +3,6 @@ package outdoorapp.presentation.views.partecipante;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -27,7 +26,6 @@ import outdoorapp.presentation.views.models.EscursioneModel;
 import outdoorapp.to.FactoryProducerTO;
 import outdoorapp.to.enums.FactoryEnum;
 import outdoorapp.to.enums.GenericEnum;
-import outdoorapp.to.enums.StatoEnum;
 import outdoorapp.to.interfaces.EmailTO;
 import outdoorapp.to.interfaces.EscursioneTO;
 import outdoorapp.to.interfaces.IscrizioneTO;
@@ -35,7 +33,6 @@ import outdoorapp.to.interfaces.ManagerDiEscursioneTO;
 import outdoorapp.to.interfaces.PartecipanteTO;
 import outdoorapp.to.interfaces.StatoIscrizioneTO;
 import outdoorapp.to.interfaces.TOFactory;
-import outdoorapp.to.interfaces.TipoEscursioneTO;
 import outdoorapp.to.interfaces.UtenteTO;
 import outdoorapp.utils.EmailConfig;
 import outdoorapp.utils.SessionCache;
@@ -195,6 +192,7 @@ public class ControllerLeMieEscursioni extends ControllerTableView{
 		mTableEscursioni.setItems(data);
 	}
 
+	@SuppressWarnings("unchecked")
 	@FXML
 	protected void cancellatiEscursione(){
 
@@ -227,23 +225,19 @@ public class ControllerLeMieEscursioni extends ControllerTableView{
 						mailMessaggio += "Il partecipante " + partecipante.getNome() + " " + partecipante.getCognome();
 						mailMessaggio += "con codice fiscale " + partecipante.getCodiceFiscale();
 						mailMessaggio += "ha scelto di disiscriversi dall'escursione " + iscrizione.getEscursione().getNome();
-
 						email.setOggetto(mailOggetto);
 						email.setMessaggio(mailMessaggio);
-
 						email.setListaDestinatari(dest);
 						emailConfig.sendEmail(email);
 						allEscursioniIscritte();
 					}
 				}
-
 			}
 		}else{
 			Alert alert1 = new Alert(AlertType.ERROR, "Nessuna Escursione Selezionata", ButtonType.OK);
 			alert1.setTitle("OutDoorSport1.0");
 			alert1.showAndWait();
 		}		
-
 	}
 
 	@FXML
@@ -266,6 +260,4 @@ public class ControllerLeMieEscursioni extends ControllerTableView{
 			alert.showAndWait();
 		}	
 	}
-
-
 }

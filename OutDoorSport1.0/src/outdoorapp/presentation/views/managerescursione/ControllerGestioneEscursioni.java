@@ -161,7 +161,6 @@ public class ControllerGestioneEscursioni extends ControllerTableView{
 		return res;
 	}
 
-
 	/**
 	 * Evento associato alla visualizzazione dei dettagli di una escursione. Una volta selezionata
 	 * l'escursione desiderata, il Manager di Escursione, premendo il tasto, potrà visualizzare i 
@@ -177,7 +176,4 @@ public class ControllerGestioneEscursioni extends ControllerTableView{
 			alert.showAndWait();
 		}
 	}
-	
-	
-
 }

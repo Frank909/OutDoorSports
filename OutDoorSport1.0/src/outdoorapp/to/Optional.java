@@ -1,8 +1,6 @@
 package outdoorapp.to;
-// Generated 14-set-2017 13.06.34 by Hibernate Tools 5.2.3.Final
 
 import outdoorapp.to.interfaces.OptionalTO;
-import outdoorapp.to.interfaces.StatoOptionalTO;
 import outdoorapp.to.interfaces.TipoOptionalTO;
 
 /**

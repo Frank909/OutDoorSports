@@ -27,12 +27,4 @@
 		
 	<query name="getAssociationID">
 		<![CDATA[ from outdoorapp.to.OptionalEscursione o where o.escursione.idEscursione = ? and o.optional.idOptional = ?]]></query>
-		
-	<!-- <query name="getAllOptional">
-        <![CDATA[ from agroludos.to.Optional o ]]></query>
-	<query name="getOptionalByTipo">
-        <![CDATA[ from agroludos.to.Optional o where o.tipoOptional.nome = ?]]></query>
-	<query name="getOptionalAttiviByTipo">
-        <![CDATA[ from agroludos.to.Optional o where o.tipoOptional.nome = ? and stato = 1]]></query>-->
-        
 </hibernate-mapping>

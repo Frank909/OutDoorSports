@@ -9,5 +9,9 @@ package outdoorapp.to.enums;
  */
 
 public enum FactoryEnum {
-	UtenteTOFactory,StatoTOFactory,OptionalTOFactory,TipoTOFactory,GenericTOFactory;
+	UtenteTOFactory,
+	StatoTOFactory,
+	OptionalTOFactory,
+	TipoTOFactory,
+	GenericTOFactory;
 }

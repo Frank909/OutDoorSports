@@ -1,18 +1,12 @@
 package outdoorapp.presentation.views.managersistema;
 
 import java.util.Optional;
-
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
-import javafx.event.Event;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.AnchorPane;
-import javafx.stage.WindowEvent;
 import outdoorapp.presentation.reqresp.Request;
 import outdoorapp.presentation.views.generic.GenericController;
 
@@ -36,16 +30,13 @@ public class ControllerManagerDiSistema extends GenericController{
 	/**
 	 * Costruttore della classe ControllerManagerDiSistema
 	 */
-	public ControllerManagerDiSistema() {
-		
-	}
+	public ControllerManagerDiSistema() {}
 	
 	/**
 	 * Metodo che inizializza tutti i campi della finestra
 	 */
 	@Override
-	protected void initialize() {	
-	}
+	protected void initialize() {	}
 
 	/**
 	 * Metodo associato all'evento del controllo della view per la gestione di un manager di escursione
@@ -83,6 +74,4 @@ public class ControllerManagerDiSistema extends GenericController{
 		    alert.close();
 		}
 	}
-
-
 }

@@ -57,5 +57,4 @@ class OptionalTOFactory implements TOFactory{
 	public OutDoorSports getStatoTO(StatoEnum choice) {
 		return null;
 	}
-
 }

@@ -5,7 +5,6 @@ import java.util.Set;
 import outdoorapp.to.interfaces.EscursioneTO;
 import outdoorapp.to.interfaces.IscrizioneTO;
 import outdoorapp.to.interfaces.OptionalEscursioneTO;
-import outdoorapp.to.interfaces.OptionalTO;
 import outdoorapp.to.interfaces.StatoIscrizioneTO;
 import outdoorapp.to.interfaces.UtenteTO;
 
@@ -19,6 +18,7 @@ import outdoorapp.to.interfaces.UtenteTO;
 
 class Iscrizione implements IscrizioneTO{
 
+	private static final long serialVersionUID = 1L;
 	private Integer idIscrizione;
 	private EscursioneTO escursione;
 	private StatoIscrizioneTO statoIscrizione;

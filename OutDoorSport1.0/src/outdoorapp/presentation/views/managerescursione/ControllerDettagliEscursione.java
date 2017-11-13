@@ -4,9 +4,6 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-
-import org.omg.DynamicAny.DynAnySeqHelper;
-
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
@@ -17,18 +14,15 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.StackPane;
 import java.time.temporal.ChronoUnit;
-
 import outdoorapp.presentation.applicationcontroller.ViewCache;
 import outdoorapp.presentation.reqresp.Request;
 import outdoorapp.presentation.reqresp.Response;
 import outdoorapp.presentation.views.generic.GenericController;
-import outdoorapp.presentation.views.models.EscursioneModel;
 import outdoorapp.to.FactoryProducerTO;
 import outdoorapp.to.enums.FactoryEnum;
 import outdoorapp.to.enums.GenericEnum;
 import outdoorapp.to.enums.StatoEnum;
 import outdoorapp.to.interfaces.EscursioneTO;
-import outdoorapp.to.interfaces.OptionalTO;
 import outdoorapp.to.interfaces.StatoEscursioneTO;
 import outdoorapp.to.interfaces.TOFactory;
 import outdoorapp.utils.SessionCache;
@@ -78,6 +72,7 @@ public class ControllerDettagliEscursione extends GenericController{
 	protected void initialize() {
 		ChangeListener<Boolean> visibilityListener = new ChangeListener<Boolean>() {
 
+			@SuppressWarnings("unchecked")
 			@Override
 			public void changed(ObservableValue<? extends Boolean> arg0, Boolean oldValue, Boolean newValue) {
 				if(newValue){

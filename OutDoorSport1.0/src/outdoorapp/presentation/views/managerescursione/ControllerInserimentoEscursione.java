@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -35,7 +34,6 @@ import outdoorapp.to.interfaces.EscursioneTO;
 import outdoorapp.to.interfaces.OptionalTO;
 import outdoorapp.to.interfaces.TOFactory;
 import outdoorapp.to.interfaces.TipoEscursioneTO;
-import outdoorapp.utils.SessionCache;
 
 /**
  * Gestisce l'inserimento di una nuova Escursione da
@@ -95,6 +93,7 @@ public class ControllerInserimentoEscursione extends ControllerEscursione{
 		
 		ChangeListener<Boolean> visibilityListener = new ChangeListener<Boolean>() {
 
+			@SuppressWarnings("unchecked")
 			@Override
 			public void changed(ObservableValue<? extends Boolean> arg0, Boolean oldValue, Boolean newValue) {
 				if(newValue){
@@ -238,5 +237,4 @@ public class ControllerInserimentoEscursione extends ControllerEscursione{
 				escursione.setData(dataEscursione.getValue().toString());
 		}
 	}
-
 }

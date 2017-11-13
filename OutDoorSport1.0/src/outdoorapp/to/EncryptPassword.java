@@ -13,6 +13,7 @@ import outdoorapp.to.interfaces.EncryptPasswordTO;
 
 class EncryptPassword implements EncryptPasswordTO{
 
+	private static final long serialVersionUID = 1L;
 	private ConfigurablePasswordEncryptor passwordEncryptor;
 	
 	/**
@@ -34,5 +35,4 @@ class EncryptPassword implements EncryptPasswordTO{
 	public boolean checkPassword(String inputPassword, String encryptedPassword){
 		return passwordEncryptor.checkPassword(inputPassword, encryptedPassword);
 	}
-
 }

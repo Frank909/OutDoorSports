@@ -8,11 +8,8 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.AnchorPane;
-import outdoorapp.presentation.applicationcontroller.ViewCache;
-import outdoorapp.presentation.frontcontroller.FrontController;
 import outdoorapp.presentation.reqresp.Request;
 import outdoorapp.presentation.views.generic.GenericController;
-import outdoorapp.utils.Views;
 
 /**
  * Gestisce la dashboard del manager di escursione

@@ -24,18 +24,4 @@
 		
 	<query name="getStatoEscursioneInCorso">
 		<![CDATA[ from outdoorapp.to.StatoEscursione o where o.idStatoEscursione = 4]]></query>
-	
-	<!-- <query name="getAllStatoCompetizione">
-        <![CDATA[ from agroludos.to.StatoCompetizione o ]]></query>
-	<query name="getStatoCmpAnnullata">
-        <![CDATA[ from agroludos.to.StatoCompetizione o where o.id = 0]]></query>
-	<query name="getStatoCmpAperta">
-        <![CDATA[ from agroludos.to.StatoCompetizione o where o.id = 1]]></query>
-	<query name="getStatoCmpInCorso">
-        <![CDATA[ from agroludos.to.StatoCompetizione o where o.id = 2]]></query>
-	<query name="getStatoCmpChiusa">
-        <![CDATA[ from agroludos.to.StatoCompetizione o where o.id = 3]]></query>
-	<query name="getStatoCmpTerminata">
-        <![CDATA[ from agroludos.to.StatoCompetizione o where o.id = 4]]></query> -->
-        
 </hibernate-mapping>

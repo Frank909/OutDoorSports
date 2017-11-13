@@ -1,27 +1,4 @@
 package outdoorapp.to;
-// Generated 14-set-2017 13.06.34 by Hibernate Tools 5.2.3.Final
-
-import java.time.LocalDate;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import static javax.persistence.GenerationType.IDENTITY;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-import javax.persistence.UniqueConstraint;
-
-import org.hibernate.annotations.NamedQueries;
-import org.hibernate.annotations.NamedQuery;
 
 import outdoorapp.to.interfaces.RuoliTO;
 import outdoorapp.to.interfaces.StatoUtenteTO;

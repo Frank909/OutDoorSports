@@ -30,5 +30,4 @@ public abstract class Service implements ServiceInterface{
 	protected Response handle(Request request, Service service){
 		return service.sendRequest(request);
 	}
-	
 }

@@ -9,7 +9,6 @@ import outdoorapp.to.interfaces.TOFactory;
 import outdoorapp.to.interfaces.EscursioneTO;
 import outdoorapp.to.interfaces.IscrizioneTO;
 import outdoorapp.to.interfaces.PartecipanteTO;
-import outdoorapp.to.interfaces.StatoIscrizioneTO;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -67,50 +66,6 @@ class IscrizioneDAO extends GenericDAO<IscrizioneTO> implements Iscrizione_DAO{
 			return true;
 	}
 	
-	
-	@Override
-	public List<IscrizioneTO> getAllIscrizioniAttive(PartecipanteTO partecipante) throws DatabaseException {
-		List<PartecipanteTO> param = new ArrayList<PartecipanteTO>();
-		param.add(partecipante);
-		List<IscrizioneTO> response = super.executeParamQuery("BOOOOOOOOh", param);
-		return response;
-	}
-	
-	/**
-	 * @return lo stato terminato di un iscrizione
-	 * @throws DatabaseException
-	 */
-	private StatoIscrizioneTO getStatoIscrizioneTerminato() throws DatabaseException {
-		StatoIscrizioneTO statoIscrizione = (StatoIscrizioneTO) super.executeQuery("BOOOOOOH");
-		return statoIscrizione;
-	}
-	
-	@Override
-	public void terminaIscrizioni(EscursioneTO escursione) throws DatabaseException {
-		List<IscrizioneTO> response = getIscrizioniAttiveEscursione(escursione);
-		for(IscrizioneTO iscrizione: response){
-			iscrizione.setStatoIscrizione(getStatoIscrizioneTerminato());
-			this.update(iscrizione);
-		}
-	}
-
-	@Override
-	public List<IscrizioneTO> getIscrizioniAttiveEscursione(EscursioneTO escursione) throws DatabaseException {
-		List<EscursioneTO> param = new ArrayList<EscursioneTO>();
-		param.add(escursione);
-		List<IscrizioneTO> response = super.executeParamQuery("boooooooooooooooooh", param);
-		return response;
-	}
-
-
-	@Override
-	public List<IscrizioneTO> getAllIscrizioniPartecipante(PartecipanteTO partecipante) throws DatabaseException {
-		List<PartecipanteTO> param = new ArrayList<PartecipanteTO>();
-		param.add(partecipante);
-		List<IscrizioneTO> res = super.executeParamQuery("booooooooh", param);
-		return res;
-	}
-
 	@Override
 	public List<IscrizioneTO> getAllIscrittiFromEscursione(EscursioneTO escursione) throws DatabaseException {
 		List<Integer> param = new ArrayList<>();

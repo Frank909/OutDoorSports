@@ -42,5 +42,4 @@ class TipoDAOFactory implements DAOFactory{
 	public GenericDAO<?> getStatoDAO(StatoDAOEnum choice) {
 		return null;
 	}
-
 }

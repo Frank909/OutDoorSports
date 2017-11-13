@@ -1,8 +1,5 @@
 package outdoorapp.presentation.views.managersistema;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
@@ -11,17 +8,12 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
 import outdoorapp.presentation.applicationcontroller.ViewCache;
 import outdoorapp.presentation.reqresp.Request;
-import outdoorapp.presentation.reqresp.Response;
 import outdoorapp.presentation.views.generic.GenericController;
-import outdoorapp.presentation.views.models.EscursioneModel;
-import outdoorapp.presentation.views.models.ManagerDiEscursioneModel;
 import outdoorapp.to.FactoryProducerTO;
 import outdoorapp.to.enums.FactoryEnum;
 import outdoorapp.to.enums.GenericEnum;
-import outdoorapp.to.enums.StatoEnum;
 import outdoorapp.to.interfaces.EscursioneTO;
 import outdoorapp.to.interfaces.OptionalTO;
-import outdoorapp.to.interfaces.StatoEscursioneTO;
 import outdoorapp.to.interfaces.TOFactory;
 import outdoorapp.utils.SessionCache;
 

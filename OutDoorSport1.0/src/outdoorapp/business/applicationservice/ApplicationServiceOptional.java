@@ -7,14 +7,10 @@ import outdoorapp.integration.dao.DAOFactory;
 import outdoorapp.integration.dao.FactoryProducerDAO;
 import outdoorapp.integration.dao.enums.DAORequest;
 import outdoorapp.integration.dao.enums.GenericDAOEnum;
-import outdoorapp.integration.dao.enums.TipoDAOEnum;
 import outdoorapp.integration.dao.interfaces.Optional_DAO;
-import outdoorapp.integration.dao.interfaces.TipoEscursione_DAO;
 import outdoorapp.presentation.reqresp.Request;
 import outdoorapp.presentation.reqresp.Response;
-import outdoorapp.to.enums.OptionalEnum;
 import outdoorapp.to.interfaces.OptionalTO;
-import outdoorapp.to.interfaces.TipoEscursioneTO;
 import outdoorapp.utils.Actions;
 
 /**

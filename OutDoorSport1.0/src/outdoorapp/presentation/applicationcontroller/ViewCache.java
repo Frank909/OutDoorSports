@@ -1,13 +1,10 @@
 package outdoorapp.presentation.applicationcontroller;
 
-
 import java.util.ArrayDeque;
 import java.util.HashMap;
 import java.util.Queue;
 
 import javafx.application.Platform;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;

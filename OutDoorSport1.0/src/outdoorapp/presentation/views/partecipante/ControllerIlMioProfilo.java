@@ -92,5 +92,4 @@ public class ControllerIlMioProfilo extends GenericController{
 	protected void modificaDatiAnagrafici(){
 		this.sendRequest(new Request(ViewCache.getNestedAnchorPane() ,VIEW_MODIFICA_DATI_PARTECIPANTE));
 	}
-
 }

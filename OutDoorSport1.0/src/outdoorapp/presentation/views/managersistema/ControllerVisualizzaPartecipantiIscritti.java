@@ -2,7 +2,6 @@ package outdoorapp.presentation.views.managersistema;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -23,8 +22,6 @@ import outdoorapp.presentation.applicationcontroller.ViewCache;
 import outdoorapp.presentation.reqresp.Request;
 import outdoorapp.presentation.reqresp.Response;
 import outdoorapp.presentation.views.generic.ControllerTableView;
-import outdoorapp.presentation.views.models.EscursioneModel;
-import outdoorapp.presentation.views.models.ManagerDiEscursioneModel;
 import outdoorapp.presentation.views.models.PartecipanteModel;
 import outdoorapp.to.FactoryProducerTO;
 import outdoorapp.to.enums.FactoryEnum;
@@ -32,7 +29,6 @@ import outdoorapp.to.enums.GenericEnum;
 import outdoorapp.to.enums.UtenteEnum;
 import outdoorapp.to.interfaces.EscursioneTO;
 import outdoorapp.to.interfaces.IscrizioneTO;
-import outdoorapp.to.interfaces.ManagerDiEscursioneTO;
 import outdoorapp.to.interfaces.PartecipanteTO;
 import outdoorapp.to.interfaces.TOFactory;
 import outdoorapp.utils.SessionCache;
@@ -64,7 +60,6 @@ public class ControllerVisualizzaPartecipantiIscritti extends ControllerTableVie
 	private PartecipanteTO partecipante = null;
 	private List<PartecipanteTO> list_partecipanti = new ArrayList<>();
 	private PartecipanteModel partecipante_model = null;
-	private ManagerDiEscursioneTO mde = null;
 	private List<IscrizioneTO> list_iscrizioni = null;
 	private IscrizioneTO iscrizione = null;
 	private EscursioneTO escursione = null;
@@ -105,7 +100,6 @@ public class ControllerVisualizzaPartecipantiIscritti extends ControllerTableVie
 
 		stpPartecipantiIscrittiEscursione.visibleProperty().addListener(visibilityListener);
 	}
-	
 	
 	/**
 	 * Metodo associato all'evento che ritorna alla view precedente
@@ -201,7 +195,6 @@ public class ControllerVisualizzaPartecipantiIscritti extends ControllerTableVie
 			partecipante_model = new PartecipanteModel(partecipante);
 			res.add(partecipante_model);
 		}
-
 		return res;
 	}
 }

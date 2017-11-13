@@ -1,6 +1,5 @@
 package outdoorapp.business;
 
-
 import outdoorapp.presentation.reqresp.Request;
 import outdoorapp.presentation.reqresp.Response;
 import outdoorapp.services.Service;

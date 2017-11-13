@@ -26,10 +26,7 @@ import outdoorapp.presentation.applicationcontroller.ViewCache;
 import outdoorapp.presentation.reqresp.Request;
 import outdoorapp.presentation.reqresp.Response;
 import outdoorapp.presentation.views.generic.ControllerTableView;
-import outdoorapp.presentation.views.generic.GenericController;
-import outdoorapp.presentation.views.models.EscursioneModel;
 import outdoorapp.presentation.views.models.OptionalModel;
-import outdoorapp.presentation.views.models.PartecipanteModel;
 import outdoorapp.to.FactoryProducerTO;
 import outdoorapp.to.enums.FactoryEnum;
 import outdoorapp.to.enums.GenericEnum;
@@ -37,8 +34,6 @@ import outdoorapp.to.enums.OptionalEnum;
 import outdoorapp.to.enums.StatoEnum;
 import outdoorapp.to.interfaces.IscrizioneTO;
 import outdoorapp.to.interfaces.OptionalEscursioneTO;
-import outdoorapp.to.interfaces.OptionalTO;
-import outdoorapp.to.interfaces.PartecipanteTO;
 import outdoorapp.to.interfaces.StatoOptionalTO;
 import outdoorapp.to.interfaces.TOFactory;
 import outdoorapp.utils.SessionCache;
@@ -77,6 +72,7 @@ public class ControllerSelezionaOptionalIscrizione extends ControllerTableView{
 	private OptionalModel optional_disponibili_model = null;
 	private OptionalModel optional_scelti_model = null;
 	private StatoOptionalTO stato_optional = null;
+	@SuppressWarnings("unused")
 	private List<StatoOptionalTO> list_stato_optional = new ArrayList<>();
 	private OptionalEscursioneTO optional_escursione = null;
 	private Set<OptionalEscursioneTO> all_optional_scelti = null;
@@ -106,6 +102,7 @@ public class ControllerSelezionaOptionalIscrizione extends ControllerTableView{
 	protected void initialize() {
 		ChangeListener<Boolean> visibilityListener = new ChangeListener<Boolean>() {
 
+			@SuppressWarnings("unchecked")
 			@Override
 			public void changed(ObservableValue<? extends Boolean> arg0, Boolean oldValue, Boolean newValue) {
 				if(newValue){

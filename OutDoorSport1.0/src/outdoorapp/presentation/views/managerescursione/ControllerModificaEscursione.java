@@ -7,8 +7,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
-import com.mysql.jdbc.interceptors.SessionAssociationInterceptor;
-
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -30,7 +28,6 @@ import outdoorapp.presentation.reqresp.Request;
 import outdoorapp.presentation.reqresp.Response;
 import outdoorapp.presentation.views.generic.ControllerEscursione;
 import outdoorapp.presentation.views.models.EscursioneModel;
-import outdoorapp.presentation.views.models.ManagerDiEscursioneModel;
 import outdoorapp.to.FactoryProducerTO;
 import outdoorapp.to.enums.FactoryEnum;
 import outdoorapp.to.enums.GenericEnum;
@@ -115,6 +112,7 @@ public class ControllerModificaEscursione extends ControllerEscursione{
 	protected void initialize() {
 		ChangeListener<Boolean> visibilityListener = new ChangeListener<Boolean>() {
 
+			@SuppressWarnings("unchecked")
 			@Override
 			public void changed(ObservableValue<? extends Boolean> arg0, Boolean oldValue, Boolean newValue) {
 				if(newValue){
@@ -214,6 +212,7 @@ public class ControllerModificaEscursione extends ControllerEscursione{
 	 * Evento associato alla disabilitazione di un optional dalla lista,
 	 * prima della modifica dell'escursione
 	 */
+	@SuppressWarnings("unchecked")
 	@FXML protected void disabilitaOptional(){
 		if(list_stati_optional == null){
 			Response response = sendRequest(new Request(stato_optional, OUTDOORSPORT_GET_ALL_STATI_OPTIONAL));

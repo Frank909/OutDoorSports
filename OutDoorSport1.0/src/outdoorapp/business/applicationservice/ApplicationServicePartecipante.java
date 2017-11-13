@@ -36,7 +36,6 @@ import outdoorapp.to.interfaces.TOFactory;
 import outdoorapp.to.interfaces.UtenteTO;
 import outdoorapp.utils.Actions;
 import outdoorapp.utils.EmailConfig;
-import outdoorapp.utils.SessionCache;
 import outdoorapp.utils.Views;
 
 /**

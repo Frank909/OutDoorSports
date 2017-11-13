@@ -11,11 +11,7 @@ import outdoorapp.presentation.reqresp.Request;
 import outdoorapp.presentation.views.generic.GenericController;
 import outdoorapp.to.FactoryProducerTO;
 import outdoorapp.to.enums.FactoryEnum;
-import outdoorapp.to.enums.GenericEnum;
 import outdoorapp.to.enums.UtenteEnum;
-import outdoorapp.to.interfaces.EscursioneTO;
-import outdoorapp.to.interfaces.IscrizioneTO;
-import outdoorapp.to.interfaces.OptionalTO;
 import outdoorapp.to.interfaces.PartecipanteTO;
 import outdoorapp.to.interfaces.TOFactory;
 import outdoorapp.utils.SessionCache;
@@ -82,5 +78,4 @@ public class ControllerDettagliPartecipante extends GenericController{
 	@FXML protected void indietro(){
 		this.sendRequest(new Request(ViewCache.getNestedAnchorPane(), VIEW_ISCRITTI_ESCURSIONE_SISTEMA));
 	}
-
 }

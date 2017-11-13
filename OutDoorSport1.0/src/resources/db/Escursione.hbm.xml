@@ -63,31 +63,5 @@
 	<query name="readEscursioniIscritte">
 		<![CDATA[from outdoorapp.to.Escursione e inner join outdoorapp.to.Iscrizione i on 
 				e.idEscursione = i.escursione.idEscursione WHERE i.utente.idUtente = ? 
-				and i.statoIscrizione.idStatoIscrizione = 2
-		 ]]></query>
-
-
-<!--  
-<query name="readEscursioniIscritte">
-		<![CDATA[from outdoorapp.to.Escursione e where e.statoEscursione.idStatoEscursione = 2 and e.idEscursione in 
-		(from outdoorapp.to.Iscrizione i where i.utente.idUtente = ? and i.statoIscrizione.idStatoIscrizione = 2)
-		 ]]></query>
-
-	<query name="getAllCompetizione">
-        <![CDATA[ from agroludos.to.Competizione c ]]></query>
-	<query name="getCompetizioniByTipo">
-        <![CDATA[ from agroludos.to.Competizione c where c.tipoCompetizione.nome = ?]]></query>
-	<query name="getCompetizioneById">
-        <![CDATA[ from agroludos.to.Competizione c where c.id = ?]]></query>
-	<query name="getCompetizioneByMdc">
-        <![CDATA[ from agroludos.to.Competizione c where c.managerDiCompetizione = ?]]></query>
-	<query name="getCompetizioneAttiveByMdc">
-        <![CDATA[ from agroludos.to.Competizione c where c.managerDiCompetizione = ? and (statocomp = 1 or statocomp = 2 or statocomp = 3)]]></query>
-	<query name="annullaCompetizione">
-        <![CDATA[ update agroludos.to.Competizione set statocomp = 0]]></query>
-	<query name="getCompetizioniAperte">
-        <![CDATA[ from agroludos.to.Competizione c where statocomp = 1]]></query>
-	<query name="getCompetizioniAttive">
-        <![CDATA[ from agroludos.to.Competizione c where statocomp = 1 or statocomp = 2 or statocomp = 3]]></query> -->
-
+				and i.statoIscrizione.idStatoIscrizione = 2 ]]></query>
 </hibernate-mapping>

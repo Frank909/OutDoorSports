@@ -1,7 +1,5 @@
 package outdoorapp.to;
-// Generated 14-set-2017 13.06.34 by Hibernate Tools 5.2.3.Final
 
-import java.util.Date;
 import java.util.Set;
 import outdoorapp.to.interfaces.EscursioneTO;
 import outdoorapp.to.interfaces.OptionalTO;
@@ -19,6 +17,7 @@ import outdoorapp.to.interfaces.UtenteTO;
 
 class Escursione implements EscursioneTO{
 
+	private static final long serialVersionUID = 1L;
 	private Integer idEscursione;
 	private StatoEscursioneTO statoEscursione;
 	private TipoEscursioneTO tipoEscursione;

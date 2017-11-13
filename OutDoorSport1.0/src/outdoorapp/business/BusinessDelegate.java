@@ -56,7 +56,6 @@ class BusinessDelegate extends Service{
 
 	@Override
 	public ServiceType getType() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 

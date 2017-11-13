@@ -10,5 +10,8 @@ package outdoorapp.to.enums;
  */
 
 public enum StatoEnum {
-	StatoUtente,StatoOptional,StatoIscrizione,StatoEscursione
+	StatoUtente,
+	StatoOptional,
+	StatoIscrizione,
+	StatoEscursione;
 }

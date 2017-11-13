@@ -3,7 +3,6 @@ package outdoorapp.integration.dao.interfaces;
 import java.util.List;
 
 import outdoorapp.exceptions.DatabaseException;
-import outdoorapp.to.interfaces.EscursioneTO;
 import outdoorapp.to.interfaces.PartecipanteTO;
 
 /** 
@@ -17,20 +16,6 @@ import outdoorapp.to.interfaces.PartecipanteTO;
  */
 
 public interface Partecipante_DAO extends Utente_DAO<PartecipanteTO>{
-	
-	/**
-	 * @param codiceFiscale
-	 * @return il Partecipante con un determinato codice fiscale 
-	 * @throws DatabaseException
-	 */
-	PartecipanteTO readByCodiceFiscale(String codiceFiscale) throws DatabaseException;
-	
-	/**
-	 * @param username
-	 * @return il Partecipante con un determinato username
-	 * @throws DatabaseException
-	 */
-	PartecipanteTO readByUsername(String username) throws DatabaseException;
 	
 	/**
 	 * @return la lista di tutti i partecipanti

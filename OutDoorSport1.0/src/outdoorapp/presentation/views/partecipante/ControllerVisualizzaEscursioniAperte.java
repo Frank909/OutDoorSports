@@ -213,8 +213,6 @@ public class ControllerVisualizzaEscursioniAperte extends ControllerTableView{
 			escursione_model = new EscursioneModel(escursione);
 			res.add(escursione_model);
 		}
-		
 		return res;
 	}
-
 }

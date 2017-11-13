@@ -16,7 +16,6 @@ import java.util.List;
 import outdoorapp.exceptions.DatabaseException;
 import outdoorapp.to.interfaces.EscursioneTO;
 import outdoorapp.to.interfaces.ManagerDiEscursioneTO;
-import outdoorapp.to.interfaces.OptionalEscursioneTO;
 import outdoorapp.to.interfaces.PartecipanteTO;
 
 public interface Escursione_DAO extends GEN_DAO<EscursioneTO>{
@@ -27,12 +26,6 @@ public interface Escursione_DAO extends GEN_DAO<EscursioneTO>{
 	 * @throws DatabaseException
 	 */
 	EscursioneTO readById(Integer id) throws DatabaseException;
-	
-	/**
-	 * @return le Escursioni attivate dal Manager di Escursione
-	 * @throws DatabaseException
-	 */
-	List<EscursioneTO> readEscursioniAttive() throws DatabaseException;
 	
 	/**
 	 * @return le Escursioni aperte alle iscrizioni
@@ -54,13 +47,6 @@ public interface Escursione_DAO extends GEN_DAO<EscursioneTO>{
 	 * @throws DatabaseException
 	 */
 	List<EscursioneTO> readEscursioniByManagerDiEscursione(ManagerDiEscursioneTO mde) throws DatabaseException;
-	
-	/**
-	 * @param mde
-	 * @return le Escursioni attive di un determinato Manager di Escursione
-	 * @throws DatabaseException
-	 */
-	List<EscursioneTO> readEscursioniAttiveByManagerDiEscursione(ManagerDiEscursioneTO mde) throws DatabaseException;
 	
 	/**
 	 * Verifica se esiste o meno l'escursione che si vuole inserire

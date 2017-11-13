@@ -1,10 +1,8 @@
 package outdoorapp.presentation.views.partecipante;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Optional;
 import java.util.Set;
-
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
@@ -25,9 +23,7 @@ import outdoorapp.to.enums.UtenteEnum;
 import outdoorapp.to.interfaces.EscursioneTO;
 import outdoorapp.to.interfaces.IscrizioneTO;
 import outdoorapp.to.interfaces.OptionalEscursioneTO;
-import outdoorapp.to.interfaces.OptionalTO;
 import outdoorapp.to.interfaces.PartecipanteTO;
-import outdoorapp.to.interfaces.StatoEscursioneTO;
 import outdoorapp.to.interfaces.TOFactory;
 import outdoorapp.utils.SessionCache;
 
@@ -163,5 +159,4 @@ public class ControllerIscrizioneEscursione extends GenericController{
 			alertConfirm.close();
 		}	
 	}
-
 }

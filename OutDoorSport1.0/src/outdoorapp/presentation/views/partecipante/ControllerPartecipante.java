@@ -8,10 +8,8 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.AnchorPane;
-import outdoorapp.presentation.frontcontroller.FrontController;
 import outdoorapp.presentation.reqresp.Request;
 import outdoorapp.presentation.views.generic.GenericController;
-import outdoorapp.utils.Views;
 
 /**
  * Gestisce la dashboard del partecipante
@@ -38,8 +36,7 @@ public class ControllerPartecipante extends GenericController{
 	 * Metodo che inizializza tutti i campi della finestra
 	 */
 	@Override
-	protected void initialize() {
-    }
+	protected void initialize() {}
 	
 	/**
 	 * Metodo associato all'evento del controllo della view per la visualizzazione del profilo del partecipante
@@ -76,5 +73,4 @@ public class ControllerPartecipante extends GenericController{
 		    alert.close();
 		}
 	}
-
 }

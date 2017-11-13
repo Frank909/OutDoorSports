@@ -2,21 +2,14 @@ package outdoorapp.utils;
 
 import javax.mail.*;  
 import javax.mail.internet.*;
-
 import javafx.application.Platform;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Alert.AlertType;
-
 import java.util.Properties;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-
-import outdoorapp.to.FactoryProducerTO;
-import outdoorapp.to.enums.FactoryEnum;
-import outdoorapp.to.enums.GenericEnum;
 import outdoorapp.to.interfaces.EmailTO;
-import outdoorapp.to.interfaces.TOFactory;
 import outdoorapp.to.interfaces.UtenteTO;
 
 /**

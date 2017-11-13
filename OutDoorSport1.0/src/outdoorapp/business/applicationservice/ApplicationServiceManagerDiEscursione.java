@@ -25,8 +25,6 @@ import outdoorapp.to.enums.GenericEnum;
 import outdoorapp.to.interfaces.EmailTO;
 import outdoorapp.to.interfaces.EncryptPasswordTO;
 import outdoorapp.to.interfaces.ManagerDiEscursioneTO;
-import outdoorapp.to.interfaces.ManagerDiSistemaTO;
-import outdoorapp.to.interfaces.PartecipanteTO;
 import outdoorapp.to.interfaces.TOFactory;
 import outdoorapp.to.interfaces.UtenteTO;
 import outdoorapp.utils.Actions;

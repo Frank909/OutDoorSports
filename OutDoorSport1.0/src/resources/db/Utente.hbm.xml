@@ -112,18 +112,4 @@
 		
 	<query name="getByID">
         <![CDATA[ from outdoorapp.to.Utente u where u.statoUtente.id = 1 and u.idUtente = ?]]></query>
-	
-	<!--<query name="checkMds">
-		<![CDATA[ from agroludos.to.Utente m where m.statoUtente.id = 1 and m.tipoUtente.id = 0 ]]></query>
-	
-	<query name="getByID">
-        <![CDATA[ from agroludos.to.Utente u where u.statoUtente.id = 1 and u.id = ?]]></query>
-	<query name="getPartecipante">
-        <![CDATA[ from agroludos.to.Partecipante p where p.statoUtente.id = 1 and p.id = ? ]]></query>
-	<query name="getPartecipanteByCF">
-        <![CDATA[ from agroludos.to.Partecipante p where p.statoUtente.id = 1 and p.cf = ? ]]></query>
-	<query name="getAllManagerDiCompetizione">
-		<![CDATA[ from agroludos.to.ManagerDiCompetizione m where m.statoUtente.id = 1]]></query>-->
-	
-	
 </hibernate-mapping>

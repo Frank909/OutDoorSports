@@ -45,18 +45,4 @@
 		
 	<query name="esisteIscrizione">
 		<![CDATA[ from outdoorapp.to.Iscrizione m where m.escursione.idEscursione = ? and m.utente.idUtente = ? and m.statoIscrizione.idStatoIscrizione = 2]]></query>
-		
-		
-	<!-- <query name="deleteIscrizioneFromEscursione">
-		<![CDATA[ update outdoorapp.to.Iscrizione m set m.statoIscrizione.idStatoIscrizione = 1 where m.escursione.idEscursione = ? and m.utente.idUtente = ?]]></query>
-		
-		
-	<query name="getAllIscrizioni">
-        <![CDATA[ from agroludos.to.Iscrizione i where i.statoIscrizione = 1 ]]></query>
-	<query name="getAllIscrizioniAttive">
-        <![CDATA[ from agroludos.to.Iscrizione i where i.partecipante = ? and stato = 1 ]]></query>
-	<query name="getIscrizioniAttiveCmp">
-        <![CDATA[ from agroludos.to.Iscrizione i where i.competizione = ? and stato = 1 ]]></query>
-	<query name="getAllIscrizioniPartecipante">
-        <![CDATA[ from agroludos.to.Iscrizione i where i.partecipante = ? ]]></query>  -->
 </hibernate-mapping>

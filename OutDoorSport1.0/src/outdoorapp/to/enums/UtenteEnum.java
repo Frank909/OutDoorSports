@@ -10,5 +10,8 @@ package outdoorapp.to.enums;
  */
 
 public enum UtenteEnum {
-	Utente,ManagerDiSistema,ManagerDiEscursione,Partecipante
+	Utente,
+	ManagerDiSistema,
+	ManagerDiEscursione,
+	Partecipante;
 }

@@ -4,7 +4,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
-import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
@@ -43,7 +42,6 @@ public class ControllerLogin extends GenericController{
 			TOFact = FactoryProducerTO.getFactory(FactoryEnum.UtenteTOFactory);
 			utente = (UtenteTO) TOFact.getUtenteTO(UtenteEnum.Utente); 
 		}
-		
 	}
 	
 	/**
@@ -77,8 +75,7 @@ public class ControllerLogin extends GenericController{
 			Alert alert = new Alert(AlertType.ERROR, "Errore! Credenziali non Riconosciute!", ButtonType.OK);
 			alert.setTitle("OutDoorSport1.0");
 			alert.showAndWait();
-		}
-			
+		}		
 	}
 	
 	/**

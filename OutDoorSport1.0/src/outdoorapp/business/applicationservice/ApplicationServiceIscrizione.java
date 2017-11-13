@@ -113,7 +113,6 @@ class ApplicationServiceIscrizione implements Views, Actions{
 			iscrizione.getEscursione().setIscritti(iscritti);
 			iscrizione.setStatoIscrizione(stato_iscrizione_dao.getStatoDisattivo());
 		} catch (DatabaseException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 		

@@ -3,9 +3,7 @@ package outdoorapp.presentation.views.generic;
 import java.lang.reflect.Field;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
 import javafx.fxml.FXML;
-import outdoorapp.to.interfaces.EscursioneTO;
 import outdoorapp.to.interfaces.UtenteTO;
 
 /**
@@ -20,9 +18,7 @@ import outdoorapp.to.interfaces.UtenteTO;
 
 public abstract class ControllerRegistrazione extends GenericController{
 
-	public ControllerRegistrazione() {
-		// TODO Auto-generated constructor stub
-	}
+	public ControllerRegistrazione() {}
 	
 	/**
 	 * Metodo astratto associato a tutti i bottoni dei controller che implementeranno una funzione di invio dati.

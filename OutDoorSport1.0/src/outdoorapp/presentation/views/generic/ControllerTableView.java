@@ -15,10 +15,8 @@ import javafx.scene.control.cell.PropertyValueFactory;
 
 public abstract class ControllerTableView extends GenericController{
 
-	public ControllerTableView() {
-		// TODO Auto-generated constructor stub
-	}
-
+	public ControllerTableView() {}
+	
 	/**
 	 * Metodo che associa la colonna ai dati che deve visualizzare
 	 * 

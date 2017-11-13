@@ -59,5 +59,4 @@ class StatoTOFactory implements TOFactory{
 			return null;
 		}
 	}
-
 }

@@ -1,7 +1,5 @@
 package outdoorapp.to.interfaces;
 
-import java.util.Set;
-
 /**
  * Interfaccia che rappresenta lo stato di OptionalEscursione. Sono fornite tutte le 
  * dichiarazioni dei metodi per la lettura dei dati
@@ -13,9 +11,16 @@ import java.util.Set;
 
 public interface OptionalEscursioneTO extends OutDoorSports{
 	
-
+	/**
+	 * @return l'id di OptionalEscursione
+	 */
 	public Integer getId();
 
+	/**
+	 * Metodo che setta l'id di OptionalEscursione
+	 * 
+	 * @param id
+	 */
 	public void setId(Integer id);
 	
 	/**

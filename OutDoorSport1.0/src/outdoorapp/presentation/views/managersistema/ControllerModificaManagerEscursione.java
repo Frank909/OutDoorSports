@@ -2,9 +2,6 @@ package outdoorapp.presentation.views.managersistema;
 
 import java.time.LocalDate;
 import java.util.Optional;
-
-import javax.transaction.Transactional.TxType;
-
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
@@ -17,13 +14,10 @@ import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.StackPane;
-import javafx.util.converter.LocalDateStringConverter;
 import outdoorapp.presentation.applicationcontroller.ViewCache;
 import outdoorapp.presentation.reqresp.Request;
 import outdoorapp.presentation.reqresp.Response;
 import outdoorapp.presentation.views.generic.ControllerRegistrazione;
-import outdoorapp.presentation.views.generic.GenericController;
-import outdoorapp.presentation.views.models.ManagerDiEscursioneModel;
 import outdoorapp.to.FactoryProducerTO;
 import outdoorapp.to.enums.FactoryEnum;
 import outdoorapp.to.enums.UtenteEnum;
@@ -192,5 +186,4 @@ public class ControllerModificaManagerEscursione extends ControllerRegistrazione
 	@FXML protected void indietro(){
 		this.sendRequest(new Request(ViewCache.getNestedAnchorPane(), VIEW_GESTIONE_MANAGER_ESCURSIONE));
 	}
-
 }

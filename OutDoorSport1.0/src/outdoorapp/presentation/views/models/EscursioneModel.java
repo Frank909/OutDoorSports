@@ -1,23 +1,10 @@
 package outdoorapp.presentation.views.models;
 
-import java.util.Date;
-import java.util.List;
-import java.util.Set;
-
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleObjectProperty;
-import javafx.beans.property.SimpleSetProperty;
 import javafx.beans.property.SimpleStringProperty;
-import outdoorapp.to.FactoryProducerTO;
-import outdoorapp.to.enums.FactoryEnum;
-import outdoorapp.to.enums.GenericEnum;
 import outdoorapp.to.interfaces.EscursioneTO;
-import outdoorapp.to.interfaces.ManagerDiEscursioneTO;
-import outdoorapp.to.interfaces.OptionalTO;
-import outdoorapp.to.interfaces.StatoEscursioneTO;
-import outdoorapp.to.interfaces.TOFactory;
-import outdoorapp.to.interfaces.TipoEscursioneTO;
 import outdoorapp.to.interfaces.UtenteTO;
 
 /**

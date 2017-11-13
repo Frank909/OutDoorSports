@@ -9,9 +9,7 @@ package outdoorapp.to;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import outdoorapp.to.interfaces.EmailTO;
-import outdoorapp.to.interfaces.OutDoorSports;
 import outdoorapp.to.interfaces.UtenteTO;
 
 class Email implements EmailTO{
@@ -57,5 +55,4 @@ class Email implements EmailTO{
 	public void setOggetto(String oggetto) {
 		this.oggetto = oggetto;
 	}
-
 }

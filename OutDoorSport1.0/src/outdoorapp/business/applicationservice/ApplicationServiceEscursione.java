@@ -1,5 +1,6 @@
 package outdoorapp.business.applicationservice;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -36,7 +37,7 @@ import outdoorapp.to.interfaces.ManagerDiEscursioneTO;
 import outdoorapp.to.interfaces.OptionalEscursioneTO;
 import outdoorapp.to.interfaces.OptionalIscrizioneTO;
 import outdoorapp.to.interfaces.OptionalTO;
-import outdoorapp.to.interfaces.PartecipanteTO;
+import outdoorapp.to.interfaces.StatoEscursioneTO;
 import outdoorapp.to.interfaces.StatoIscrizioneTO;
 import outdoorapp.to.interfaces.StatoOptionalTO;
 import outdoorapp.to.interfaces.TOFactory;
@@ -60,7 +61,7 @@ import outdoorapp.utils.SessionCache;
 class ApplicationServiceEscursione implements Actions {
 
 	private DAOFactory genericFactory = null, 
-			statoFactory = null, tipoFactory = null;
+			statoFactory = null;
 
 	private Escursione_DAO escursione_dao = null;
 	private OptionalEscursione_DAO optional_escursione_dao = null;
@@ -101,6 +102,22 @@ class ApplicationServiceEscursione implements Actions {
 
 		try {
 			List<EscursioneTO> list_escursioni = escursione_dao.getAll();
+			List<StatoEscursioneTO> list_stato_escursione = statoEscursioneDao.getAll();
+			
+			for(EscursioneTO e : list_escursioni){
+				LocalDate today = LocalDate.now();
+				if(today.toString().equals(e.getData())){
+					e.setStatoEscursione(list_stato_escursione.get(3));
+					escursione_dao.update(e);
+				}else{
+					LocalDate eDate = LocalDate.parse(e.getData());
+					if(eDate.isBefore(today)){
+						e.setStatoEscursione(list_stato_escursione.get(0));
+						escursione_dao.update(e);
+					}
+				}
+			}
+			
 			response.setData(list_escursioni);
 			response.setResponse(RESP_OK);
 		} catch (DatabaseException e) {
@@ -334,7 +351,6 @@ class ApplicationServiceEscursione implements Actions {
 				try {
 					set_oe.addAll(optional_escursione_dao.getOptionalsFromEscursione(escursione.getIdEscursione()));
 				} catch (DatabaseException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 

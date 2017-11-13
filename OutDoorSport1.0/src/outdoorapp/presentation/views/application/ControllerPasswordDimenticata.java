@@ -1,21 +1,17 @@
 package outdoorapp.presentation.views.application;
 
-import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import outdoorapp.presentation.frontcontroller.FrontController;
 import outdoorapp.presentation.reqresp.Request;
 import outdoorapp.presentation.reqresp.Response;
 import outdoorapp.presentation.views.generic.GenericController;
 import outdoorapp.to.FactoryProducerTO;
 import outdoorapp.to.enums.FactoryEnum;
 import outdoorapp.to.enums.UtenteEnum;
-import outdoorapp.to.interfaces.ManagerDiSistemaTO;
 import outdoorapp.to.interfaces.TOFactory;
 import outdoorapp.to.interfaces.UtenteTO;
 
@@ -44,7 +40,6 @@ public class ControllerPasswordDimenticata extends GenericController{
 			TOFact = FactoryProducerTO.getFactory(FactoryEnum.UtenteTOFactory);
 			utente = (UtenteTO) TOFact.getUtenteTO(UtenteEnum.Utente); 
 		}
-		
 	}
 	
 	/**
@@ -67,17 +62,13 @@ public class ControllerPasswordDimenticata extends GenericController{
 	 */
 	private void execRequestNewPassword() {
 		utente.setEmail(txtEmail.getText());
-		
 		Response response = this.sendRequest(new Request(utente, OUTDOORSPORT_REQUEST_NEW_PASSWORD));
 		if(response.toString().equals(RESP_OK)){
 			Alert alert = new Alert(AlertType.INFORMATION, "La nuova password è stata inviata correttamente!", ButtonType.OK);
 			alert.setTitle("OutDoorSport1.0");
 			alert.showAndWait();
-			
 			if(alert.getResult() == ButtonType.OK)
 				this.sendRequest(new Request(VIEW_LOGIN));
-			
-				
 		}else{
 			Alert alert = new Alert(AlertType.ERROR, "Errore! L'email inserita non esiste!", ButtonType.OK);
 			alert.setTitle("OutDoorSport1.0");
@@ -85,6 +76,9 @@ public class ControllerPasswordDimenticata extends GenericController{
 		}		
 	}
 	
+	/**
+	 * Evento associato al al tasto indietro per tornare alla schermata di login
+	 */
 	@FXML protected void btnIndietro(){
 		sendRequest(new Request(VIEW_LOGIN));
 	}

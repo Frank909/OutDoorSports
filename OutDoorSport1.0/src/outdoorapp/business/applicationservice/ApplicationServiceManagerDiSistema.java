@@ -1,7 +1,5 @@
 package outdoorapp.business.applicationservice;
 
-import java.util.List;
-
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Alert.AlertType;
@@ -9,15 +7,12 @@ import outdoorapp.exceptions.DatabaseException;
 import outdoorapp.integration.dao.DAOFactory;
 import outdoorapp.integration.dao.FactoryProducerDAO;
 import outdoorapp.integration.dao.enums.DAORequest;
-import outdoorapp.integration.dao.enums.GenericDAOEnum;
 import outdoorapp.integration.dao.enums.StatoDAOEnum;
 import outdoorapp.integration.dao.enums.TipoDAOEnum;
 import outdoorapp.integration.dao.enums.UtenteDAOEnum;
 import outdoorapp.integration.dao.interfaces.MDS_DAO;
-import outdoorapp.integration.dao.interfaces.Optional_DAO;
 import outdoorapp.integration.dao.interfaces.Ruoli_DAO;
 import outdoorapp.integration.dao.interfaces.StatoUtente_DAO;
-import outdoorapp.integration.dao.interfaces.TipoEscursione_DAO;
 import outdoorapp.presentation.reqresp.Request;
 import outdoorapp.presentation.reqresp.Response;
 import outdoorapp.to.FactoryProducerTO;
@@ -25,12 +20,9 @@ import outdoorapp.to.enums.FactoryEnum;
 import outdoorapp.to.enums.GenericEnum;
 import outdoorapp.to.interfaces.EncryptPasswordTO;
 import outdoorapp.to.interfaces.ManagerDiSistemaTO;
-import outdoorapp.to.interfaces.OptionalTO;
 import outdoorapp.to.interfaces.TOFactory;
-import outdoorapp.to.interfaces.TipoEscursioneTO;
 import outdoorapp.to.interfaces.UtenteTO;
 import outdoorapp.utils.Actions;
-import outdoorapp.utils.SessionCache;
 import outdoorapp.utils.Views;
 
 /**

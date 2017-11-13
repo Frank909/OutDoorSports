@@ -10,7 +10,6 @@ import outdoorapp.presentation.applicationcontroller.ViewCache;
 import outdoorapp.presentation.reqresp.Request;
 import outdoorapp.presentation.views.generic.GenericController;
 import outdoorapp.presentation.views.models.ManagerDiEscursioneModel;
-import outdoorapp.to.interfaces.ManagerDiEscursioneTO;
 import outdoorapp.utils.SessionCache;
 
 /**

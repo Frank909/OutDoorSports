@@ -10,5 +10,7 @@ package outdoorapp.to.enums;
  */
 
 public enum OptionalEnum {
-	Optional,OptionalEscursione,OptionalIscrizione
+	Optional,
+	OptionalEscursione,
+	OptionalIscrizione;
 }

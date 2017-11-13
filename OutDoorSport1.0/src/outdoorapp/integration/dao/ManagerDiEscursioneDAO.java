@@ -4,9 +4,7 @@ import outdoorapp.exceptions.DatabaseException;
 import outdoorapp.integration.dao.interfaces.MDE_DAO;
 import outdoorapp.to.FactoryProducerTO;
 import outdoorapp.to.enums.FactoryEnum;
-import outdoorapp.to.enums.GenericEnum;
 import outdoorapp.to.enums.UtenteEnum;
-import outdoorapp.to.interfaces.EscursioneTO;
 import outdoorapp.to.interfaces.ManagerDiEscursioneTO;
 import outdoorapp.to.interfaces.TOFactory;
 
@@ -36,13 +34,5 @@ class ManagerDiEscursioneDAO extends UtenteDAO<ManagerDiEscursioneTO> implements
 	public List<ManagerDiEscursioneTO> getAll() throws DatabaseException{
 		List<ManagerDiEscursioneTO> response = super.getAll();
 		return response;
-	}
-	
-	/**
-	 * @return la lista di tutti i Manager di Escursione
-	 * @throws DatabaseException
-	 */
-	public List<ManagerDiEscursioneTO> getAllManagerDiEscursione() throws DatabaseException {
-		return super.executeQuery("booooooooooooohhhh");
 	}
 }

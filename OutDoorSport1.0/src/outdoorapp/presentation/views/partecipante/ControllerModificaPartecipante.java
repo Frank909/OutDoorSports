@@ -135,5 +135,4 @@ public class ControllerModificaPartecipante extends ControllerRegistrazione{
 	protected void btnBackClicked(){
 		this.sendRequest(new Request(ViewCache.getNestedAnchorPane(), VIEW_IL_MIO_PROFILO));
 	}
-
 }

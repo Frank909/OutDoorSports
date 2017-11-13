@@ -25,7 +25,6 @@ import outdoorapp.to.enums.GenericEnum;
 import outdoorapp.to.enums.StatoEnum;
 import outdoorapp.to.interfaces.IscrizioneTO;
 import outdoorapp.to.interfaces.OptionalEscursioneTO;
-import outdoorapp.to.interfaces.OptionalTO;
 import outdoorapp.to.interfaces.StatoEscursioneTO;
 import outdoorapp.to.interfaces.TOFactory;
 import outdoorapp.utils.SessionCache;
@@ -74,6 +73,7 @@ public class ControllerModificaIscrizioneEscursione extends GenericController{
 	protected void initialize() {
 		ChangeListener<Boolean> visibilityListener = new ChangeListener<Boolean>() {
 
+			@SuppressWarnings({ "rawtypes", "unchecked" })
 			@Override
 			public void changed(ObservableValue<? extends Boolean> arg0, Boolean oldValue, Boolean newValue) {
 				if(newValue){

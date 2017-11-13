@@ -3,7 +3,6 @@ package outdoorapp.presentation.views.partecipante;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
-
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;

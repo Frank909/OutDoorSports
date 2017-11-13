@@ -10,5 +10,8 @@ package outdoorapp.to.enums;
  */
 
 public enum GenericEnum {
-	Escursione,Iscrizione,Email,EncryptPassword;
+	Escursione,
+	Iscrizione,
+	Email,
+	EncryptPassword;
 }

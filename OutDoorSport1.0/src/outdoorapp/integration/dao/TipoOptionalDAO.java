@@ -3,7 +3,6 @@ package outdoorapp.integration.dao;
 import outdoorapp.integration.dao.interfaces.TipoOptional_DAO;
 import outdoorapp.to.FactoryProducerTO;
 import outdoorapp.to.enums.FactoryEnum;
-import outdoorapp.to.enums.StatoEnum;
 import outdoorapp.to.enums.TipoEnum;
 import outdoorapp.to.interfaces.TOFactory;
 import outdoorapp.to.interfaces.TipoOptionalTO;

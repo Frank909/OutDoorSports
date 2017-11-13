@@ -33,38 +33,6 @@ public interface Iscrizione_DAO extends GEN_DAO<IscrizioneTO> {
 	boolean esisteIscrizione(IscrizioneTO iscrizione) throws DatabaseException;
 	
 	/**
-	 * 
-	 * @param partecipante
-	 * @return la lista delle iscrizioni attive di un partecipante
-	 * @throws DatabaseException
-	 */
-	List<IscrizioneTO> getAllIscrizioniAttive(PartecipanteTO partecipante) throws DatabaseException;
-	
-
-	/**
-	 * Modifica lo stato delle Iscrizioni di una determinata Escursione 
-	 * in termininato
-	 * 
-	 * @param escursione
-	 * @throws DatabaseException
-	 */
-	void terminaIscrizioni(EscursioneTO escursione) throws DatabaseException;
-	
-	/**
-	 * @param escursione
-	 * @return la lista delle Iscrizioni attive per una determitata Escursione
-	 * @throws DatabaseException
-	 */
-	List<IscrizioneTO> getIscrizioniAttiveEscursione(EscursioneTO escursione) throws DatabaseException;
-	
-	/**
-	 * @param partecipante
-	 * @return tutte le iscrizioni di un partecipante
-	 * @throws DatabaseException
-	 */
-	List<IscrizioneTO> getAllIscrizioniPartecipante(PartecipanteTO partecipante) throws DatabaseException;
-	
-	/**
 	 * @return i partecipanti iscritti a una escursione
 	 * @throws DatabaseException
 	 */

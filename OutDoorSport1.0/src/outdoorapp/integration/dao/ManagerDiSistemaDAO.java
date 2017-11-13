@@ -5,7 +5,6 @@ import outdoorapp.integration.dao.interfaces.MDS_DAO;
 import outdoorapp.to.FactoryProducerTO;
 import outdoorapp.to.enums.FactoryEnum;
 import outdoorapp.to.enums.UtenteEnum;
-import outdoorapp.to.interfaces.ManagerDiEscursioneTO;
 import outdoorapp.to.interfaces.ManagerDiSistemaTO;
 import outdoorapp.to.interfaces.TOFactory;
 import outdoorapp.utils.Actions;
@@ -42,5 +41,4 @@ class ManagerDiSistemaDAO extends UtenteDAO<ManagerDiSistemaTO> implements Actio
 			response = false;
 		return response;
 	}
-
 }

@@ -1,23 +1,6 @@
 package outdoorapp.to;
-// Generated 14-set-2017 13.06.34 by Hibernate Tools 5.2.3.Final
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import static javax.persistence.GenerationType.IDENTITY;
-
-import java.io.Serializable;
-
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-
-import outdoorapp.to.interfaces.IscrizioneTO;
-import outdoorapp.to.interfaces.OptionalEscursioneTO;
 import outdoorapp.to.interfaces.OptionalIscrizioneTO;
-import outdoorapp.to.interfaces.OutDoorSports;
 
 /**
  * Classe che implementa lo stato di OptionalIscrizione.
@@ -56,5 +39,4 @@ class OptionalIscrizione implements OptionalIscrizioneTO{
 	public void setIdOptionalEscursione(Integer idOptionalEscursione) {
 		this.idOptionalEscursione = idOptionalEscursione;
 	}
-
 }

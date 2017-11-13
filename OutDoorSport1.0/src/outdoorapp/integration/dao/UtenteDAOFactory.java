@@ -44,7 +44,4 @@ class UtenteDAOFactory implements DAOFactory{
 	public GenericDAO<?> getStatoDAO(StatoDAOEnum choice) {
 		return null;
 	}
-
-
-
 }

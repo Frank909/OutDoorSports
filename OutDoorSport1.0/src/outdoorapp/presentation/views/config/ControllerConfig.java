@@ -18,7 +18,6 @@ import outdoorapp.to.interfaces.ManagerDiSistemaTO;
 import outdoorapp.to.interfaces.TOFactory;
 import outdoorapp.to.interfaces.UtenteTO;
 
-
 /**
  * Gestisce la view per la configurazione iniziale alla prima
  * apertura dell'applicazione.
@@ -55,7 +54,6 @@ public class ControllerConfig extends ControllerRegistrazione{
 			TOFact = FactoryProducerTO.getFactory(FactoryEnum.UtenteTOFactory);
 			mds = (ManagerDiSistemaTO) TOFact.getUtenteTO(UtenteEnum.ManagerDiSistema);
 		}
-
 	}
 
 	/**
@@ -64,11 +62,9 @@ public class ControllerConfig extends ControllerRegistrazione{
 	@Override
 	protected void initialize() {
 		lblErrore.setText("");
-		
 		final ToggleGroup group = new ToggleGroup();
 		radioM.setToggleGroup(group);
 		radioF.setToggleGroup(group);
-		
 		group.selectToggle(radioM);
 	}
 
@@ -125,7 +121,6 @@ public class ControllerConfig extends ControllerRegistrazione{
 				utente.setDataNascita(dateDataNasc.getValue().toString());
 		}
 	}
-
 }
 
 

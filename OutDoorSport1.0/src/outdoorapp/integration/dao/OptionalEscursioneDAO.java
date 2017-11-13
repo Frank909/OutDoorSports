@@ -21,9 +21,7 @@ import outdoorapp.to.interfaces.OptionalTO;
 
 class OptionalEscursioneDAO extends GenericDAO<OptionalEscursioneTO> implements OptionalEscursione_DAO{
 
-	public OptionalEscursioneDAO() {
-		// TODO Auto-generated constructor stub
-	}
+	public OptionalEscursioneDAO() {}
 
 	@Override
 	public List<OptionalEscursioneTO> getOptionalsFromEscursione(int idEscursione) throws DatabaseException {
