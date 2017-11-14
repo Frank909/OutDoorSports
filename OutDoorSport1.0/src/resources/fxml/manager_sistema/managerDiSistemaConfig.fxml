@@ -19,7 +19,7 @@
                   <children>
                     <GridPane prefHeight="388.0" prefWidth="376.0" GridPane.columnIndex="1" GridPane.rowIndex="0">
                       <children>
-                                    <TextField fx:id="txtTelefono" text="0883559326" GridPane.columnIndex="1" GridPane.rowIndex="5" GridPane.valignment="TOP">
+                                    <TextField fx:id="txtTelefono" GridPane.columnIndex="1" GridPane.rowIndex="5" GridPane.valignment="TOP">
                                        <GridPane.margin>
                                           <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                                        </GridPane.margin>
@@ -59,7 +59,7 @@
                         </GridPane>
                         <GridPane GridPane.columnIndex="1" GridPane.rowIndex="0">
                           <children>
-                            <TextField fx:id="txtIndirizzo" text="fdfddfdfdfdfdf" GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.valignment="TOP">
+                            <TextField fx:id="txtIndirizzo" GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.valignment="TOP">
                               <GridPane.margin>
                                 <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" fx:id="x5" />
                               </GridPane.margin>
@@ -75,7 +75,7 @@
                         </GridPane>
                         <GridPane GridPane.columnIndex="1" GridPane.rowIndex="3">
                           <children>
-                            <TextField fx:id="txtEmail" text="andreese@hotmail.it" GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.valignment="TOP">
+                            <TextField fx:id="txtEmail" GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.valignment="TOP">
                               <GridPane.margin>
                                 <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" fx:id="x5" />
                               </GridPane.margin>
@@ -91,7 +91,7 @@
                         </GridPane>
                         <GridPane GridPane.columnIndex="1" GridPane.rowIndex="2">
                           <children>
-                          <RadioButton fx:id="radioM" mnemonicParsing="false" selected="true" text="M" GridPane.valignment="TOP">
+                          <RadioButton fx:id="radioM" mnemonicParsing="false" text="M" GridPane.valignment="TOP">
                             <GridPane.margin>
                               <Insets bottom="10.0" left="10.0" right="10.0" top="5.0" fx:id="x4" />
                             </GridPane.margin>
@@ -116,7 +116,7 @@
                                     </Label>
                                     <GridPane GridPane.columnIndex="1" GridPane.rowIndex="1">
                                        <children>
-                                          <TextField fx:id="txtCitta" text="fddfdfdfdfdfdfdf" GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.valignment="TOP">
+                                          <TextField fx:id="txtCitta" GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.valignment="TOP">
                                              <GridPane.margin>
                                                 <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" fx:id="x51" />
                                              </GridPane.margin>
@@ -170,7 +170,7 @@
                               <children>
                                 <GridPane prefHeight="74.0" prefWidth="312.0" GridPane.columnIndex="0" GridPane.rowIndex="0">
                                   <children>
-                                    <PasswordField fx:id="txtPassword" prefWidth="-1.0" text="andreese" GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.valignment="TOP">
+                                    <PasswordField fx:id="txtPassword" prefWidth="-1.0" GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.valignment="TOP">
                                       <GridPane.margin>
                                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" fx:id="x5" />
                                       </GridPane.margin>
@@ -207,7 +207,7 @@
                                        </GridPane.margin></Label>
                         <GridPane GridPane.columnIndex="1" GridPane.rowIndex="0">
                           <children>
-                            <TextField fx:id="txtNome" prefWidth="200.0" text="andrea" GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.valignment="TOP">
+                            <TextField fx:id="txtNome" prefWidth="200.0" GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.valignment="TOP">
                               <GridPane.margin>
                                 <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" fx:id="x5" />
                               </GridPane.margin>
@@ -223,7 +223,7 @@
                         </GridPane>
                         <GridPane GridPane.columnIndex="1" GridPane.rowIndex="1">
                           <children>
-                            <TextField fx:id="txtCognome" prefWidth="200.0" text="zito" GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.valignment="TOP">
+                            <TextField fx:id="txtCognome" prefWidth="200.0" GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.valignment="TOP">
                               <GridPane.margin>
                                 <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" fx:id="x5" />
                               </GridPane.margin>
@@ -239,7 +239,7 @@
                         </GridPane>
                         <GridPane GridPane.columnIndex="1" GridPane.rowIndex="3">
                           <children>
-                            <TextField fx:id="txtUsername" prefWidth="200.0" text="andreese" GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.valignment="TOP">
+                            <TextField fx:id="txtUsername" prefWidth="200.0" GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.valignment="TOP">
                               <GridPane.margin>
                                 <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" fx:id="x5" />
                               </GridPane.margin>
@@ -264,7 +264,7 @@
                         </Label>
                         <GridPane GridPane.columnIndex="1" GridPane.rowIndex="2">
                           <children>
-                            <TextField fx:id="txtCF" prefWidth="200.0" text="xxxxxxxxxxxxxxxx" GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.valignment="TOP">
+                            <TextField fx:id="txtCF" prefWidth="200.0" GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.valignment="TOP">
                               <GridPane.margin>
                                 <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" fx:id="x5" />
                               </GridPane.margin>
